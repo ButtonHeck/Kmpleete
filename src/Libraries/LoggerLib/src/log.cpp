@@ -20,9 +20,10 @@ namespace Kmplete
 {
     static Log::LogSettings logSettings;
     static std::stringstream stringStream;
+    static auto nullSink = CreatePtr<spdlog::sinks::null_sink_mt>();
 
 
-    /*static*/ Ptr<spdlog::logger> Log::_logger;
+    /*static*/ Ptr<spdlog::logger> Log::_logger = CreatePtr<spdlog::logger>("", nullSink);
 
 
     namespace
@@ -45,12 +46,6 @@ namespace Kmplete
 
     void Log::Boot(const String& programName)
     {
-        if (_logger)
-        {
-            Log::Warn("Log: logger instance has already been booted");
-            return;
-        }
-
         bootMessages.reserve(64);
 
         const auto callbackSink = CreatePtr<spdlog::sinks::callback_sink_mt>([](const spdlog::details::log_msg& msg) 
@@ -130,11 +125,6 @@ namespace Kmplete
             _logger = CreatePtr<spdlog::async_logger>(programName, begin(logSinks), end(logSinks), spdlog::thread_pool(), spdlog::async_overflow_policy::block);
             _logger->set_level(coreLevel);
             _logger->flush_on(coreLevelFlush);
-        }
-        else
-        {
-            const auto nullSink = CreatePtr<spdlog::sinks::null_sink_mt>();
-            _logger = CreatePtr<spdlog::async_logger>(programName, nullSink, spdlog::thread_pool(), spdlog::async_overflow_policy::block);
         }
 
         spdlog::register_logger(_logger);

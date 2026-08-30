@@ -39,7 +39,8 @@
 namespace Kmplete
 {
     //! Global logging controller backed by the spdlog library, available for logging
-    //! to a console, a file or a string stream. Initialization is split to two parts:
+    //! to a console, a file or a string stream. Initially the logger is instantiated with a
+    //! NullObject sink. Initialization is split to two parts:
     //! first by a "Boot" function that stores all messages in a temporary storage, then
     //! when an application loads its settings (including logger settings) all messages
     //! from that storage moved to sinks according to those settings.
@@ -81,22 +82,22 @@ namespace Kmplete
         KMP_NODISCARD static std::stringstream& StringLogOutput();
 
         template <typename... Args>
-        static void Trace(spdlog::format_string_t<Args...> fmt, Args&&... args) { if (_logger) _logger->trace(fmt, std::forward<Args>(args)...); }
+        static void Trace(spdlog::format_string_t<Args...> fmt, Args&&... args) { _logger->trace(fmt, std::forward<Args>(args)...); }
 
         template <typename... Args>
-        static void Debug(spdlog::format_string_t<Args...> fmt, Args&&... args) { if (_logger) _logger->debug(fmt, std::forward<Args>(args)...); }
+        static void Debug(spdlog::format_string_t<Args...> fmt, Args&&... args) { _logger->debug(fmt, std::forward<Args>(args)...); }
 
         template <typename... Args>
-        static void Info(spdlog::format_string_t<Args...> fmt, Args&&... args) { if (_logger) _logger->info(fmt, std::forward<Args>(args)...); }
+        static void Info(spdlog::format_string_t<Args...> fmt, Args&&... args) { _logger->info(fmt, std::forward<Args>(args)...); }
 
         template <typename... Args>
-        static void Warn(spdlog::format_string_t<Args...> fmt, Args&&... args) { if (_logger) _logger->warn(fmt, std::forward<Args>(args)...); }
+        static void Warn(spdlog::format_string_t<Args...> fmt, Args&&... args) { _logger->warn(fmt, std::forward<Args>(args)...); }
 
         template <typename... Args>
-        static void Error(spdlog::format_string_t<Args...> fmt, Args&&... args) { if (_logger) _logger->error(fmt, std::forward<Args>(args)...); }
+        static void Error(spdlog::format_string_t<Args...> fmt, Args&&... args) { _logger->error(fmt, std::forward<Args>(args)...); }
 
         template <typename... Args>
-        static void Critical(spdlog::format_string_t<Args...> fmt, Args&&... args) { if (_logger) _logger->critical(fmt, std::forward<Args>(args)...); }
+        static void Critical(spdlog::format_string_t<Args...> fmt, Args&&... args) { _logger->critical(fmt, std::forward<Args>(args)...); }
 
     private:
         static Ptr<spdlog::logger> _logger;
