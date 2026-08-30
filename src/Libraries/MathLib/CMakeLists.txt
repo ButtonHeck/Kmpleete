@@ -9,6 +9,7 @@ add_library(MathLib INTERFACE)
 AddTargetSourcesGroup(MathLib "Math"
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Math/math.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Math/geometry.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Math/rng.h
 )
 
 #TODO: uncomment after MathLib becomes non header-only and change INTERFACE to PUBLIC/PRIVATE

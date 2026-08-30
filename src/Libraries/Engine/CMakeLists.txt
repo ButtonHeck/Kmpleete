@@ -15,7 +15,6 @@ AddTargetSourcesGroup(Kmplete "Core"
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Core/settings_document.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Core/settings_manager.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Core/system_metrics_manager.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Core/rng.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Core/stacktrace.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Core/exception_handler.h
     ${CMAKE_CURRENT_LIST_DIR}/src/Core/uuid.cpp

@@ -1,10 +1,10 @@
 #include "Kmplete/Core/uuid.h"
-#include "Kmplete/Core/rng.h"
+#include "Kmplete/Math/rng.h"
 
 
 namespace Kmplete
 {
-    static RNGUInt64 rng;
+    static Math::RNGUInt64 rng;
 
     UUID UUID::InvalidUuid(0);
 

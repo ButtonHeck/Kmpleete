@@ -2,7 +2,7 @@
 
 #include "Kmplete/Application/application_context.h"
 #include "Kmplete/Utils/function_utils.h"
-#include "Kmplete/Core/rng.h"
+#include "Kmplete/Math/rng.h"
 #include "Kmplete/Graphics/Vulkan/Core/vulkan_graphics_base.h"
 #include "Kmplete/Graphics/Vulkan/Core/vulkan_graphics_backend.h"
 #include "Kmplete/Graphics/Vulkan/Core/vulkan_physical_device.h"
@@ -232,8 +232,8 @@ namespace Kmplete
         const auto DSLayout = descriptorSetManager.AddDescriptorSetLayout(DSLayout_SID, { matricesLayoutBinding, colorsLayoutBinding });
         descriptorSetManager.AllocateDescriptorSets(DSLayout, DS_SID, 1, "per frame"_true);
 
-        RNGFloat rng(-80.0f, 80.0f);
-        RNGFloat colorRng(0.0f, 1.0f);
+        Math::RNGFloat rng(-80.0f, 80.0f);
+        Math::RNGFloat colorRng(0.0f, 1.0f);
         for (auto m = 0; m < InstancesCount; m++)
         {
             auto& modelMatrix = _matricesShaderData.models[m];
@@ -303,7 +303,7 @@ namespace Kmplete
         if (_colorRandomizingTimer.ReachedTimeout())
         {
             _colorRandomizingTimer.Mark();
-            MersenneTwister32 mt32;
+            Math::MersenneTwister32 mt32;
             std::shuffle(_colorsIndices.begin(), _colorsIndices.end(), mt32.engine);
         }
     }

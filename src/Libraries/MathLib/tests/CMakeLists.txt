@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION 3.24)
 set(MathLib_UnitTests_MATH
     ${CMAKE_CURRENT_LIST_DIR}/geometry_tests.cpp
     ${CMAKE_CURRENT_LIST_DIR}/math_tests.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/rng_tests.cpp
 )
 
 add_executable(MathLib_UnitTests
