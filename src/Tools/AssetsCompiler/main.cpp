@@ -136,7 +136,6 @@ namespace Kmplete
                 Log::LogSettings logSettings;
                 logSettings.outputFile = false;
                 logSettings.outputConsole = true;
-                logSettings.outputStringBuffer = false;
                 logSettings.level = 0;
                 logSettings.levelFlush = 0;
                 Log::SetSettings(logSettings);

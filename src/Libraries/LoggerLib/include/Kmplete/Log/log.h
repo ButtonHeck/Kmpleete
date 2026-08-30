@@ -33,13 +33,11 @@
     #pragma warning(pop)
 #endif
 
-#include <sstream>
-
 
 namespace Kmplete
 {
     //! Global logging controller backed by the spdlog library, available for logging
-    //! to a console, a file or a string stream. Initially the logger is instantiated with a
+    //! to a console or a file. Initially the logger is instantiated with a
     //! NullObject sink. Initialization is split to two parts:
     //! first by a "Boot" function that stores all messages in a temporary storage, then
     //! when an application loads its settings (including logger settings) all messages
@@ -55,7 +53,6 @@ namespace Kmplete
         static constexpr auto TruncateStr = "Truncate";
         static constexpr auto OutputConsoleStr = "OutputConsole";
         static constexpr auto OutputFileStr = "OutputFile";
-        static constexpr auto OutputStringBufferStr = "OutputStringBuffer";
         static constexpr auto LevelStr = "Level";
         static constexpr auto LevelFlushStr = "LevelFlush";
 
@@ -66,7 +63,6 @@ namespace Kmplete
             bool truncate = false;
             bool outputConsole = true;
             bool outputFile = true;
-            bool outputStringBuffer = false;
             int level = spdlog::level::trace;
             int levelFlush = spdlog::level::trace;
         };
@@ -78,8 +74,6 @@ namespace Kmplete
 
         static void SetSettings(const LogSettings& settings);
         static const LogSettings& GetSettings();
-
-        KMP_NODISCARD static std::stringstream& StringLogOutput();
 
         template <typename... Args>
         static void Trace(spdlog::format_string_t<Args...> fmt, Args&&... args) { _logger->trace(fmt, std::forward<Args>(args)...); }

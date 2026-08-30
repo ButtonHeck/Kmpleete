@@ -129,7 +129,6 @@ namespace Kmplete
         settings->get().SaveBool(Log::TruncateStr, logSettings.truncate);
         settings->get().SaveBool(Log::OutputConsoleStr, logSettings.outputConsole);
         settings->get().SaveBool(Log::OutputFileStr, logSettings.outputFile);
-        settings->get().SaveBool(Log::OutputStringBufferStr, logSettings.outputStringBuffer);
         settings->get().SaveInt(Log::LevelStr, logSettings.level);
         settings->get().SaveInt(Log::LevelFlushStr, logSettings.levelFlush);
         settings->get().EndSaveObject();
@@ -163,7 +162,6 @@ namespace Kmplete
         logSettings.truncate = settings->get().GetBool(Log::TruncateStr, false);
         logSettings.outputConsole = settings->get().GetBool(Log::OutputConsoleStr, true);
         logSettings.outputFile = settings->get().GetBool(Log::OutputFileStr, true);
-        logSettings.outputStringBuffer = settings->get().GetBool(Log::OutputStringBufferStr, false);
         logSettings.level = settings->get().GetInt(Log::LevelStr, spdlog::level::trace);
         logSettings.levelFlush = settings->get().GetInt(Log::LevelFlushStr, spdlog::level::trace);
         Log::SetSettings(logSettings);

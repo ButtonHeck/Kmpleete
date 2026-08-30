@@ -5,7 +5,6 @@
 
 #include <spdlog/async.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
-#include <spdlog/sinks/ostream_sink.h>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/null_sink.h>
 #include <spdlog/sinks/callback_sink.h>
@@ -19,7 +18,6 @@
 namespace Kmplete
 {
     static Log::LogSettings logSettings;
-    static std::stringstream stringStream;
     static auto nullSink = CreatePtr<spdlog::sinks::null_sink_mt>();
 
 
@@ -95,13 +93,6 @@ namespace Kmplete
                 logSinks.push_back(fileSink);
             }
 
-            if (logSettings.outputStringBuffer)
-            {
-                const auto stringBufferSink = CreatePtr<spdlog::sinks::ostream_sink_mt>(stringStream);
-                stringBufferSink->set_pattern("%T.%e %L \"%n\" | %v");
-                logSinks.push_back(stringBufferSink);
-            }
-
             const auto coreLevel = static_cast<spdlog::level::level_enum>(std::clamp(logSettings.level, SPDLOG_LEVEL_TRACE, SPDLOG_LEVEL_CRITICAL));
             auto coreLevelFlush = static_cast<spdlog::level::level_enum>(std::clamp(logSettings.levelFlush, SPDLOG_LEVEL_TRACE, SPDLOG_LEVEL_CRITICAL));
             if (coreLevelFlush < coreLevel)
@@ -157,12 +148,6 @@ namespace Kmplete
     const Log::LogSettings& Log::GetSettings()
     {
         return logSettings;
-    }
-    //--------------------------------------------------------------------------
-
-    std::stringstream& Log::StringLogOutput()
-    {
-        return stringStream;
     }
     //--------------------------------------------------------------------------
 }

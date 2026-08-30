@@ -6,7 +6,6 @@
             "Truncate": false,
             "OutputConsole": true,
             "OutputFile": true,
-            "OutputStringBuffer": true,
             "Level": 0,
             "LevelFlush": 0
         },
