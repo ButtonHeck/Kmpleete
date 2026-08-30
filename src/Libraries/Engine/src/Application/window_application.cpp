@@ -76,7 +76,7 @@ namespace Kmplete
 
     void WindowApplication::OnEvent(Events::Event& event)
     {
-        KMP_ASSERT(_inputManager && _frameListenerManager && _graphicsBackend);
+        KMP_ASSERT(_inputManager && _frameListenerManager);
 
         _inputManager->ProcessInputEvents(event);
         _frameListenerManager->_DispatchEventToFrameListeners(event);
