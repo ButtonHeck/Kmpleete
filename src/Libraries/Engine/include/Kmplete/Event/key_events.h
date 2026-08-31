@@ -60,7 +60,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("KeyPressEvent: ", _keyCode, " (repeat = ", _repeat, ", mods = ", _mods, ")");
+                return Utils::Concatenate(GetName(), ": ", _keyCode, " (repeat = ", _repeat, ", mods = ", _mods, ")");
             }
 
         private:
@@ -86,7 +86,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("KeyReleaseEvent: ", _keyCode);
+                return Utils::Concatenate(GetName(), ": ", _keyCode);
             }
 
         private:
@@ -105,7 +105,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("KeyCharEvent: ", _keyCode);
+                return Utils::Concatenate(GetName(), ": ", _keyCode);
             }
         };
         //--------------------------------------------------------------------------

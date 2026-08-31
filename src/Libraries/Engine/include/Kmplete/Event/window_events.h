@@ -61,7 +61,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("WindowResizeEvent: ", _width, ", ", _height);
+                return Utils::Concatenate(GetName(), ": ", _width, ", ", _height);
             }
 
         private:
@@ -92,7 +92,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("WindowMoveEvent: ", _x, ", ", _y);
+                return Utils::Concatenate(GetName(), ": ", _x, ", ", _y);
             }
 
         private:
@@ -126,7 +126,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("WindowFocusEvent: ", IsFocused());
+                return Utils::Concatenate(GetName(), ": ", IsFocused());
             }
 
         private:
@@ -150,7 +150,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("WindowIconifyEvent: ", IsIconified());
+                return Utils::Concatenate(GetName(), ": ", IsIconified());
             }
 
         private:
@@ -180,7 +180,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("WindowFramebufferResizeEvent: ", _width, ", ", _height);
+                return Utils::Concatenate(GetName(), ": ", _width, ", ", _height);
             }
 
         private:
@@ -214,7 +214,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("WindowContentScaleEvent: ", _scale);
+                return Utils::Concatenate(GetName(), ": ", _scale);
             }
 
         private:
@@ -238,7 +238,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("WindowScreenModeEvent: ", Window::ScreenModeToString(_screenMode));
+                return Utils::Concatenate(GetName(), ": ", Window::ScreenModeToString(_screenMode));
             }
 
         private:

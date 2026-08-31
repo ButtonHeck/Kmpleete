@@ -39,7 +39,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("MultisamplingChangeEvent: ", _msaaSamples);
+                return Utils::Concatenate(GetName(), ": ", _msaaSamples);
             }
 
         private:

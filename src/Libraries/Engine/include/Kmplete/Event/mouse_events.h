@@ -43,7 +43,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("MouseMoveEvent: ", _x, ", ", _y);
+                return Utils::Concatenate(GetName(), ": ", _x, ", ", _y);
             }
 
         private:
@@ -74,7 +74,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("MouseScrollEvent: ", _xOffset, ", ", _yOffset);
+                return Utils::Concatenate(GetName(), ": ", _xOffset, ", ", _yOffset);
             }
 
         private:
@@ -119,7 +119,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("MouseButtonPressEvent: ", _button);
+                return Utils::Concatenate(GetName(), ": ", _button);
             }
         };
         //--------------------------------------------------------------------------
@@ -135,7 +135,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("MouseButtonReleaseEvent: ", _button);
+                return Utils::Concatenate(GetName(), ": ", _button);
             }
         };
         //--------------------------------------------------------------------------

@@ -31,7 +31,7 @@ namespace Kmplete
 
             KMP_NODISCARD String ToString() const override
             {
-                return Utils::Concatenate("LocaleChangeEvent: ", _locale);
+                return Utils::Concatenate(GetName(), ": ", _locale);
             }
 
         private:
