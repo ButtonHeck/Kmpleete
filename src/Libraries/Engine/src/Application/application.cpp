@@ -66,10 +66,10 @@ namespace Kmplete
         const auto defaultTranslationsPath = Filesystem::ToGenericU8String(applicationPath / LocalesDirectory);
         KMP_ASSERT(defaultTranslationsPath != LocalesDirectory);
         _localizationManager->AddMessagesPath(defaultTranslationsPath);
-        const auto engineDomainAdded = _localizationManager->AddMessagesDomain(KMP_TR_DOMAIN_ENGINE);
+        KMP_MB_UNUSED const auto engineDomainAdded = _localizationManager->AddMessagesDomain(KMP_TR_DOMAIN_ENGINE);
         KMP_ASSERT(engineDomainAdded);
 
-        const auto unicodeMapsInitialized = Localization::UnicodeMap::Initialize();
+        KMP_MB_UNUSED const auto unicodeMapsInitialized = Localization::UnicodeMap::Initialize();
         KMP_ASSERT(unicodeMapsInitialized);
 
         _settingsManager = CreateUPtr<SettingsManager>(parameters.settingsFilepath.empty()

@@ -12,6 +12,8 @@
 #include "Kmplete/Profile/profiler.h"
 #include "Kmplete/Log/log.h"
 
+#include <thread>
+
 
 namespace Kmplete
 {
