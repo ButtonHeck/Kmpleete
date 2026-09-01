@@ -2,14 +2,14 @@
 
 #include "shared_state.h"
 
-#include "Kmplete/Application/frame_listener.h"
-#include "Kmplete/Utils/function_utils.h"
-#include "Kmplete/Event/mouse_events.h"
-#include "Kmplete/Event/event_handler_guard.h"
-#include "Kmplete/Input/input_codes.h"
+#include "Kmpleete/Application/frame_listener.h"
+#include "Kmpleete/Utils/function_utils.h"
+#include "Kmpleete/Event/mouse_events.h"
+#include "Kmpleete/Event/event_handler_guard.h"
+#include "Kmpleete/Input/input_codes.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     class TestFrameListener1Delegate
     {

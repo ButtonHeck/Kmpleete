@@ -1,14 +1,14 @@
-#include "Kmplete/Assets/font_asset_manager.h"
-#include "Kmplete/Graphics/font.h"
-#include "Kmplete/Base/pointers.h"
-#include "Kmplete/Base/string_id.h"
-#include "Kmplete/Utils/string_utils.h"
+#include "Kmpleete/Assets/font_asset_manager.h"
+#include "Kmpleete/Graphics/font.h"
+#include "Kmpleete/Base/pointers.h"
+#include "Kmpleete/Base/string_id.h"
+#include "Kmpleete/Utils/string_utils.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
-using namespace Kmplete;
-using namespace Kmplete::Assets;
+using namespace Kmpleete;
+using namespace Kmpleete::Assets;
 
 
 TEST_CASE("FontAssetManager creation", "[graphics][font_asset_manager][asset][font]")

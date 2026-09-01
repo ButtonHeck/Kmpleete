@@ -1,8 +1,8 @@
-#include "Kmplete/Graphics/Vulkan/Utils/initializers.h"
-#include "Kmplete/Graphics/Vulkan/Utils/bits_aliases.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/initializers.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

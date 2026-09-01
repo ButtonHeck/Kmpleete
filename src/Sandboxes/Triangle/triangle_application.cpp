@@ -1,9 +1,9 @@
 #include "triangle_application.h"
 
-#include "Kmplete/Application/application_context.h"
+#include "Kmpleete/Application/application_context.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     TriangleApplication::TriangleApplication(const WindowApplicationParameters& parameters)
         : WindowApplication(parameters)

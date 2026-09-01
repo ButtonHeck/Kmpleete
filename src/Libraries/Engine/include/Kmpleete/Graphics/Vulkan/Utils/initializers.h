@@ -1,0 +1,88 @@
+#pragma once
+
+#include "Kmpleete/Base/Kmpleete_api.h"
+
+#include <vulkan/vulkan.h>
+
+
+namespace Kmpleete
+{
+    namespace Graphics
+    {
+        namespace VKUtils
+        {
+            //! Utility functions to create premade Vulkan structs with filled ".sType" fields
+
+            KMP_NODISCARD KMP_API VkDebugUtilsMessengerCreateInfoEXT InitVkDebugUtilsMessengerCreateInfo();
+            KMP_NODISCARD KMP_API VkApplicationInfo InitVkApplicationInfo();
+            KMP_NODISCARD KMP_API VkInstanceCreateInfo InitVkInstanceCreateInfo(const VkApplicationInfo& applicationInfo);
+
+            KMP_NODISCARD KMP_API VkPhysicalDeviceProperties2 InitVkPhysicalDeviceProperties2();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceVulkan11Properties InitVkPhysicalDeviceVulkan11Properties();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceVulkan12Properties InitVkPhysicalDeviceVulkan12Properties();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceFeatures2 InitVkPhysicalDeviceFeatures2();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceVulkan13Features InitVkPhysicalDeviceVulkan13Features();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceExtendedDynamicState2FeaturesEXT InitVkPhysicalDeviceExtendedDynamicState2FeaturesEXT();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceExtendedDynamicState3FeaturesEXT InitVkPhysicalDeviceExtendedDynamicState3FeaturesEXT();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceDepthClipEnableFeaturesEXT InitVkPhysicalDeviceDepthClipEnableFeaturesEXT();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceColorWriteEnableFeaturesEXT InitVkPhysicalDeviceColorWriteEnableFeaturesEXT();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT InitVkPhysicalDeviceVertexInputDynamicStateFeaturesEXT();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceShaderObjectFeaturesEXT InitVkPhysicalDeviceShaderObjectFeaturesEXT();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceLineRasterizationFeaturesEXT InitVkPhysicalDeviceLineRasterizationFeaturesEXT();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceVertexAttributeDivisorFeatures InitVkPhysicalDeviceVertexAttributeDivisorFeatures();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceMemoryProperties2 InitVkPhysicalDeviceMemoryProperties2();
+            KMP_NODISCARD KMP_API VkPhysicalDeviceMemoryBudgetPropertiesEXT InitVkPhysicalDeviceMemoryBudgetPropertiesEXT();
+
+            KMP_NODISCARD KMP_API VkDeviceCreateInfo InitVkDeviceCreateInfo();
+            KMP_NODISCARD KMP_API VkSemaphoreCreateInfo InitVkSemaphoreCreateInfo();
+            KMP_NODISCARD KMP_API VkCommandBufferAllocateInfo InitVkCommandBufferAllocateInfo(bool primary = true);
+            KMP_NODISCARD KMP_API VkCommandBufferBeginInfo InitVkCommandBufferBeginInfo();
+            KMP_NODISCARD KMP_API VkFenceCreateInfo InitVkFenceCreateInfo(bool signaled = true);
+            KMP_NODISCARD KMP_API VkDescriptorPoolCreateInfo InitVkDescriptorPoolCreateInfo();
+            KMP_NODISCARD KMP_API VkDeviceQueueCreateInfo InitVkDeviceQueueCreateInfo();
+            KMP_NODISCARD KMP_API VkCommandPoolCreateInfo InitVkCommandPoolCreateInfo();
+            KMP_NODISCARD KMP_API VkSwapchainCreateInfoKHR InitVkSwapchainCreateInfoKHR();
+            KMP_NODISCARD KMP_API VkSubmitInfo InitVkSubmitInfo();
+            KMP_NODISCARD KMP_API VkPresentInfoKHR InitVkPresentInfoKHR();
+            KMP_NODISCARD KMP_API VkRenderingAttachmentInfo InitVkRenderingAttachmentInfo();
+            KMP_NODISCARD KMP_API VkRenderingInfo InitVkRenderingInfo();
+            KMP_NODISCARD KMP_API VkDescriptorSetLayoutCreateInfo InitVkDescriptorSetLayoutCreateInfo();
+            KMP_NODISCARD KMP_API VkDescriptorSetAllocateInfo InitVkDescriptorSetAllocateInfo();
+            KMP_NODISCARD KMP_API VkWriteDescriptorSet InitVkWriteDescriptorSet();
+
+            KMP_NODISCARD KMP_API VkPipelineLayoutCreateInfo InitVkPipelineLayoutCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineCacheCreateInfo InitVkPipelineCacheCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineRenderingCreateInfoKHR InitVkPipelineRenderingCreateInfoKHR();
+            KMP_NODISCARD KMP_API VkGraphicsPipelineCreateInfo InitVkGraphicsPipelineCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineInputAssemblyStateCreateInfo InitVkPipelineInputAssemblyStateCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineRasterizationStateCreateInfo InitVkPipelineRasterizationStateCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineColorBlendStateCreateInfo InitVkPipelineColorBlendStateCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineViewportStateCreateInfo InitVkPipelineViewportStateCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineDynamicStateCreateInfo InitVkPipelineDynamicStateCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineDepthStencilStateCreateInfo InitVkPipelineDepthStencilStateCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineMultisampleStateCreateInfo InitVkPipelineMultisampleStateCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineVertexInputStateCreateInfo InitVkPipelineVertexInputStateCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineVertexInputDivisorStateCreateInfo InitVkPipelineVertexInputDivisorStateCreateInfo();
+            KMP_NODISCARD KMP_API VkPipelineShaderStageCreateInfo InitVkPipelineShaderStageCreateInfo(VkShaderStageFlagBits stage);
+            KMP_NODISCARD KMP_API VkPipelineRasterizationLineStateCreateInfo InitVkPipelineRasterizationLineStateCreateInfo();
+
+            KMP_NODISCARD KMP_API VkImageCreateInfo InitVkImageCreateInfo();
+            KMP_NODISCARD KMP_API VkImageViewCreateInfo InitVkImageViewCreateInfo();
+            KMP_NODISCARD KMP_API VkImageFormatListCreateInfo InitVkImageFormatListCreateInfo();
+            KMP_NODISCARD KMP_API VkImageMemoryBarrier InitVkImageMemoryBarrier();
+            KMP_NODISCARD KMP_API VkSamplerCreateInfo InitVkSamplerCreateInfo();
+
+            KMP_NODISCARD KMP_API VkMemoryAllocateInfo InitVkMemoryAllocateInfo();
+            KMP_NODISCARD KMP_API VkMemoryAllocateFlagsInfoKHR InitVkMemoryAllocateFlagsInfoKHR();
+            KMP_NODISCARD KMP_API VkMappedMemoryRange InitVkMappedMemoryRange(VkDeviceSize size, VkDeviceSize offset);
+
+            KMP_NODISCARD KMP_API VkBufferCreateInfo InitVkBufferCreateInfo(VkDeviceSize size, VkBufferUsageFlags usageFlags);
+
+            KMP_NODISCARD KMP_API VkShaderModuleCreateInfo InitVkShaderModuleCreateInfo();
+            KMP_NODISCARD KMP_API VkShaderCreateInfoEXT InitVkShaderCreateInfoEXT();
+
+            KMP_NODISCARD KMP_API VkVertexInputBindingDescription2EXT InitVkVertexInputBindingDescription2EXT();
+            KMP_NODISCARD KMP_API VkVertexInputAttributeDescription2EXT InitVkVertexInputAttributeDescription2EXT();
+        }
+    }
+}

@@ -1,11 +1,11 @@
-#include "Kmplete/Math/geometry.h"
+#include "Kmpleete/Math/geometry.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
 TEST_CASE("Geometry GetCenter 2D tests", "[math][geometry]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     Rect2I rectInt({ 0, 0 }, { 10, 10 });
     Point2I centerInt = rectInt.GetCenter();
@@ -59,7 +59,7 @@ TEST_CASE("Geometry GetCenter 2D tests", "[math][geometry]")
 
 TEST_CASE("Geometry GetCenter 3D tests", "[math][geometry]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     Rect3I rectInt({ 0, 0, 0 }, { 10, 10, 10 });
     Point3I centerInt = rectInt.GetCenter();
@@ -115,7 +115,7 @@ TEST_CASE("Geometry GetCenter 3D tests", "[math][geometry]")
 
 TEST_CASE("Geometry ContainsPoint 2D tests", "[math][geometry]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     Rect2I rectInt({ 0, 0 }, { 10, 10 });
     Point2I point(5, 5);
@@ -213,7 +213,7 @@ TEST_CASE("Geometry ContainsPoint 2D tests", "[math][geometry]")
 
 TEST_CASE("Geometry ContainsPoint 2D with offset tests", "[math][geometry]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     Rect2I rectInt({ 0, 0 }, { 10, 10 });
     Point2I point(11, 5);
@@ -252,7 +252,7 @@ TEST_CASE("Geometry ContainsPoint 2D with offset tests", "[math][geometry]")
 
 TEST_CASE("Geometry ContainsPoint 3D tests", "[math][geometry]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     Rect3I rectInt({ 0, 0, 0 }, { 10, 10, 10 });
     Point3I point(5, 5, 5);
@@ -350,7 +350,7 @@ TEST_CASE("Geometry ContainsPoint 3D tests", "[math][geometry]")
 
 TEST_CASE("Geometry ContainsPoint 3D with offset tests", "[math][geometry]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     Rect3I rectInt({ 0, 0, 0 }, { 10, 10, 10 });
     Point3I point(11, 5, 5);

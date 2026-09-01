@@ -1,6 +1,6 @@
-#include "Kmplete/Json/json_reader.h"
-#include "Kmplete/Localization/localization_manager.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Json/json_reader.h"
+#include "Kmpleete/Localization/localization_manager.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -183,7 +183,7 @@ TEST_CASE("Rapidjson escaped quotes", "[json][reader]")
 
 TEST_CASE("Rapidjson cyrillic use", "[json][reader]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const char* JsonString = R"rjs(
@@ -354,7 +354,7 @@ TEST_CASE("Json reader positive", "[json][reader]")
     REQUIRE(error == rapidjson::kParseErrorNone);
     REQUIRE(document.IsObject());
 
-    Kmplete::JsonReader reader(document);
+    Kmpleete::JsonReader reader(document);
 
     REQUIRE_FALSE(reader.StartObject(""));
     REQUIRE(reader.StartObject("Group1"));
@@ -442,7 +442,7 @@ TEST_CASE("Json reader negative", "[json][reader]")
     REQUIRE(error == rapidjson::kParseErrorNone);
     REQUIRE(document.IsObject());
 
-    Kmplete::JsonReader reader(document);
+    Kmpleete::JsonReader reader(document);
 
     REQUIRE_FALSE(reader.StartObject(""));
     REQUIRE(reader.StartObject("Group1"));

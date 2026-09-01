@@ -1,12 +1,12 @@
 #include "Application/editor_application.h"
 
-#include "Kmplete/Application/application_context.h"
-#include "Kmplete/Core/settings_document.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Application/application_context.h"
+#include "Kmpleete/Core/settings_document.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static constexpr auto SettingsEntryName = "EditorApplication";
 

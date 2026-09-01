@@ -1,7 +1,7 @@
-#include "Kmplete/Time/clock.h"
+#include "Kmpleete/Time/clock.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Time
     {

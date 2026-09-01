@@ -1,7 +1,7 @@
-#include "Kmplete/Graphics/swapchain.h"
+#include "Kmpleete/Graphics/swapchain.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

@@ -1,8 +1,8 @@
-#include "Kmplete/Core/uuid.h"
-#include "Kmplete/Math/rng.h"
+#include "Kmpleete/Core/uuid.h"
+#include "Kmpleete/Math/rng.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static Math::RNGUInt64 rng;
 

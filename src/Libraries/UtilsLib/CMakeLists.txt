@@ -7,10 +7,10 @@ project(UtilsLib LANGUAGES CXX)
 add_library(UtilsLib)
 
 AddTargetSourcesGroup(UtilsLib "Utils"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Utils/function_utils.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Utils/string_utils.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Utils/vector_utils.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Utils/memory_utils.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Utils/function_utils.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Utils/string_utils.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Utils/vector_utils.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Utils/memory_utils.h
     ${CMAKE_CURRENT_LIST_DIR}/src/string_utils.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/memory_utils.cpp
 )
@@ -32,10 +32,10 @@ target_compile_definitions(UtilsLib
 )
 
 set_target_properties(UtilsLib PROPERTIES 
-    FOLDER Kmplete/Libraries/UtilsLib
+    FOLDER Kmpleete/Libraries/UtilsLib
 )
 
-if(${KMPLETE_BUILD_TESTS})
+if(${KMPLEETE_BUILD_TESTS})
     add_subdirectory(tests)
 endif()
 
@@ -45,7 +45,7 @@ endif()
 
 install(TARGETS UtilsLib
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )

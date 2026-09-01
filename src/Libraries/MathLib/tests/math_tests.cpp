@@ -1,4 +1,4 @@
-#include "Kmplete/Math/math.h"
+#include "Kmpleete/Math/math.h"
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -7,7 +7,7 @@
 
 TEST_CASE("Math Clamp value in range", "[math]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     float valueFloat = 5.0f;
     REQUIRE_NOTHROW(valueFloat = Clamp(valueFloat, 0.0f, 10.0f));
@@ -20,7 +20,7 @@ TEST_CASE("Math Clamp value in range", "[math]")
 
 TEST_CASE("Math Clamp value not in range", "[math]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     float valueFloat = 5.0f;
     REQUIRE_NOTHROW(valueFloat = Clamp(valueFloat, 0.0f, 1.0f));
@@ -37,7 +37,7 @@ TEST_CASE("Math Clamp value not in range", "[math]")
 
 TEST_CASE("Math Clamp range reversed", "[math]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     float valueFloat = 5.0f;
     REQUIRE_NOTHROW(valueFloat = Clamp(valueFloat, 10.0f, 0.0f));
@@ -52,7 +52,7 @@ TEST_CASE("Math Clamp range reversed", "[math]")
 
 TEST_CASE("Math Min", "[math]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     int minValueInt = 0;
     REQUIRE_NOTHROW(minValueInt = Min(10, 20));
@@ -85,7 +85,7 @@ TEST_CASE("Math Min", "[math]")
 
 TEST_CASE("Math Max", "[math]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     int maxValueInt = 0;
     REQUIRE_NOTHROW(maxValueInt = Max(10, 20));
@@ -112,7 +112,7 @@ TEST_CASE("Math Max", "[math]")
 
 TEST_CASE("Math Log2", "[math]")
 {
-    using namespace Kmplete::Math;
+    using namespace Kmpleete::Math;
 
     int resultInt = 0;
     REQUIRE_NOTHROW(resultInt = Log2(16).value());

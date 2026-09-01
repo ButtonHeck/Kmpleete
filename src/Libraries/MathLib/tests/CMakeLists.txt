@@ -15,6 +15,6 @@ add_executable(MathLib_UnitTests
 
 SetupUnitTestsTargetProperties(
     MathLib_UnitTests
-    Kmplete/Tests/Auto
+    Kmpleete/Tests/Auto
     Catch2::Catch2WithMain MathLib
 )

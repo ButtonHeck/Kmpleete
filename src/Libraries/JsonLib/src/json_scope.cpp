@@ -1,10 +1,10 @@
-#include "Kmplete/Json/json_scope.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Utils/string_utils.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Json/json_scope.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Utils/string_utils.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     void JsonScope::Push(const String& entry) KMP_PROFILING(ProfileLevelMinorVerbose)
     {

@@ -1,11 +1,11 @@
-#include "Kmplete/Graphics/Vulkan/Delegates/vulkan_memory_type_delegate.h"
-#include "Kmplete/Graphics/Vulkan/Utils/initializers.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_memory_type_delegate.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/initializers.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

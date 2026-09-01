@@ -1,17 +1,17 @@
-#include "Kmplete/Window/window_backend_glfw.h"
-#include "Kmplete/Window/window_glfw.h"
-#include "Kmplete/Window/window_cursor_glfw.h"
-#include "Kmplete/Core/settings_document.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Window/window_backend_glfw.h"
+#include "Kmpleete/Window/window_glfw.h"
+#include "Kmpleete/Window/window_cursor_glfw.h"
+#include "Kmpleete/Core/settings_document.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace
     {

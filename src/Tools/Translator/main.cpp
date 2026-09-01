@@ -1,9 +1,9 @@
 #include "translator.h"
 
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Utils/string_utils.h"
-#include "Kmplete/Json/json_document.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Utils/string_utils.h"
+#include "Kmpleete/Json/json_document.h"
 
 #include <boost/program_options.hpp>
 
@@ -12,12 +12,12 @@
 
 namespace bpo = boost::program_options;
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Translator
     {
         void PrintUsage(const bpo::options_description& description);
-        bool WorkModeIsValid(const Kmplete::String& workMode);
+        bool WorkModeIsValid(const Kmpleete::String& workMode);
         bpo::options_description CreateOptionsDescription();
         int ParseParameters(const bpo::options_description& optionsDescription, bpo::variables_map& vm, TranslatorParameters& translatorParameters);
     }
@@ -31,7 +31,7 @@ namespace Kmplete
 //! Stage 3 - create and run the translator with parameters from stage 2
 int main(int argc, char** argv)
 {
-    using namespace Kmplete::Translator;
+    using namespace Kmpleete::Translator;
 
     // Stage 1
 
@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 #if not defined (KMP_CONFIG_TYPE_PRODUCTION)
         if (vm.count(ProcessorArgumentLogging))
         {
-            Kmplete::Log::Finalize();
+            Kmpleete::Log::Finalize();
         }
 #endif
 
@@ -77,7 +77,7 @@ int main(int argc, char** argv)
 #if not defined (KMP_CONFIG_TYPE_PRODUCTION)
     if (vm.count(ProcessorArgumentLogging))
     {
-        Kmplete::Log::Finalize();
+        Kmpleete::Log::Finalize();
     }
 #endif
 
@@ -86,7 +86,7 @@ int main(int argc, char** argv)
 //--------------------------------------------------------------------------
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Translator
     {
@@ -122,7 +122,7 @@ namespace Kmplete
         }
         //--------------------------------------------------------------------------
 
-        bool WorkModeIsValid(const Kmplete::String& workMode)
+        bool WorkModeIsValid(const Kmpleete::String& workMode)
         {
             return workMode == ProcessorWorkModeUpdate ||
                    workMode == ProcessorWorkModeCompile;
@@ -143,7 +143,7 @@ namespace Kmplete
                 logSettings.level = 0;
                 logSettings.levelFlush = 0;
                 Log::SetSettings(logSettings);
-                Log::Initialize("Kmplete Translator", Filesystem::GetCurrentFilepath() / "Logs");
+                Log::Initialize("Kmpleete Translator", Filesystem::GetCurrentFilepath() / "Logs");
             }
 #endif
 

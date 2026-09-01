@@ -1,9 +1,9 @@
-#include "Kmplete/Graphics/Vulkan/Utils/result_description.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/result_description.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Log/log.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

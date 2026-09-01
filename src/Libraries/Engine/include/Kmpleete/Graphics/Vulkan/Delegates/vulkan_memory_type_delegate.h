@@ -1,0 +1,44 @@
+#pragma once
+
+#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/types_aliases.h"
+#include "Kmpleete/Log/log_class_macro.h"
+#include "Kmpleete/Profile/profiler_fwd.h"
+
+#include <vulkan/vulkan.h>
+
+
+namespace Kmpleete
+{
+    namespace Graphics
+    {
+        //! Helper delegate class for handling memory requirements functions during
+        //! image or buffer creation, finding suitable memory type for required properties
+        class KMP_API VulkanMemoryTypeDelegate
+        {
+            KMP_DISABLE_COPY_MOVE(VulkanMemoryTypeDelegate)
+            KMP_LOG_CLASSNAME(VulkanMemoryTypeDelegate)
+            KMP_PROFILE_CONSTRUCTOR_DECLARE()
+
+        public:
+            //! Memory allocation information wrapper struct
+            struct MemoryContext
+            {
+                VkMemoryRequirements requirements{};
+                VkMemoryAllocateInfo allocateInfo{};
+            };
+
+        public:
+            explicit VulkanMemoryTypeDelegate(VkPhysicalDeviceMemoryProperties memoryProperties) noexcept;
+            ~VulkanMemoryTypeDelegate() = default;
+
+            KMP_NODISCARD MemoryContext GetBufferMemoryContext(VkDevice device, VkBuffer buffer, VkMemoryPropertyFlags properties) const;
+            KMP_NODISCARD MemoryContext GetImageMemoryContext(VkDevice device, VkImage image, VkMemoryPropertyFlags properties) const;
+            KMP_NODISCARD UInt32 FindMemoryType(UInt32 typeFilter, VkMemoryPropertyFlags properties) const;
+
+        private:
+            VkPhysicalDeviceMemoryProperties _memoryProperties;
+        };
+        //--------------------------------------------------------------------------
+    }
+}

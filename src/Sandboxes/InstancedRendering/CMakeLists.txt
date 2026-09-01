@@ -14,8 +14,8 @@ set(InstancedRendering_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/instanced_rendering_frame_listener.cpp
 )
 set(InstancedRendering_SHADERS
-    ${KmpleteSandboxResourcesFolder}/instanced_rendering.vert
-    ${KmpleteSandboxResourcesFolder}/instanced_rendering.frag
+    ${KmpleeteSandboxResourcesFolder}/instanced_rendering.vert
+    ${KmpleeteSandboxResourcesFolder}/instanced_rendering.frag
 )
 source_group("Shaders" FILES ${InstancedRendering_SHADERS})
 
@@ -28,15 +28,15 @@ add_executable(InstancedRendering
 SetupCompilerOptions(InstancedRendering)
 
 set_target_properties(InstancedRendering PROPERTIES
-    FOLDER Kmplete/Sandboxes/InstancedRendering
+    FOLDER Kmpleete/Sandboxes/InstancedRendering
 )
 
 target_compile_definitions(InstancedRendering
-    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleteSandboxResourcesFolder}/\"
+    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleeteSandboxResourcesFolder}/\"
 )
 
 target_link_libraries(InstancedRendering
-    PRIVATE Kmplete
+    PRIVATE Kmpleete
     PRIVATE ImGuiUtilsLib
     PRIVATE Vulkan::Vulkan
 )

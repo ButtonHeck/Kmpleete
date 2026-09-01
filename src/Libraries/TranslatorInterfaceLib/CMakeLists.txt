@@ -7,7 +7,7 @@ project(TranslatorInterfaceLib LANGUAGES CXX)
 add_library(TranslatorInterfaceLib INTERFACE)
 
 AddTargetSourcesGroup(TranslatorInterfaceLib "Translator"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Translator/translator_interface.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Translator/translator_interface.h
 )
 
 target_include_directories(TranslatorInterfaceLib
@@ -15,5 +15,5 @@ target_include_directories(TranslatorInterfaceLib
 )
 
 set_target_properties(TranslatorInterfaceLib PROPERTIES 
-    FOLDER Kmplete/Tools/TranslatorInterfaceLib
+    FOLDER Kmpleete/Tools/TranslatorInterfaceLib
 )

@@ -1,16 +1,16 @@
-#include "Kmplete/Graphics/Vulkan/Core/vulkan_graphics_backend.h"
-#include "Kmplete/Graphics/Vulkan/Utils/initializers.h"
-#include "Kmplete/Graphics/Vulkan/Utils/result_description.h"
-#include "Kmplete/Graphics/Vulkan/Utils/extension_functions.h"
-#include "Kmplete/Graphics/Vulkan/Utils/bits_aliases.h"
-#include "Kmplete/Core/settings_document.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Window/window.h"
-#include "Kmplete/Math/math.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Version/kmplete_version.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Graphics/Vulkan/Core/vulkan_graphics_backend.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/initializers.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/result_description.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/extension_functions.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
+#include "Kmpleete/Core/settings_document.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Window/window.h"
+#include "Kmpleete/Math/math.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Version/kmpleete_version.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #if defined (KMP_WINDOW_BACKEND_GLFW)
     #define GLFW_INCLUDE_NONE
@@ -20,7 +20,7 @@
 #include <cstring>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static constexpr auto ValidationLayerName = "VK_LAYER_KHRONOS_validation";
     static const Vector<const char*> LayerNames = { ValidationLayerName };
@@ -304,10 +304,10 @@ namespace Kmplete
         VkApplicationInfo VulkanGraphicsBackend::_CreateApplicationInfo() const KMP_PROFILING(ProfileLevelImportant)
         {
             auto applicationInfo = VKUtils::InitVkApplicationInfo();
-            applicationInfo.pApplicationName = "Kmplete Application";
-            applicationInfo.applicationVersion = VK_MAKE_VERSION(GetKmpleteVersionMajor(), GetKmpleteVersionMinor(), GetKmpleteVersionPatch());
-            applicationInfo.pEngineName = "Kmplete engine";
-            applicationInfo.engineVersion = VK_MAKE_VERSION(GetKmpleteVersionMajor(), GetKmpleteVersionMinor(), GetKmpleteVersionPatch());
+            applicationInfo.pApplicationName = "Kmpleete Application";
+            applicationInfo.applicationVersion = VK_MAKE_VERSION(GetKmpleeteVersionMajor(), GetKmpleeteVersionMinor(), GetKmpleeteVersionPatch());
+            applicationInfo.pEngineName = "Kmpleete engine";
+            applicationInfo.engineVersion = VK_MAKE_VERSION(GetKmpleeteVersionMajor(), GetKmpleeteVersionMinor(), GetKmpleeteVersionPatch());
             applicationInfo.apiVersion = VK_API_VERSION_1_4;
 
             return applicationInfo;

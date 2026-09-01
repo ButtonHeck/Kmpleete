@@ -1,7 +1,7 @@
-#include "Kmplete/Core/system_metrics_manager.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Core/system_metrics_manager.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #if defined (KMP_PLATFORM_WINDOWS)
     #include <Windows.h>
@@ -18,7 +18,7 @@
 #endif
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     SystemMetricsManager::SystemMetricsManager()
         : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()

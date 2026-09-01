@@ -1,21 +1,21 @@
-#include "Kmplete/Window/window_glfw.h"
-#include "Kmplete/Window/window_cursor_glfw.h"
-#include "Kmplete/Base/named_bool.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Event/window_events.h"
-#include "Kmplete/Event/key_events.h"
-#include "Kmplete/Event/mouse_events.h"
-#include "Kmplete/Graphics/image.h"
-#include "Kmplete/Math/geometry.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Window/window_glfw.h"
+#include "Kmpleete/Window/window_cursor_glfw.h"
+#include "Kmpleete/Base/named_bool.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Event/window_events.h"
+#include "Kmpleete/Event/key_events.h"
+#include "Kmpleete/Event/mouse_events.h"
+#include "Kmpleete/Graphics/image.h"
+#include "Kmpleete/Math/geometry.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     NonNull<WindowGlfw::_UserData*> WindowGlfw::_GetUserPointer(const NonNull<GLFWwindow*> window)
     {

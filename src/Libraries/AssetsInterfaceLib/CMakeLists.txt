@@ -7,7 +7,7 @@ project(AssetsInterfaceLib LANGUAGES CXX)
 add_library(AssetsInterfaceLib INTERFACE)
 
 AddTargetSourcesGroup(AssetsInterfaceLib "Assets"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Assets/assets_interface.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Assets/assets_interface.h
 )
 
 target_include_directories(AssetsInterfaceLib
@@ -19,5 +19,5 @@ target_link_libraries(AssetsInterfaceLib
 )
 
 set_target_properties(AssetsInterfaceLib PROPERTIES 
-    FOLDER Kmplete/Libraries/AssetsInterfaceLib
+    FOLDER Kmpleete/Libraries/AssetsInterfaceLib
 )

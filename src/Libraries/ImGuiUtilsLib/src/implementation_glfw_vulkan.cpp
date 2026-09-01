@@ -1,6 +1,6 @@
-#include "Kmplete/ImGui/implementation_glfw_vulkan.h"
-#include "Kmplete/Base/named_bool.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/ImGui/implementation_glfw_vulkan.h"
+#include "Kmpleete/Base/named_bool.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <GLFW/glfw3.h>
 #include <imgui.h>
@@ -8,7 +8,7 @@
 #include <backends/imgui_impl_vulkan.h>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace ImGuiUtils
     {

@@ -1,8 +1,8 @@
 #include "assets_compiler.h"
 
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Utils/string_utils.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Utils/string_utils.h"
 
 #include <boost/program_options.hpp>
 
@@ -22,7 +22,7 @@
 
 namespace bpo = boost::program_options;
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Assets
     {
@@ -40,7 +40,7 @@ namespace Kmplete
 //! Stage 3 - create and run the compiler with parameters from stage 2
 int main(int argc, char** argv)
 {
-    using namespace Kmplete::Assets;
+    using namespace Kmpleete::Assets;
 
     // Stage 1
 
@@ -70,7 +70,7 @@ int main(int argc, char** argv)
 #if not defined (KMP_CONFIG_TYPE_PRODUCTION)
         if (vm.count(Compiler::CompilerArgumentLogging))
         {
-            Kmplete::Log::Finalize();
+            Kmpleete::Log::Finalize();
         }
 #endif
 
@@ -86,7 +86,7 @@ int main(int argc, char** argv)
 #if not defined (KMP_CONFIG_TYPE_PRODUCTION)
     if (vm.count(Compiler::CompilerArgumentLogging))
     {
-        Kmplete::Log::Finalize();
+        Kmpleete::Log::Finalize();
     }
 #endif
 
@@ -95,7 +95,7 @@ int main(int argc, char** argv)
 //--------------------------------------------------------------------------
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Assets
     {
@@ -139,7 +139,7 @@ namespace Kmplete
                 logSettings.level = 0;
                 logSettings.levelFlush = 0;
                 Log::SetSettings(logSettings);
-                Log::Initialize("Kmplete Assets compiler", Filesystem::GetCurrentFilepath() / "Logs");
+                Log::Initialize("Kmpleete Assets compiler", Filesystem::GetCurrentFilepath() / "Logs");
             }
 #endif
 

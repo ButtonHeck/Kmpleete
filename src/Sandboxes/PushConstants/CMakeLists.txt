@@ -14,8 +14,8 @@ set(PushConstants_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/push_constants_frame_listener.cpp
 )
 set(PushConstants_SHADERS
-    ${KmpleteSandboxResourcesFolder}/push_constants.vert
-    ${KmpleteSandboxResourcesFolder}/push_constants.frag
+    ${KmpleeteSandboxResourcesFolder}/push_constants.vert
+    ${KmpleeteSandboxResourcesFolder}/push_constants.frag
 )
 source_group("Shaders" FILES ${PushConstants_SHADERS})
 
@@ -28,15 +28,15 @@ add_executable(PushConstants
 SetupCompilerOptions(PushConstants)
 
 set_target_properties(PushConstants PROPERTIES
-    FOLDER Kmplete/Sandboxes/PushConstants
+    FOLDER Kmpleete/Sandboxes/PushConstants
 )
 
 target_compile_definitions(PushConstants
-    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleteSandboxResourcesFolder}/\"
+    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleeteSandboxResourcesFolder}/\"
 )
 
 target_link_libraries(PushConstants
-    PRIVATE Kmplete
+    PRIVATE Kmpleete
     PRIVATE ImGuiUtilsLib
     PRIVATE Vulkan::Vulkan
 )

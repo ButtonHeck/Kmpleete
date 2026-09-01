@@ -1,11 +1,11 @@
-#include "Kmplete/Window/window_backend.h"
+#include "Kmpleete/Window/window_backend.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
 TEST_CASE("Window backend monitor functions", "[core][window_backend][monitor]")
 {
-    const auto windowBackend = Kmplete::WindowBackend::Create(Kmplete::Graphics::GraphicsBackendType::Vulkan);
+    const auto windowBackend = Kmpleete::WindowBackend::Create(Kmpleete::Graphics::GraphicsBackendType::Vulkan);
     REQUIRE(windowBackend);
 
     const auto monitorsCount = windowBackend->GetMonitorCount();
@@ -54,7 +54,7 @@ TEST_CASE("Window backend monitor functions", "[core][window_backend][monitor]")
     }
     REQUIRE(firstMonitorVideoModesDataValid);
 
-    auto nonExistentMonitorVideoModes = std::vector<Kmplete::WindowBackend::MonitorVideoMode>();
+    auto nonExistentMonitorVideoModes = std::vector<Kmpleete::WindowBackend::MonitorVideoMode>();
     REQUIRE_NOTHROW(nonExistentMonitorVideoModes = windowBackend->GetMonitorVideoModes(monitorsCount));
     REQUIRE(nonExistentMonitorVideoModes.empty());
 }
@@ -63,7 +63,7 @@ TEST_CASE("Window backend monitor functions", "[core][window_backend][monitor]")
 
 TEST_CASE("Window backend primary monitor DPI scale", "[core][window_backend][monitor]")
 {
-    const auto windowBackend = Kmplete::WindowBackend::Create(Kmplete::Graphics::GraphicsBackendType::Vulkan);
+    const auto windowBackend = Kmpleete::WindowBackend::Create(Kmpleete::Graphics::GraphicsBackendType::Vulkan);
     REQUIRE(windowBackend);
 
     auto dpi = 0.0f;

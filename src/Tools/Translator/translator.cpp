@@ -1,10 +1,10 @@
 #include "translator.h"
 
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Utils/string_utils.h"
-#include "Kmplete/Utils/vector_utils.h"
-#include "Kmplete/Base/named_bool.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Utils/string_utils.h"
+#include "Kmpleete/Utils/vector_utils.h"
+#include "Kmpleete/Base/named_bool.h"
 
 #include <boost/process/v1/child.hpp>
 
@@ -19,7 +19,7 @@
     #define KMP_UNDEF_CreateFile
 #endif
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Translator
     {

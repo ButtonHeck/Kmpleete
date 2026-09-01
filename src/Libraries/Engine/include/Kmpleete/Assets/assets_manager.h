@@ -1,0 +1,64 @@
+#pragma once
+
+#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/types_aliases.h"
+#include "Kmpleete/Graphics/graphics_backend.h"
+#include "Kmpleete/Localization/localization_base.h"
+#include "Kmpleete/Assets/texture_asset_manager.h"
+#include "Kmpleete/Assets/font_asset_manager.h"
+#include "Kmpleete/Assets/assets_interface.h"
+#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Log/log_class_macro.h"
+
+
+namespace Kmpleete
+{
+    namespace Assets
+    {
+        //! Manager for application assets. Responsible for managing lifetime of asset submanagers, handling
+        //! assets loading and unloading, loading assets files. All asset files are supposed to be placed in
+        //! the Data directory relative to the application executable directory
+        //! @see assets_interface.h
+        class KMP_API AssetsManager
+        {
+            KMP_LOG_CLASSNAME(AssetsManager)
+            KMP_PROFILE_CONSTRUCTOR_DECLARE()
+            KMP_DISABLE_COPY_MOVE(AssetsManager)
+
+        public:
+            AssetsManager(const Filepath& dataPath, Graphics::GraphicsBackend& graphicsBackend, const LocaleStr& currentLocale);
+            ~AssetsManager();
+
+            KMP_NODISCARD const TextureAssetManager& GetTextureAssetManager() const noexcept;
+            KMP_NODISCARD TextureAssetManager& GetTextureAssetManager() noexcept;
+
+            KMP_NODISCARD const FontAssetManager& GetFontAssetManager() const noexcept;
+            KMP_NODISCARD FontAssetManager& GetFontAssetManager() noexcept;
+
+            KMP_NODISCARD bool LoadAssetFile(const Filepath& filepath, bool loadBinaries = true);
+
+            KMP_NODISCARD bool LoadAssets(const Vector<StringID>& assetsSids);
+            KMP_NODISCARD bool UnloadAssets(const Vector<StringID>& assetsSids);
+
+        private:
+            void _Initialize();
+            void _Finalize();
+
+            void _LoadAssetFileHeaders(const BinaryBuffer& fileBuffer, AssetCount assetCount, const Filepath& filepath);
+            KMP_NODISCARD bool _LoadAssetFileBinaries(const BinaryBuffer& fileBuffer, AssetCount assetCount);
+
+            Vector<AssetLookupInfo> _GetSortedByFileAssetsInfos(const Vector<StringID>& assetsSids) const;
+            KMP_NODISCARD bool _LoadAssetsEntriesBinaries(const Vector<AssetLookupInfo>& sortedLookupVector);
+            KMP_NODISCARD bool _LoadAssetEntryBinary(const BinaryBuffer& fileBuffer, const AssetEntryHeader& assetHeader);
+
+        private:
+            const Filepath& _dataPath;
+            const LocaleStr& _currentLocale;
+            Graphics::GraphicsBackend& _graphicsBackend;
+            UPtr<TextureAssetManager> _textureAssetManager;
+            UPtr<FontAssetManager> _fontAssetManager;
+            StringIDHashMap<AssetLookupInfo> _lookupMap;
+        };
+        //--------------------------------------------------------------------------
+    }
+}

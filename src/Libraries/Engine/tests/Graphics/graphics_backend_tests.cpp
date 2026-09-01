@@ -1,20 +1,20 @@
-#include "Kmplete/Graphics/graphics_backend.h"
-#include "Kmplete/Window/window_backend.h"
-#include "Kmplete/Window/window.h"
-#include "Kmplete/Base/pointers.h"
+#include "Kmpleete/Graphics/graphics_backend.h"
+#include "Kmpleete/Window/window_backend.h"
+#include "Kmpleete/Window/window.h"
+#include "Kmpleete/Base/pointers.h"
 
 #include <catch2/catch_test_macros.hpp>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 
-using namespace Kmplete;
-using namespace Kmplete::Graphics;
+using namespace Kmpleete;
+using namespace Kmpleete::Graphics;
 
 
 TEST_CASE("Graphics backend initialization error type", "[graphics]")
 {
-    auto windowBackend = Kmplete::WindowBackend::Create(GraphicsBackendType::Unknown);
+    auto windowBackend = Kmpleete::WindowBackend::Create(GraphicsBackendType::Unknown);
     auto& mainWindow = windowBackend->CreateMainWindow();
 
     UPtr<GraphicsBackend> backend;
@@ -25,7 +25,7 @@ TEST_CASE("Graphics backend initialization error type", "[graphics]")
 
 TEST_CASE("Graphics backend initialization Vulkan", "[graphics]")
 {
-    auto windowBackend = Kmplete::WindowBackend::Create(GraphicsBackendType::Vulkan);
+    auto windowBackend = Kmpleete::WindowBackend::Create(GraphicsBackendType::Vulkan);
     auto& mainWindow = windowBackend->CreateMainWindow();
 
     UPtr<GraphicsBackend> backend;

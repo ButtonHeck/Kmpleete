@@ -1,9 +1,9 @@
-#include "Kmplete/Graphics/graphics_chain_handler.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Core/assertion.h"
+#include "Kmpleete/Graphics/graphics_chain_handler.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Core/assertion.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

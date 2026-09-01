@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Kmplete/Base/kmplete_api.h"
-#include "Kmplete/Base/types_aliases.h"
-#include "Kmplete/ShaderCompiler/shader_compiler_tool_interface.h"
-#include "Kmplete/ShaderCompiler/compile.h"
-#include "Kmplete/Log/log_class_macro.h"
+#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/types_aliases.h"
+#include "Kmpleete/ShaderCompiler/shader_compiler_tool_interface.h"
+#include "Kmpleete/ShaderCompiler/compile.h"
+#include "Kmpleete/Log/log_class_macro.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     class JsonDocument;
 

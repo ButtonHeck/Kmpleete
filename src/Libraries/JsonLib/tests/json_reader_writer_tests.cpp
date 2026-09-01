@@ -1,6 +1,6 @@
-#include "Kmplete/Json/json_writer.h"
-#include "Kmplete/Json/json_reader.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Json/json_writer.h"
+#include "Kmpleete/Json/json_reader.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -21,8 +21,8 @@ TEST_CASE("Json Reader/Writer overwriting", "[json][reader][writer]")
     REQUIRE(error == rapidjson::kParseErrorNone);
     REQUIRE(document.IsObject());
 
-    Kmplete::JsonReader reader(document);
-    Kmplete::JsonWriter writer(document);
+    Kmpleete::JsonReader reader(document);
+    Kmpleete::JsonWriter writer(document);
 
     // check if reader still can read document's content
     REQUIRE(reader.StartArray("Group1") == 3);

@@ -23,12 +23,12 @@ add_library(ImGuiUtilsLib STATIC
 )
 
 AddTargetSourcesGroup(ImGuiUtilsLib "Utils"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/ImGui/helper_functions.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/ImGui/scope_guards.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/ImGui/context.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/ImGui/context_vulkan.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/ImGui/implementation.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/ImGui/implementation_glfw_vulkan.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/ImGui/helper_functions.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/ImGui/scope_guards.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/ImGui/context.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/ImGui/context_vulkan.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/ImGui/implementation.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/ImGui/implementation_glfw_vulkan.h
     ${CMAKE_CURRENT_LIST_DIR}/src/helper_functions.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/scope_guards.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/context.cpp
@@ -45,7 +45,7 @@ target_include_directories(ImGuiUtilsLib
     PUBLIC ${imgui_SOURCE_DIR}/backends
 )
 
-if(${KMPLETE_USE_WINDOW_BACKEND_GLFW})
+if(${KMPLEETE_USE_WINDOW_BACKEND_GLFW})
     target_compile_definitions(ImGuiUtilsLib PUBLIC 
         KMP_WINDOW_BACKEND_GLFW
     )
@@ -64,5 +64,5 @@ target_link_libraries(ImGuiUtilsLib
 )
 
 set_target_properties(ImGuiUtilsLib PROPERTIES 
-    FOLDER Kmplete/Libraries/ImGuiUtilsLib
+    FOLDER Kmpleete/Libraries/ImGuiUtilsLib
 )

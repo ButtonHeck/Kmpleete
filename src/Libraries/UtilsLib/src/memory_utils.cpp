@@ -1,11 +1,11 @@
-#include "Kmplete/Utils/memory_utils.h"
-#include "Kmplete/Base/platform.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Utils/memory_utils.h"
+#include "Kmpleete/Base/platform.h"
+#include "Kmpleete/Log/log.h"
 
 #include <cstdlib>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Utils
     {

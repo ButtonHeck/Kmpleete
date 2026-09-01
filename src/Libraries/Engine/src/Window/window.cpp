@@ -1,12 +1,12 @@
-#include "Kmplete/Window/window.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Core/settings_document.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Window/window.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Core/settings_document.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static constexpr auto NameStr = "Name";
     static constexpr auto XStr = "X";

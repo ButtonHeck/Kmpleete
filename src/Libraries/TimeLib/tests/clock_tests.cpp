@@ -1,5 +1,5 @@
-#include "Kmplete/Time/clock.h"
-#include "Kmplete/Base/pointers.h"
+#include "Kmpleete/Time/clock.h"
+#include "Kmpleete/Base/pointers.h"
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -11,16 +11,16 @@ static constexpr auto timerTimeMs = 200;
 
 TEST_CASE("Clock creation nothrow", "[time][clock]")
 {
-    Kmplete::Ptr<Kmplete::Time::Clock> clock = nullptr;
-    REQUIRE_NOTHROW(clock = Kmplete::CreatePtr<Kmplete::Time::Clock>());
+    Kmpleete::Ptr<Kmpleete::Time::Clock> clock = nullptr;
+    REQUIRE_NOTHROW(clock = Kmpleete::CreatePtr<Kmpleete::Time::Clock>());
 }
 //--------------------------------------------------------------------------
 
 
 TEST_CASE("Clock Peek is correct", "[time][clock]")
 {
-    Kmplete::Ptr<Kmplete::Time::Clock> clock = nullptr;
-    REQUIRE_NOTHROW(clock = Kmplete::CreatePtr<Kmplete::Time::Clock>());
+    Kmpleete::Ptr<Kmpleete::Time::Clock> clock = nullptr;
+    REQUIRE_NOTHROW(clock = Kmpleete::CreatePtr<Kmpleete::Time::Clock>());
 
     REQUIRE((clock->Peek() < timerTimeMs && clock->Peek() > 0));
 
@@ -35,8 +35,8 @@ TEST_CASE("Clock Peek is correct", "[time][clock]")
 
 TEST_CASE("Clock Mark is correct", "[time][clock]")
 {
-    Kmplete::Ptr<Kmplete::Time::Clock> clock = nullptr;
-    REQUIRE_NOTHROW(clock = Kmplete::CreatePtr<Kmplete::Time::Clock>());
+    Kmpleete::Ptr<Kmpleete::Time::Clock> clock = nullptr;
+    REQUIRE_NOTHROW(clock = Kmpleete::CreatePtr<Kmpleete::Time::Clock>());
 
     std::this_thread::sleep_for(std::chrono::milliseconds(timerTimeMs * 2));
     auto elapsed = 0.0f;

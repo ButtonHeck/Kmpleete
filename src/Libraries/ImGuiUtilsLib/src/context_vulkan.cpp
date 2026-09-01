@@ -1,8 +1,8 @@
-#include "Kmplete/ImGui/context_vulkan.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/ImGui/context_vulkan.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace ImGuiUtils
     {

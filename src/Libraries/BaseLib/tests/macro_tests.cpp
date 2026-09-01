@@ -1,5 +1,5 @@
-#include "Kmplete/Base/kmplete_api.h"
-#include "Kmplete/Base/macro.h"
+#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/macro.h"
 
 #include <catch2/catch_test_macros.hpp>
 

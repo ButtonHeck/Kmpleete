@@ -7,10 +7,10 @@ project(JsonLib LANGUAGES CXX)
 add_library(JsonLib)
 
 AddTargetSourcesGroup(JsonLib "Json"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Json/json_document.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Json/json_reader.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Json/json_writer.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Json/json_scope.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Json/json_document.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Json/json_reader.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Json/json_writer.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Json/json_scope.h
     ${CMAKE_CURRENT_LIST_DIR}/src/json_document.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/json_reader.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/json_writer.cpp
@@ -37,10 +37,10 @@ target_compile_definitions(JsonLib
 )
 
 set_target_properties(JsonLib PROPERTIES 
-    FOLDER Kmplete/Libraries/JsonLib
+    FOLDER Kmpleete/Libraries/JsonLib
 )
 
-if(${KMPLETE_BUILD_TESTS})
+if(${KMPLEETE_BUILD_TESTS})
     add_subdirectory(tests)
 endif()
 
@@ -50,7 +50,7 @@ endif()
 
 install(TARGETS JsonLib
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )

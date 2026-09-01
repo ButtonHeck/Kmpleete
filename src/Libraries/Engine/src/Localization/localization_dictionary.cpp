@@ -1,10 +1,10 @@
-#include "Kmplete/Localization/localization_dictionary.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Localization/localization_dictionary.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     LocalizationDictionary::LocalizationDictionary(const DomainStrSID& domain, const LocaleStrSID& localeSid /*= SidTrInvalidLocale*/) noexcept
         : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()

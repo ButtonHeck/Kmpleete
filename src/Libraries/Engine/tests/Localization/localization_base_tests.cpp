@@ -1,11 +1,11 @@
-#include "Kmplete/Localization/localization_base.h"
+#include "Kmpleete/Localization/localization_base.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
 TEST_CASE("Plurality form english", "[localization][locale]")
 {
-    using namespace Kmplete;
+    using namespace Kmpleete;
     const auto& pluralityFormDispatcherEn = GetPluralityDispatcher(LocaleEnUTF8Keyword);
 
     REQUIRE(pluralityFormDispatcherEn.GetPluralityForm(1) == PluralityFormSingular);
@@ -22,7 +22,7 @@ TEST_CASE("Plurality form english", "[localization][locale]")
 
 TEST_CASE("Plurality form russian", "[localization][locale]")
 {
-    using namespace Kmplete;
+    using namespace Kmpleete;
     const auto& pluralityFormDispatcherRu = GetPluralityDispatcher(LocaleRuUTF8Keyword);
 
     REQUIRE(pluralityFormDispatcherRu.GetPluralityForm(1) == PluralityFormSingular);

@@ -1,6 +1,6 @@
-#include "Kmplete/Base/platform.h"
-#include "Kmplete/Localization/localization_manager.h"
-#include "Kmplete/Utils/string_utils.h"
+#include "Kmpleete/Base/platform.h"
+#include "Kmpleete/Localization/localization_manager.h"
+#include "Kmpleete/Utils/string_utils.h"
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -11,47 +11,47 @@
 
 TEST_CASE("Concatenate empty", "[utils][string]")
 {
-    const auto result = Kmplete::Utils::Concatenate("");
+    const auto result = Kmpleete::Utils::Concatenate("");
     REQUIRE(result.empty());
 }
 
 TEST_CASE("Concatenate empty multiple", "[utils][string]")
 {
-    const auto result = Kmplete::Utils::Concatenate("", "", "");
+    const auto result = Kmpleete::Utils::Concatenate("", "", "");
     REQUIRE(result.empty());
 }
 
 TEST_CASE("Concatenate", "[utils][string]")
 {
-    auto result = Kmplete::Utils::Concatenate("string", 123, "other_string", " ", '.');
+    auto result = Kmpleete::Utils::Concatenate("string", 123, "other_string", " ", '.');
     REQUIRE(result == "string123other_string .");
 
-    result = Kmplete::Utils::Concatenate(1L, 2UL, 3.3f, 4.4);
+    result = Kmpleete::Utils::Concatenate(1L, 2UL, 3.3f, 4.4);
     REQUIRE(result == "123.34.4");
 
-    result = Kmplete::Utils::Concatenate(1UL, 2L, 3.0, 4.0f);
+    result = Kmpleete::Utils::Concatenate(1UL, 2L, 3.0, 4.0f);
     REQUIRE(result == "1234");
 
-    result = Kmplete::Utils::Concatenate(1, ' ', 2, "", 'c');
+    result = Kmpleete::Utils::Concatenate(1, ' ', 2, "", 'c');
     REQUIRE(result == "1 2c");
 
-    result = Kmplete::Utils::Concatenate(std::hex, 15);
+    result = Kmpleete::Utils::Concatenate(std::hex, 15);
     REQUIRE(result == "f");
 
-    result = Kmplete::Utils::Concatenate(std::hex, std::showbase, 15);
+    result = Kmpleete::Utils::Concatenate(std::hex, std::showbase, 15);
     REQUIRE(result == "0xf");
 
-    result = Kmplete::Utils::Concatenate(true, false, std::boolalpha, true, false);
+    result = Kmpleete::Utils::Concatenate(true, false, std::boolalpha, true, false);
     REQUIRE(result == "10truefalse");
 
-    result = Kmplete::Utils::Concatenate(nullptr);
+    result = Kmpleete::Utils::Concatenate(nullptr);
     REQUIRE(result == "nullptr");
 
-    result = Kmplete::Utils::Concatenate(std::nullptr_t{});
+    result = Kmpleete::Utils::Concatenate(std::nullptr_t{});
     REQUIRE(result == "nullptr");
 
-    result = Kmplete::String("");
-    result = Kmplete::Utils::Concatenate(&result);
+    result = Kmpleete::String("");
+    result = Kmpleete::Utils::Concatenate(&result);
     REQUIRE(not result.empty());
 }
 //--------------------------------------------------------------------------
@@ -59,91 +59,91 @@ TEST_CASE("Concatenate", "[utils][string]")
 
 TEST_CASE("StringVectorToString empty vector - char delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec;
-    const auto result = Kmplete::Utils::StringVectorToString(vec, '/');
+    Kmpleete::StringVector vec;
+    const auto result = Kmpleete::Utils::StringVectorToString(vec, '/');
     REQUIRE(result.empty());
 }
 
 TEST_CASE("StringVectorToString empty vector - string delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec;
-    const auto result = Kmplete::Utils::StringVectorToString(vec, "-YAY-");
+    Kmpleete::StringVector vec;
+    const auto result = Kmpleete::Utils::StringVectorToString(vec, "-YAY-");
     REQUIRE(result.empty());
 }
 
 TEST_CASE("StringVectorToString - char delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec{ "Hello", "World", "!" };
-    const auto result = Kmplete::Utils::StringVectorToString(vec, '/');
+    Kmpleete::StringVector vec{ "Hello", "World", "!" };
+    const auto result = Kmpleete::Utils::StringVectorToString(vec, '/');
     REQUIRE(result == "/Hello/World/!");
 }
 
 TEST_CASE("StringVectorToString - string delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec{ "Hello", "World", "!" };
-    const auto result = Kmplete::Utils::StringVectorToString(vec, "-YAY-");
+    Kmpleete::StringVector vec{ "Hello", "World", "!" };
+    const auto result = Kmpleete::Utils::StringVectorToString(vec, "-YAY-");
     REQUIRE(result == "-YAY-Hello-YAY-World-YAY-!");
 }
 
 TEST_CASE("StringVectorToString with some empty strings - char delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec{ "", "This", "", "Is", "Sparta", "" };
-    const auto result = Kmplete::Utils::StringVectorToString(vec, '/');
+    Kmpleete::StringVector vec{ "", "This", "", "Is", "Sparta", "" };
+    const auto result = Kmpleete::Utils::StringVectorToString(vec, '/');
     REQUIRE(result == "/This/Is/Sparta");
 }
 
 TEST_CASE("StringVectorToString with some empty strings - string delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec{ "", "This", "", "Is", "Sparta", "" };
-    const auto result = Kmplete::Utils::StringVectorToString(vec, "-YAY-");
+    Kmpleete::StringVector vec{ "", "This", "", "Is", "Sparta", "" };
+    const auto result = Kmpleete::Utils::StringVectorToString(vec, "-YAY-");
     REQUIRE(result == "-YAY-This-YAY-Is-YAY-Sparta");
 }
 
 TEST_CASE("StringVectorToString with all empty strings - char delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec{ "", "", "", "", "", "" };
-    const auto result = Kmplete::Utils::StringVectorToString(vec, '/');
+    Kmpleete::StringVector vec{ "", "", "", "", "", "" };
+    const auto result = Kmpleete::Utils::StringVectorToString(vec, '/');
     REQUIRE(result.empty());
 }
 
 TEST_CASE("StringVectorToString with all empty strings - string delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec{ "", "", "", "", "", "" };
-    const auto result = Kmplete::Utils::StringVectorToString(vec, "-YAY-");
+    Kmpleete::StringVector vec{ "", "", "", "", "", "" };
+    const auto result = Kmpleete::Utils::StringVectorToString(vec, "-YAY-");
     REQUIRE(result.empty());
 }
 
 TEST_CASE("StringVectorToString single element - char delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec{ "Alone" };
-    auto result = Kmplete::Utils::StringVectorToString(vec, ".");
+    Kmpleete::StringVector vec{ "Alone" };
+    auto result = Kmpleete::Utils::StringVectorToString(vec, ".");
     REQUIRE(result == ".Alone");
 
-    result = Kmplete::Utils::StringVectorToString(vec, ".", false);
+    result = Kmpleete::Utils::StringVectorToString(vec, ".", false);
     REQUIRE(result == "Alone");
 }
 
 TEST_CASE("StringVectorToString single element - string delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec{ "Alone" };
-    auto result = Kmplete::Utils::StringVectorToString(vec, "Home ");
+    Kmpleete::StringVector vec{ "Alone" };
+    auto result = Kmpleete::Utils::StringVectorToString(vec, "Home ");
     REQUIRE(result == "Home Alone");
 
-    result = Kmplete::Utils::StringVectorToString(vec, "Home ", false);
+    result = Kmpleete::Utils::StringVectorToString(vec, "Home ", false);
     REQUIRE(result == "Alone");
 }
 
 TEST_CASE("StringVectorToString - empty delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec{ "Harry", "Potter" };
-    const auto result = Kmplete::Utils::StringVectorToString(vec, "");
+    Kmpleete::StringVector vec{ "Harry", "Potter" };
+    const auto result = Kmpleete::Utils::StringVectorToString(vec, "");
     REQUIRE(result == "HarryPotter");
 }
 
 TEST_CASE("StringVectorToString with some empty elements - empty delimiter", "[utils][string]")
 {
-    Kmplete::StringVector vec{ "", "A", "B", "", "C", "", "", "D", "", "" };
-    const auto result = Kmplete::Utils::StringVectorToString(vec, "");
+    Kmpleete::StringVector vec{ "", "A", "B", "", "C", "", "", "D", "", "" };
+    const auto result = Kmpleete::Utils::StringVectorToString(vec, "");
     REQUIRE(result == "ABCD");
 }
 //--------------------------------------------------------------------------
@@ -152,7 +152,7 @@ TEST_CASE("StringVectorToString with some empty elements - empty delimiter", "[u
 TEST_CASE("ToSStream empty", "[utils][string]")
 {
     std::ostringstream oss;
-    Kmplete::Utils::ToSStream(oss, "");
+    Kmpleete::Utils::ToSStream(oss, "");
     const auto result = oss.str();
     REQUIRE(result.empty());
 }
@@ -160,7 +160,7 @@ TEST_CASE("ToSStream empty", "[utils][string]")
 TEST_CASE("ToSStream empty multiple", "[utils][string]")
 {
     std::ostringstream oss;
-    Kmplete::Utils::ToSStream(oss, "", "", "");
+    Kmpleete::Utils::ToSStream(oss, "", "", "");
     const auto result = oss.str();
     REQUIRE(result.empty());
 }
@@ -168,52 +168,52 @@ TEST_CASE("ToSStream empty multiple", "[utils][string]")
 TEST_CASE("ToSStream", "[utils][string]")
 {
     std::ostringstream oss;
-    Kmplete::Utils::ToSStream(oss, "string", 123, "other_string", " ", '.');
+    Kmpleete::Utils::ToSStream(oss, "string", 123, "other_string", " ", '.');
     auto result = oss.str();
     REQUIRE(result == "string123other_string .");
 
     oss.str("");
-    Kmplete::Utils::ToSStream(oss, 1L, 2UL, 3.3f, 4.4);
+    Kmpleete::Utils::ToSStream(oss, 1L, 2UL, 3.3f, 4.4);
     result = oss.str();
     REQUIRE(result == "123.34.4");
 
     oss.str("");
-    Kmplete::Utils::ToSStream(oss, 1UL, 2L, 3.0, 4.0f);
+    Kmpleete::Utils::ToSStream(oss, 1UL, 2L, 3.0, 4.0f);
     result = oss.str();
     REQUIRE(result == "1234");
 
     oss.str("");
-    Kmplete::Utils::ToSStream(oss, 1, ' ', 2, "", 'c');
+    Kmpleete::Utils::ToSStream(oss, 1, ' ', 2, "", 'c');
     result = oss.str();
     REQUIRE(result == "1 2c");
 
     oss.str("");
-    Kmplete::Utils::ToSStream(oss, std::hex, 15);
+    Kmpleete::Utils::ToSStream(oss, std::hex, 15);
     result = oss.str();
     REQUIRE(result == "f");
 
     oss.str("");
-    Kmplete::Utils::ToSStream(oss, std::hex, std::showbase, 15);
+    Kmpleete::Utils::ToSStream(oss, std::hex, std::showbase, 15);
     result = oss.str();
     REQUIRE(result == "0xf");
 
     oss.str("");
-    Kmplete::Utils::ToSStream(oss, std::noshowbase, true, false, std::boolalpha, true, false);
+    Kmpleete::Utils::ToSStream(oss, std::noshowbase, true, false, std::boolalpha, true, false);
     result = oss.str();
     REQUIRE(result == "10truefalse");
 
     oss.str("");
-    Kmplete::Utils::ToSStream(oss, nullptr);
+    Kmpleete::Utils::ToSStream(oss, nullptr);
     result = oss.str();
     REQUIRE(result == "nullptr");
 
     oss.str("");
-    Kmplete::Utils::ToSStream(oss, std::nullptr_t{});
+    Kmpleete::Utils::ToSStream(oss, std::nullptr_t{});
     result = oss.str();
     REQUIRE(result == "nullptr");
 
     oss.str("");
-    Kmplete::Utils::ToSStream(oss, &result);
+    Kmpleete::Utils::ToSStream(oss, &result);
     result = oss.str();
     REQUIRE(not result.empty());
 }
@@ -222,26 +222,26 @@ TEST_CASE("ToSStream", "[utils][string]")
 
 TEST_CASE("Utf8ToNarrow english", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    const auto englishString = Kmplete::String("bear");
+    const auto englishString = Kmpleete::String("bear");
     REQUIRE(englishString.size() == size_t(4));
-    const auto fromUtf8 = Kmplete::Utils::Utf8ToNarrow(englishString);
+    const auto fromUtf8 = Kmpleete::Utils::Utf8ToNarrow(englishString);
     REQUIRE(englishString == fromUtf8);
 }
 
 TEST_CASE("Utf8ToNarrow cyrillic", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    auto cyrillicStr = Kmplete::String("абв");
+    auto cyrillicStr = Kmpleete::String("абв");
     if (cyrillicStr.size() != size_t(3)) // file is in UTF
     {
         REQUIRE(cyrillicStr.size() == size_t(6));
 
-        const auto fromUtf8 = Kmplete::Utils::Utf8ToNarrow(cyrillicStr);
+        const auto fromUtf8 = Kmpleete::Utils::Utf8ToNarrow(cyrillicStr);
 #if defined (KMP_PLATFORM_WINDOWS)
         // assuming Windows1251 code page
         REQUIRE((fromUtf8.size() == size_t(3) &&
@@ -254,12 +254,12 @@ TEST_CASE("Utf8ToNarrow cyrillic", "[utils][string]")
 #endif
     }
 
-    cyrillicStr = Kmplete::String({ 
+    cyrillicStr = Kmpleete::String({ 
         static_cast<char>(0xD0),static_cast<char>(0xB3), 
         static_cast<char>(0xD0),static_cast<char>(0xB4), 
         static_cast<char>(0xD0),static_cast<char>(0xB5)});
 
-    const auto fromUtf8 = Kmplete::Utils::Utf8ToNarrow(cyrillicStr);
+    const auto fromUtf8 = Kmpleete::Utils::Utf8ToNarrow(cyrillicStr);
 #if defined (KMP_PLATFORM_WINDOWS)
     // assuming Windows1251 code page
     REQUIRE((fromUtf8.size() == size_t(3) &&
@@ -274,15 +274,15 @@ TEST_CASE("Utf8ToNarrow cyrillic", "[utils][string]")
 
 TEST_CASE("Utf8ToNarrow mixed", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    const auto mixedString = Kmplete::String("bear абв");
+    const auto mixedString = Kmpleete::String("bear абв");
     if (mixedString.size() != size_t(8)) // file is in UTF
     {
         REQUIRE(mixedString.size() == size_t(4 + 1 + 6));
 
-        const auto fromUtf8 = Kmplete::Utils::Utf8ToNarrow(mixedString);
+        const auto fromUtf8 = Kmpleete::Utils::Utf8ToNarrow(mixedString);
 #if defined (KMP_PLATFORM_WINDOWS)
         // assuming Windows1251 code page
         REQUIRE((fromUtf8.size() == size_t(8) &&
@@ -305,22 +305,22 @@ TEST_CASE("Utf8ToNarrow mixed", "[utils][string]")
 
 TEST_CASE("NarrowToUtf8 english", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    const auto englishString = Kmplete::String("bear");
+    const auto englishString = Kmpleete::String("bear");
     REQUIRE(englishString.size() == size_t(4));
-    const auto toUtf8 = Kmplete::Utils::NarrowToUtf8(englishString);
+    const auto toUtf8 = Kmpleete::Utils::NarrowToUtf8(englishString);
     REQUIRE(englishString == toUtf8);
 }
 
 TEST_CASE("NarrowToUtf8 cyrillic", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    const auto cyrillicStr = Kmplete::String({ static_cast<char>(0xE0), static_cast<char>(0xE1), static_cast<char>(0xE2) });
-    const auto toUtf8 = Kmplete::Utils::NarrowToUtf8(cyrillicStr);
+    const auto cyrillicStr = Kmpleete::String({ static_cast<char>(0xE0), static_cast<char>(0xE1), static_cast<char>(0xE2) });
+    const auto toUtf8 = Kmpleete::Utils::NarrowToUtf8(cyrillicStr);
 #if defined (KMP_PLATFORM_WINDOWS)
     REQUIRE((toUtf8.size() == size_t(6) &&
         static_cast<unsigned char>(toUtf8[0]) == 0xD0 && static_cast<unsigned char>(toUtf8[1]) == 0xB0 &&
@@ -333,10 +333,10 @@ TEST_CASE("NarrowToUtf8 cyrillic", "[utils][string]")
 
 TEST_CASE("NarrowToUtf8 mixed", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    const auto mixedStr = Kmplete::String({
+    const auto mixedStr = Kmpleete::String({
         static_cast<char>(0xE0), 
         static_cast<char>(98),
         static_cast<char>(101),
@@ -346,7 +346,7 @@ TEST_CASE("NarrowToUtf8 mixed", "[utils][string]")
         static_cast<char>(0xE1), 
         static_cast<char>(0xE2)});
 
-    const auto toUtf8 = Kmplete::Utils::NarrowToUtf8(mixedStr);
+    const auto toUtf8 = Kmpleete::Utils::NarrowToUtf8(mixedStr);
 #if defined (KMP_PLATFORM_WINDOWS)
     REQUIRE((toUtf8.size() == size_t(11) &&
         static_cast<unsigned char>(toUtf8[0]) == 0xD0 && static_cast<unsigned char>(toUtf8[1]) == 0xB0 &&
@@ -366,14 +366,14 @@ TEST_CASE("NarrowToUtf8 mixed", "[utils][string]")
 
 TEST_CASE("Conversion ping-pong Utf8", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    const auto str = Kmplete::String("12 test абв АБ_В!\"№;%:?*");
+    const auto str = Kmpleete::String("12 test абв АБ_В!\"№;%:?*");
     if (str.size() != size_t(24))
     {
         REQUIRE(str.size() == size_t(32));
-        REQUIRE(str == Kmplete::Utils::NarrowToUtf8(Kmplete::Utils::Utf8ToNarrow(str)));
+        REQUIRE(str == Kmpleete::Utils::NarrowToUtf8(Kmpleete::Utils::Utf8ToNarrow(str)));
     }
 }
 //--------------------------------------------------------------------------
@@ -381,10 +381,10 @@ TEST_CASE("Conversion ping-pong Utf8", "[utils][string]")
 
 TEST_CASE("NarrowToWide english", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    auto wstr = Kmplete::Utils::NarrowToWide("basic");
+    auto wstr = Kmpleete::Utils::NarrowToWide("basic");
     REQUIRE((wstr.size() == size_t(5) &&
         wstr[0] == 98 &&
         wstr[1] == 97 &&
@@ -395,17 +395,17 @@ TEST_CASE("NarrowToWide english", "[utils][string]")
 
 TEST_CASE("NarrowToWide cyrillic", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
 #if defined (KMP_PLATFORM_WINDOWS)
-    const auto narrow = Kmplete::String({ static_cast<char>(0xE0), static_cast<char>(0xE1), static_cast<char>(0xE2) });
+    const auto narrow = Kmpleete::String({ static_cast<char>(0xE0), static_cast<char>(0xE1), static_cast<char>(0xE2) });
 #else
-    const auto narrow = Kmplete::String({ static_cast<char>(0xD0), static_cast<char>(0xB0), 
+    const auto narrow = Kmpleete::String({ static_cast<char>(0xD0), static_cast<char>(0xB0), 
                                           static_cast<char>(0xD0), static_cast<char>(0xB1),
                                           static_cast<char>(0xD0), static_cast<char>(0xB2) });
 #endif
-    const auto wstr = Kmplete::Utils::NarrowToWide(narrow);
+    const auto wstr = Kmpleete::Utils::NarrowToWide(narrow);
     REQUIRE((wstr.size() == size_t(3) &&
         wstr[0] == 0x430 &&
         wstr[1] == 0x431 &&
@@ -414,15 +414,15 @@ TEST_CASE("NarrowToWide cyrillic", "[utils][string]")
 
 TEST_CASE("NarrowToWide mixed", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
 #if defined (KMP_PLATFORM_WINDOWS)
-    const auto narrow = Kmplete::String({ static_cast<char>(0xE0), 'a', 'b', 'c', static_cast<char>(0xE1), 'd', 'e' });
+    const auto narrow = Kmpleete::String({ static_cast<char>(0xE0), 'a', 'b', 'c', static_cast<char>(0xE1), 'd', 'e' });
 #else
-    const auto narrow = Kmplete::String({ static_cast<char>(0xD0), static_cast<char>(0xB0), 'a', 'b', 'c', static_cast<char>(0xD0), static_cast<char>(0xB1), 'd', 'e' });
+    const auto narrow = Kmpleete::String({ static_cast<char>(0xD0), static_cast<char>(0xB0), 'a', 'b', 'c', static_cast<char>(0xD0), static_cast<char>(0xB1), 'd', 'e' });
 #endif
-    const auto wstr = Kmplete::Utils::NarrowToWide(narrow);
+    const auto wstr = Kmpleete::Utils::NarrowToWide(narrow);
     REQUIRE((wstr.size() == size_t(7) &&
         wstr[0] == 0x430 &&
         wstr[1] == 97 &&
@@ -437,21 +437,21 @@ TEST_CASE("NarrowToWide mixed", "[utils][string]")
 
 TEST_CASE("WideToNarrow english", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    const auto wstr = Kmplete::WString(L"abc-def");
-    const auto narrow = Kmplete::Utils::WideToNarrow(wstr);
+    const auto wstr = Kmpleete::WString(L"abc-def");
+    const auto narrow = Kmpleete::Utils::WideToNarrow(wstr);
     REQUIRE(narrow == "abc-def");
 }
 
 TEST_CASE("WideToNarrow cyrillic", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    const auto wstr = Kmplete::WString({ static_cast<wchar_t>(0x430), static_cast<wchar_t>(0x431), static_cast<wchar_t>(0x432) });
-    const auto narrow = Kmplete::Utils::WideToNarrow(wstr);
+    const auto wstr = Kmpleete::WString({ static_cast<wchar_t>(0x430), static_cast<wchar_t>(0x431), static_cast<wchar_t>(0x432) });
+    const auto narrow = Kmpleete::Utils::WideToNarrow(wstr);
 #if defined (KMP_PLATFORM_WINDOWS)
     REQUIRE((narrow.size() == size_t(3) &&
         static_cast<unsigned char>(narrow[0]) == 0xE0 &&
@@ -470,11 +470,11 @@ TEST_CASE("WideToNarrow cyrillic", "[utils][string]")
 
 TEST_CASE("WideToNarrow mixed", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    const auto wstr = Kmplete::WString({ L'a', static_cast<wchar_t>(0x430), L'b', static_cast<wchar_t>(0x431), L'c', static_cast<wchar_t>(0x432) });
-    const auto narrow = Kmplete::Utils::WideToNarrow(wstr);
+    const auto wstr = Kmpleete::WString({ L'a', static_cast<wchar_t>(0x430), L'b', static_cast<wchar_t>(0x431), L'c', static_cast<wchar_t>(0x432) });
+    const auto narrow = Kmpleete::Utils::WideToNarrow(wstr);
 #if defined (KMP_PLATFORM_WINDOWS)
     REQUIRE((narrow.size() == size_t(6) &&
         static_cast<unsigned char>(narrow[0]) == 'a' &&
@@ -501,14 +501,14 @@ TEST_CASE("WideToNarrow mixed", "[utils][string]")
 
 TEST_CASE("Conversion ping-pong wide-narrow", "[utils][string]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    const auto str = Kmplete::String("12 test абв АБ_В!\"№;%:?*");
+    const auto str = Kmpleete::String("12 test абв АБ_В!\"№;%:?*");
     if (str.size() != size_t(24))
     {
         REQUIRE(str.size() == size_t(32));
-        REQUIRE(str == Kmplete::Utils::WideToNarrow(Kmplete::Utils::NarrowToWide(str)));
+        REQUIRE(str == Kmpleete::Utils::WideToNarrow(Kmpleete::Utils::NarrowToWide(str)));
     }
 }
 //--------------------------------------------------------------------------
@@ -516,63 +516,63 @@ TEST_CASE("Conversion ping-pong wide-narrow", "[utils][string]")
 
 TEST_CASE("RegexReplace positive", "[utils][string]")
 {
-    auto str1 = Kmplete::String("Test Test");
-    REQUIRE_NOTHROW(str1 = Kmplete::Utils::RegexReplace(str1, "Test", "TEST"));
+    auto str1 = Kmpleete::String("Test Test");
+    REQUIRE_NOTHROW(str1 = Kmpleete::Utils::RegexReplace(str1, "Test", "TEST"));
     REQUIRE(str1 == "TEST TEST");
 
-    auto str2 = Kmplete::String("TestTest");
-    REQUIRE_NOTHROW(str2 = Kmplete::Utils::RegexReplace(str2, "Test", "TEST"));
+    auto str2 = Kmpleete::String("TestTest");
+    REQUIRE_NOTHROW(str2 = Kmpleete::Utils::RegexReplace(str2, "Test", "TEST"));
     REQUIRE(str2 == "TESTTEST");
 
-    auto str3 = Kmplete::String("test test");
-    REQUIRE_NOTHROW(str3 = Kmplete::Utils::RegexReplace(str3, "Test", "TEST"));
+    auto str3 = Kmpleete::String("test test");
+    REQUIRE_NOTHROW(str3 = Kmpleete::Utils::RegexReplace(str3, "Test", "TEST"));
     REQUIRE(str3 == "test test");
 
-    auto str4 = Kmplete::String("Test test");
-    REQUIRE_NOTHROW(str4 = Kmplete::Utils::RegexReplace(str4, "Test", "TEST"));
+    auto str4 = Kmpleete::String("Test test");
+    REQUIRE_NOTHROW(str4 = Kmpleete::Utils::RegexReplace(str4, "Test", "TEST"));
     REQUIRE(str4 == "TEST test");
 
-    auto str5 = Kmplete::String("Test Test");
-    REQUIRE_NOTHROW(str5 = Kmplete::Utils::RegexReplace(str5, "11", "22"));
+    auto str5 = Kmpleete::String("Test Test");
+    REQUIRE_NOTHROW(str5 = Kmpleete::Utils::RegexReplace(str5, "11", "22"));
     REQUIRE(str5 == "Test Test");
 
-    auto str6 = Kmplete::String("TEST test");
-    REQUIRE_NOTHROW(str6 = Kmplete::Utils::RegexReplace(str6, "[A-Z]", "_"));
+    auto str6 = Kmpleete::String("TEST test");
+    REQUIRE_NOTHROW(str6 = Kmpleete::Utils::RegexReplace(str6, "[A-Z]", "_"));
     REQUIRE(str6 == "____ test");
 
-    auto str7 = Kmplete::String("TEST test");
-    REQUIRE_NOTHROW(str7 = Kmplete::Utils::RegexReplace(str7, "", "_"));
+    auto str7 = Kmpleete::String("TEST test");
+    REQUIRE_NOTHROW(str7 = Kmpleete::Utils::RegexReplace(str7, "", "_"));
     REQUIRE(str7 == "_T_E_S_T_ _t_e_s_t_");
 
-    auto str8 = Kmplete::String("TEST test");
-    REQUIRE_NOTHROW(str8 = Kmplete::Utils::RegexReplace(str8, " ", "_"));
+    auto str8 = Kmpleete::String("TEST test");
+    REQUIRE_NOTHROW(str8 = Kmpleete::Utils::RegexReplace(str8, " ", "_"));
     REQUIRE(str8 == "TEST_test");
 
-    auto str9 = Kmplete::String("   test   test  ");
-    REQUIRE_NOTHROW(str9 = Kmplete::Utils::RegexReplace(str9, " +", " "));
+    auto str9 = Kmpleete::String("   test   test  ");
+    REQUIRE_NOTHROW(str9 = Kmpleete::Utils::RegexReplace(str9, " +", " "));
     REQUIRE(str9 == " test test ");
 }
 
 TEST_CASE("RegexReplace negative", "[utils][string]")
 {
-    auto str1 = Kmplete::String("TEST test");
-    REQUIRE_NOTHROW(str1 = Kmplete::Utils::RegexReplace(str1, "[A-\\]", "_"));
+    auto str1 = Kmpleete::String("TEST test");
+    REQUIRE_NOTHROW(str1 = Kmpleete::Utils::RegexReplace(str1, "[A-\\]", "_"));
     REQUIRE(str1 == "TEST test");
 
-    auto str2 = Kmplete::String("TEST test");
-    REQUIRE_NOTHROW(str2 = Kmplete::Utils::RegexReplace(str2, "A-Z]", "_"));
+    auto str2 = Kmpleete::String("TEST test");
+    REQUIRE_NOTHROW(str2 = Kmpleete::Utils::RegexReplace(str2, "A-Z]", "_"));
     REQUIRE(str1 == "TEST test");
 
-    auto str3 = Kmplete::String("TEST test");
-    REQUIRE_NOTHROW(str3 = Kmplete::Utils::RegexReplace(str3, nullptr, "_"));
+    auto str3 = Kmpleete::String("TEST test");
+    REQUIRE_NOTHROW(str3 = Kmpleete::Utils::RegexReplace(str3, nullptr, "_"));
     REQUIRE(str3 == "TEST test");
 
-    auto str4 = Kmplete::String("TEST test");
-    REQUIRE_NOTHROW(str4 = Kmplete::Utils::RegexReplace(str4, "TEST", nullptr));
+    auto str4 = Kmpleete::String("TEST test");
+    REQUIRE_NOTHROW(str4 = Kmpleete::Utils::RegexReplace(str4, "TEST", nullptr));
     REQUIRE(str4 == "TEST test");
 
-    auto str5 = Kmplete::String("TEST   test");
-    REQUIRE_NOTHROW(str5 = Kmplete::Utils::RegexReplace(str5, "\\ \\++", "_"));
+    auto str5 = Kmpleete::String("TEST   test");
+    REQUIRE_NOTHROW(str5 = Kmpleete::Utils::RegexReplace(str5, "\\ \\++", "_"));
     REQUIRE(str5 == "TEST   test");
 }
 //--------------------------------------------------------------------------

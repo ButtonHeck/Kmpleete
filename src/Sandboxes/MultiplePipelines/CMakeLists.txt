@@ -14,10 +14,10 @@ set(MultiplePipelines_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/multiple_pipelines_frame_listener.cpp
 )
 set(MultiplePipelines_SHADERS
-    ${KmpleteSandboxResourcesFolder}/multiple_pipelines_buffered_color.vert
-    ${KmpleteSandboxResourcesFolder}/multiple_pipelines_buffered_color.frag
-    ${KmpleteSandboxResourcesFolder}/multiple_pipelines_fixed_color.vert
-    ${KmpleteSandboxResourcesFolder}/multiple_pipelines_fixed_color.frag
+    ${KmpleeteSandboxResourcesFolder}/multiple_pipelines_buffered_color.vert
+    ${KmpleeteSandboxResourcesFolder}/multiple_pipelines_buffered_color.frag
+    ${KmpleeteSandboxResourcesFolder}/multiple_pipelines_fixed_color.vert
+    ${KmpleeteSandboxResourcesFolder}/multiple_pipelines_fixed_color.frag
 )
 source_group("Shaders" FILES ${MultiplePipelines_SHADERS})  
 
@@ -30,15 +30,15 @@ add_executable(MultiplePipelines
 SetupCompilerOptions(MultiplePipelines)
 
 set_target_properties(MultiplePipelines PROPERTIES
-    FOLDER Kmplete/Sandboxes/MultiplePipelines
+    FOLDER Kmpleete/Sandboxes/MultiplePipelines
 )
 
 target_compile_definitions(MultiplePipelines
-    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleteSandboxResourcesFolder}/\"
+    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleeteSandboxResourcesFolder}/\"
 )
 
 target_link_libraries(MultiplePipelines
-    PRIVATE Kmplete
+    PRIVATE Kmpleete
     PRIVATE ImGuiUtilsLib
     PRIVATE Vulkan::Vulkan
 )

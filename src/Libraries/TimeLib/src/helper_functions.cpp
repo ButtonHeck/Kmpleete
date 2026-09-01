@@ -1,12 +1,12 @@
-#include "Kmplete/Time/helper_functions.h"
-#include "Kmplete/Base/platform.h"
+#include "Kmpleete/Time/helper_functions.h"
+#include "Kmpleete/Base/platform.h"
 
 #include <chrono>
 #include <iomanip>
 #include <sstream>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Time
     {

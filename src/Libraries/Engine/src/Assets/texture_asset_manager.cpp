@@ -1,14 +1,14 @@
-#include "Kmplete/Assets/texture_asset_manager.h"
-#include "Kmplete/Graphics/image.h"
-#include "Kmplete/Internal/error_texture_data.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Assets/texture_asset_manager.h"
+#include "Kmpleete/Graphics/image.h"
+#include "Kmpleete/Internal/error_texture_data.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Assets
     {

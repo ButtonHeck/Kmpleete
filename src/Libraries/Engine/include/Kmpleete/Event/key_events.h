@@ -1,0 +1,113 @@
+#pragma once
+
+#include "Kmpleete/Event/event.h"
+#include "Kmpleete/Input/input_codes.h"
+#include "Kmpleete/Utils/string_utils.h"
+
+
+namespace Kmpleete
+{
+    //! Definitions of keyboard events supported by engine
+
+    namespace Events
+    {
+        static constexpr auto KeyPressEventTypeStr = "KeyPressEvent";
+        static constexpr auto KeyReleaseEventTypeStr = "KeyReleaseEvent";
+        static constexpr auto KeyCharEventTypeStr = "KeyCharEvent";
+
+        static constexpr auto KeyPressEventTypeID = ToStringID(KeyPressEventTypeStr);
+        static constexpr auto KeyReleaseEventTypeID = ToStringID(KeyReleaseEventTypeStr);
+        static constexpr auto KeyCharEventTypeID = ToStringID(KeyCharEventTypeStr);
+
+
+        struct KeyEvent : public Event
+        {
+            KMP_NODISCARD Input::InputCode GetKeyCode() const noexcept
+            {
+                return _keyCode;
+            }
+
+        protected:
+            explicit KeyEvent(const Input::InputCode keyCode) noexcept
+                : _keyCode(keyCode)
+            {}
+
+        protected:
+            const Input::InputCode _keyCode;
+        };
+        //--------------------------------------------------------------------------
+
+
+        struct KeyPressEvent : public KeyEvent
+        {
+            EVENT_CLASS_TYPE(KeyPressEventTypeStr)
+
+            KeyPressEvent(const Input::InputCode keyCode, int mods, bool repeat = false) noexcept
+                : KeyEvent(keyCode)
+                , _mods(mods)
+                , _repeat(repeat)
+            {}
+
+            KMP_NODISCARD bool IsRepeat() const noexcept
+            {
+                return _repeat;
+            }
+
+            KMP_NODISCARD int GetMods() const noexcept
+            {
+                return _mods;
+            }
+
+            KMP_NODISCARD String ToString() const override
+            {
+                return Utils::Concatenate(GetName(), ": ", _keyCode, " (repeat = ", _repeat, ", mods = ", _mods, ")");
+            }
+
+        private:
+            const int _mods;
+            const bool _repeat;
+        };
+        //--------------------------------------------------------------------------
+
+
+        struct KeyReleaseEvent : public KeyEvent
+        {
+            EVENT_CLASS_TYPE(KeyReleaseEventTypeStr)
+
+            explicit KeyReleaseEvent(const Input::InputCode keyCode, int mods) noexcept
+                : KeyEvent(keyCode)
+                , _mods(mods)
+            {}
+
+            KMP_NODISCARD int GetMods() const noexcept
+            {
+                return _mods;
+            }
+
+            KMP_NODISCARD String ToString() const override
+            {
+                return Utils::Concatenate(GetName(), ": ", _keyCode);
+            }
+
+        private:
+            const int _mods;
+        };
+        //--------------------------------------------------------------------------
+
+
+        struct KeyCharEvent : public KeyEvent
+        {
+            EVENT_CLASS_TYPE(KeyCharEventTypeStr)
+
+            explicit KeyCharEvent(const Input::InputCode keyCode) noexcept
+                : KeyEvent(keyCode)
+            {}
+
+            KMP_NODISCARD String ToString() const override
+            {
+                return Utils::Concatenate(GetName(), ": ", _keyCode);
+            }
+        };
+        //--------------------------------------------------------------------------
+    }
+}

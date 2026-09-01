@@ -21,7 +21,7 @@ SetupBoost(Translator)
 SetupCompilerOptions(Translator)
 
 set_target_properties(Translator PROPERTIES 
-    FOLDER Kmplete/Tools/Translator
+    FOLDER Kmpleete/Tools/Translator
 )
 
 target_link_libraries(Translator
@@ -66,5 +66,5 @@ add_custom_command(TARGET Translator POST_BUILD
 
 install(TARGETS Translator
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} 
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )

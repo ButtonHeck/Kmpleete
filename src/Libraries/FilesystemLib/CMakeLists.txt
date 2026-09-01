@@ -7,7 +7,7 @@ project(FilesystemLib LANGUAGES CXX)
 add_library(FilesystemLib)
 
 AddTargetSourcesGroup(FilesystemLib "Filesystem"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Filesystem/filesystem.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Filesystem/filesystem.h
     ${CMAKE_CURRENT_LIST_DIR}/src/filesystem.cpp
 )
 
@@ -28,10 +28,10 @@ target_compile_definitions(FilesystemLib
 )
 
 set_target_properties(FilesystemLib PROPERTIES 
-    FOLDER Kmplete/Libraries/FilesystemLib
+    FOLDER Kmpleete/Libraries/FilesystemLib
 )
 
-if(${KMPLETE_BUILD_TESTS})
+if(${KMPLEETE_BUILD_TESTS})
     add_subdirectory(tests)
 endif()
 
@@ -41,7 +41,7 @@ endif()
 
 install(TARGETS FilesystemLib
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )

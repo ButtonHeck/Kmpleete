@@ -7,7 +7,7 @@ project(ShaderCompilerToolInterfaceLib LANGUAGES CXX)
 add_library(ShaderCompilerToolInterfaceLib INTERFACE)
 
 AddTargetSourcesGroup(ShaderCompilerToolInterfaceLib "ShaderCompiler"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/ShaderCompiler/shader_compiler_tool_interface.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/ShaderCompiler/shader_compiler_tool_interface.h
 )
 
 target_include_directories(ShaderCompilerToolInterfaceLib
@@ -15,5 +15,5 @@ target_include_directories(ShaderCompilerToolInterfaceLib
 )
 
 set_target_properties(ShaderCompilerToolInterfaceLib PROPERTIES 
-    FOLDER Kmplete/Tools/ShaderCompilerToolInterfaceLib
+    FOLDER Kmpleete/Tools/ShaderCompilerToolInterfaceLib
 )

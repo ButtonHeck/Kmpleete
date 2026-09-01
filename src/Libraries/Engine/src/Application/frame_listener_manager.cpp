@@ -1,11 +1,11 @@
-#include "Kmplete/Application/frame_listener_manager.h"
-#include "Kmplete/Event/event_queue.h"
-#include "Kmplete/Profile/profiler.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Core/assertion.h"
+#include "Kmpleete/Application/frame_listener_manager.h"
+#include "Kmpleete/Event/event_queue.h"
+#include "Kmpleete/Profile/profiler.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Core/assertion.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     FrameListenerManager::~FrameListenerManager() KMP_PROFILING(ProfileLevelAlways)
     {

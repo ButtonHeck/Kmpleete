@@ -14,10 +14,10 @@ set(PostProcessing_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/post_processing_frame_listener.cpp
 )
 set(PostProcessing_SHADERS
-    ${KmpleteSandboxResourcesFolder}/post_processing_pre.vert
-    ${KmpleteSandboxResourcesFolder}/post_processing_pre.frag
-    ${KmpleteSandboxResourcesFolder}/post_processing_post.vert
-    ${KmpleteSandboxResourcesFolder}/post_processing_post.frag
+    ${KmpleeteSandboxResourcesFolder}/post_processing_pre.vert
+    ${KmpleeteSandboxResourcesFolder}/post_processing_pre.frag
+    ${KmpleeteSandboxResourcesFolder}/post_processing_post.vert
+    ${KmpleeteSandboxResourcesFolder}/post_processing_post.frag
 )
 source_group("Shaders" FILES ${PostProcessing_SHADERS})
 
@@ -30,15 +30,15 @@ add_executable(PostProcessing
 SetupCompilerOptions(PostProcessing)
 
 set_target_properties(PostProcessing PROPERTIES
-    FOLDER Kmplete/Sandboxes/PostProcessing
+    FOLDER Kmpleete/Sandboxes/PostProcessing
 )
 
 target_compile_definitions(PostProcessing
-    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleteSandboxResourcesFolder}/\"
+    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleeteSandboxResourcesFolder}/\"
 )
 
 target_link_libraries(PostProcessing
-    PRIVATE Kmplete
+    PRIVATE Kmpleete
     PRIVATE ImGuiUtilsLib
     PRIVATE Vulkan::Vulkan
 )

@@ -1,9 +1,9 @@
 #include "shader_compiler_tool.h"
 
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Utils/string_utils.h"
-#include "Kmplete/ShaderCompiler/compile.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Utils/string_utils.h"
+#include "Kmpleete/ShaderCompiler/compile.h"
 
 #include <boost/program_options.hpp>
 
@@ -12,12 +12,12 @@
 
 namespace bpo = boost::program_options;
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace ShaderCompiler
     {
         void PrintUsage(const bpo::options_description& description);
-        bool WorkModeIsValid(const Kmplete::String& workMode);
+        bool WorkModeIsValid(const Kmpleete::String& workMode);
         bpo::options_description CreateOptionsDescription();
         int ParseParameters(const bpo::options_description& optionsDescription, bpo::variables_map& vm, ShaderCompilerTool::CompilerParameters& compilerParameters);
     }
@@ -31,7 +31,7 @@ namespace Kmplete
 //! Stage 3 - create and run the compiler with parameters from stage 2
 int main(int argc, char** argv)
 {
-    using namespace Kmplete::ShaderCompiler;
+    using namespace Kmpleete::ShaderCompiler;
 
     // Stage 1
 
@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 #if not defined (KMP_CONFIG_TYPE_PRODUCTION)
         if (vm.count(ShaderCompilerTool::CompilerArgumentLogging))
         {
-            Kmplete::Log::Finalize();
+            Kmpleete::Log::Finalize();
         }
 #endif
 
@@ -77,7 +77,7 @@ int main(int argc, char** argv)
 #if not defined (KMP_CONFIG_TYPE_PRODUCTION)
     if (vm.count(ShaderCompilerTool::CompilerArgumentLogging))
     {
-        Kmplete::Log::Finalize();
+        Kmpleete::Log::Finalize();
     }
 #endif
 
@@ -86,7 +86,7 @@ int main(int argc, char** argv)
 //--------------------------------------------------------------------------
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace ShaderCompiler
     {
@@ -118,7 +118,7 @@ namespace Kmplete
         }
         //--------------------------------------------------------------------------
 
-        bool WorkModeIsValid(const Kmplete::String& workMode)
+        bool WorkModeIsValid(const Kmpleete::String& workMode)
         {
             return workMode == ShaderCompilerTool::CompilerWorkModeDirect ||
                    workMode == ShaderCompilerTool::CompilerWorkModeJson;
@@ -141,7 +141,7 @@ namespace Kmplete
                 logSettings.level = 0;
                 logSettings.levelFlush = 0;
                 Log::SetSettings(logSettings);
-                Log::Initialize("Kmplete Shader compiler", Filesystem::GetCurrentFilepath() / "Logs");
+                Log::Initialize("Kmpleete Shader compiler", Filesystem::GetCurrentFilepath() / "Logs");
             }
 #endif
 

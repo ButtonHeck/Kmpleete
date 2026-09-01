@@ -1,10 +1,10 @@
-#include "Kmplete/ImGui/scope_guards.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/ImGui/scope_guards.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <imgui_internal.h>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace ImGuiUtils
     {

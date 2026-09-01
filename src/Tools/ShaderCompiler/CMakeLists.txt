@@ -21,7 +21,7 @@ SetupBoost(ShaderCompilerTool)
 SetupCompilerOptions(ShaderCompilerTool)
 
 set_target_properties(ShaderCompilerTool PROPERTIES
-    FOLDER Kmplete/Tools/ShaderCompilerTool
+    FOLDER Kmpleete/Tools/ShaderCompilerTool
 )
 
 target_link_libraries(ShaderCompilerTool
@@ -48,5 +48,5 @@ endif()
 
 install(TARGETS ShaderCompilerTool
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} 
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )

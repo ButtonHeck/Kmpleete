@@ -1,14 +1,14 @@
 #include "assets_compiler.h"
 
-#include "Kmplete/Json/json_document.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Json/json_document.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Log/log.h"
 
 #include <fstream>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Assets
     {

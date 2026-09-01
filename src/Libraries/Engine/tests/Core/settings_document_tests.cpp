@@ -1,12 +1,12 @@
-#include "Kmplete/Core/settings_document.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Core/settings_document.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
 TEST_CASE("SettingsDocument minimal saving", "[core][settings_document]")
 {
-    Kmplete::SettingsDocument settings("TestSettings");
+    Kmpleete::SettingsDocument settings("TestSettings");
 
     REQUIRE(settings.GetName() == "TestSettings");
     REQUIRE_FALSE(settings.EndLoadObject());
@@ -38,7 +38,7 @@ TEST_CASE("SettingsDocument normal saving", "[core][settings_document]")
     }
     */
 
-    Kmplete::SettingsDocument settings("TestSettings");
+    Kmpleete::SettingsDocument settings("TestSettings");
 
     REQUIRE(settings.StartSaveObject("Group1"));
         REQUIRE(settings.SaveInt("Prop1", 11));
@@ -110,10 +110,10 @@ TEST_CASE("SettingsDocument normal loading", "[core][settings_document]")
     REQUIRE(error == rapidjson::kParseErrorNone);
     REQUIRE(document.IsObject());
 
-    const auto jsonDocument = Kmplete::CreatePtr<Kmplete::JsonDocument>(std::move(document));
+    const auto jsonDocument = Kmpleete::CreatePtr<Kmpleete::JsonDocument>(std::move(document));
     REQUIRE(jsonDocument);
 
-    Kmplete::SettingsDocument settings("TestSettings", jsonDocument);
+    Kmpleete::SettingsDocument settings("TestSettings", jsonDocument);
     REQUIRE(settings.GetName() == "TestSettings");
 
     REQUIRE_FALSE(settings.StartLoadObject("Obj"));
@@ -190,10 +190,10 @@ TEST_CASE("SettingsDocument loading malformed json", "[core][settings_document]"
     document.Parse(MalformedJsonStr);
     REQUIRE(document.HasParseError());
 
-    const auto jsonDocument = Kmplete::CreatePtr<Kmplete::JsonDocument>(std::move(document));
+    const auto jsonDocument = Kmpleete::CreatePtr<Kmpleete::JsonDocument>(std::move(document));
     REQUIRE(jsonDocument);
 
-    Kmplete::SettingsDocument settings("SettingsWithError", jsonDocument);
+    Kmpleete::SettingsDocument settings("SettingsWithError", jsonDocument);
 
     REQUIRE_FALSE(settings.GetInt("Hello") == 321);
     REQUIRE_FALSE(settings.GetBool("Var") == true);
@@ -217,10 +217,10 @@ TEST_CASE("SettingsDocument loading document with null value", "[core][settings_
 
     REQUIRE(error == rapidjson::kParseErrorNone);
 
-    const auto jsonDocument = Kmplete::CreatePtr<Kmplete::JsonDocument>(std::move(document));
+    const auto jsonDocument = Kmpleete::CreatePtr<Kmpleete::JsonDocument>(std::move(document));
     REQUIRE(jsonDocument);
 
-    Kmplete::SettingsDocument settings("SettingsWithNull", jsonDocument);
+    Kmpleete::SettingsDocument settings("SettingsWithNull", jsonDocument);
 
     REQUIRE(settings.GetInt("Hello", 99) == 321);
     REQUIRE(settings.GetInt("Ptr", 99) == 99);
@@ -243,10 +243,10 @@ TEST_CASE("SettingsDocument loading duplicate values", "[core][settings_document
 
     REQUIRE(error == rapidjson::kParseErrorNone);
 
-    const auto jsonDocument = Kmplete::CreatePtr<Kmplete::JsonDocument>(std::move(document));
+    const auto jsonDocument = Kmpleete::CreatePtr<Kmpleete::JsonDocument>(std::move(document));
     REQUIRE(jsonDocument);
 
-    Kmplete::SettingsDocument settings("SettingsWithDups", jsonDocument);
+    Kmpleete::SettingsDocument settings("SettingsWithDups", jsonDocument);
 
     REQUIRE(settings.GetInt("Hello") == 321);
 }

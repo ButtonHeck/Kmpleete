@@ -1,9 +1,9 @@
 #include "storage_buffers_application.h"
 
-#include "Kmplete/Application/application_context.h"
+#include "Kmpleete/Application/application_context.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     StorageBuffersApplication::StorageBuffersApplication(const WindowApplicationParameters& parameters)
         : WindowApplication(parameters)

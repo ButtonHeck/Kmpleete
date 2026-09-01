@@ -1,13 +1,13 @@
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #if defined(KMP_PROFILE)
 
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Log/log.h"
 
 #include <iomanip>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     Profiler::Profiler() noexcept
         : _level(0)

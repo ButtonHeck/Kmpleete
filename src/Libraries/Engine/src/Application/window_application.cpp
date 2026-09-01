@@ -1,21 +1,21 @@
-#include "Kmplete/Application/window_application.h"
-#include "Kmplete/Application/application_context.h"
-#include "Kmplete/Internal/default_window_icon_data.h"
-#include "Kmplete/Window/window.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Utils/function_utils.h"
-#include "Kmplete/Utils/string_utils.h"
-#include "Kmplete/Math/math.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Event/key_events.h"
-#include "Kmplete/Event/window_events.h"
-#include "Kmplete/Profile/profiler.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Application/window_application.h"
+#include "Kmpleete/Application/application_context.h"
+#include "Kmpleete/Internal/default_window_icon_data.h"
+#include "Kmpleete/Window/window.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Utils/function_utils.h"
+#include "Kmpleete/Utils/string_utils.h"
+#include "Kmpleete/Math/math.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Event/key_events.h"
+#include "Kmpleete/Event/window_events.h"
+#include "Kmpleete/Profile/profiler.h"
+#include "Kmpleete/Log/log.h"
 
 #include <thread>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static constexpr auto SettingsEntryName = "WindowApplication";
     static constexpr auto IconifiedFPSStr = "IconifiedFPS";

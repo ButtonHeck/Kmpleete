@@ -1,15 +1,15 @@
-#include "Kmplete/Input/input_manager.h"
-#include "Kmplete/Event/event.h"
-#include "Kmplete/Event/mouse_events.h"
-#include "Kmplete/Event/key_events.h"
-#include "Kmplete/Base/type_traits.h"
-#include "Kmplete/Base/named_bool.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Utils/vector_utils.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Input/input_manager.h"
+#include "Kmpleete/Event/event.h"
+#include "Kmpleete/Event/mouse_events.h"
+#include "Kmpleete/Event/key_events.h"
+#include "Kmpleete/Base/type_traits.h"
+#include "Kmpleete/Base/named_bool.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Utils/vector_utils.h"
+#include "Kmpleete/Log/log.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Input
     {

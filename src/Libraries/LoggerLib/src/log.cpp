@@ -1,7 +1,7 @@
 #if not defined (KMP_CONFIG_TYPE_PRODUCTION)
 
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Time/helper_functions.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Time/helper_functions.h"
 
 #include <spdlog/async.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
@@ -15,7 +15,7 @@
 #include <iostream>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static Log::LogSettings logSettings;
     static auto nullSink = CreatePtr<spdlog::sinks::null_sink_mt>();

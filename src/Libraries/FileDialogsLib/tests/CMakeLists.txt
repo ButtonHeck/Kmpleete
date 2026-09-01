@@ -13,6 +13,6 @@ add_executable(FileDialogsLib_UnitTests
 
 SetupUnitTestsTargetProperties(
     FileDialogsLib_UnitTests 
-    Kmplete/Tests/Manual
-    Catch2::Catch2WithMain FileDialogsLib Kmplete
+    Kmpleete/Tests/Manual
+    Catch2::Catch2WithMain FileDialogsLib Kmpleete
 )

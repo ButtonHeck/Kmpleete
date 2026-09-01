@@ -1,10 +1,10 @@
-#include "Kmplete/Graphics/Vulkan/Core/vulkan_graphics_surface.h"
-#include "Kmplete/Graphics/Vulkan/Utils/initializers.h"
-#include "Kmplete/Graphics/Vulkan/Utils/result_description.h"
-#include "Kmplete/Window/window.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Graphics/Vulkan/Core/vulkan_graphics_surface.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/initializers.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/result_description.h"
+#include "Kmpleete/Window/window.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #if defined (KMP_WINDOW_BACKEND_GLFW)
     #define GLFW_INCLUDE_NONE
@@ -12,7 +12,7 @@
 #endif
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

@@ -10,8 +10,8 @@ project(ProfilerLib LANGUAGES CXX)
 add_library(ProfilerLib)
 
 AddTargetSourcesGroup(ProfilerLib "Profile"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Profile/profiler.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Profile/profiler_fwd.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Profile/profiler.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Profile/profiler_fwd.h
     ${CMAKE_CURRENT_LIST_DIR}/src/profiler.cpp
 )
 
@@ -31,7 +31,7 @@ target_compile_definitions(ProfilerLib
 )
 
 set_target_properties(ProfilerLib PROPERTIES 
-    FOLDER Kmplete/Libraries/ProfilerLib
+    FOLDER Kmpleete/Libraries/ProfilerLib
 )
 
 
@@ -40,8 +40,8 @@ set_target_properties(ProfilerLib PROPERTIES
 add_library(ProfilerInterfaceLib INTERFACE)
 
 AddTargetSourcesGroup(ProfilerInterfaceLib "Profile"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Profile/profiler.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Profile/profiler_fwd.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Profile/profiler.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Profile/profiler_fwd.h
 )
 
 target_compile_definitions(ProfilerInterfaceLib
@@ -53,7 +53,7 @@ target_include_directories(ProfilerInterfaceLib
 )
 
 set_target_properties(ProfilerInterfaceLib PROPERTIES 
-    FOLDER Kmplete/Libraries/ProfilerLib
+    FOLDER Kmpleete/Libraries/ProfilerLib
 )
 
 
@@ -62,7 +62,7 @@ set_target_properties(ProfilerInterfaceLib PROPERTIES
 
 install(TARGETS ProfilerLib
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )

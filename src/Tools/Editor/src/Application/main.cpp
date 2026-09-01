@@ -1,11 +1,11 @@
 #include "Application/editor_application.h"
 
-#include "Kmplete/Core/main.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Graphics/Vulkan/Core/vulkan_graphics_parameters.h"
+#include "Kmpleete/Core/main.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Graphics/Vulkan/Core/vulkan_graphics_parameters.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     const char* ApplicationProfileSessionPrefix()
     {
@@ -38,7 +38,7 @@ namespace Kmplete
         {
             WindowApplicationParameters parameters = WindowApplicationParameters{
                 .applicationParameters = {
-                    .applicationName = "Kmplete Editor",
+                    .applicationName = "Kmpleete Editor",
                     .settingsFilepath = programOptions.GetSettingsFilepath(),
                     .defaultSettingsFileName = "Editor_settings.json"
                 },

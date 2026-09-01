@@ -19,7 +19,7 @@
 # targetName_localization_compile
 ############################################################################
 
-set(Kmplete_Localization_OK TRUE)
+set(Kmpleete_Localization_OK TRUE)
 
 find_package(Gettext)
 
@@ -30,46 +30,42 @@ find_program(GETTEXT_MSGINIT_EXECUTABLE msginit)
 find_program(GETTEXT_MSGATTRIB_EXECUTABLE msgattrib)
 
 if(NOT Gettext_FOUND)
-    set(Kmplete_Localization_OK FALSE)
-    if(WIN32)
-        message(WARNING "Gettext package not found! Try installing gettext or adding vendor/gettext/win path")
-    elseif(UNIX)
-        message(WARNING "Gettext package not found! Try installing gettext")
-    endif()
+    set(Kmpleete_Localization_OK FALSE)
+    message(WARNING "Gettext package not found! Try installing gettext")
 endif()
 
 if(GETTEXT_XGETTEXT_EXECUTABLE)
     message(STATUS "Found xgettext: ${GETTEXT_XGETTEXT_EXECUTABLE}")
 else()
-    set(Kmplete_Localization_OK FALSE)
+    set(Kmpleete_Localization_OK FALSE)
     message(WARNING "xgettext not found!")
 endif()
 
 if(GETTEXT_MSGMERGE_EXECUTABLE)
     message(STATUS "Found msgmerge: ${GETTEXT_MSGMERGE_EXECUTABLE}")
 else()
-    set(Kmplete_Localization_OK FALSE)
+    set(Kmpleete_Localization_OK FALSE)
     message(WARNING "msgmerge not found!")
 endif()
 
 if(GETTEXT_MSGFMT_EXECUTABLE)
     message(STATUS "Found msgfmt: ${GETTEXT_MSGFMT_EXECUTABLE}")
 else()
-    set(Kmplete_Localization_OK FALSE)
+    set(Kmpleete_Localization_OK FALSE)
     message(WARNING "msgfmt not found!")
 endif()
 
 if(GETTEXT_MSGINIT_EXECUTABLE)
     message(STATUS "Found msginit: ${GETTEXT_MSGINIT_EXECUTABLE}")
 else()
-    set(Kmplete_Localization_OK FALSE)
+    set(Kmpleete_Localization_OK FALSE)
     message(WARNING "msginit not found!")
 endif()
 
 if(GETTEXT_MSGATTRIB_EXECUTABLE)
     message(STATUS "Found msgattrib: ${GETTEXT_MSGATTRIB_EXECUTABLE}")
 else()
-    set(Kmplete_Localization_OK FALSE)
+    set(Kmpleete_Localization_OK FALSE)
     message(WARNING "msgattrib not found!")
 endif()
 

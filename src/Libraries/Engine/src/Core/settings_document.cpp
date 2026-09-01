@@ -1,9 +1,9 @@
-#include "Kmplete/Core/settings_document.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Core/settings_document.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     SettingsDocument::SettingsDocument(const String& name, Ptr<JsonDocument> document)
         : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()

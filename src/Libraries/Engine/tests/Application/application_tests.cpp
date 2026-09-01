@@ -1,14 +1,14 @@
-#include "Kmplete/Application/application.h"
-#include "Kmplete/Application/application_context.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Utils/function_utils.h"
+#include "Kmpleete/Application/application.h"
+#include "Kmpleete/Application/application_context.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Utils/function_utils.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 #include <thread>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     class TestApplication : public Application
     {
@@ -45,25 +45,25 @@ namespace Kmplete
 TEST_CASE("Test application initialize", "[application]")
 {
     {
-        const auto application = Kmplete::CreateUPtr<Kmplete::TestApplication>(Kmplete::ApplicationParameters("TestApplication", "", "Kmplete_unit_tests_settings.json"));
+        const auto application = Kmpleete::CreateUPtr<Kmpleete::TestApplication>(Kmpleete::ApplicationParameters("TestApplication", "", "Kmpleete_unit_tests_settings.json"));
 
         REQUIRE(application);
-        REQUIRE(not Kmplete::Filesystem::GetCurrentFilepath().empty());
+        REQUIRE(not Kmpleete::Filesystem::GetCurrentFilepath().empty());
     }
 
-    const auto settingsFilepath = Kmplete::Filesystem::GetCurrentFilepath().append("Kmplete_unit_tests_settings.json");
-    REQUIRE(Kmplete::Filesystem::FilepathIsValid(settingsFilepath));
-    REQUIRE(Kmplete::Filesystem::FilepathExists(settingsFilepath));
+    const auto settingsFilepath = Kmpleete::Filesystem::GetCurrentFilepath().append("Kmpleete_unit_tests_settings.json");
+    REQUIRE(Kmpleete::Filesystem::FilepathIsValid(settingsFilepath));
+    REQUIRE(Kmpleete::Filesystem::FilepathExists(settingsFilepath));
 }
 //--------------------------------------------------------------------------
 
 
 TEST_CASE("Test application name", "[application]")
 {
-    const auto application = Kmplete::CreateUPtr<Kmplete::MetricsTestApplication>(Kmplete::ApplicationParameters("MetricsTestApplication", "", "Kmplete_unit_tests_settings.json"));
+    const auto application = Kmpleete::CreateUPtr<Kmpleete::MetricsTestApplication>(Kmpleete::ApplicationParameters("MetricsTestApplication", "", "Kmpleete_unit_tests_settings.json"));
     REQUIRE(application);
-    Kmplete::String appName = "";
-    REQUIRE_NOTHROW(appName = Kmplete::ApplicationContext::GetApplicationName());
+    Kmpleete::String appName = "";
+    REQUIRE_NOTHROW(appName = Kmpleete::ApplicationContext::GetApplicationName());
     REQUIRE(not appName.empty());
 }
 //--------------------------------------------------------------------------
@@ -71,7 +71,7 @@ TEST_CASE("Test application name", "[application]")
 
 TEST_CASE("Test application metrics update", "[application][metrics]")
 {
-    const auto application = Kmplete::CreateUPtr<Kmplete::MetricsTestApplication>(Kmplete::ApplicationParameters("MetricsTestApplication", "", "Kmplete_unit_tests_settings.json"));
+    const auto application = Kmpleete::CreateUPtr<Kmpleete::MetricsTestApplication>(Kmpleete::ApplicationParameters("MetricsTestApplication", "", "Kmpleete_unit_tests_settings.json"));
 
     REQUIRE(application);
     std::this_thread::sleep_for(std::chrono::milliseconds(100));

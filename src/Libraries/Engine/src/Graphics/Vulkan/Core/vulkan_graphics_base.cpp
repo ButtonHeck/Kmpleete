@@ -1,9 +1,9 @@
-#include "Kmplete/Graphics/Vulkan/Core/vulkan_graphics_base.h"
-#include "Kmplete/Graphics/Vulkan/Utils/bits_aliases.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Graphics/Vulkan/Core/vulkan_graphics_base.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
+#include "Kmpleete/Log/log.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

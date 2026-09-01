@@ -2,19 +2,19 @@
 #include "main_frame_listener.h"
 #include "test_frame_listeners.h"
 
-#include "Kmplete/Base/types_aliases.h"
-#include "Kmplete/Application/window_application.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/FileDialogs/file_dialogs.h"
-#include "Kmplete/Utils/function_utils.h"
-#include "Kmplete/Assets/font_asset_manager.h"
-#include "Kmplete/Assets/assets_manager.h"
-#include "Kmplete/Graphics/Vulkan/Core/vulkan_graphics_parameters.h"
+#include "Kmpleete/Base/types_aliases.h"
+#include "Kmpleete/Application/window_application.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/FileDialogs/file_dialogs.h"
+#include "Kmpleete/Utils/function_utils.h"
+#include "Kmpleete/Assets/font_asset_manager.h"
+#include "Kmpleete/Assets/assets_manager.h"
+#include "Kmpleete/Graphics/Vulkan/Core/vulkan_graphics_parameters.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {
@@ -129,12 +129,12 @@ namespace Kmplete
 
 TEST_CASE("Test window application", "[window_application][application][window][event]")
 {
-    Kmplete::Graphics::ClientInitializeGraphicsParametersFn = Kmplete::Graphics::InitializeTestWindowAppGraphicsParameters;
+    Kmpleete::Graphics::ClientInitializeGraphicsParametersFn = Kmpleete::Graphics::InitializeTestWindowAppGraphicsParameters;
 
-    auto application = Kmplete::CreateUPtr<Kmplete::TestWindowApplication>(Kmplete::WindowApplicationParameters{ .applicationParameters{"TestWindowApplication", "", KMP_TEST_SETTINGS_JSON}, .resizable = true });
+    auto application = Kmpleete::CreateUPtr<Kmpleete::TestWindowApplication>(Kmpleete::WindowApplicationParameters{ .applicationParameters{"TestWindowApplication", "", KMP_TEST_SETTINGS_JSON}, .resizable = true });
 
     REQUIRE(application);
-    REQUIRE(not Kmplete::Filesystem::GetCurrentFilepath().empty());
+    REQUIRE(not Kmpleete::Filesystem::GetCurrentFilepath().empty());
 
     REQUIRE(application->FrameListenersCountOk());
     REQUIRE_FALSE(application->mainFrameListener->IsKeyPressEventInvoked());
@@ -195,8 +195,8 @@ TEST_CASE("Test window application", "[window_application][application][window][
 
     application.reset();
 
-    const auto settingsFilepath = Kmplete::Filesystem::GetCurrentFilepath().append(KMP_TEST_SETTINGS_JSON);
-    REQUIRE(Kmplete::Filesystem::FilepathIsValid(settingsFilepath));
-    REQUIRE(Kmplete::Filesystem::FilepathExists(settingsFilepath));
+    const auto settingsFilepath = Kmpleete::Filesystem::GetCurrentFilepath().append(KMP_TEST_SETTINGS_JSON);
+    REQUIRE(Kmpleete::Filesystem::FilepathIsValid(settingsFilepath));
+    REQUIRE(Kmpleete::Filesystem::FilepathExists(settingsFilepath));
 }
 //--------------------------------------------------------------------------

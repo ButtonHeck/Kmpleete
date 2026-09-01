@@ -1,5 +1,5 @@
-#include "Kmplete/Json/json_writer.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Json/json_writer.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -28,7 +28,7 @@ TEST_CASE("Json writer positive", "[json][writer]")
     */
 
     rapidjson::Document document;
-    Kmplete::JsonWriter writer(document);
+    Kmpleete::JsonWriter writer(document);
 
     REQUIRE(writer.StartObject("Group1"));
         REQUIRE(writer.SetInt("Prop1", 11));
@@ -74,7 +74,7 @@ TEST_CASE("Json writer positive", "[json][writer]")
 TEST_CASE("Json writer negative", "[json][writer]")
 {
     rapidjson::Document document;
-    Kmplete::JsonWriter writer(document);
+    Kmpleete::JsonWriter writer(document);
 
     REQUIRE(writer.StartObject("Group1"));
         REQUIRE_FALSE(writer.EndArray());

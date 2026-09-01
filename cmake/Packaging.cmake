@@ -5,11 +5,11 @@
 ############################################################################
 
 function(SetupPackaging)
-    set(CPACK_PACKAGE_NAME "KmpleteEditor")
+    set(CPACK_PACKAGE_NAME "KmpleeteEditor")
     set(CPACK_PACKAGE_VENDOR "Buttonheck")
-    set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Kmplete engine editor")
+    set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Kmpleete engine editor")
     set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
-    set(CPACK_COMPONENTS_ALL KmpleteInstallEditor)
+    set(CPACK_COMPONENTS_ALL KmpleeteInstallEditor)
     set(CPACK_COMPONENT_INSTALL ON)
 
     if(UNIX)
@@ -18,7 +18,7 @@ function(SetupPackaging)
         set(CPACK_DEBIAN_PACKAGE_CONTROL_STRICT_PERMISSION ON)
         set(CPACK_PACKAGE_CONTACT "not yet")
         set(CPACK_DEBIAN_PACKAGE_MAINTAINER "not yet")
-        set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/Kmplete")
+        set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/Kmpleete")
     else()
         set(CPACK_GENERATOR "NSIS")
     endif()

@@ -21,7 +21,7 @@ SetupBoost(AssetsCompiler)
 SetupCompilerOptions(AssetsCompiler)
 
 set_target_properties(AssetsCompiler PROPERTIES
-    FOLDER Kmplete/Tools/AssetsCompiler
+    FOLDER Kmpleete/Tools/AssetsCompiler
 )
 
 target_link_libraries(AssetsCompiler
@@ -48,5 +48,5 @@ endif()
 
 install(TARGETS AssetsCompiler
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} 
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )

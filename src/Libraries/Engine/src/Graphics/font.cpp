@@ -1,15 +1,15 @@
-#include "Kmplete/Graphics/font.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Graphics/font.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

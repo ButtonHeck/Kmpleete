@@ -1,0 +1,143 @@
+#pragma once
+
+#include "Kmpleete/Event/event.h"
+#include "Kmpleete/Input/input_codes.h"
+#include "Kmpleete/Utils/string_utils.h"
+
+
+namespace Kmpleete
+{
+    //! Definitions of mouse events supported by engine
+
+    namespace Events
+    {
+        static constexpr auto MouseMoveEventTypeStr = "MouseMoveEvent";
+        static constexpr auto MouseScrollEventTypeStr = "MouseScrollEvent";
+        static constexpr auto MouseButtonPressEventTypeStr = "MouseButtonPressEvent";
+        static constexpr auto MouseButtonReleaseEventTypeStr = "MouseButtonReleaseEvent";
+
+        static constexpr auto MouseMoveEventTypeID = ToStringID(MouseMoveEventTypeStr);
+        static constexpr auto MouseScrollEventTypeID = ToStringID(MouseScrollEventTypeStr);
+        static constexpr auto MouseButtonPressEventTypeID = ToStringID(MouseButtonPressEventTypeStr);
+        static constexpr auto MouseButtonReleaseEventTypeID = ToStringID(MouseButtonReleaseEventTypeStr);
+
+
+        struct MouseMoveEvent : public Event
+        {
+            EVENT_CLASS_TYPE(MouseMoveEventTypeStr)
+
+            MouseMoveEvent(float x, float y) noexcept
+                : _x(x)
+                , _y(y)
+            {}
+
+            KMP_NODISCARD float GetX() const noexcept
+            {
+                return _x;
+            }
+
+            KMP_NODISCARD float GetY() const noexcept
+            {
+                return _y;
+            }
+
+            KMP_NODISCARD String ToString() const override
+            {
+                return Utils::Concatenate(GetName(), ": ", _x, ", ", _y);
+            }
+
+        private:
+            const float _x;
+            const float _y;
+        };
+        //--------------------------------------------------------------------------
+
+
+        struct MouseScrollEvent : public Event
+        {
+            EVENT_CLASS_TYPE(MouseScrollEventTypeStr)
+
+            MouseScrollEvent(float xOffset, float yOffset) noexcept
+                : _xOffset(xOffset)
+                , _yOffset(yOffset)
+            {}
+
+            KMP_NODISCARD float GetXOffset() const noexcept
+            {
+                return _xOffset;
+            }
+
+            KMP_NODISCARD float GetYOffset() const noexcept
+            {
+                return _yOffset;
+            }
+
+            KMP_NODISCARD String ToString() const override
+            {
+                return Utils::Concatenate(GetName(), ": ", _xOffset, ", ", _yOffset);
+            }
+
+        private:
+            const float _xOffset;
+            const float _yOffset;
+        };
+        //--------------------------------------------------------------------------
+
+
+        struct MouseButtonEvent : public Event
+        {
+            KMP_NODISCARD Input::InputCode GetMouseButton() const noexcept
+            {
+                return _button;
+            }
+
+            KMP_NODISCARD int GetMods() const noexcept
+            {
+                return _mods;
+            }
+
+        protected:
+            MouseButtonEvent(const Input::InputCode button, int mods) noexcept
+                : _button(button)
+                , _mods(mods)
+            {}
+
+        protected:
+            const Input::InputCode _button;
+            const int _mods;
+        };
+        //--------------------------------------------------------------------------
+
+
+        struct MouseButtonPressEvent : public MouseButtonEvent
+        {
+            EVENT_CLASS_TYPE(MouseButtonPressEventTypeStr)
+
+            MouseButtonPressEvent(const Input::InputCode button, int mods) noexcept
+                : MouseButtonEvent(button, mods)
+            {}
+
+            KMP_NODISCARD String ToString() const override
+            {
+                return Utils::Concatenate(GetName(), ": ", _button);
+            }
+        };
+        //--------------------------------------------------------------------------
+
+
+        struct MouseButtonReleaseEvent : public MouseButtonEvent
+        {
+            EVENT_CLASS_TYPE(MouseButtonReleaseEventTypeStr)
+
+            MouseButtonReleaseEvent(const Input::InputCode button, int mods) noexcept
+                : MouseButtonEvent(button, mods)
+            {}
+
+            KMP_NODISCARD String ToString() const override
+            {
+                return Utils::Concatenate(GetName(), ": ", _button);
+            }
+        };
+        //--------------------------------------------------------------------------
+    }
+}

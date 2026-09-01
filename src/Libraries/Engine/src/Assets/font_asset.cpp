@@ -1,8 +1,8 @@
-#include "Kmplete/Assets/font_asset.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Assets/font_asset.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Assets
     {

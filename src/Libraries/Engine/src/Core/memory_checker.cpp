@@ -1,4 +1,4 @@
-#include "Kmplete/Core/memory_checker.h"
+#include "Kmpleete/Core/memory_checker.h"
 
 #if defined (KMP_PLATFORM_WINDOWS) && defined (KMP_COMPILER_MSVC)
     #define _CRTDBG_MAP_ALLOC
@@ -6,7 +6,7 @@
 #endif
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     void MemoryChecker::Prepare()
     {

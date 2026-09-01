@@ -1,8 +1,8 @@
-#include "Kmplete/Graphics/physical_device.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Graphics/physical_device.h"
+#include "Kmpleete/Log/log.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

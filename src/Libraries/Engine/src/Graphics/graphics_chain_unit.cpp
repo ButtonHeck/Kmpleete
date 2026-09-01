@@ -1,8 +1,8 @@
-#include "Kmplete/Graphics/graphics_chain_unit.h"
-#include "Kmplete/Graphics/graphics_chain_handler.h"
+#include "Kmpleete/Graphics/graphics_chain_unit.h"
+#include "Kmpleete/Graphics/graphics_chain_handler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

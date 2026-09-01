@@ -1,0 +1,21 @@
+#pragma once
+
+#include "Kmpleete/Base/Kmpleete_api.h"
+
+
+namespace Kmpleete
+{
+    namespace Graphics
+    {
+        //! Base class of a graphics API command pool abstraction
+        class KMP_API CommandPool
+        {
+            KMP_DISABLE_COPY_MOVE(CommandPool)
+
+        public:
+            CommandPool() = default;
+            virtual ~CommandPool() = default;
+        };
+        //--------------------------------------------------------------------------
+    }
+}

@@ -1,10 +1,10 @@
-#include "Kmplete/Application/frame_listener.h"
-#include "Kmplete/Application/frame_listener_manager.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Application/frame_listener.h"
+#include "Kmpleete/Application/frame_listener_manager.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Log/log.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     FrameListener::FrameListener(FrameListenerManager& frameListenerManager, const StringID& sid, UInt8 priority)
         : _sid(sid)

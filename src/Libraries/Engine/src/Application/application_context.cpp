@@ -1,9 +1,9 @@
-#include "Kmplete/Application/application_context.h"
-#include "Kmplete/Application/application.h"
-#include "Kmplete/Filesystem/filesystem.h"
+#include "Kmpleete/Application/application_context.h"
+#include "Kmpleete/Application/application.h"
+#include "Kmpleete/Filesystem/filesystem.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     /*static*/ String ApplicationContext::_applicationName;
     /*static*/ Filepath ApplicationContext::_applicationPath;

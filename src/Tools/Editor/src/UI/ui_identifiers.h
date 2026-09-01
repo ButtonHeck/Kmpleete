@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static constexpr auto IdApp_ApplicationWindow = "ApplicationWindow";
     static constexpr auto IdApp_MainWorkingArea = "MainWorkingArea";

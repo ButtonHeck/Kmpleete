@@ -1,11 +1,11 @@
-#include "Kmplete/Utils/memory_utils.h"
+#include "Kmpleete/Utils/memory_utils.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
 TEST_CASE("AlignedAlloc and AlignedFree int tests", "[utils][memory]")
 {
-    using namespace Kmplete::Utils;
+    using namespace Kmpleete::Utils;
 
     int* alignedInt = nullptr;
     const auto allocationSize = sizeof(int);
@@ -37,7 +37,7 @@ TEST_CASE("AlignedAlloc and AlignedFree int tests", "[utils][memory]")
 
 TEST_CASE("AlignedAlloc and AlignedFree char tests", "[utils][memory]")
 {
-    using namespace Kmplete::Utils;
+    using namespace Kmpleete::Utils;
 
     char* alignedChar = nullptr;
     const auto allocationSize = sizeof(char);
@@ -69,7 +69,7 @@ TEST_CASE("AlignedAlloc and AlignedFree char tests", "[utils][memory]")
 
 TEST_CASE("AlignedAlloc and AlignedFree double tests", "[utils][memory]")
 {
-    using namespace Kmplete::Utils;
+    using namespace Kmpleete::Utils;
 
     double* alignedDouble = nullptr;
     const auto allocationSize = sizeof(double);

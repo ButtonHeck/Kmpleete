@@ -14,8 +14,8 @@ set(Texture_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/texture_frame_listener.cpp
 )
 set(Texture_SHADERS
-    ${KmpleteSandboxResourcesFolder}/texture.vert
-    ${KmpleteSandboxResourcesFolder}/texture.frag
+    ${KmpleeteSandboxResourcesFolder}/texture.vert
+    ${KmpleeteSandboxResourcesFolder}/texture.frag
 )
 source_group("Shaders" FILES ${Texture_SHADERS})
 
@@ -28,15 +28,15 @@ add_executable(Texture
 SetupCompilerOptions(Texture)
 
 set_target_properties(Texture PROPERTIES
-    FOLDER Kmplete/Sandboxes/Texture
+    FOLDER Kmpleete/Sandboxes/Texture
 )
 
 target_compile_definitions(Texture
-    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleteSandboxResourcesFolder}/\"
+    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleeteSandboxResourcesFolder}/\"
 )
 
 target_link_libraries(Texture
-    PRIVATE Kmplete
+    PRIVATE Kmpleete
     PRIVATE ImGuiUtilsLib
     PRIVATE Vulkan::Vulkan
 )
@@ -76,7 +76,7 @@ add_custom_command(TARGET Texture_compile_assets PRE_BUILD
     "--output_file_name=\"${exeDir}/Data/TextureSandbox_assets.kmpdata\""
 )
 set_target_properties(Texture_compile_assets PROPERTIES
-    FOLDER Kmplete/Sandboxes/Texture
+    FOLDER Kmpleete/Sandboxes/Texture
 )
 
 add_dependencies(Texture Texture_compile_assets)

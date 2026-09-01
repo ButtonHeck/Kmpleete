@@ -2,14 +2,14 @@
 
 ############################################################################
 # Top-level CMakeLists file containing global variables, options, includes etc.
-# All CMake modules are included here, both Kmplete and vendor sources included
+# All CMake modules are included here, both Kmpleete and vendor sources included
 # as subdirectories
 ############################################################################
 
 # Preamble
 cmake_minimum_required(VERSION 3.24)
 enable_testing()
-project(Kmplete 
+project(Kmpleete 
     VERSION 0.3.0
     LANGUAGES CXX
 )
@@ -29,14 +29,14 @@ set(CMAKE_SKIP_INSTALL_ALL_DEPENDENCY ON)
 if(APPLE)
     set(CMAKE_INSTALL_RPATH "@loader_path/../lib;@loader_path")
 elseif(UNIX)
-    set(CMAKE_INSTALL_PREFIX "$ENV{HOME}/local/bin/Kmplete")
+    set(CMAKE_INSTALL_PREFIX "$ENV{HOME}/local/bin/Kmpleete")
     set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib:$ORIGIN/")
 endif()
 
-option(KMPLETE_BUILD_TESTS "Build catch2 tests" ON)
-option(KMPLETE_MULTIPROCESSOR_BUILD "Use multiple processors during compilation" ON)
-option(KMPLETE_USE_WINDOW_BACKEND_GLFW "Use GLFW for window management" ON)
-option(KMPLETE_IGNORE_SYSTEM_BOOST "Use Boost system libraries" OFF)
+option(KMPLEETE_BUILD_TESTS "Build catch2 tests" ON)
+option(KMPLEETE_MULTIPROCESSOR_BUILD "Use multiple processors during compilation" ON)
+option(KMPLEETE_USE_WINDOW_BACKEND_GLFW "Use GLFW for window management" ON)
+option(KMPLEETE_IGNORE_SYSTEM_BOOST "Use Boost system libraries" OFF)
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
 include(NoInSourceBuilds)
@@ -56,8 +56,8 @@ include(Packaging)
 add_subdirectory(dependencies)
 
 
-# Kmplete main targets
-set(KmpleteInstallEditorComponentName Editor)
+# Kmpleete main targets
+set(KmpleeteInstallEditorComponentName Editor)
 add_subdirectory(src)
 
 

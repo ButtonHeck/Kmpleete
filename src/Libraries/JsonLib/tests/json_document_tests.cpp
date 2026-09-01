@@ -1,8 +1,8 @@
-#include "Kmplete/Json/json_document.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Localization/localization_manager.h"
-#include "Kmplete/Utils/string_utils.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Json/json_document.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Localization/localization_manager.h"
+#include "Kmpleete/Utils/string_utils.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -14,7 +14,7 @@ TEST_CASE("Json document from empty rapidjson document", "[json][reader][writer]
     rapidjson::Document document;
     document.Parse(EmptyStr);
 
-    Kmplete::JsonDocument jsonDocument(std::move(document));
+    Kmpleete::JsonDocument jsonDocument(std::move(document));
     REQUIRE(jsonDocument.HasError());
 
     const auto childrenDocuments = jsonDocument.GetChildren();
@@ -30,7 +30,7 @@ TEST_CASE("Json document from minimal rapidjson document", "[json][reader][write
     rapidjson::Document document;
     document.Parse(EmptyJsonStr);
 
-    Kmplete::JsonDocument jsonDocument(std::move(document));
+    Kmpleete::JsonDocument jsonDocument(std::move(document));
     REQUIRE_FALSE(jsonDocument.HasError());
 
     auto childrenDocuments = jsonDocument.GetChildren();
@@ -56,7 +56,7 @@ TEST_CASE("Json document from simple rapidjson document", "[json][reader][writer
     rapidjson::Document document;
     document.Parse(BasicJsonStr);
 
-    Kmplete::JsonDocument jsonDocument(std::move(document));
+    Kmpleete::JsonDocument jsonDocument(std::move(document));
     REQUIRE_FALSE(jsonDocument.HasError());
 
     auto childrenDocuments = jsonDocument.GetChildren();
@@ -137,7 +137,7 @@ TEST_CASE("Json document from invalid rapidjson document", "[json][reader][write
     document.Parse(MalformedJsonStr);
     REQUIRE(document.HasParseError());
 
-    Kmplete::JsonDocument jsonDocument(std::move(document));
+    Kmpleete::JsonDocument jsonDocument(std::move(document));
     REQUIRE(jsonDocument.HasError());
 }
 //--------------------------------------------------------------------------
@@ -145,20 +145,20 @@ TEST_CASE("Json document from invalid rapidjson document", "[json][reader][write
 
 TEST_CASE("Json document add children documents positive", "[json][reader][writer][document]")
 {
-    Kmplete::JsonDocument rootDoc;
+    Kmpleete::JsonDocument rootDoc;
     REQUIRE_FALSE(rootDoc.HasError());
     auto childrenDocuments = rootDoc.GetChildren();
     REQUIRE(childrenDocuments.empty());
 
     // assure lifetime of child1 and child2 doesn't affect rootDoc (rapidjson allocators didn't mess up)
-    Kmplete::String rootDocStringBeforeScopeExit = "";
+    Kmpleete::String rootDocStringBeforeScopeExit = "";
     {
-        Kmplete::JsonDocument child1;
+        Kmpleete::JsonDocument child1;
         REQUIRE(child1.SetInt("Int1", 10));
         REQUIRE(child1.SetInt("Int2", 20));
         REQUIRE(child1.SetInt("Int3", 30));
 
-        Kmplete::JsonDocument child2;
+        Kmpleete::JsonDocument child2;
         REQUIRE(child2.StartSetArray("StringArray"));
         REQUIRE(child2.SetString(0, "zero"));
         REQUIRE(child2.SetString(1, "one"));
@@ -167,7 +167,7 @@ TEST_CASE("Json document add children documents positive", "[json][reader][write
 
         // assure lifetime of ChildStr doesn't affect rootDoc
         {
-            const auto ChildStr = Kmplete::String("Child1");
+            const auto ChildStr = Kmpleete::String("Child1");
             REQUIRE(rootDoc.AddChildDocument(ChildStr, child1));
             REQUIRE(rootDoc.AddChildDocument("Child2", child2));
             childrenDocuments = rootDoc.GetChildren();
@@ -199,12 +199,12 @@ TEST_CASE("Json document add children documents positive", "[json][reader][write
 
 TEST_CASE("Json document add children - default constructed", "[json][reader][writer][document]")
 {
-    Kmplete::JsonDocument rootDoc;
+    Kmpleete::JsonDocument rootDoc;
     REQUIRE_FALSE(rootDoc.HasError());
     auto childrenDocuments = rootDoc.GetChildren();
     REQUIRE(childrenDocuments.empty());
 
-    Kmplete::JsonDocument defaultCreatedChild;
+    Kmpleete::JsonDocument defaultCreatedChild;
     REQUIRE(rootDoc.AddChildDocument("Child", defaultCreatedChild));
     childrenDocuments = rootDoc.GetChildren();
     REQUIRE(childrenDocuments.size() == size_t(1));
@@ -214,7 +214,7 @@ TEST_CASE("Json document add children - default constructed", "[json][reader][wr
 
 TEST_CASE("Json document add children - invalid child", "[json][reader][writer][document]")
 {
-    Kmplete::JsonDocument rootDoc;
+    Kmpleete::JsonDocument rootDoc;
     REQUIRE_FALSE(rootDoc.HasError());
     auto childrenDocuments = rootDoc.GetChildren();
     REQUIRE(childrenDocuments.empty());
@@ -231,7 +231,7 @@ TEST_CASE("Json document add children - invalid child", "[json][reader][writer][
     document.Parse(MalformedJsonStr);
     REQUIRE(document.HasParseError());
 
-    Kmplete::JsonDocument invalidChildDoc(std::move(document));
+    Kmpleete::JsonDocument invalidChildDoc(std::move(document));
     REQUIRE(invalidChildDoc.HasError());
 
     REQUIRE_FALSE(rootDoc.AddChildDocument("Child", invalidChildDoc));
@@ -243,7 +243,7 @@ TEST_CASE("Json document add children - invalid child", "[json][reader][writer][
 
 TEST_CASE("Json document add children - empty name", "[json][reader][writer][document]")
 {
-    Kmplete::JsonDocument rootDoc;
+    Kmpleete::JsonDocument rootDoc;
     REQUIRE_FALSE(rootDoc.HasError());
     auto childrenDocuments = rootDoc.GetChildren();
     REQUIRE(childrenDocuments.empty());
@@ -260,7 +260,7 @@ TEST_CASE("Json document add children - empty name", "[json][reader][writer][doc
     rapidjson::Document document;
     document.Parse(BasicJsonStr);
 
-    Kmplete::JsonDocument childDoc(std::move(document));
+    Kmpleete::JsonDocument childDoc(std::move(document));
     REQUIRE_FALSE(childDoc.HasError());
 
     REQUIRE_FALSE(rootDoc.AddChildDocument("", childDoc));
@@ -270,7 +270,7 @@ TEST_CASE("Json document add children - empty name", "[json][reader][writer][doc
 
 TEST_CASE("Json document add children - overwrite existing object", "[json][reader][writer][document]")
 {
-    Kmplete::JsonDocument rootDoc;
+    Kmpleete::JsonDocument rootDoc;
     REQUIRE(rootDoc.StartSetObject("Obj1"));
         REQUIRE(rootDoc.SetBool("Bool", true));
         REQUIRE(rootDoc.SetInt("Int", 33));
@@ -291,7 +291,7 @@ TEST_CASE("Json document add children - overwrite existing object", "[json][read
     rapidjson::Document document;
     document.Parse(BasicJsonStr);
 
-    Kmplete::JsonDocument childDoc(std::move(document));
+    Kmpleete::JsonDocument childDoc(std::move(document));
     REQUIRE_FALSE(childDoc.HasError());
 
     REQUIRE_FALSE(rootDoc.AddChildDocument("Obj1", childDoc, false));
@@ -314,7 +314,7 @@ TEST_CASE("Json document add children - overwrite existing object", "[json][read
 
 TEST_CASE("Json document add children during filling another object", "[json][reader][writer][document]")
 {
-    Kmplete::JsonDocument rootDoc;
+    Kmpleete::JsonDocument rootDoc;
 
     const char* BasicJsonStr = R"rjs(
     {
@@ -327,7 +327,7 @@ TEST_CASE("Json document add children during filling another object", "[json][re
     rapidjson::Document document;
     document.Parse(BasicJsonStr);
 
-    Kmplete::JsonDocument childDoc(std::move(document));
+    Kmpleete::JsonDocument childDoc(std::move(document));
     REQUIRE_FALSE(childDoc.HasError());
 
     REQUIRE(rootDoc.StartSetObject("Obj1"));
@@ -345,14 +345,14 @@ TEST_CASE("Json document add children during filling another object", "[json][re
 
 TEST_CASE("Json document save to file and read from file", "[json][reader][writer][document]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    const auto settingsFilepath = Kmplete::Filesystem::GetCurrentFilepath().append("json_document_test_temp.json");
-    const auto settingsPathStr = Kmplete::Filesystem::ToGenericString(settingsFilepath);
-    const auto nonExistSettingsPath = Kmplete::Filesystem::GetCurrentFilepath().append("non-exist.json");
+    const auto settingsFilepath = Kmpleete::Filesystem::GetCurrentFilepath().append("json_document_test_temp.json");
+    const auto settingsPathStr = Kmpleete::Filesystem::ToGenericString(settingsFilepath);
+    const auto nonExistSettingsPath = Kmpleete::Filesystem::GetCurrentFilepath().append("non-exist.json");
 
-    Kmplete::JsonDocument rootDoc;
+    Kmpleete::JsonDocument rootDoc;
     REQUIRE(rootDoc.StartSetObject("Obj1"));
         REQUIRE(rootDoc.SetBool("Bool", true));
         REQUIRE(rootDoc.SetInt("Int", 33));
@@ -364,7 +364,7 @@ TEST_CASE("Json document save to file and read from file", "[json][reader][write
 
     REQUIRE(rootDoc.Save(settingsFilepath));
 
-    Kmplete::JsonDocument loadedDoc(settingsFilepath);
+    Kmpleete::JsonDocument loadedDoc(settingsFilepath);
     REQUIRE_FALSE(loadedDoc.HasError());
     auto childrenDocuments = loadedDoc.GetChildren();
     REQUIRE(childrenDocuments.size() == size_t(1));
@@ -384,7 +384,7 @@ TEST_CASE("Json document save to file and read from file", "[json][reader][write
     REQUIRE_FALSE(loadedDoc.Save());
     REQUIRE(loadedDoc.Save(settingsPathStr));
 
-    Kmplete::JsonDocument loadedEmptyDoc;
+    Kmpleete::JsonDocument loadedEmptyDoc;
     REQUIRE_FALSE(loadedEmptyDoc.Load());
     REQUIRE_FALSE(loadedEmptyDoc.Load(nonExistSettingsPath));
 }
@@ -393,17 +393,17 @@ TEST_CASE("Json document save to file and read from file", "[json][reader][write
 
 TEST_CASE("Json document save with unescaped quotes", "[json][reader][writer][document]")
 {
-    const auto settingsFilepath = Kmplete::Filesystem::GetCurrentFilepath().append("json_document_test_temp_unescaped.json");
+    const auto settingsFilepath = Kmpleete::Filesystem::GetCurrentFilepath().append("json_document_test_temp_unescaped.json");
 
-    Kmplete::JsonDocument rootDoc;
-    const Kmplete::String unescaped = R"rjs("Quote" unescaped)rjs";
-    const Kmplete::String unsecaped2 = R"rjs("Quote\" unescaped)rjs";
+    Kmpleete::JsonDocument rootDoc;
+    const Kmpleete::String unescaped = R"rjs("Quote" unescaped)rjs";
+    const Kmpleete::String unsecaped2 = R"rjs("Quote\" unescaped)rjs";
 
     REQUIRE(rootDoc.SetString("Unescaped", unescaped));
     REQUIRE(rootDoc.SetString("Unescaped2", unsecaped2));
     REQUIRE(rootDoc.Save(settingsFilepath));
 
-    Kmplete::JsonDocument loadedDoc(settingsFilepath);
+    Kmpleete::JsonDocument loadedDoc(settingsFilepath);
     REQUIRE_FALSE(loadedDoc.HasError());
 }
 //--------------------------------------------------------------------------
@@ -411,20 +411,20 @@ TEST_CASE("Json document save with unescaped quotes", "[json][reader][writer][do
 
 TEST_CASE("Json document save/load with cyrillic path", "[json][reader][writer][document]")
 {
-    auto localizationManager = Kmplete::LocalizationManager();
+    auto localizationManager = Kmpleete::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
-    auto settingsFilepath = Kmplete::Filesystem::GetCurrentFilepath();
-    const auto settingsSubPath = Kmplete::Utils::Utf8ToNarrow("Тест");
+    auto settingsFilepath = Kmpleete::Filesystem::GetCurrentFilepath();
+    const auto settingsSubPath = Kmpleete::Utils::Utf8ToNarrow("Тест");
 
-    settingsFilepath.append(Kmplete::Utils::NarrowToFilepath(settingsSubPath));
+    settingsFilepath.append(Kmpleete::Utils::NarrowToFilepath(settingsSubPath));
     settingsFilepath.append("json_document_test_temp_unescaped.json");
 
-    Kmplete::JsonDocument rootDoc;
+    Kmpleete::JsonDocument rootDoc;
     REQUIRE(rootDoc.SetInt("AnInt", 13));
     REQUIRE(rootDoc.Save(settingsFilepath));
 
-    Kmplete::JsonDocument loadedDoc(settingsFilepath);
+    Kmpleete::JsonDocument loadedDoc(settingsFilepath);
     REQUIRE_FALSE(loadedDoc.HasError());
     REQUIRE(loadedDoc.GetInt("AnInt") == 13);
 }

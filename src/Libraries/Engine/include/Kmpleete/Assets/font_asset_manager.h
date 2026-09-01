@@ -1,0 +1,60 @@
+#pragma once
+
+#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/types_aliases.h"
+#include "Kmpleete/Base/pointers.h"
+#include "Kmpleete/Base/string_id.h"
+#include "Kmpleete/Assets/font_asset.h"
+#include "Kmpleete/Log/log_class_macro.h"
+#include "Kmpleete/Profile/profiler_fwd.h"
+
+
+struct FT_LibraryRec_;
+
+
+namespace Kmpleete
+{
+    namespace Assets
+    {
+        //! Manager of font assets, responsible for initializing FreeType for font-related routines,
+        //! managing lifetime of contained asset objects, adding/deleting font assets. 
+        //! If this manager has been successfully created - then there is the asset with StringID = 0 that holds
+        //! the "default" font (which font is used depends on the platform - Arial or Ubuntu with size 18)
+        //! @see Assets::FontAsset
+        class KMP_API FontAssetManager
+        {
+            KMP_LOG_CLASSNAME(FontAssetManager)
+            KMP_DISABLE_COPY_MOVE(FontAssetManager)
+            KMP_PROFILE_CONSTRUCTOR_DECLARE()
+
+        public:
+            static constexpr StringID DefaultFontSID = 0;
+
+            FontAssetManager();
+            ~FontAssetManager();
+
+            bool CreateAsset(StringID fontSid, BinaryBuffer&& fontData, FontSubTypeMaskBits subTypeMask);
+            bool CreateAsset(StringID fontSid, const Filepath& filepath, FontSubTypeMaskBits subTypeMask);
+
+            KMP_NODISCARD const Assets::FontAsset& GetAsset(StringID fontSid) const;
+            KMP_NODISCARD Assets::FontAsset& GetAsset(StringID fontSid);
+
+            void RemoveAssets(const Vector<StringID>& sids);
+            KMP_NODISCARD bool RemoveAsset(StringID sid);
+
+            KMP_NODISCARD UInt64 GetAssetsCount() const noexcept;
+
+        private:
+            void _Initialize();
+            void _Finalize();
+
+            KMP_NODISCARD bool _CreateDefaultFontAsset();
+            KMP_NODISCARD bool _AddFontToStorage(StringID sid, BinaryBuffer&& fontData, FontSubTypeMaskBits subTypeMask);
+
+        private:
+            FT_LibraryRec_* _freetypeLibInstance;
+            StringIDHashMap<UPtr<Assets::FontAsset>> _fonts;
+        };
+        //--------------------------------------------------------------------------
+    }
+}

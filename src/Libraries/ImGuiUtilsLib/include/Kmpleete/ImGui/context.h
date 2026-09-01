@@ -1,0 +1,28 @@
+#pragma once
+
+#include "Kmpleete/Base/types_aliases.h"
+
+
+namespace Kmpleete
+{
+    namespace ImGuiUtils
+    {
+        //! Base class of an ImGUI instance properties and settings
+        struct Context
+        {
+            static constexpr auto ConfigurationFileName = "imgui.ini";
+
+            Context(void* window, String graphicsBackendType, bool dockingEnabled, bool viewportsEnabled, float baseScale, float fontDensity);
+            virtual ~Context() = default;
+
+            void* window;
+            String graphicsBackendType;
+            bool dockingEnabled;
+            bool viewportsEnabled;
+            const char* configName = ConfigurationFileName;
+            const float baseScale;
+            const float fontDensity;
+        };
+        //--------------------------------------------------------------------------
+    }
+}

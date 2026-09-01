@@ -10,9 +10,9 @@ project(LoggerLib LANGUAGES CXX)
 add_library(LoggerLib)
 
 AddTargetSourcesGroup(LoggerLib "Log"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Log/log.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Log/log_api.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Log/log_class_macro.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Log/log.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Log/log_api.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Log/log_class_macro.h
     ${CMAKE_CURRENT_LIST_DIR}/src/log.cpp
 )
 
@@ -34,7 +34,7 @@ target_compile_definitions(LoggerLib
 )
 
 set_target_properties(LoggerLib PROPERTIES 
-    FOLDER Kmplete/Libraries/LoggerLib
+    FOLDER Kmpleete/Libraries/LoggerLib
 )
 
 
@@ -43,8 +43,8 @@ set_target_properties(LoggerLib PROPERTIES
 add_library(LoggerInterfaceLib INTERFACE)
 
 AddTargetSourcesGroup(LoggerInterfaceLib "Log"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Log/log.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Log/log_class_macro.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Log/log.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Log/log_class_macro.h
 )
 
 target_compile_definitions(LoggerInterfaceLib
@@ -57,7 +57,7 @@ target_include_directories(LoggerInterfaceLib
 )
 
 set_target_properties(LoggerInterfaceLib PROPERTIES 
-    FOLDER Kmplete/Libraries/LoggerLib
+    FOLDER Kmpleete/Libraries/LoggerLib
 )
 
 
@@ -66,11 +66,11 @@ set_target_properties(LoggerInterfaceLib PROPERTIES
 
 install(TARGETS LoggerLib
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )
 install(TARGETS spdlog
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} 
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )

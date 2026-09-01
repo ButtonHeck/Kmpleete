@@ -1,11 +1,11 @@
-#include "Kmplete/Json/json_reader.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Json/json_reader.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <rapidjson/pointer.h>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     JsonReader::JsonReader(rapidjson::Document& document)
         : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()

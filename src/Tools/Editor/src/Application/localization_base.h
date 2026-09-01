@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Kmplete/Base/string_id.h"
+#include "Kmpleete/Base/string_id.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static constexpr auto SidTrDomainEditor = ToStringID(KMP_TR_DOMAIN_EDITOR);
 }

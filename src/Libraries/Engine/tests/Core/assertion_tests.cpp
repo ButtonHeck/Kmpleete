@@ -1,4 +1,4 @@
-#include "Kmplete/Core/assertion.h"
+#include "Kmpleete/Core/assertion.h"
 
 #include <catch2/catch_test_macros.hpp>
 

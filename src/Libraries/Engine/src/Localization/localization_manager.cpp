@@ -1,16 +1,16 @@
-#include "Kmplete/Localization/localization_manager.h"
-#include "Kmplete/Localization/localization_translator.h"
-#include "Kmplete/Core/settings_document.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Localization/localization_manager.h"
+#include "Kmpleete/Localization/localization_translator.h"
+#include "Kmpleete/Core/settings_document.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <iostream>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static constexpr auto SettingsEntryName = "LocalizationManager";
     static constexpr auto SettingsLocaleStr = "Locale";

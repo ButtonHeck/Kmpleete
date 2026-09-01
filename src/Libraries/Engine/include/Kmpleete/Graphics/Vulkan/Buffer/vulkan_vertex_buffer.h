@@ -1,0 +1,65 @@
+#pragma once
+
+#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/types_aliases.h"
+#include "Kmpleete/Base/type_traits.h"
+#include "Kmpleete/Graphics/graphics_base.h"
+#include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_buffer.h"
+#include "Kmpleete/Profile/profiler_fwd.h"
+
+#include <vulkan/vulkan.h>
+
+
+namespace Kmpleete
+{
+    namespace Graphics
+    {
+        class VulkanMemoryTypeDelegate;
+
+
+        //! Vulkan vertex buffer implementation class that additionally supports
+        //! storing one or more BufferLayout-s which are used for calculating 
+        //! bindings and attributes descriptions for rendering
+        //! @see BufferLayout
+        class KMP_API VulkanVertexBuffer : public VulkanBuffer
+        {
+            KMP_DISABLE_COPY(VulkanVertexBuffer)
+            KMP_PROFILE_CONSTRUCTOR_DECLARE()
+
+        public:
+            VulkanVertexBuffer(const VulkanMemoryTypeDelegate& memoryTypeDelegate, VkDevice device, const VulkanBufferParameters& parameters);
+            VulkanVertexBuffer(VulkanVertexBuffer&& other) noexcept;
+            VulkanVertexBuffer& operator=(VulkanVertexBuffer&& other) noexcept;
+            ~VulkanVertexBuffer() = default;
+
+            void AddLayout(const BufferLayout& layout);
+            KMP_NODISCARD UInt32 LayoutCount() const noexcept;
+
+            KMP_NODISCARD Pair<Vector<VkVertexInputBindingDescription>, Vector<VkVertexInputAttributeDescription>> GetBindingsDescriptions(UInt32 baseBinding) const noexcept;
+            KMP_NODISCARD Pair<Vector<VkVertexInputBindingDescription2EXT>, Vector<VkVertexInputAttributeDescription2EXT>> GetDynamicBindingsDescriptions(UInt32 baseBinding) const noexcept;
+
+        private:
+            //! Helper struct to store precalculated description objects for dynamic rendering.
+            //! Unless a new layout is added - this cache, once calculated, may be used for dynamic rendering
+            //! without recalculating each time
+            struct DescriptionsCache
+            {
+                Vector<VkVertexInputBindingDescription2EXT> bindingDescriptions;
+                Vector<VkVertexInputAttributeDescription2EXT> attributeDescriptions;
+                bool valid = false;
+            };
+
+        private:
+            KMP_NODISCARD Pair<Vector<VkVertexInputBindingDescription2EXT>, Vector<VkVertexInputAttributeDescription2EXT>> _GetDynamicBindingsDescriptionsFromCache(UInt32 baseBinding) const noexcept;
+            KMP_NODISCARD Pair<Vector<VkVertexInputBindingDescription2EXT>, Vector<VkVertexInputAttributeDescription2EXT>> _GetDynamicBindingsDescriptions(UInt32 baseBinding) const noexcept;
+
+        private:
+            Vector<BufferLayout> _layouts;
+            mutable DescriptionsCache _cache;
+        };
+        //--------------------------------------------------------------------------
+
+        static_assert(IsMoveConstructible<VulkanVertexBuffer>::value);
+        static_assert(IsMoveAssignable<VulkanVertexBuffer>::value);
+    }
+}

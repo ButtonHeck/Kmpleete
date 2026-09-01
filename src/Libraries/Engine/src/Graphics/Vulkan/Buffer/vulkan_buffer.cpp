@@ -1,15 +1,15 @@
-#include "Kmplete/Graphics/Vulkan/Buffer/vulkan_buffer.h"
-#include "Kmplete/Graphics/Vulkan/Delegates/vulkan_memory_type_delegate.h"
-#include "Kmplete/Graphics/Vulkan/Utils/initializers.h"
-#include "Kmplete/Graphics/Vulkan/Utils/result_description.h"
-#include "Kmplete/Graphics/Vulkan/Utils/bits_aliases.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_buffer.h"
+#include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_memory_type_delegate.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/initializers.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/result_description.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <cstring>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

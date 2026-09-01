@@ -7,9 +7,9 @@ project(MathLib LANGUAGES CXX)
 add_library(MathLib INTERFACE)
 
 AddTargetSourcesGroup(MathLib "Math"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Math/math.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Math/geometry.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Math/rng.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Math/math.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Math/geometry.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Math/rng.h
 )
 
 #TODO: uncomment after MathLib becomes non header-only and change INTERFACE to PUBLIC/PRIVATE
@@ -30,9 +30,9 @@ target_link_libraries(MathLib
 #)
 
 set_target_properties(MathLib PROPERTIES
-    FOLDER Kmplete/Libraries/MathLib
+    FOLDER Kmpleete/Libraries/MathLib
 )
 
-if(${KMPLETE_BUILD_TESTS})
+if(${KMPLEETE_BUILD_TESTS})
     add_subdirectory(tests)
 endif()

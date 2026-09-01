@@ -14,8 +14,8 @@ set(TextRendering_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/text_rendering_frame_listener.cpp
 )
 set(TextRendering_SHADERS
-    ${KmpleteSandboxResourcesFolder}/text_rendering.vert
-    ${KmpleteSandboxResourcesFolder}/text_rendering.frag
+    ${KmpleeteSandboxResourcesFolder}/text_rendering.vert
+    ${KmpleeteSandboxResourcesFolder}/text_rendering.frag
 )
 source_group("Shaders" FILES ${TextRendering_SHADERS})
 
@@ -28,15 +28,15 @@ add_executable(TextRendering
 SetupCompilerOptions(TextRendering)
 
 set_target_properties(TextRendering PROPERTIES
-    FOLDER Kmplete/Sandboxes/TextRendering
+    FOLDER Kmpleete/Sandboxes/TextRendering
 )
 
 target_compile_definitions(TextRendering
-    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleteSandboxResourcesFolder}/\"
+    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleeteSandboxResourcesFolder}/\"
 )
 
 target_link_libraries(TextRendering
-    PRIVATE Kmplete
+    PRIVATE Kmpleete
     PRIVATE ImGuiUtilsLib
     PRIVATE Vulkan::Vulkan
     PRIVATE freetype
@@ -68,13 +68,13 @@ add_custom_command(TARGET TextRendering_copy_translations PRE_BUILD
     VERBATIM
 )
 set_target_properties(TextRendering_copy_translations PROPERTIES
-    FOLDER Kmplete/Sandboxes/TextRendering
+    FOLDER Kmpleete/Sandboxes/TextRendering
 )
 
 add_dependencies(TextRendering TextRendering_copy_translations)
 
 CreateTranslationHelperTargets(
-    TextRendering Kmplete/Sandboxes/TextRendering
+    TextRendering Kmpleete/Sandboxes/TextRendering
     "--mode=Update --input_directories=\"${CMAKE_CURRENT_LIST_DIR}\" --extensions=.cpp .h --recursive --output_directory=\"${CMAKE_CURRENT_LIST_DIR}/locale\" --output_file_name=${TextRenderingDomain} --gettext_binaries_paths=\"${CMAKE_BINARY_DIR}/src/Tools/Translator/translator_gettext_paths.json\""
     "--mode=Compile --output_directory=\"${CMAKE_CURRENT_LIST_DIR}/locale\" --output_file_name=${TextRenderingDomain} --gettext_binaries_paths=\"${CMAKE_BINARY_DIR}/src/Tools/Translator/translator_gettext_paths.json\""
 )

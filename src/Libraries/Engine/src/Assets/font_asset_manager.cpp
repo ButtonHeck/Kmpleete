@@ -1,10 +1,10 @@
-#include "Kmplete/Assets/font_asset_manager.h"
-#include "Kmplete/Base/platform.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Assets/font_asset_manager.h"
+#include "Kmpleete/Base/platform.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -16,7 +16,7 @@
 #endif
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Assets
     {

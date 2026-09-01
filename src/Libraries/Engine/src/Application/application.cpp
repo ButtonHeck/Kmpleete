@@ -1,16 +1,16 @@
-#include "Kmplete/Application/application.h"
-#include "Kmplete/Application/application_context.h"
-#include "Kmplete/Localization/localization_unicode_map.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Core/settings_document.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Utils/function_utils.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Application/application.h"
+#include "Kmpleete/Application/application_context.h"
+#include "Kmpleete/Localization/localization_unicode_map.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Core/settings_document.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Utils/function_utils.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static constexpr auto SettingsEntryName = "Application";
 
@@ -157,7 +157,7 @@ namespace Kmplete
         settings->get().StartLoadObject(Log::SettingsEntryName);
 
         Log::LogSettings logSettings;
-        logSettings.filename = Utils::Utf8ToNarrow(settings->get().GetString(Log::FilenameStr, "Kmplete_log.txt"));
+        logSettings.filename = Utils::Utf8ToNarrow(settings->get().GetString(Log::FilenameStr, "Kmpleete_log.txt"));
         logSettings.enabled = settings->get().GetBool(Log::EnabledStr, true);
         logSettings.truncate = settings->get().GetBool(Log::TruncateStr, false);
         logSettings.outputConsole = settings->get().GetBool(Log::OutputConsoleStr, true);

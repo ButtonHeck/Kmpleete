@@ -1,11 +1,11 @@
-#include "Kmplete/Graphics/Vulkan/Delegates/vulkan_format_delegate.h"
-#include "Kmplete/Graphics/Vulkan/Utils/bits_aliases.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Profile/profiler.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_format_delegate.h"
+#include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Profile/profiler.h"
+#include "Kmpleete/Log/log.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

@@ -1,14 +1,14 @@
-#include "Kmplete/Assets/assets_manager.h"
-#include "Kmplete/Assets/assets_interface.h"
-#include "Kmplete/Graphics/image.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Assets/assets_manager.h"
+#include "Kmpleete/Assets/assets_interface.h"
+#include "Kmpleete/Graphics/image.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Assets
     {

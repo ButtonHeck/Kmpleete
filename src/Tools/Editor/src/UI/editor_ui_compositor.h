@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Kmplete/Base/kmplete_api.h"
-#include "Kmplete/Base/types_aliases.h"
-#include "Kmplete/Window/window.h"
-#include "Kmplete/Event/window_events.h"
-#include "Kmplete/ImGui/implementation.h"
-#include "Kmplete/Profile/profiler_fwd.h"
+#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/types_aliases.h"
+#include "Kmpleete/Window/window.h"
+#include "Kmpleete/Event/window_events.h"
+#include "Kmpleete/ImGui/implementation.h"
+#include "Kmpleete/Profile/profiler_fwd.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     class LocalizationManager;
     class SystemMetricsManager;

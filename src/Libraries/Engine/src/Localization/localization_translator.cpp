@@ -1,8 +1,8 @@
-#include "Kmplete/Localization/localization_translator.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Localization/localization_translator.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Localization
     {

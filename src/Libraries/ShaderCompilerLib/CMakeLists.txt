@@ -7,7 +7,7 @@ project(ShaderCompilerLib LANGUAGES CXX)
 add_library(ShaderCompilerLib)
 
 AddTargetSourcesGroup(ShaderCompilerLib "ShaderCompiler"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/ShaderCompiler/compile.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/ShaderCompiler/compile.h
     ${CMAKE_CURRENT_LIST_DIR}/src/compile.cpp
 )
 
@@ -35,7 +35,7 @@ target_compile_definitions(ShaderCompilerLib
 )
 
 set_target_properties(ShaderCompilerLib PROPERTIES 
-    FOLDER Kmplete/Libraries/ShaderCompilerLib
+    FOLDER Kmpleete/Libraries/ShaderCompilerLib
 )
 
 
@@ -44,7 +44,7 @@ set_target_properties(ShaderCompilerLib PROPERTIES
 
 install(TARGETS ShaderCompilerLib
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )

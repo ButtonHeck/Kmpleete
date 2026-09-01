@@ -1,9 +1,9 @@
-#include "Kmplete/ImGui/helper_functions.h"
-#include "Kmplete/Profile/profiler.h"
-#include "Kmplete/Base/macro.h"
+#include "Kmpleete/ImGui/helper_functions.h"
+#include "Kmpleete/Profile/profiler.h"
+#include "Kmpleete/Base/macro.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace ImGuiUtils
     {

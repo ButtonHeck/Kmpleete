@@ -14,8 +14,8 @@ set(UniformBuffers_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/uniform_buffers_frame_listener.cpp
 )
 set(UniformBuffers_SHADERS
-    ${KmpleteSandboxResourcesFolder}/uniform_buffers.vert
-    ${KmpleteSandboxResourcesFolder}/uniform_buffers.frag
+    ${KmpleeteSandboxResourcesFolder}/uniform_buffers.vert
+    ${KmpleeteSandboxResourcesFolder}/uniform_buffers.frag
 )
 source_group("Shaders" FILES ${UniformBuffers_SHADERS})
 
@@ -28,15 +28,15 @@ add_executable(UniformBuffers
 SetupCompilerOptions(UniformBuffers)
 
 set_target_properties(UniformBuffers PROPERTIES
-    FOLDER Kmplete/Sandboxes/UniformBuffers
+    FOLDER Kmpleete/Sandboxes/UniformBuffers
 )
 
 target_compile_definitions(UniformBuffers
-    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleteSandboxResourcesFolder}/\"
+    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleeteSandboxResourcesFolder}/\"
 )
 
 target_link_libraries(UniformBuffers
-    PRIVATE Kmplete
+    PRIVATE Kmpleete
     PRIVATE ImGuiUtilsLib
     PRIVATE Vulkan::Vulkan
 )

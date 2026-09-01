@@ -1,26 +1,26 @@
-#include "Kmplete/Assets/texture_asset_manager.h"
-#include "Kmplete/Graphics/texture.h"
-#include "Kmplete/Graphics/graphics_backend.h"
-#include "Kmplete/Graphics/image.h"
-#include "Kmplete/Window/window_backend.h"
-#include "Kmplete/Window/window.h"
-#include "Kmplete/Base/pointers.h"
-#include "Kmplete/Base/string_id.h"
-#include "Kmplete/Utils/string_utils.h"
+#include "Kmpleete/Assets/texture_asset_manager.h"
+#include "Kmpleete/Graphics/texture.h"
+#include "Kmpleete/Graphics/graphics_backend.h"
+#include "Kmpleete/Graphics/image.h"
+#include "Kmpleete/Window/window_backend.h"
+#include "Kmpleete/Window/window.h"
+#include "Kmpleete/Base/pointers.h"
+#include "Kmpleete/Base/string_id.h"
+#include "Kmpleete/Utils/string_utils.h"
 
 #include <catch2/catch_test_macros.hpp>
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 
-using namespace Kmplete;
-using namespace Kmplete::Assets;
-using namespace Kmplete::Graphics;
+using namespace Kmpleete;
+using namespace Kmpleete::Assets;
+using namespace Kmpleete::Graphics;
 
 
 static UPtr<GraphicsBackend> prepareBackend(GraphicsBackendType type)
 {
-    auto windowBackend = Kmplete::WindowBackend::Create(type);
+    auto windowBackend = Kmpleete::WindowBackend::Create(type);
     auto& mainWindow = windowBackend->CreateMainWindow();
 
     return GraphicsBackend::Create(mainWindow);

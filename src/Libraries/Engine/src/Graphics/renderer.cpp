@@ -1,7 +1,7 @@
-#include "Kmplete/Graphics/renderer.h"
+#include "Kmpleete/Graphics/renderer.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

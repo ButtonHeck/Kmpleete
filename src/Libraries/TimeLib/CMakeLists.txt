@@ -7,9 +7,9 @@ project(TimeLib LANGUAGES CXX)
 add_library(TimeLib)
 
 AddTargetSourcesGroup(TimeLib "Time"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Time/clock.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Time/timer.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/Time/helper_functions.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Time/clock.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Time/timer.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Time/helper_functions.h
     ${CMAKE_CURRENT_LIST_DIR}/src/clock.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/timer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/helper_functions.cpp
@@ -30,10 +30,10 @@ target_compile_definitions(TimeLib
 )
 
 set_target_properties(TimeLib PROPERTIES 
-    FOLDER Kmplete/Libraries/TimeLib
+    FOLDER Kmpleete/Libraries/TimeLib
 )
 
-if(${KMPLETE_BUILD_TESTS})
+if(${KMPLEETE_BUILD_TESTS})
     add_subdirectory(tests)
 endif()
 
@@ -43,7 +43,7 @@ endif()
 
 install(TARGETS TimeLib
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )

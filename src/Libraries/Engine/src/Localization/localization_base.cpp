@@ -1,7 +1,7 @@
-#include "Kmplete/Localization/localization_base.h"
+#include "Kmpleete/Localization/localization_base.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     PluralityForm PluralityFormDispatcherEn::GetPluralityForm(int count) const noexcept
     {

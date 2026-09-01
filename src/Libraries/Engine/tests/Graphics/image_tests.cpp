@@ -1,13 +1,13 @@
-#include "Kmplete/Graphics/image.h"
-#include "Kmplete/Base/pointers.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Utils/string_utils.h"
+#include "Kmpleete/Graphics/image.h"
+#include "Kmpleete/Base/pointers.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Utils/string_utils.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
-using namespace Kmplete;
-using namespace Kmplete::Graphics;
+using namespace Kmpleete;
+using namespace Kmpleete::Graphics;
 
 
 TEST_CASE("Image from valid filepath", "[graphics][image]")

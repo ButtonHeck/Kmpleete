@@ -1,14 +1,14 @@
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Utils/string_utils.h"
-#include "Kmplete/Base/string_id.h"
-#include "Kmplete/Localization/localization_base.h"
-#include "Kmplete/Localization/localization_manager.h"
-#include "Kmplete/Localization/localization_translator.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Utils/string_utils.h"
+#include "Kmpleete/Base/string_id.h"
+#include "Kmpleete/Localization/localization_base.h"
+#include "Kmpleete/Localization/localization_manager.h"
+#include "Kmpleete/Localization/localization_translator.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
-using namespace Kmplete; // for _sid literal and Utils
+using namespace Kmpleete; // for _sid literal and Utils
 static constexpr auto SidTrDomainTests = ToStringID(KMP_TR_DOMAIN_TESTS);
 
 

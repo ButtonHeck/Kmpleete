@@ -15,12 +15,12 @@ endif()
 
 ## Dependencies without FetchContent
 # stb_image
-message("---- Kmplete dependencies: stb_image")
+message("---- Kmpleete dependencies: stb_image")
 add_subdirectory(stb_image)
 set_target_properties(stb_image PROPERTIES FOLDER Dependencies/stb_image)
 
 # icons_fonts
-message("---- Kmplete dependencies: icons_fonts")
+message("---- Kmpleete dependencies: icons_fonts")
 add_subdirectory(icons_fonts)
 
 
@@ -29,7 +29,7 @@ add_subdirectory(icons_fonts)
 include(FetchContent)
 
 # GLFW
-message("---- Kmplete dependencies: GLFW (3.4)")
+message("---- Kmpleete dependencies: GLFW (3.4)")
 FetchContent_Declare(glfw
     GIT_REPOSITORY https://github.com/glfw/glfw.git
     GIT_TAG 3.4
@@ -50,13 +50,13 @@ if(NOT glfw_POPULATED)
     set_target_properties(update_mappings PROPERTIES FOLDER Dependencies/GLFW)
     
     target_compile_options(glfw PUBLIC
-        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLETE_MULTIPROCESSOR_BUILD}>:/MP>>
+        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLEETE_MULTIPROCESSOR_BUILD}>:/MP>>
     )
 endif()
 
 
 # Dear ImGui
-message("---- Kmplete dependencies: ImGui (v1.90.7-docking)")
+message("---- Kmpleete dependencies: ImGui (v1.90.7-docking)")
 FetchContent_Declare(imgui
     GIT_REPOSITORY https://github.com/ocornut/imgui.git
     GIT_TAG v1.90.7-docking
@@ -72,7 +72,7 @@ endif()
 
 
 # PFD
-message("---- Kmplete dependencies: pfd (7f852d8)")
+message("---- Kmpleete dependencies: pfd (7f852d8)")
 FetchContent_Declare(pfd
     GIT_REPOSITORY https://github.com/samhocevar/portable-file-dialogs.git
     GIT_TAG 7f852d88a480020d7f91957cbcefe514fc95000c
@@ -87,7 +87,7 @@ endif()
 
 
 # RapidJSON
-message("---- Kmplete dependencies: RapidJSON (ebd87cb)")
+message("---- Kmpleete dependencies: RapidJSON (ebd87cb)")
 FetchContent_Declare(rapidjson
     GIT_REPOSITORY https://github.com/Tencent/rapidjson.git
     GIT_TAG ebd87cb468fb4cb060b37e579718c4a4125416c1
@@ -110,7 +110,7 @@ endif()
 
 
 # spdlog
-message("---- Kmplete dependencies: spdlog (v1.14.1)")
+message("---- Kmpleete dependencies: spdlog (v1.14.1)")
 FetchContent_Declare(spdlog
     GIT_REPOSITORY https://github.com/gabime/spdlog.git
     GIT_TAG v1.14.1
@@ -125,13 +125,13 @@ if(NOT spdlog_POPULATED)
     set_target_properties(spdlog PROPERTIES FOLDER Dependencies/spdlog)
     
     target_compile_options(spdlog PUBLIC
-        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLETE_MULTIPROCESSOR_BUILD}>:/MP>>
+        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLEETE_MULTIPROCESSOR_BUILD}>:/MP>>
     )
 endif()
 
 
 # Catch2
-message("---- Kmplete dependencies: Catch2 (v3.6.0)")
+message("---- Kmpleete dependencies: Catch2 (v3.6.0)")
 FetchContent_Declare(catch2
     GIT_REPOSITORY https://github.com/catchorg/Catch2.git
     GIT_TAG v3.6.0
@@ -147,16 +147,16 @@ if(NOT catch2_POPULATED)
     set_target_properties(Catch2WithMain PROPERTIES FOLDER Dependencies/Catch2)
     
     target_compile_options(Catch2 PUBLIC
-        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLETE_MULTIPROCESSOR_BUILD}>:/MP>>
+        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLEETE_MULTIPROCESSOR_BUILD}>:/MP>>
     )
     target_compile_options(Catch2WithMain PUBLIC
-        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLETE_MULTIPROCESSOR_BUILD}>:/MP>>
+        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLEETE_MULTIPROCESSOR_BUILD}>:/MP>>
     )
 endif()
 
 
 # glm
-message("---- Kmplete dependencies: glm (1.0.1)")
+message("---- Kmpleete dependencies: glm (1.0.1)")
 FetchContent_Declare(glm
     GIT_REPOSITORY https://github.com/g-truc/glm.git
     GIT_TAG 1.0.1
@@ -173,13 +173,13 @@ if(NOT glm_POPULATED)
     set_target_properties(glm PROPERTIES FOLDER Dependencies/glm)
     
     target_compile_options(glm PUBLIC
-        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLETE_MULTIPROCESSOR_BUILD}>:/MP>>
+        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLEETE_MULTIPROCESSOR_BUILD}>:/MP>>
     )
 endif()
 
 
 # entt
-message("---- Kmplete dependencies: EnTT (v3.13.2)")
+message("---- Kmpleete dependencies: EnTT (v3.13.2)")
 FetchContent_Declare(entt
     GIT_REPOSITORY https://github.com/skypjack/entt.git
     GIT_TAG v3.13.2
@@ -194,7 +194,7 @@ endif()
 
 
 # GSL
-message("---- Kmplete dependencies: GSL (v4.2.1)")
+message("---- Kmpleete dependencies: GSL (v4.2.1)")
 FetchContent_Declare(GSL
     GIT_REPOSITORY https://github.com/microsoft/GSL.git
     GIT_TAG v4.2.1
@@ -209,7 +209,7 @@ endif()
 
 
 # cpptrace
-message("---- Kmplete dependencies: cpptrace (v1.0.4)")
+message("---- Kmpleete dependencies: cpptrace (v1.0.4)")
 FetchContent_Declare(cpptrace
     GIT_REPOSITORY https://github.com/jeremy-rifkin/cpptrace.git
     GIT_TAG v1.0.4
@@ -228,13 +228,13 @@ if(NOT cpptrace_POPULATED)
     set_target_properties(cpptrace-lib PROPERTIES FOLDER Dependencies/cpptrace)
     
     target_compile_options(cpptrace-lib PUBLIC
-        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLETE_MULTIPROCESSOR_BUILD}>:/MP>>
+        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLEETE_MULTIPROCESSOR_BUILD}>:/MP>>
     )
 endif()
 
 
 # FreeType
-message("---- Kmplete dependencies: FreeType (VER-2-13-2)")
+message("---- Kmpleete dependencies: FreeType (VER-2-13-2)")
 FetchContent_Declare(freetype
     GIT_REPOSITORY https://github.com/freetype/freetype.git
     GIT_TAG VER-2-13-2
@@ -254,13 +254,13 @@ if(NOT freetype_POPULATED)
     set_target_properties(freetype PROPERTIES FOLDER Dependencies/FreeType)
     
     target_compile_options(freetype PUBLIC
-        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLETE_MULTIPROCESSOR_BUILD}>:/MP>>
+        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLEETE_MULTIPROCESSOR_BUILD}>:/MP>>
     )
 endif()
 
 
 # openal-soft
-message("---- Kmplete dependencies: OpenAL-soft (1.25.2)")
+message("---- Kmpleete dependencies: OpenAL-soft (1.25.2)")
 FetchContent_Declare(openal-soft
     GIT_REPOSITORY https://github.com/kcat/openal-soft.git
     GIT_TAG 1.25.2 
@@ -288,6 +288,6 @@ if(NOT openal-soft_POPULATED)
     set_target_properties(clang-tidy-check PROPERTIES FOLDER Dependencies/OpenAL)
     
     target_compile_options(OpenAL PUBLIC
-        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLETE_MULTIPROCESSOR_BUILD}>:/MP>>
+        $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLEETE_MULTIPROCESSOR_BUILD}>:/MP>>
     )
 endif()

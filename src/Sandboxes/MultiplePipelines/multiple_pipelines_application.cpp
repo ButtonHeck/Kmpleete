@@ -1,9 +1,9 @@
 #include "multiple_pipelines_application.h"
 
-#include "Kmplete/Application/application_context.h"
+#include "Kmpleete/Application/application_context.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     MultiplePipelinesApplication::MultiplePipelinesApplication(const WindowApplicationParameters& parameters)
         : WindowApplication(parameters)

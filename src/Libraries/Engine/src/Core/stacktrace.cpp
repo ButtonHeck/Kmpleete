@@ -1,15 +1,15 @@
-#include "Kmplete/Core/stacktrace.h"
-#include "Kmplete/Application/application_context.h"
-#include "Kmplete/Time/helper_functions.h"
-#include "Kmplete/Utils/string_utils.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Base/named_bool.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Core/stacktrace.h"
+#include "Kmpleete/Application/application_context.h"
+#include "Kmpleete/Time/helper_functions.h"
+#include "Kmpleete/Utils/string_utils.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Base/named_bool.h"
+#include "Kmpleete/Log/log.h"
 
 #include <cpptrace/cpptrace.hpp>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     void DumpStacktrace()
     {

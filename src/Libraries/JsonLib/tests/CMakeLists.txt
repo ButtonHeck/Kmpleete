@@ -16,6 +16,6 @@ add_executable(JsonLib_UnitTests
 
 SetupUnitTestsTargetProperties(
     JsonLib_UnitTests 
-    Kmplete/Tests/Auto
-    Catch2::Catch2WithMain FilesystemLib Kmplete
+    Kmpleete/Tests/Auto
+    Catch2::Catch2WithMain FilesystemLib Kmpleete
 )

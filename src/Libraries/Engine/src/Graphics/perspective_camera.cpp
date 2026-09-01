@@ -1,8 +1,8 @@
-#include "Kmplete/Graphics/perspective_camera.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Graphics/perspective_camera.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

@@ -1,7 +1,7 @@
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Base/named_bool.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Base/named_bool.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <fstream>
 
@@ -17,7 +17,7 @@
     #define KMP_UNDEF_CopyFile
 #endif
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Filesystem
     {

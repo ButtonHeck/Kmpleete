@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Kmplete/Base/kmplete_api.h"
-#include "Kmplete/Application/frame_listener.h"
-#include "Kmplete/Window/window.h"
-#include "Kmplete/Graphics/graphics_backend.h"
+#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Application/frame_listener.h"
+#include "Kmpleete/Window/window.h"
+#include "Kmpleete/Graphics/graphics_backend.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

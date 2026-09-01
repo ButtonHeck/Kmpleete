@@ -1,11 +1,11 @@
-#include "Kmplete/FileDialogs/file_dialogs.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Utils/string_utils.h"
+#include "Kmpleete/FileDialogs/file_dialogs.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Utils/string_utils.h"
 
 #include <portable-file-dialogs.h>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static constexpr auto StringToFilepathConverterFn = Utils::Utf8ToNarrow;
     static constexpr auto FilepathToStringConverterFn = Filesystem::ToGenericString;

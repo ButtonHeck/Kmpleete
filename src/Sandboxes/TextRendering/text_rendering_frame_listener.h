@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Kmplete/Base/kmplete_api.h"
-#include "Kmplete/Application/frame_listener.h"
-#include "Kmplete/Window/window.h"
-#include "Kmplete/Graphics/graphics_backend.h"
-#include "Kmplete/ImGui/implementation.h"
-#include "Kmplete/Event/event_handler_guard.h"
-#include "Kmplete/Event/window_events.h"
+#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Application/frame_listener.h"
+#include "Kmpleete/Window/window.h"
+#include "Kmpleete/Graphics/graphics_backend.h"
+#include "Kmpleete/ImGui/implementation.h"
+#include "Kmpleete/Event/event_handler_guard.h"
+#include "Kmpleete/Event/window_events.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     class LocalizationManager;
 

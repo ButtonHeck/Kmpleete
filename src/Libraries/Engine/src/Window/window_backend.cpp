@@ -1,9 +1,9 @@
-#include "Kmplete/Window/window_backend.h"
-#include "Kmplete/Window/window_backend_glfw.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Window/window_backend.h"
+#include "Kmpleete/Window/window_backend_glfw.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     UPtr<WindowBackend> WindowBackend::Create(Graphics::GraphicsBackendType graphicsBackendType) KMP_PROFILING(ProfileLevelAlways)
     {

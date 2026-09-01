@@ -1,7 +1,7 @@
-#include "Kmplete/Graphics/logical_device.h"
+#include "Kmpleete/Graphics/logical_device.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

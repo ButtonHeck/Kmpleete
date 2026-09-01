@@ -7,7 +7,7 @@ project(FileDialogsLib LANGUAGES CXX)
 add_library(FileDialogsLib)
 
 AddTargetSourcesGroup(FileDialogsLib "File Dialogs"
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmplete/FileDialogs/file_dialogs.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/FileDialogs/file_dialogs.h
     ${CMAKE_CURRENT_LIST_DIR}/src/file_dialogs.cpp
 )
 
@@ -31,10 +31,10 @@ target_compile_definitions(FileDialogsLib
 )
 
 set_target_properties(FileDialogsLib PROPERTIES 
-    FOLDER Kmplete/Libraries/FileDialogsLib
+    FOLDER Kmpleete/Libraries/FileDialogsLib
 )
 
-if(${KMPLETE_BUILD_TESTS})
+if(${KMPLEETE_BUILD_TESTS})
     add_subdirectory(tests)
 endif()
 
@@ -44,5 +44,5 @@ endif()
 
 install(TARGETS FileDialogsLib
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} 
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )

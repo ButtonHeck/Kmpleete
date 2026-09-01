@@ -1,6 +1,6 @@
-#include "Kmplete/Utils/string_utils.h"
-#include "Kmplete/Base/platform.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Utils/string_utils.h"
+#include "Kmpleete/Base/platform.h"
+#include "Kmpleete/Log/log.h"
 
 #include <numeric>
 #include <regex>
@@ -11,7 +11,7 @@
 #endif
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Utils
     {
@@ -157,7 +157,7 @@ namespace Kmplete
             result = Utils::RegexReplace(result, "__ptr64", "");
             result = Utils::RegexReplace(result, "class ", "");
             result = Utils::RegexReplace(result, "struct ", "");
-            result = Utils::RegexReplace(result, "Kmplete::", "");
+            result = Utils::RegexReplace(result, "Kmpleete::", "");
             result = Utils::RegexReplace(result, " &", "&");
             result = Utils::RegexReplace(result, " &&", "&&");
             result = Utils::RegexReplace(result, " \\*", "*");

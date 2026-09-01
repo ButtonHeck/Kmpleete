@@ -1,9 +1,9 @@
 #include "texture_application.h"
 
-#include "Kmplete/Application/application_context.h"
+#include "Kmpleete/Application/application_context.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     TextureApplication::TextureApplication(const WindowApplicationParameters& parameters)
         : WindowApplication(parameters)

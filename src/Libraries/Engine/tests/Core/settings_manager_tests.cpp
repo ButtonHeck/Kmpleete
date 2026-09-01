@@ -1,14 +1,14 @@
-#include "Kmplete/Core/settings_manager.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Core/settings_manager.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
 TEST_CASE("SettingsManager basic test", "[core][settings_document][manager]")
 {
-    const auto settingsFilepath = Kmplete::Filesystem::GetCurrentFilepath().append("Kmplete_settings_unit_tests.json");
-    Kmplete::SettingsManager settingsManager(settingsFilepath);
+    const auto settingsFilepath = Kmpleete::Filesystem::GetCurrentFilepath().append("Kmpleete_settings_unit_tests.json");
+    Kmpleete::SettingsManager settingsManager(settingsFilepath);
 
     REQUIRE(not settingsManager.GetFilepath().empty());
     REQUIRE(settingsManager.LoadSettings());
@@ -38,8 +38,8 @@ TEST_CASE("SettingsManager basic test", "[core][settings_document][manager]")
 
 TEST_CASE("SettingsManager read/write and back", "[core][settings_document][manager]")
 {
-    const auto settingsFilepath = Kmplete::Filesystem::GetCurrentFilepath().append("Kmplete_settings_unit_tests.json");
-    Kmplete::SettingsManager settingsManager(settingsFilepath);
+    const auto settingsFilepath = Kmpleete::Filesystem::GetCurrentFilepath().append("Kmpleete_settings_unit_tests.json");
+    Kmpleete::SettingsManager settingsManager(settingsFilepath);
 
     REQUIRE(not settingsManager.GetFilepath().empty());
     REQUIRE(settingsManager.LoadSettings());
@@ -48,12 +48,12 @@ TEST_CASE("SettingsManager read/write and back", "[core][settings_document][mana
     REQUIRE(settings);
     REQUIRE(settings->get().SaveInt("PropA", 999));
 
-    const auto swapSettingsPath = Kmplete::Filesystem::GetCurrentFilepath().append("Kmplete_settings_unit_tests_swap.json");
+    const auto swapSettingsPath = Kmpleete::Filesystem::GetCurrentFilepath().append("Kmpleete_settings_unit_tests_swap.json");
     settingsManager.SetFilepath(swapSettingsPath);
     REQUIRE(settingsManager.SaveSettings());
 
 
-    Kmplete::SettingsManager swapSettingsManager(swapSettingsPath);
+    Kmpleete::SettingsManager swapSettingsManager(swapSettingsPath);
     REQUIRE(not swapSettingsManager.GetFilepath().empty());
     REQUIRE(swapSettingsManager.LoadSettings());
 

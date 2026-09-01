@@ -1,9 +1,9 @@
-#include "Kmplete/Graphics/graphics_surface.h"
-#include "Kmplete/Window/window.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Graphics/graphics_surface.h"
+#include "Kmpleete/Window/window.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

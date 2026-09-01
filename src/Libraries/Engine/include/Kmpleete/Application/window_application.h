@@ -1,0 +1,90 @@
+#pragma once
+
+#include "Kmpleete/Application/application.h"
+#include "Kmpleete/Application/frame_listener.h"
+#include "Kmpleete/Application/frame_listener_manager.h"
+#include "Kmpleete/Window/window_backend.h"
+#include "Kmpleete/Graphics/graphics_backend.h"
+#include "Kmpleete/Assets/assets_manager.h"
+#include "Kmpleete/Time/clock.h"
+#include "Kmpleete/Base/nullability.h"
+#include "Kmpleete/Input/input_manager.h"
+#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Log/log_class_macro.h"
+
+
+namespace Kmpleete
+{
+    class Window;
+
+
+    //! Parameters for Kmpleete window application creation, 
+    //! encapsulates base application parameters
+    //! @see WindowApplication
+    struct WindowApplicationParameters
+    {
+        const ApplicationParameters applicationParameters;
+        const bool resizable;
+    };
+    //--------------------------------------------------------------------------
+
+
+    //! Application class that supports window and all subsystems that somehow depends on
+    //! a window existence or subsystems that don't make sense without a window.
+    //! It encapsulates the high-level control flow of a main loop, actual logic steps
+    //! implementation are handled by frame listeners. If instance of this class has successfully been created,
+    //! than there exists the window named "Main".
+    //! Client code may redefine behaviour when the application is about to close by reimplementing
+    //! "ConfirmExit" function (e.g. some editor apps may show additional dialog window if
+    //! some data is not saved). This class is responsible for connecting low-level events (KeyPressed, WindowMoved etc.),
+    //! provided by the underlying window, to the subsystems responsible of delegating or/and further processing these events.
+    //! By default graphics API is set to Vulkan
+    //! @see Application
+    //! @see WindowBackend
+    //! @see Window
+    //! @see FrameListenerManager
+    class KMP_API WindowApplication : public Application
+    {
+        KMP_LOG_CLASSNAME(WindowApplication)
+        KMP_PROFILE_CONSTRUCTOR_DECLARE()
+        KMP_DISABLE_COPY_MOVE(WindowApplication)
+
+    public:
+        explicit WindowApplication(const WindowApplicationParameters& parameters);
+        virtual ~WindowApplication();
+
+        void Run() override;
+
+        KMP_NODISCARD virtual bool ConfirmExit();
+
+    protected:
+        void OnEvent(Events::Event& event);
+
+    private:
+        void _Initialize(const WindowApplicationParameters& parameters);
+        void _Finalize();
+
+        KMP_NODISCARD bool _RunFrameIteration(Window& window);
+        void _ProcessEvents(Window& window, float frameTimestep);
+        void _IconifiedSleep();
+
+        void _SaveSettings() const;
+        void _LoadWindowBackendSettings(SettingsDocument& settingsDocument);
+        void _LoadGraphicsBackendSettings(SettingsDocument& settingsDocument);
+        void _LoadSettings(SettingsDocument& settingsDocument);
+
+    protected:
+        UPtr<WindowBackend> _windowBackend;
+        UPtr<Graphics::GraphicsBackend> _graphicsBackend;
+        UPtr<Input::InputManager> _inputManager;
+        UPtr<Assets::AssetsManager> _assetsManager;
+        UPtr<FrameListenerManager> _frameListenerManager;
+
+    private:
+        Time::Clock _frameClock;
+        UInt32 _iconifiedFPS;
+        Graphics::GraphicsBackendType _graphicsBackendType;
+        bool _resizing;
+    };
+    //--------------------------------------------------------------------------
+}

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Kmplete/Event/event.h"
+#include "Kmpleete/Event/event.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Events
     {

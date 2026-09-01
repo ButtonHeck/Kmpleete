@@ -1,10 +1,10 @@
-#include "Kmplete/Base/types_aliases.h"
-#include "Kmplete/Utils/vector_utils.h"
+#include "Kmpleete/Base/types_aliases.h"
+#include "Kmpleete/Utils/vector_utils.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
-using namespace Kmplete;
+using namespace Kmpleete;
 
 TEST_CASE("MergeVectors empty source", "[utils][vector]")
 {

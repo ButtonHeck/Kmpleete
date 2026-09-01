@@ -14,8 +14,8 @@ set(StorageBuffers_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/storage_buffers_frame_listener.cpp
 )
 set(StorageBuffers_SHADERS
-    ${KmpleteSandboxResourcesFolder}/storage_buffers.vert
-    ${KmpleteSandboxResourcesFolder}/storage_buffers.frag
+    ${KmpleeteSandboxResourcesFolder}/storage_buffers.vert
+    ${KmpleeteSandboxResourcesFolder}/storage_buffers.frag
 )
 source_group("Shaders" FILES ${StorageBuffers_SHADERS})
 
@@ -28,15 +28,15 @@ add_executable(StorageBuffers
 SetupCompilerOptions(StorageBuffers)
 
 set_target_properties(StorageBuffers PROPERTIES
-    FOLDER Kmplete/Sandboxes/StorageBuffers
+    FOLDER Kmpleete/Sandboxes/StorageBuffers
 )
 
 target_compile_definitions(StorageBuffers
-    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleteSandboxResourcesFolder}/\"
+    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleeteSandboxResourcesFolder}/\"
 )
 
 target_link_libraries(StorageBuffers
-    PRIVATE Kmplete
+    PRIVATE Kmpleete
     PRIVATE ImGuiUtilsLib
     PRIVATE Vulkan::Vulkan
 )

@@ -1,11 +1,11 @@
-#include "Kmplete/Core/settings_manager.h"
-#include "Kmplete/Json/json_document.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Core/settings_manager.h"
+#include "Kmpleete/Json/json_document.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     SettingsManager::SettingsManager(const Filepath& filepath)
         : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()

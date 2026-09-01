@@ -1,10 +1,10 @@
-#include "Kmplete/Graphics/colors.h"
+#include "Kmpleete/Graphics/colors.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/color_space.hpp>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

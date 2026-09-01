@@ -14,8 +14,8 @@ set(Triangle_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/triangle_frame_listener.cpp
 )
 set(Triangle_SHADERS
-    ${KmpleteSandboxResourcesFolder}/triangle.vert
-    ${KmpleteSandboxResourcesFolder}/triangle.frag
+    ${KmpleeteSandboxResourcesFolder}/triangle.vert
+    ${KmpleeteSandboxResourcesFolder}/triangle.frag
 )
 source_group("Shaders" FILES ${Triangle_SHADERS})
 
@@ -28,15 +28,15 @@ add_executable(Triangle
 SetupCompilerOptions(Triangle)
 
 set_target_properties(Triangle PROPERTIES
-    FOLDER Kmplete/Sandboxes/Triangle
+    FOLDER Kmpleete/Sandboxes/Triangle
 )
 
 target_compile_definitions(Triangle
-    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleteSandboxResourcesFolder}/\"
+    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleeteSandboxResourcesFolder}/\"
 )
 
 target_link_libraries(Triangle
-    PRIVATE Kmplete
+    PRIVATE Kmpleete
     PRIVATE ImGuiUtilsLib
     PRIVATE Vulkan::Vulkan
 )

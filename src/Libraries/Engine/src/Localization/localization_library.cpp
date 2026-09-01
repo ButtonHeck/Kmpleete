@@ -1,10 +1,10 @@
-#include "Kmplete/Localization/localization_library.h"
-#include "Kmplete/Localization/localization_dictionary.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Localization/localization_library.h"
+#include "Kmpleete/Localization/localization_dictionary.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static const auto NoTranslation = TranslationStr("");
 

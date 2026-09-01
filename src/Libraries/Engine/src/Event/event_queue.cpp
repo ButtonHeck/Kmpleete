@@ -1,8 +1,8 @@
-#include "Kmplete/Event/event_queue.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Event/event_queue.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Events
     {

@@ -14,8 +14,8 @@ set(DrawIndirect_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/draw_indirect_frame_listener.cpp
 )
 set(DrawIndirect_SHADERS
-    ${KmpleteSandboxResourcesFolder}/draw_indirect.vert
-    ${KmpleteSandboxResourcesFolder}/draw_indirect.frag
+    ${KmpleeteSandboxResourcesFolder}/draw_indirect.vert
+    ${KmpleeteSandboxResourcesFolder}/draw_indirect.frag
 )
 source_group("Shaders" FILES ${DrawIndirect_SHADERS})
 
@@ -28,15 +28,15 @@ add_executable(DrawIndirect
 SetupCompilerOptions(DrawIndirect)
 
 set_target_properties(DrawIndirect PROPERTIES
-    FOLDER Kmplete/Sandboxes/DrawIndirect
+    FOLDER Kmpleete/Sandboxes/DrawIndirect
 )
 
 target_compile_definitions(DrawIndirect
-    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleteSandboxResourcesFolder}/\"
+    PRIVATE KMP_SANDBOX_RESOURCES_FOLDER=\"${KmpleeteSandboxResourcesFolder}/\"
 )
 
 target_link_libraries(DrawIndirect
-    PRIVATE Kmplete
+    PRIVATE Kmpleete
     PRIVATE ImGuiUtilsLib
     PRIVATE Vulkan::Vulkan
 )

@@ -1,28 +1,28 @@
-#include "Kmplete/Utils/function_utils.h"
-#include "Kmplete/Base/functional.h"
+#include "Kmpleete/Utils/function_utils.h"
+#include "Kmpleete/Base/functional.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
 TEST_CASE("GetArgsCount 0", "[utils][function]")
 {
-    REQUIRE(Kmplete::Utils::GetArgsCount() == size_t(0));
+    REQUIRE(Kmpleete::Utils::GetArgsCount() == size_t(0));
 }
 
 TEST_CASE("GetArgsCount 1", "[utils][function]")
 {
     const auto arg1 = 0;
-    REQUIRE(Kmplete::Utils::GetArgsCount(arg1) == size_t(1));
-    REQUIRE(Kmplete::Utils::GetArgsCount(nullptr) == size_t(1));
-    REQUIRE(Kmplete::Utils::GetArgsCount((arg1 ? arg1 : 42)) == size_t(1));
+    REQUIRE(Kmpleete::Utils::GetArgsCount(arg1) == size_t(1));
+    REQUIRE(Kmpleete::Utils::GetArgsCount(nullptr) == size_t(1));
+    REQUIRE(Kmpleete::Utils::GetArgsCount((arg1 ? arg1 : 42)) == size_t(1));
 }
 
 TEST_CASE("GetArgsCount 2", "[utils][function]")
 {
     const auto arg1 = 0;
     const auto arg2 = "s";
-    REQUIRE(Kmplete::Utils::GetArgsCount(arg1, arg2) == size_t(2));
-    REQUIRE(Kmplete::Utils::GetArgsCount(nullptr, nullptr) == size_t(2));
+    REQUIRE(Kmpleete::Utils::GetArgsCount(arg1, arg2) == size_t(2));
+    REQUIRE(Kmpleete::Utils::GetArgsCount(nullptr, nullptr) == size_t(2));
 }
 
 TEST_CASE("GetArgsCount 3", "[utils][function]")
@@ -30,7 +30,7 @@ TEST_CASE("GetArgsCount 3", "[utils][function]")
     const auto arg1 = 0;
     const auto arg2 = "s";
     const auto arg3 = 'c';
-    REQUIRE(Kmplete::Utils::GetArgsCount(arg1, arg2, arg3) == size_t(3));
+    REQUIRE(Kmpleete::Utils::GetArgsCount(arg1, arg2, arg3) == size_t(3));
 }
 
 TEST_CASE("GetArgsCount 4", "[utils][function]")
@@ -40,15 +40,15 @@ TEST_CASE("GetArgsCount 4", "[utils][function]")
     const auto arg2 = "s";
     const auto arg3 = 'c';
     const auto arg4 = S();
-    REQUIRE(Kmplete::Utils::GetArgsCount(arg1, arg2, arg3, arg4) == size_t(4));
+    REQUIRE(Kmpleete::Utils::GetArgsCount(arg1, arg2, arg3, arg4) == size_t(4));
 }
 //--------------------------------------------------------------------------
 
 
 TEST_CASE("KMP_BIND", "[utils][function]")
 {
-    using CallbackIntNoParamsFn = Kmplete::Function<int()>;
-    using CallbackIntParamsFn = Kmplete::Function<int(int)>;
+    using CallbackIntNoParamsFn = Kmpleete::Function<int()>;
+    using CallbackIntParamsFn = Kmpleete::Function<int(int)>;
 
     struct CallbackTest
     {
@@ -100,8 +100,8 @@ static int Return555() { return 555; }
 static int ReturnParamX2(int param) { return param * 2; }
 TEST_CASE("KMP_BIND_FREE_FN", "[utils][function]")
 {
-    using CallbackIntNoParamsFn = Kmplete::Function<int()>;
-    using CallbackIntParamsFn = Kmplete::Function<int(int)>;
+    using CallbackIntNoParamsFn = Kmpleete::Function<int()>;
+    using CallbackIntParamsFn = Kmpleete::Function<int(int)>;
 
     struct CallbackTest
     {

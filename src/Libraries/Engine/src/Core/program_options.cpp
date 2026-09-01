@@ -1,7 +1,7 @@
-#include "Kmplete/Core/program_options.h"
+#include "Kmpleete/Core/program_options.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     ProgramOptions::ProgramOptions() noexcept
         : _settingsFilepath(Filepath())
@@ -59,7 +59,7 @@ namespace Kmplete
 
     void ProgramOptions::_ProcessCommandLineArgs(boost::program_options::command_line_parser& cmdParser)
     {
-        boost::program_options::options_description optDescription("Kmplete options");
+        boost::program_options::options_description optDescription("Kmpleete options");
         optDescription.add_options()
             ("settings,S",          boost::program_options::value<String>(),    "Path to settings file")
             ("profile_level,P",     boost::program_options::value<int>(),       "Profiling level (0-4)")

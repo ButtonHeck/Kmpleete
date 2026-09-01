@@ -2,13 +2,13 @@
 
 #include "Application/editor_frame_listener.h"
 
-#include "Kmplete/Base/pointers.h"
-#include "Kmplete/Application/window_application.h"
-#include "Kmplete/Profile/profiler_fwd.h"
-#include "Kmplete/Log/log_class_macro.h"
+#include "Kmpleete/Base/pointers.h"
+#include "Kmpleete/Application/window_application.h"
+#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Log/log_class_macro.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     class EditorApplication : public WindowApplication
     {

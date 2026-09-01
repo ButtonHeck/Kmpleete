@@ -1,12 +1,12 @@
 #include "shader_compiler_tool.h"
 
-#include "Kmplete/Json/json_document.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Base/named_bool.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Json/json_document.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Base/named_bool.h"
+#include "Kmpleete/Log/log.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace ShaderCompiler
     {

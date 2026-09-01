@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Kmplete/Base/types_aliases.h"
+#include "Kmpleete/Base/types_aliases.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static constexpr auto frame1Mask = 0b0001;
     static constexpr auto frame2Mask = 0b0010;

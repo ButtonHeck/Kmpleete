@@ -1,4 +1,4 @@
-#include "Kmplete/Math/rng.h"
+#include "Kmpleete/Math/rng.h"
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -8,7 +8,7 @@
 TEST_CASE("RNG uint32_t unbounded", "[core][rng]")
 {
     const auto min = 0;
-    Kmplete::Math::RNGUInt32 rng;
+    Kmpleete::Math::RNGUInt32 rng;
 
     std::unordered_set<uint32_t> set;
     const auto iterations = 1000;
@@ -30,7 +30,7 @@ TEST_CASE("RNG uint32_t bounded", "[core][rng]")
 {
     const auto min = 5;
     const auto max = 100;
-    Kmplete::Math::RNGUInt32 rng(min, max);
+    Kmpleete::Math::RNGUInt32 rng(min, max);
 
     const auto iterations = 1000;
     bool conditionMinCheck = true;
@@ -50,7 +50,7 @@ TEST_CASE("RNG uint32_t bounded", "[core][rng]")
 
 TEST_CASE("RNG float unbounded", "[core][rng]")
 {
-    Kmplete::Math::RNGFloat rng;
+    Kmpleete::Math::RNGFloat rng;
 
     std::unordered_set<float> set;
     const auto iterations = 1000;
@@ -68,7 +68,7 @@ TEST_CASE("RNG float bounded", "[core][rng]")
 {
     const auto min = -100.0f;
     const auto max = 100.0f;
-    Kmplete::Math::RNGFloat rng(min, max);
+    Kmpleete::Math::RNGFloat rng(min, max);
 
     const auto iterations = 1000;
     bool conditionMinCheck = true;

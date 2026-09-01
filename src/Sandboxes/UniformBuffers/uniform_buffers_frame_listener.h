@@ -1,21 +1,21 @@
 #pragma once
 
-#include "Kmplete/Base/kmplete_api.h"
-#include "Kmplete/Base/types_aliases.h"
-#include "Kmplete/Application/frame_listener.h"
-#include "Kmplete/Window/window.h"
-#include "Kmplete/Graphics/graphics_backend.h"
-#include "Kmplete/Graphics/orthographic_camera.h"
-#include "Kmplete/Event/event_handler_guard.h"
-#include "Kmplete/Event/window_events.h"
-#include "Kmplete/Event/mouse_events.h"
-#include "Kmplete/Input/input_manager.h"
-#include "Kmplete/Utils/memory_utils.h"
+#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/types_aliases.h"
+#include "Kmpleete/Application/frame_listener.h"
+#include "Kmpleete/Window/window.h"
+#include "Kmpleete/Graphics/graphics_backend.h"
+#include "Kmpleete/Graphics/orthographic_camera.h"
+#include "Kmpleete/Event/event_handler_guard.h"
+#include "Kmpleete/Event/window_events.h"
+#include "Kmpleete/Event/mouse_events.h"
+#include "Kmpleete/Input/input_manager.h"
+#include "Kmpleete/Utils/memory_utils.h"
 
 #include <vulkan/vulkan.h>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {

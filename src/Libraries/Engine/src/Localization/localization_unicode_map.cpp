@@ -1,8 +1,8 @@
-#include "Kmplete/Localization/localization_unicode_map.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Localization/localization_unicode_map.h"
+#include "Kmpleete/Log/log.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Localization
     {

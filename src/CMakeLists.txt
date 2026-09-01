@@ -1,18 +1,18 @@
 ## ~/src/CMakeLists.txt
 
 ############################################################################
-# Main CMakeLists file for all Kmplete targets and its' tests. All main targets
-# are placed into "Kmplete/[Type]" folder, where [Type] is either "Libraries" or
+# Main CMakeLists file for all Kmpleete targets and its' tests. All main targets
+# are placed into "Kmpleete/[Type]" folder, where [Type] is either "Libraries" or
 # "Tools" depending on the target purpose.
-# All test targets are placed into "Kmplete/Tests" folder and additional
+# All test targets are placed into "Kmpleete/Tests" folder and additional
 # "_BuildAllTests" target added to build all tests at once
 ############################################################################
 
 cmake_minimum_required(VERSION 3.24)
 
-set(KmpleteResourcesFolder ${CMAKE_CURRENT_LIST_DIR}/Resources)
+set(KmpleeteResourcesFolder ${CMAKE_CURRENT_LIST_DIR}/Resources)
 
-if(${KMPLETE_BUILD_TESTS})
+if(${KMPLEETE_BUILD_TESTS})
     list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
 endif()
 
@@ -41,7 +41,7 @@ add_subdirectory(Tools/ShaderCompiler)
 
 add_subdirectory(Sandboxes)
 
-if(${KMPLETE_BUILD_TESTS})
+if(${KMPLEETE_BUILD_TESTS})
     add_custom_target(_BuildAllTests)
     add_dependencies(_BuildAllTests
         BaseLib_UnitTests
@@ -52,12 +52,12 @@ if(${KMPLETE_BUILD_TESTS})
         MathLib_UnitTests
         TimeLib_UnitTests
 
-        Kmplete_UnitTests
-        Kmplete_WindowApplicationTests
-        Kmplete_LocaleTests
+        Kmpleete_UnitTests
+        Kmpleete_WindowApplicationTests
+        Kmpleete_LocaleTests
         TestWindowApplication
     )
     set_target_properties(_BuildAllTests PROPERTIES
-        FOLDER Kmplete/Tests
+        FOLDER Kmpleete/Tests
     )
 endif()

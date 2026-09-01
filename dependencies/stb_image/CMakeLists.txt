@@ -14,5 +14,5 @@ set_target_properties(stb_image PROPERTIES
 )
 
 target_compile_options(stb_image PUBLIC
-    $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLETE_MULTIPROCESSOR_BUILD}>:/MP>>
+    $<$<CXX_COMPILER_ID:MSVC>:$<$<BOOL:${KMPLEETE_MULTIPROCESSOR_BUILD}>:/MP>>
 )

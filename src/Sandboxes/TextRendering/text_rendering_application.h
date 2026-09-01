@@ -2,11 +2,11 @@
 
 #include "text_rendering_frame_listener.h"
 
-#include "Kmplete/Base/pointers.h"
-#include "Kmplete/Application/window_application.h"
+#include "Kmpleete/Base/pointers.h"
+#include "Kmpleete/Application/window_application.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     class TextRenderingApplication : public WindowApplication
     {

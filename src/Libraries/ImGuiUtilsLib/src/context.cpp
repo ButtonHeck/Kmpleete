@@ -1,7 +1,7 @@
-#include "Kmplete/ImGui/context.h"
+#include "Kmpleete/ImGui/context.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace ImGuiUtils
     {

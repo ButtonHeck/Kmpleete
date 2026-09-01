@@ -1,7 +1,7 @@
-#include "Kmplete/ShaderCompiler/compile.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Profile/profiler.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/ShaderCompiler/compile.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Profile/profiler.h"
+#include "Kmpleete/Log/log.h"
 
 #include <shaderc/shaderc.hpp>
 
@@ -10,7 +10,7 @@
 #endif
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace ShaderCompiler
     {

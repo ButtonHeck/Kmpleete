@@ -1,9 +1,9 @@
 #include "post_processing_application.h"
 
-#include "Kmplete/Application/application_context.h"
+#include "Kmpleete/Application/application_context.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     PostProcessingApplication::PostProcessingApplication(const WindowApplicationParameters& parameters)
         : WindowApplication(parameters)

@@ -2,26 +2,26 @@
 #include "UI/ui_identifiers.h"
 #include "Application/localization_base.h"
 
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Core/system_metrics_manager.h"
-#include "Kmplete/Core/settings_document.h"
-#include "Kmplete/Time/timer.h"
-#include "Kmplete/Utils/function_utils.h"
-#include "Kmplete/Localization/localization_manager.h"
-#include "Kmplete/Assets/texture_asset_manager.h"
-#include "Kmplete/Assets/assets_manager.h"
-#include "Kmplete/Input/input_manager.h"
-#include "Kmplete/ImGui/helper_functions.h"
-#include "Kmplete/ImGui/scope_guards.h"
-#include "Kmplete/Event/event_queue.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Core/system_metrics_manager.h"
+#include "Kmpleete/Core/settings_document.h"
+#include "Kmpleete/Time/timer.h"
+#include "Kmpleete/Utils/function_utils.h"
+#include "Kmpleete/Localization/localization_manager.h"
+#include "Kmpleete/Assets/texture_asset_manager.h"
+#include "Kmpleete/Assets/assets_manager.h"
+#include "Kmpleete/Input/input_manager.h"
+#include "Kmpleete/ImGui/helper_functions.h"
+#include "Kmpleete/ImGui/scope_guards.h"
+#include "Kmpleete/Event/event_queue.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <imgui_internal.h> // for ImGui::DockBuilder api
 #include <misc/cpp/imgui_stdlib.h> // for ImGui::InputText wrappers for std::string
 #include <forkawesome-webfont.h>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     static constexpr auto SettingsEntryName = "EditorUICompositor";
     static constexpr auto MetricsFractionalStr = "MetricsFractional";

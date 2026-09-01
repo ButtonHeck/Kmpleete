@@ -1,10 +1,10 @@
 #if not defined (KMP_CONFIG_TYPE_PRODUCTION)
 
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Log/log.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Log/log.h"
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     Assertion::Assertion(const String& expression, const String& file, const String& function, int line, Consequence consequence /*= Consequence::Terminate*/)
         : _file(file)

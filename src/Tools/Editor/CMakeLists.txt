@@ -5,12 +5,12 @@ cmake_minimum_required(VERSION 3.24)
 project(Editor LANGUAGES CXX)
 
 if(WIN32)
-    set(KMPLETE_WIN_ICO_PATH "${KmpleteResourcesFolder}/icons/Kmplete64.ico")
-    configure_file("${CMAKE_CURRENT_SOURCE_DIR}/src/win/kmplete_editor.rc_in" "${CMAKE_CURRENT_BINARY_DIR}/kmplete_editor.rc")
+    set(KMPLEETE_WIN_ICO_PATH "${KmpleeteResourcesFolder}/icons/Kmpleete64.ico")
+    configure_file("${CMAKE_CURRENT_SOURCE_DIR}/src/win/kmpleete_editor.rc_in" "${CMAKE_CURRENT_BINARY_DIR}/kmpleete_editor.rc")
     configure_file("${CMAKE_CURRENT_SOURCE_DIR}/src/win/resource.h" "${CMAKE_CURRENT_BINARY_DIR}/resource.h" COPYONLY)
     set(Editor_WINRC
         "${CMAKE_CURRENT_BINARY_DIR}/resource.h"
-        "${CMAKE_CURRENT_BINARY_DIR}/kmplete_editor.rc"
+        "${CMAKE_CURRENT_BINARY_DIR}/kmpleete_editor.rc"
     )
     source_group("Resources" FILES ${Editor_WINRC})
 endif()
@@ -40,7 +40,7 @@ target_include_directories(Editor
 )
 
 target_link_libraries(Editor
-    PRIVATE Kmplete
+    PRIVATE Kmpleete
     PRIVATE TranslatorInterfaceLib
     PRIVATE AssetsCompilerInterfaceLib
     PRIVATE ImGuiUtilsLib
@@ -67,17 +67,17 @@ if(MSVC)
 endif()
 
 set_target_properties(Editor PROPERTIES 
-    FOLDER Kmplete/Tools/Editor
+    FOLDER Kmpleete/Tools/Editor
 )
 
 set(EditorCopySettingsScriptName "CopySettings$<CONFIG>.cmake")
 file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${EditorCopySettingsScriptName}"
     CONTENT
     [=[
-    if (NOT EXISTS "$<TARGET_FILE_DIR:Editor>/Kmplete_settings.json")
+    if (NOT EXISTS "$<TARGET_FILE_DIR:Editor>/Kmpleete_settings.json")
     execute_process(COMMAND "${CMAKE_COMMAND}" -E copy
-        "${resources_folder}/json/Kmplete_settings_example.json"
-        "$<TARGET_FILE_DIR:Editor>/Kmplete_settings.json")
+        "${resources_folder}/json/Kmpleete_settings_example.json"
+        "$<TARGET_FILE_DIR:Editor>/Kmpleete_settings.json")
     endif() 
     ]=]
 )
@@ -85,7 +85,7 @@ file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${EditorCopySettingsScriptName
 add_custom_command(
     TARGET Editor
     POST_BUILD
-    COMMAND "${CMAKE_COMMAND}" -D resources_folder=${KmpleteResourcesFolder} -P ${EditorCopySettingsScriptName}
+    COMMAND "${CMAKE_COMMAND}" -D resources_folder=${KmpleeteResourcesFolder} -P ${EditorCopySettingsScriptName}
     WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 )
 
@@ -109,13 +109,13 @@ add_custom_command(TARGET Editor_copy_translations PRE_BUILD
     VERBATIM
 )
 set_target_properties(Editor_copy_translations PROPERTIES
-    FOLDER Kmplete/Tools/Editor
+    FOLDER Kmpleete/Tools/Editor
 )
 
 add_dependencies(Editor Editor_copy_translations)
 
 CreateTranslationHelperTargets(
-    Editor Kmplete/Tools/Editor
+    Editor Kmpleete/Tools/Editor
     "--mode=Update --input_directories=\"${CMAKE_CURRENT_LIST_DIR}/src\" --extensions=.cpp .h --recursive --output_directory=\"${CMAKE_CURRENT_LIST_DIR}/locale\" --output_file_name=${EditorDomain} --gettext_binaries_paths=\"${CMAKE_BINARY_DIR}/src/Tools/Translator/translator_gettext_paths.json\""
     "--mode=Compile --output_directory=\"${CMAKE_CURRENT_LIST_DIR}/locale\" --output_file_name=${EditorDomain} --gettext_binaries_paths=\"${CMAKE_BINARY_DIR}/src/Tools/Translator/translator_gettext_paths.json\""
 )
@@ -153,7 +153,7 @@ add_custom_command(TARGET Editor_compile_assets PRE_BUILD
     "--output_file_name=\"${exeDir}/Data/${AssetsDataFilename}\""
 )
 set_target_properties(Editor_compile_assets PROPERTIES
-    FOLDER Kmplete/Tools/Editor
+    FOLDER Kmpleete/Tools/Editor
 )
 
 add_dependencies(Editor Editor_compile_assets)
@@ -164,14 +164,14 @@ add_dependencies(Editor Editor_compile_assets)
 
 install(TARGETS Editor
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} 
-        COMPONENT ${KmpleteInstallEditorComponentName}
+        COMPONENT ${KmpleeteInstallEditorComponentName}
 )
 install(DIRECTORY locale
     DESTINATION ${CMAKE_INSTALL_BINDIR} 
-    COMPONENT ${KmpleteInstallEditorComponentName}
+    COMPONENT ${KmpleeteInstallEditorComponentName}
     FILES_MATCHING PATTERN "*.mo"
 )
 install(FILES "${exeDir}/Data/${AssetsDataFilename}"
     DESTINATION ${CMAKE_INSTALL_BINDIR}/Data
-    COMPONENT ${KmpleteInstallEditorComponentName}
+    COMPONENT ${KmpleeteInstallEditorComponentName}
 )

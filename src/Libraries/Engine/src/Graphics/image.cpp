@@ -1,17 +1,17 @@
-#include "Kmplete/Graphics/image.h"
-#include "Kmplete/Filesystem/filesystem.h"
-#include "Kmplete/Base/exception.h"
-#include "Kmplete/Core/assertion.h"
-#include "Kmplete/Math/math.h"
-#include "Kmplete/Log/log.h"
-#include "Kmplete/Profile/profiler.h"
+#include "Kmpleete/Graphics/image.h"
+#include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Base/exception.h"
+#include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Math/math.h"
+#include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <stb_image.h>
 
 #include <cstring>
 
 
-namespace Kmplete
+namespace Kmpleete
 {
     namespace Graphics
     {
