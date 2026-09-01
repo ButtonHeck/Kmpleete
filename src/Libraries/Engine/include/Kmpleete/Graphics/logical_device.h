@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Base/nullability.h"
 #include "Kmpleete/Graphics/command_pool.h"

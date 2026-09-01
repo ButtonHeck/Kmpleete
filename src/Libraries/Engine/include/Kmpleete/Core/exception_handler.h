@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Kmpleete/Base/platform.h"
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 
 #if defined (KMP_PLATFORM_WINDOWS)
     #include <Windows.h>

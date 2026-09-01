@@ -4,7 +4,7 @@
 #include "Kmpleete/Graphics/graphics_base.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_context.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_queue.h"
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Log/log_class_macro.h"

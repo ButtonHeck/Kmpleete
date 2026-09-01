@@ -2,7 +2,7 @@
 
 #if not defined (KMP_CONFIG_TYPE_PRODUCTION)
 
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/macro.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Utils/string_utils.h"

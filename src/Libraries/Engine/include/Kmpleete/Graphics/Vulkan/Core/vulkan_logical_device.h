@@ -20,7 +20,7 @@
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_memory_type_delegate.h"
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_image_creator_delegate.h"
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_format_delegate.h"
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Base/nullability.h"
 #include "Kmpleete/Base/types_aliases.h"

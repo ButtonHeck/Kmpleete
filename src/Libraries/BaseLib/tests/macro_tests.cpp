@@ -1,4 +1,4 @@
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/macro.h"
 
 #include <catch2/catch_test_macros.hpp>

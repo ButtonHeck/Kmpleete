@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/platform.h"
 
 #if not defined (KMP_COMPILER_MSVC)

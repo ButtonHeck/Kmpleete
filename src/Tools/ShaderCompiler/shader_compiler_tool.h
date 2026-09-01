@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/ShaderCompiler/shader_compiler_tool_interface.h"
 #include "Kmpleete/ShaderCompiler/compile.h"

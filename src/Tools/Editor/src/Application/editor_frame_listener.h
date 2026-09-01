@@ -4,7 +4,7 @@
 
 #include "Kmpleete/Application/frame_listener.h"
 #include "Kmpleete/Window/window.h"
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Core/settings_document.h"
 #include "Kmpleete/Time/timer.h"
 #include "Kmpleete/Event/window_events.h"

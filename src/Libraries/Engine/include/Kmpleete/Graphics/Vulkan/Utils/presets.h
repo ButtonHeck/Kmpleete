@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/function_utils.h"

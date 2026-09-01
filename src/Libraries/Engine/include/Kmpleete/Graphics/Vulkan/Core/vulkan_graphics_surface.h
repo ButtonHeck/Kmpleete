@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Graphics/graphics_surface.h"
 #include "Kmpleete/Profile/profiler_fwd.h"
 

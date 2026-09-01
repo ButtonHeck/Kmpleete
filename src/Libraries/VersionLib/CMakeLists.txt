@@ -37,7 +37,7 @@ if(result)
     message(FATAL_ERROR "Failed to get git branch: ${result}")
 endif()
 
-configure_file(Kmpleete_version.cpp.in kmpleete_version.cpp @ONLY)
+configure_file(kmpleete_version.cpp.in kmpleete_version.cpp @ONLY)
 
 add_library(VersionLib STATIC 
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Version/kmpleete_version.h

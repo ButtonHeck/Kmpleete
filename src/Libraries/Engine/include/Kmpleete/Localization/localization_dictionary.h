@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Kmpleete/Localization/localization_base.h"
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/string_id.h"
 #include "Kmpleete/Profile/profiler_fwd.h"

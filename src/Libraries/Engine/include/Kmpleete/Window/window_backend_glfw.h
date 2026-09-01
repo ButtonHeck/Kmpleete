@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Window/window_backend.h"
 #include "Kmpleete/Window/window_cursor.h"
 #include "Kmpleete/Log/log_class_macro.h"

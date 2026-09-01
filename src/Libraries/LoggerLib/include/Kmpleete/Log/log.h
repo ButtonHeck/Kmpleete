@@ -18,7 +18,7 @@
 
 #else
 #include "Kmpleete/Log/log_api.h"
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/platform.h"
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Base/types_aliases.h"

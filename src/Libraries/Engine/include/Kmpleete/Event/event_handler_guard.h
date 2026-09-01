@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Kmpleete/Base/Kmpleete_api.h"
+#include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/type_traits.h"
 #include "Kmpleete/Event/event.h"
 #include "Kmpleete/Event/event_dispatcher.h"
