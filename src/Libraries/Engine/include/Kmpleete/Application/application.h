@@ -47,8 +47,6 @@ namespace Kmpleete
         void _SaveSettings() const;
         void _LoadSettings();
 
-        void _FillDictionary();
-
     protected:
         bool _running;
 

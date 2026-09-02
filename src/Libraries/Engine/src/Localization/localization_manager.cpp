@@ -47,6 +47,7 @@ namespace Kmpleete
             _library->SetLocale(_currentLocale);
 
             _ImbueLocale();
+            _FillDictionary();
             _NotifyLocaleListeners();
 
             KMP_LOG_INFO("set locale '{}'", _currentLocale);
@@ -273,6 +274,13 @@ namespace Kmpleete
         std::cout.imbue(locale);
         std::cerr.imbue(locale);
         std::clog.imbue(locale);
+    }}
+    //--------------------------------------------------------------------------
+
+    void LocalizationManager::_FillDictionary() KMP_PROFILING(ProfileLevelMinor)
+    {
+        Translate(KMP_TR_DOMAIN_ENGINE, "English");
+        Translate(KMP_TR_DOMAIN_ENGINE, "Russian");
     }}
     //--------------------------------------------------------------------------
 

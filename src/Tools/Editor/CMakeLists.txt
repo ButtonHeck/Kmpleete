@@ -104,7 +104,7 @@ add_custom_target(Editor_copy_translations
 )
 add_custom_command(TARGET Editor_copy_translations PRE_BUILD
     COMMAND ${CMAKE_COMMAND}
-    "-D DEST_DIR=${exeDir}" "-D SRC_DIRS=${CMAKE_CURRENT_LIST_DIR}/locale;${CMAKE_CURRENT_LIST_DIR}/../Engine/locale" 
+    "-D DEST_DIR=${exeDir}" "-D SRC_DIRS=${CMAKE_CURRENT_LIST_DIR}/locale;${CMAKE_CURRENT_LIST_DIR}/../../Libraries/Engine/locale" 
     -P "${CMAKE_SOURCE_DIR}/cmake/CopyTranslations.cmake"
     VERBATIM
 )

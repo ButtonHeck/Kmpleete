@@ -85,9 +85,6 @@ namespace Kmpleete
             Log::Initialize(ApplicationContext::GetApplicationName(), ApplicationContext::GetApplicationLogPath());
         }
 #endif
-
-        _FillDictionary();
-        _localizationManager->AddLocaleChangedCallback(KMP_BIND(Application::_FillDictionary));
     }
     //--------------------------------------------------------------------------
 
@@ -170,15 +167,6 @@ namespace Kmpleete
 #endif
 
         _localizationManager->LoadSettings(*settings);
-    }}
-    //--------------------------------------------------------------------------
-
-    void Application::_FillDictionary() KMP_PROFILING(ProfileLevelMinor)
-    {
-        KMP_ASSERT(_localizationManager);
-
-        _localizationManager->Translate(KMP_TR_DOMAIN_ENGINE, "English");
-        _localizationManager->Translate(KMP_TR_DOMAIN_ENGINE, "Russian");
     }}
     //--------------------------------------------------------------------------
 }

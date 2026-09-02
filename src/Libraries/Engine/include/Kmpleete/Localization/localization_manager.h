@@ -80,6 +80,7 @@ namespace Kmpleete
 
     private:
         void _ImbueLocale() const;
+        void _FillDictionary();
         void _NotifyLocaleListeners() const;
 
     private:
