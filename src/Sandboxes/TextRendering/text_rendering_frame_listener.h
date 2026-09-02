@@ -7,6 +7,7 @@
 #include "Kmpleete/ImGui/implementation.h"
 #include "Kmpleete/Event/event_handler_guard.h"
 #include "Kmpleete/Event/window_events.h"
+#include "Kmpleete/Event/application_events.h"
 
 
 namespace Kmpleete
@@ -48,6 +49,7 @@ namespace Kmpleete
         void _RenderImGui();
 
         bool _OnWindowContentScaleEvent(Events::WindowContentScaleEvent& event);
+        bool _OnLocaleChangeEvent(Events::LocaleChangeEvent& event);
 
         void _FillDictionary();
 
@@ -60,6 +62,7 @@ namespace Kmpleete
         UInt32 _verticesCount;
 
         Events::EventHandlerGuard<Events::WindowContentScaleEvent> _windowContentScaleHandler;
+        Events::EventHandlerGuard<Events::LocaleChangeEvent> _localeChangeHandler;
     };
     //--------------------------------------------------------------------------
 }

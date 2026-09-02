@@ -2,6 +2,7 @@
 #include "UI/ui_identifiers.h"
 
 #include "Kmpleete/Core/system_metrics_manager.h"
+#include "Kmpleete/Localization/localization_manager.h"
 #include "Kmpleete/Base/named_bool.h"
 #include "Kmpleete/Graphics/graphics_backend.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_graphics_base.h"
@@ -43,14 +44,16 @@ namespace Kmpleete
         , _mainWindow(mainWindow)
         , _graphicsBackend(graphicsBackend)
         , _assetsManager(assetsManager)
+        , _localizationManager(localizationManager)
         , _imguiImpl(nullptr)
         , _uiCompositor(nullptr)
         , _metricsTimer(1000)
         , _windowCloseHandler(_eventDispatcher, KMP_BIND(EditorFrameListener::_OnWindowCloseEvent))
         , _windowContentScaleHandler(_eventDispatcher, KMP_BIND(EditorFrameListener::_OnWindowContentScaleEvent))
         , _windowScreenModeHandler(_eventDispatcher, KMP_BIND(EditorFrameListener::_OnWindowScreenModeEvent))
+        , _localeChangeHandler(_eventDispatcher, KMP_BIND(EditorFrameListener::_OnLocaleChangeEvent))
     {
-        _Initialize(localizationManager, systemMetricsManager, inputManager);
+        _Initialize(inputManager);
 
         KMP_PROFILE_CONSTRUCTOR_END()
     }
@@ -62,12 +65,13 @@ namespace Kmpleete
     }}
     //--------------------------------------------------------------------------
 
-    void EditorFrameListener::_Initialize(LocalizationManager& localizationManager, SystemMetricsManager& systemMetricsManager, Input::InputManager& inputManager)
+    void EditorFrameListener::_Initialize(Input::InputManager& inputManager)
     {
+        _FillDictionary();
         _InitializeGraphics();
         _InitializeImGui();
 
-        _uiCompositor.reset(new EditorUICompositor(_mainWindow, _assetsManager, localizationManager, systemMetricsManager, inputManager));
+        _uiCompositor.reset(new EditorUICompositor(_mainWindow, _assetsManager, _localizationManager, _systemMetricsManager, inputManager));
 
         _metricsTimer.Mark();
     }
@@ -209,11 +213,18 @@ namespace Kmpleete
     }}
     //--------------------------------------------------------------------------
 
-    bool EditorFrameListener::_OnWindowScreenModeEvent(Events::WindowScreenModeEvent& event)
+    bool EditorFrameListener::_OnWindowScreenModeEvent(Events::WindowScreenModeEvent& event) KMP_PROFILING(ProfileLevelMinor)
     {
         _mainWindow.SetScreenMode(event.GetScreenMode());
         return true;
-    }
+    }}
+    //--------------------------------------------------------------------------
+
+    bool EditorFrameListener::_OnLocaleChangeEvent(Events::LocaleChangeEvent&) KMP_PROFILING(ProfileLevelMinor)
+    {
+        _FillDictionary();
+        return true;
+    }}
     //--------------------------------------------------------------------------
 
     void EditorFrameListener::_AddImGuiFonts()
@@ -258,6 +269,19 @@ namespace Kmpleete
         {
             _imguiImpl->Render();
         }
+    }}
+    //--------------------------------------------------------------------------
+
+    void EditorFrameListener::_FillDictionary() KMP_PROFILING(ProfileLevelMinor)
+    {
+        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "File");
+        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "View");
+        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Quit");
+        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Fullscreen");
+        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Metrics update period (ms)");
+        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Show fractional");
+        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Change language");
+        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Always on top");
     }}
     //--------------------------------------------------------------------------
 

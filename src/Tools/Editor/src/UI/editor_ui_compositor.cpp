@@ -36,9 +36,6 @@ namespace Kmpleete
         , _systemMetricsManager(systemMetricsManager)
         , _needCheckImguiIniFile(true)
     {
-        _FillDictionary();
-        _localizationManager.AddLocaleChangedCallback(KMP_BIND(EditorUICompositor::_FillDictionary));
-
         inputManager.MapInputToCallback({ Input::Code::Key_Q, { Input::ButtonPressedValue, Input::Modifier::Ctrl } }, "editor_quit"_sid, [&](Input::InputControlValue) {
             _popups.quit = true;
             return true;
@@ -307,19 +304,6 @@ namespace Kmpleete
         settings.StartLoadObject(SettingsEntryName);
         _state.metricsFractional = settings.GetBool(MetricsFractionalStr, true);
         settings.EndLoadObject();
-    }}
-    //--------------------------------------------------------------------------
-
-    void EditorUICompositor::_FillDictionary() KMP_PROFILING(ProfileLevelMinor)
-    {
-        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "File");
-        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "View");
-        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Quit");
-        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Fullscreen");
-        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Metrics update period (ms)");
-        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Show fractional");
-        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Change language");
-        _localizationManager.Translate(KMP_TR_DOMAIN_EDITOR, "Always on top");
     }}
     //--------------------------------------------------------------------------
 }

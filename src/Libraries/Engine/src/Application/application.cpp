@@ -60,14 +60,10 @@ namespace Kmpleete
         _systemMetricsManager = CreateUPtr<SystemMetricsManager>();
         KMP_ASSERT(_systemMetricsManager);
 
-        _localizationManager = CreateUPtr<LocalizationManager>();
+        const auto messagesPath = Filesystem::ToGenericU8String(applicationPath / LocalesDirectory);
+        KMP_ASSERT(messagesPath != LocalesDirectory);
+        _localizationManager = CreateUPtr<LocalizationManager>(messagesPath);
         KMP_ASSERT(_localizationManager);
-
-        const auto defaultTranslationsPath = Filesystem::ToGenericU8String(applicationPath / LocalesDirectory);
-        KMP_ASSERT(defaultTranslationsPath != LocalesDirectory);
-        _localizationManager->AddMessagesPath(defaultTranslationsPath);
-        KMP_MB_UNUSED const auto engineDomainAdded = _localizationManager->AddMessagesDomain(KMP_TR_DOMAIN_ENGINE);
-        KMP_ASSERT(engineDomainAdded);
 
         KMP_MB_UNUSED const auto unicodeMapsInitialized = Localization::UnicodeMap::Initialize();
         KMP_ASSERT(unicodeMapsInitialized);

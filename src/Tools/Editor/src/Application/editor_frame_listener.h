@@ -8,6 +8,7 @@
 #include "Kmpleete/Core/settings_document.h"
 #include "Kmpleete/Time/timer.h"
 #include "Kmpleete/Event/window_events.h"
+#include "Kmpleete/Event/application_events.h"
 #include "Kmpleete/Event/event_handler_guard.h"
 #include "Kmpleete/ImGui/implementation.h"
 #include "Kmpleete/Profile/profiler_fwd.h"
@@ -53,7 +54,7 @@ namespace Kmpleete
         void LoadSettings(SettingsDocument& settings);
 
     private:
-        void _Initialize(LocalizationManager& localizationManager, SystemMetricsManager& systemMetricsManager, Input::InputManager& inputManager);
+        void _Initialize(Input::InputManager& inputManager);
         void _InitializeGraphics();
         void _InitializeImGui();
         void _Finalize();
@@ -72,15 +73,18 @@ namespace Kmpleete
         KMP_NODISCARD bool _OnWindowCloseEvent(Events::WindowCloseEvent& event);
         KMP_NODISCARD bool _OnWindowContentScaleEvent(Events::WindowContentScaleEvent& event);
         KMP_NODISCARD bool _OnWindowScreenModeEvent(Events::WindowScreenModeEvent& event);
+        bool _OnLocaleChangeEvent(Events::LocaleChangeEvent& event);
 
         void _AddImGuiFonts();
         void _RenderImGui();
+        void _FillDictionary();
 
     private:
         SystemMetricsManager& _systemMetricsManager;
         Window& _mainWindow;
         Graphics::GraphicsBackend& _graphicsBackend;
         Assets::AssetsManager& _assetsManager;
+        LocalizationManager& _localizationManager;
         UPtr<ImGuiUtils::ImGuiImplementation> _imguiImpl;
         UPtr<EditorUICompositor> _uiCompositor;
         Time::Timer _metricsTimer;
@@ -88,6 +92,7 @@ namespace Kmpleete
         Events::EventHandlerGuard<Events::WindowCloseEvent> _windowCloseHandler;
         Events::EventHandlerGuard<Events::WindowContentScaleEvent> _windowContentScaleHandler;
         Events::EventHandlerGuard<Events::WindowScreenModeEvent> _windowScreenModeHandler;
+        Events::EventHandlerGuard<Events::LocaleChangeEvent> _localeChangeHandler;
     };
     //--------------------------------------------------------------------------
 }

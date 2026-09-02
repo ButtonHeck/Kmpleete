@@ -237,10 +237,9 @@ namespace Kmpleete
         , _imguiImpl(nullptr)
         , _verticesCount(0)
         , _windowContentScaleHandler(_eventDispatcher, KMP_BIND(TextRenderingFrameListener::_OnWindowContentScaleEvent))
+        , _localeChangeHandler(_eventDispatcher, KMP_BIND(TextRenderingFrameListener::_OnLocaleChangeEvent))
     {
         _FillDictionary();
-        _localizationManager.AddLocaleChangedCallback(KMP_BIND(TextRenderingFrameListener::_FillDictionary));
-
         _Initialize();
     }
     //--------------------------------------------------------------------------
@@ -471,6 +470,13 @@ namespace Kmpleete
         _InitializeImGui();
 
         return true;
+    }
+    //--------------------------------------------------------------------------
+
+    bool TextRenderingFrameListener::_OnLocaleChangeEvent(Events::LocaleChangeEvent&)
+    {
+        _FillDictionary();
+        return false;
     }
     //--------------------------------------------------------------------------
 

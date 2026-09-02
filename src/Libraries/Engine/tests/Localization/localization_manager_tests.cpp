@@ -181,33 +181,6 @@ TEST_CASE("Localization manager set/get locale", "[localization][locale]")
 //--------------------------------------------------------------------------
 
 
-TEST_CASE("Localization manager callbacks", "[localization][locale]")
-{
-    int testValue = 0;
-    LocalizationManager localizationManager;
-
-    REQUIRE_NOTHROW(localizationManager.AddLocaleChangedCallback([&](){ testValue++; }));
-
-    // ru_RU.UTF-8
-    REQUIRE_NOTHROW(localizationManager.SetLocale(LocaleRuUTF8Keyword));
-    REQUIRE(testValue == 1);
-
-    int anotherTestValue = 100;
-    REQUIRE_NOTHROW(localizationManager.AddLocaleChangedCallback([&](){ anotherTestValue++; }));
-
-    // ru_RU.UTF-8 again
-    REQUIRE_NOTHROW(localizationManager.SetLocale(LocaleRuUTF8Keyword));
-    REQUIRE(testValue == 1);
-    REQUIRE(anotherTestValue == 100);
-
-    // en_US.UTF-8
-    REQUIRE_NOTHROW(localizationManager.SetLocale(LocaleEnUTF8Keyword));
-    REQUIRE(testValue == 2);
-    REQUIRE(anotherTestValue == 101);
-}
-//--------------------------------------------------------------------------
-
-
 TEST_CASE("Localization manager add/remove domain", "[localization][locale]")
 {
     const auto defaultTranslationsPath = Filesystem::ToGenericU8String(Filesystem::GetCurrentFilepath().append(LocalesDirectory));

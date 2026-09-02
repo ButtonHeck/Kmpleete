@@ -6,6 +6,8 @@
 #include "Kmpleete/Base/exception.h"
 #include "Kmpleete/Log/log.h"
 #include "Kmpleete/Profile/profiler.h"
+#include "Kmpleete/Event/application_events.h"
+#include "Kmpleete/Event/event_queue.h"
 
 #include <iostream>
 
@@ -16,48 +18,35 @@ namespace Kmpleete
     static constexpr auto SettingsLocaleStr = "Locale";
 
 
-    LocalizationManager::LocalizationManager() noexcept
+    LocalizationManager::LocalizationManager(const String& initialMessagesPath /*= ""*/) noexcept
         : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()
           _localeGenerator()
         , _library(CreateUPtr<LocalizationLibrary>())
         , _currentLocale(std::locale().name())
     {
-        SetLocale(LocaleEnUTF8Keyword);
+        if (not initialMessagesPath.empty())
+        {
+            AddMessagesPath(initialMessagesPath);
+
+            KMP_MB_UNUSED const auto engineDomainAdded = AddMessagesDomain(KMP_TR_DOMAIN_ENGINE);
+            KMP_ASSERT(engineDomainAdded);
+        }
+
+        _SetLocale(LocaleEnUTF8Keyword);
 
         KMP_PROFILE_CONSTRUCTOR_END()
     }
     //--------------------------------------------------------------------------
 
-    bool LocalizationManager::SetLocale(const LocaleStr& localeString) KMP_PROFILING(ProfileLevelImportant)
+    bool LocalizationManager::SetLocale(const LocaleStr& localeString) KMP_PROFILING(ProfileLevelImportantVerbose)
     {
-        KMP_ASSERT(_library);
-
-        if (_currentLocale == localeString)
+        const auto localeSet = _SetLocale(localeString);
+        if (localeSet)
         {
-            KMP_LOG_INFO("locale '{}' already set", localeString);
-            return false;
+            Events::QueueEvent(CreateUPtr<Events::LocaleChangeEvent>(_currentLocale));
         }
-
-        try
-        {
-            const auto testLocale = localeString.empty() ? std::locale::classic() : std::locale(localeString);
-            _currentLocale = testLocale.name();
-            std::setlocale(LC_ALL, _currentLocale.c_str());
-
-            _library->SetLocale(_currentLocale);
-
-            _ImbueLocale();
-            _FillDictionary();
-            _NotifyLocaleListeners();
-
-            KMP_LOG_INFO("set locale '{}'", _currentLocale);
-            return true;
-        }
-        catch (KMP_MB_UNUSED const Exception& e)
-        {
-            KMP_LOG_ERROR("cannot set locale '{}' - {}", localeString, e.what());
-            return false;
-        }
+        
+        return localeSet;
     }}
     //--------------------------------------------------------------------------
 
@@ -92,12 +81,6 @@ namespace Kmpleete
     }}
     //--------------------------------------------------------------------------
 
-    void LocalizationManager::AddLocaleChangedCallback(const LocaleChangeCallback& callback) KMP_PROFILING(ProfileLevelMinorVerbose)
-    {
-        _localeChangedCallbacks.push_back(callback);
-    }}
-    //--------------------------------------------------------------------------
-
     void LocalizationManager::SaveSettings(SettingsDocument& settings) const KMP_PROFILING(ProfileLevelImportant)
     {
         settings.StartSaveObject(SettingsEntryName);
@@ -110,7 +93,7 @@ namespace Kmpleete
     {
         settings.StartLoadObject(SettingsEntryName);
         const auto localeStr = settings.GetString(SettingsLocaleStr, LocaleEnUTF8Keyword);
-        SetLocale(localeStr);
+        _SetLocale(localeStr);
         settings.EndLoadObject();
     }}
     //--------------------------------------------------------------------------
@@ -284,11 +267,34 @@ namespace Kmpleete
     }}
     //--------------------------------------------------------------------------
 
-    void LocalizationManager::_NotifyLocaleListeners() const KMP_PROFILING(ProfileLevelAlways)
+    bool LocalizationManager::_SetLocale(const LocaleStr& localeString) KMP_PROFILING(ProfileLevelImportant)
     {
-        for (const auto& callback : _localeChangedCallbacks)
+        KMP_ASSERT(_library);
+
+        if (_currentLocale == localeString)
         {
-            callback();
+            KMP_LOG_INFO("locale '{}' already set", localeString);
+            return false;
+        }
+
+        try
+        {
+            const auto testLocale = localeString.empty() ? std::locale::classic() : std::locale(localeString);
+            _currentLocale = testLocale.name();
+            std::setlocale(LC_ALL, _currentLocale.c_str());
+
+            _library->SetLocale(_currentLocale);
+
+            _ImbueLocale();
+            _FillDictionary();
+
+            KMP_LOG_INFO("set locale '{}'", _currentLocale);
+            return true;
+        }
+        catch (KMP_MB_UNUSED const Exception& e)
+        {
+            KMP_LOG_ERROR("cannot set locale '{}' - {}", localeString, e.what());
+            return false;
         }
     }}
     //--------------------------------------------------------------------------

@@ -65,8 +65,6 @@ namespace Kmpleete
         void _SwitchFullscreen();
         void _SwitchAlwaysOnTop();
 
-        void _FillDictionary();
-
     private:
         struct _UIComponentsState
         {

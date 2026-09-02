@@ -18,8 +18,7 @@ namespace Kmpleete
 
     //! Manager for localization of the application, responsible for handling locale settings,
     //! creating locales, adding/removing translations from files (domains). Uses Boost.Locale library as
-    //! the localization backend. Client application should add a callback(s) to this manager in order
-    //! to be notified when locale changes.
+    //! the localization backend. Each time a locale change occur this manager will emit a LocaleChangeEvent.
     //! "Translate[...]" functions names SHOULD MATCH parameters of gettext utility
     //! programs in order to successfully update and compile translations - thus if any renaming occurs, make sure
     //! to rename those parameters as well.
@@ -35,10 +34,7 @@ namespace Kmpleete
         KMP_DISABLE_COPY_MOVE(LocalizationManager)
 
     public:
-        using LocaleChangeCallback = Function<void()>;
-
-    public:
-        LocalizationManager() noexcept;
+        explicit LocalizationManager(const String& initialMessagesPath = "") noexcept;
         ~LocalizationManager() = default;
 
         bool SetLocale(const LocaleStr& localeString);
@@ -48,8 +44,6 @@ namespace Kmpleete
 
         bool AddMessagesDomain(const DomainStr& domain);
         bool RemoveMessagesDomain(const DomainStr& domain);
-
-        void AddLocaleChangedCallback(const LocaleChangeCallback& callback);
 
         void SaveSettings(SettingsDocument& settings) const;
         void LoadSettings(SettingsDocument& settings);
@@ -81,13 +75,12 @@ namespace Kmpleete
     private:
         void _ImbueLocale() const;
         void _FillDictionary();
-        void _NotifyLocaleListeners() const;
+        bool _SetLocale(const LocaleStr& localeString);
 
     private:
         boost::locale::generator _localeGenerator;
         UPtr<LocalizationLibrary> _library;
         LocaleStr _currentLocale;
-        Vector<LocaleChangeCallback> _localeChangedCallbacks;
     };
     //--------------------------------------------------------------------------
 }
