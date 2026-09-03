@@ -132,7 +132,7 @@ namespace Kmpleete
 
     void FrameListenerManager::_DispatchQueuedEventsToFrameListeners() KMP_PROFILING(ProfileLevelImportant)
     {
-        auto eventQueue = Events::EventQueue::Get().GetEvents();
+        auto eventQueue = Events::EventQueue::Get().GetEvents(Events::EventQueue::GetEventsPasskey{});
         for (auto eventIter = eventQueue.begin(); eventIter != eventQueue.end();)
         {
             Events::Event& event = *eventIter->get();

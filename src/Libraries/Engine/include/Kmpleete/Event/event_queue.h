@@ -27,7 +27,21 @@ namespace Kmpleete
             KMP_DISABLE_COPY_MOVE(EventQueue)
 
         public:
+            //! Passkey for GetEvents invocation
+            //! to limit function availability to a FrameListenerManager 
+            //! without "friend"-ing it
+            class GetEventsPasskey
+            {
+                KMP_DISABLE_COPY_MOVE(GetEventsPasskey)
+
+            private:
+                friend class ::Kmpleete::FrameListenerManager;
+                GetEventsPasskey() {}
+            };
+
+        public:
             KMP_NODISCARD static EventQueue& Get();
+            KMP_NODISCARD Vector<UPtr<Event>> GetEvents(GetEventsPasskey);
 
         public:
             void QueueEvent(UPtr<Event>&& event);
@@ -35,10 +49,6 @@ namespace Kmpleete
         private:
             EventQueue() = default;
             ~EventQueue() = default;
-
-            friend class ::Kmpleete::FrameListenerManager;
-
-            KMP_NODISCARD Vector<UPtr<Event>> GetEvents();
 
         private:
             Vector<UPtr<Event>> _events;

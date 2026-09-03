@@ -20,7 +20,7 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-        Vector<UPtr<Event>> EventQueue::GetEvents() KMP_PROFILING(ProfileLevelImportantVerbose)
+        Vector<UPtr<Event>> EventQueue::GetEvents(GetEventsPasskey) KMP_PROFILING(ProfileLevelImportantVerbose)
         {
             Vector<UPtr<Event>> events;
             {
