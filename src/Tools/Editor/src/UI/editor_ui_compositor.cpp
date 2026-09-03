@@ -125,11 +125,11 @@ namespace Kmpleete
 
             if (EngButtonClicked)
             {
-                _localizationManager.SetLocale(LocaleEnUTF8Keyword);
+                _localizationManager.SetLocaleChangeRequest(LocaleEnUTF8Keyword);
             }
             else if (RusButtonClicked)
             {
-                _localizationManager.SetLocale(LocaleRuUTF8Keyword);
+                _localizationManager.SetLocaleChangeRequest(LocaleRuUTF8Keyword);
             }
 
             ImGui::EndPopup();

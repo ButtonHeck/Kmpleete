@@ -14,6 +14,7 @@
 namespace Kmpleete
 {
     class SettingsDocument;
+    class WindowApplication;
 
 
     //! Manager for localization of the application, responsible for handling locale settings,
@@ -34,8 +35,24 @@ namespace Kmpleete
         KMP_DISABLE_COPY_MOVE(LocalizationManager)
 
     public:
+        //! Passkey for ProcessLocaleChangeRequest invocation
+        //! to limit function availability to certain classes 
+        //! without "friend"-ing them
+        class RequestPasskey
+        {
+            KMP_DISABLE_COPY_MOVE(RequestPasskey)
+
+        private:
+            friend class ::Kmpleete::WindowApplication;
+            RequestPasskey() {}
+        };
+
+    public:
         explicit LocalizationManager(const String& initialMessagesPath = "") noexcept;
         ~LocalizationManager() = default;
+
+        void SetLocaleChangeRequest(const LocaleStr& localeString);
+        void ProcessLocaleChangeRequest(RequestPasskey);
 
         bool SetLocale(const LocaleStr& localeString);
         KMP_NODISCARD const LocaleStr& GetLocale() const noexcept;
@@ -73,6 +90,14 @@ namespace Kmpleete
         KMP_NODISCARD TranslationStr TranslationCtx(const DomainStr& domain, const SourceStr& sourceSingular, const SourceStr& sourcePlural, int count, const ContextStr& context, const LocaleStr& localeString);
 
     private:
+        //! Helper struct to keep track on future localization changes requests
+        struct LocaleChangeRequest
+        {
+            bool pending;
+            String newLocale;
+        };
+
+    private:
         void _ImbueLocale() const;
         void _FillDictionary();
         bool _SetLocale(const LocaleStr& localeString);
@@ -81,6 +106,7 @@ namespace Kmpleete
         boost::locale::generator _localeGenerator;
         UPtr<LocalizationLibrary> _library;
         LocaleStr _currentLocale;
+        LocaleChangeRequest _localeChangeRequest;
     };
     //--------------------------------------------------------------------------
 }

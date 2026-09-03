@@ -207,6 +207,8 @@ namespace Kmpleete
             _graphicsBackend->EndFrame();
         }
 
+        _localizationManager->ProcessLocaleChangeRequest(LocalizationManager::RequestPasskey{});
+
         return true;
     }}
     //--------------------------------------------------------------------------
