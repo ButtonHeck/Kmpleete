@@ -3,6 +3,7 @@
 #include "Kmpleete/Graphics/graphics_backend.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_graphics_surface.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_physical_device.h"
+#include "Kmpleete/Graphics/Vulkan/Core/vulkan_logical_device.h"
 #include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler_fwd.h"
 
@@ -18,7 +19,7 @@ namespace Kmpleete
     namespace Graphics
     {
         //! Vulkan API backend class implementation. Responsible for initializing
-        //! top-level Vulkan objects such as instance, physical device, surface,
+        //! top-level Vulkan objects such as instance, physical device, logical device, surface,
         //! tracking current buffer index that is used by dependent objects.
         class KMP_API VulkanGraphicsBackend : public GraphicsBackend
         {
@@ -33,6 +34,8 @@ namespace Kmpleete
             KMP_NODISCARD const GraphicsSurface& GetGraphicsSurface() const noexcept override;
             KMP_NODISCARD const VulkanPhysicalDevice& GetPhysicalDevice() const noexcept override;
             KMP_NODISCARD VulkanPhysicalDevice& GetPhysicalDevice() noexcept override;
+            KMP_NODISCARD const VulkanLogicalDevice& GetLogicalDevice() const noexcept override;
+            KMP_NODISCARD VulkanLogicalDevice& GetLogicalDevice() noexcept override;
 
             KMP_NODISCARD bool StartFrame(float frameTimestep) override;
             void EndFrame() override;
@@ -73,6 +76,7 @@ namespace Kmpleete
             UPtr<VulkanPhysicalDevice> _physicalDevice;
             VkDebugUtilsMessengerEXT _debugMessenger;
             UInt32 _currentBufferIndex;
+            UPtr<VulkanLogicalDevice> _logicalDevice;
         };
         //--------------------------------------------------------------------------
     }

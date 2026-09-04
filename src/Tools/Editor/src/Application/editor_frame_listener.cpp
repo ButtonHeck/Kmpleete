@@ -80,7 +80,7 @@ namespace Kmpleete
     void EditorFrameListener::_InitializeGraphics() KMP_PROFILING(ProfileLevelImportant)
     {
         auto& vulkanPhysicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
-        auto& vulkanDevice = vulkanPhysicalDevice.GetLogicalDevice();
+        auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
         const auto& vulkanContext = vulkanPhysicalDevice.GetVulkanContext();
 
         auto& textureAttachmentManager = vulkanDevice.GetTextureAttachmentManager();
@@ -100,7 +100,7 @@ namespace Kmpleete
         {
             const auto& vulkanBackend = dynamic_cast<Graphics::VulkanGraphicsBackend&>(_graphicsBackend);
             auto& physicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
-            auto& logicalDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(physicalDevice.GetLogicalDevice());
+            auto& logicalDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
             logicalDevice.GetDescriptorSetManager().AllocateAuxDescriptorPool("ImGui_Pool"_sid, 100, {
                 { Graphics::VKBits::VK_DescriptorType_Sampler, 100 },
@@ -241,7 +241,7 @@ namespace Kmpleete
     {
         if (_graphicsBackend.GetType() == Graphics::GraphicsBackendType::Vulkan)
         {
-            auto& vulkanLogicalDevice = dynamic_cast<const Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetPhysicalDevice().GetLogicalDevice());
+            auto& vulkanLogicalDevice = dynamic_cast<const Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
             const auto& vulkanRenderer = vulkanLogicalDevice.GetRenderer();
             auto commandBuffer = vulkanRenderer.GetCurrentCommandBuffer();
             const auto& vulkanTextureAttachmentManager = vulkanLogicalDevice.GetTextureAttachmentManager();

@@ -7,6 +7,7 @@
 #include "Kmpleete/Graphics/graphics_base.h"
 #include "Kmpleete/Graphics/graphics_surface.h"
 #include "Kmpleete/Graphics/physical_device.h"
+#include "Kmpleete/Graphics/logical_device.h"
 #include "Kmpleete/Graphics/graphics_chain_handler.h"
 #include "Kmpleete/Graphics/texture.h"
 #include "Kmpleete/Assets/assets_interface.h"
@@ -48,6 +49,8 @@ namespace Kmpleete
             KMP_NODISCARD virtual const GraphicsSurface& GetGraphicsSurface() const noexcept = 0;
             KMP_NODISCARD virtual const PhysicalDevice& GetPhysicalDevice() const noexcept = 0;
             KMP_NODISCARD virtual PhysicalDevice& GetPhysicalDevice() noexcept = 0;
+            KMP_NODISCARD virtual const LogicalDevice& GetLogicalDevice() const noexcept = 0;
+            KMP_NODISCARD virtual LogicalDevice& GetLogicalDevice() noexcept = 0;
 
             KMP_NODISCARD virtual bool StartFrame(float frameTimestep) = 0;
             virtual void EndFrame() = 0;

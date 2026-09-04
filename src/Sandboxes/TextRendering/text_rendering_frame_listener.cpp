@@ -247,7 +247,7 @@ namespace Kmpleete
     void TextRenderingFrameListener::_Initialize()
     {
         auto& vulkanPhysicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
-        auto& vulkanDevice = vulkanPhysicalDevice.GetLogicalDevice();
+        auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
         InitializeCyrillicLocaleCodes();
         _TestCreateFontAtlas();
@@ -365,7 +365,7 @@ namespace Kmpleete
         {
             const auto& vulkanBackend = dynamic_cast<Graphics::VulkanGraphicsBackend&>(_graphicsBackend);
             auto& physicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
-            auto& logicalDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(physicalDevice.GetLogicalDevice());
+            auto& logicalDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
             logicalDevice.GetDescriptorSetManager().AllocateAuxDescriptorPool("ImGui_Pool"_sid, 100, {
                 { VK_DescriptorType_Sampler, 100 },
@@ -422,7 +422,7 @@ namespace Kmpleete
     void TextRenderingFrameListener::_RenderTexts()
     {
         auto& vulkanGraphicsBackend = dynamic_cast<Graphics::VulkanGraphicsBackend&>(_graphicsBackend);
-        const auto& vulkanDevice = vulkanGraphicsBackend.GetPhysicalDevice().GetLogicalDevice();
+        const auto& vulkanDevice = vulkanGraphicsBackend.GetLogicalDevice();
         const auto& vulkanTextureAttachmentManager = vulkanDevice.GetTextureAttachmentManager();
         const auto& renderer = vulkanDevice.GetRenderer();
         const auto drawArea = VkRect2D{ VkOffset2D{.x = 0, .y = 0 }, vulkanDevice.GetCurrentExtent() };

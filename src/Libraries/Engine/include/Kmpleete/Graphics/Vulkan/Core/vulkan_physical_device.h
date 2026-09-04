@@ -4,7 +4,6 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Graphics/physical_device.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_context.h"
-#include "Kmpleete/Graphics/Vulkan/Core/vulkan_logical_device.h"
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_memory_type_delegate.h"
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_format_delegate.h"
 #include "Kmpleete/Log/log_class_macro.h"
@@ -31,13 +30,10 @@ namespace Kmpleete
             KMP_NODISCARD static const Vector<const char*>& GetEnabledDeviceExtensions();
 
         public:
-            VulkanPhysicalDevice(GraphicsChainHandler& chainHandler, const Window& window, const UInt32& currentBufferIndex, VkInstance instance, VkSurfaceKHR surface);
+            VulkanPhysicalDevice(const Window& window, const UInt32& currentBufferIndex, VkInstance instance, VkSurfaceKHR surface);
             ~VulkanPhysicalDevice();
 
             void RecreateResources() override;
-
-            KMP_NODISCARD const VulkanLogicalDevice& GetLogicalDevice() const noexcept override;
-            KMP_NODISCARD VulkanLogicalDevice& GetLogicalDevice() noexcept override;
 
             KMP_NODISCARD VkPhysicalDevice GetVkPhysicalDevice() const noexcept;
             KMP_NODISCARD const VulkanContext& GetVulkanContext() const noexcept;
@@ -48,12 +44,8 @@ namespace Kmpleete
             void _Initialize();
             void _Finalize();
 
-            KMP_NODISCARD bool _StartFrame(float frameTimestep) override;
-            void _EndFrame() override;
-
             KMP_NODISCARD Vector<VkPhysicalDevice> _GetListOfPhysicalDevices() const;
             void _PickSuitablePhysicalDevice(const Vector<VkPhysicalDevice>& physicalDevices);
-            void _UpdateSurfaceInfo();
             void _QueryGPUInfo() override;
 
         private:
@@ -66,7 +58,6 @@ namespace Kmpleete
             UPtr<VulkanFormatDelegate> _formatDelegate;
             VulkanContext _vulkanContext;
             UPtr<VulkanMemoryTypeDelegate> _memoryTypeDelegate;
-            UPtr<VulkanLogicalDevice> _logicalDevice;
         };
         //--------------------------------------------------------------------------
     }

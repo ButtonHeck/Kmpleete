@@ -28,16 +28,16 @@ namespace Kmpleete
         using namespace VKBits;
 
 
-        VulkanLogicalDevice::VulkanLogicalDevice(GraphicsChainHandler& chainHandler, VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, const VulkanContext& vulkanContext,
-                                                 const VulkanMemoryTypeDelegate& memoryTypeDelegate,const VulkanFormatDelegate& formatDelegate, const Window& window, const UInt32& currentBufferIndex)
+        VulkanLogicalDevice::VulkanLogicalDevice(GraphicsChainHandler& chainHandler, const VulkanPhysicalDevice& physicalDevice,
+                                                 VkSurfaceKHR surface, const Window& window, const UInt32& currentBufferIndex)
             : LogicalDevice(chainHandler)
               KMP_PROFILE_CONSTRUCTOR_START_DERIVED_CLASS()
-            , _vulkanContext(vulkanContext)
-            , _memoryTypeDelegate(memoryTypeDelegate)
-            , _formatDelegate(formatDelegate)
+            , _vulkanContext(physicalDevice.GetVulkanContext())
+            , _memoryTypeDelegate(physicalDevice.GetVulkanMemoryTypeDelegate())
+            , _formatDelegate(physicalDevice.GetVulkanFormatDelegate())
             , _window(window)
             , _currentBufferIndex(currentBufferIndex)
-            , _physicalDevice(physicalDevice)
+            , _physicalDevice(physicalDevice.GetVkPhysicalDevice())
             , _surface(surface)
             , _graphicsParameters(nullptr)
             , _device(nullptr)

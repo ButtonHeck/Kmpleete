@@ -61,7 +61,7 @@ namespace Kmpleete
     void InstancedRenderingFrameListener::_Initialize()
     {
         auto& vulkanPhysicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
-        auto& vulkanDevice = vulkanPhysicalDevice.GetLogicalDevice();
+        auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
         _InitializeBuffers(vulkanDevice);
         _InitializePipeline(vulkanDevice, vulkanPhysicalDevice.GetVulkanContext());
@@ -192,7 +192,7 @@ namespace Kmpleete
     void InstancedRenderingFrameListener::Render()
     {
         auto& vulkanGraphicsBackend = dynamic_cast<Graphics::VulkanGraphicsBackend&>(_graphicsBackend);
-        const auto& vulkanDevice = vulkanGraphicsBackend.GetPhysicalDevice().GetLogicalDevice();
+        const auto& vulkanDevice = vulkanGraphicsBackend.GetLogicalDevice();
         const auto& vulkanBufferManager = vulkanDevice.GetBufferManager();
         const auto& vulkanTextureAttachmentManager = vulkanDevice.GetTextureAttachmentManager();
         const auto& renderer = vulkanDevice.GetRenderer();

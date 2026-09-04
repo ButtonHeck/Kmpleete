@@ -99,7 +99,7 @@ namespace Kmpleete
     void TextureFrameListener::_Initialize()
     {
         auto& vulkanPhysicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
-        auto& vulkanDevice = vulkanPhysicalDevice.GetLogicalDevice();
+        auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
         _InitializeCamera();
         _InitializeBuffers(vulkanDevice);
@@ -353,7 +353,7 @@ namespace Kmpleete
         {
             const auto& vulkanBackend = dynamic_cast<Graphics::VulkanGraphicsBackend&>(_graphicsBackend);
             auto& physicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
-            auto& logicalDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(physicalDevice.GetLogicalDevice());
+            auto& logicalDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
             logicalDevice.GetDescriptorSetManager().AllocateAuxDescriptorPool("ImGui_Pool"_sid, 100, {
                 { VK_DescriptorType_Sampler, 100 },
@@ -416,7 +416,7 @@ namespace Kmpleete
     void TextureFrameListener::_RenderTextureQuad()
     {
         auto& vulkanGraphicsBackend = dynamic_cast<Graphics::VulkanGraphicsBackend&>(_graphicsBackend);
-        const auto& vulkanDevice = vulkanGraphicsBackend.GetPhysicalDevice().GetLogicalDevice();
+        const auto& vulkanDevice = vulkanGraphicsBackend.GetLogicalDevice();
         const auto& vulkanBufferManager = vulkanDevice.GetBufferManager();
         const auto& vulkanTextureAttachmentManager = vulkanDevice.GetTextureAttachmentManager();
         const auto& renderer = vulkanDevice.GetRenderer();
@@ -510,8 +510,7 @@ namespace Kmpleete
 
     void TextureFrameListener::_RenderImGui()
     {
-        auto& vulkanPhysicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
-        auto& vulkanDevice = vulkanPhysicalDevice.GetLogicalDevice();
+        auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
         const auto& vulkanTextureAttachmentManager = vulkanDevice.GetTextureAttachmentManager();
         auto& textureAssetManager = _assetsManager.GetTextureAssetManager();
         const auto& descriptorSetManager = vulkanDevice.GetDescriptorSetManager();

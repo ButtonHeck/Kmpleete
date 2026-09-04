@@ -10,6 +10,7 @@
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_samplers_storage.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_descriptor_set_manager.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_metrics_manager.h"
+#include "Kmpleete/Graphics/Vulkan/Core/vulkan_physical_device.h"
 #include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_buffer_manager.h"
 #include "Kmpleete/Graphics/Vulkan/Texture/vulkan_texture.h"
 #include "Kmpleete/Graphics/Vulkan/Texture/vulkan_texture_attachment_manager.h"
@@ -52,8 +53,8 @@ namespace Kmpleete
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:
-            VulkanLogicalDevice(GraphicsChainHandler& chainHandler, VkPhysicalDevice physicalDevice, VkSurfaceKHR surface, const VulkanContext& vulkanContext,
-                                const VulkanMemoryTypeDelegate& memoryTypeDelegate, const VulkanFormatDelegate& formatDelegate, const Window& window, const UInt32& currentBufferIndex);
+            VulkanLogicalDevice(GraphicsChainHandler& chainHandler, const VulkanPhysicalDevice& physicalDevice,
+                                VkSurfaceKHR surface, const Window& window, const UInt32& currentBufferIndex);
             ~VulkanLogicalDevice();
 
             void RecreateResources() override;

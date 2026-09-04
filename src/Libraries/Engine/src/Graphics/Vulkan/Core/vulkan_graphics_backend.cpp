@@ -81,6 +81,7 @@ namespace Kmpleete
             , _physicalDevice(nullptr)
             , _debugMessenger(VK_NULL_HANDLE)
             , _currentBufferIndex(0)
+            , _logicalDevice(nullptr)
         {
             _Initialize();
 
@@ -118,19 +119,35 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
+        const VulkanLogicalDevice& VulkanGraphicsBackend::GetLogicalDevice() const noexcept
+        {
+            KMP_ASSERT(_logicalDevice);
+
+            return *_logicalDevice.get();
+        }
+        //--------------------------------------------------------------------------
+
+        VulkanLogicalDevice& VulkanGraphicsBackend::GetLogicalDevice() noexcept
+        {
+            KMP_ASSERT(_logicalDevice);
+
+            return *_logicalDevice.get();
+        }
+        //--------------------------------------------------------------------------
+
         bool VulkanGraphicsBackend::StartFrame(float frameTimestep)
         {
-            KMP_ASSERT(_physicalDevice && _chainHandler);
+            KMP_ASSERT(_logicalDevice && _chainHandler);
 
-            return _chainHandler->HandleStartFrame(GraphicsChainHandler::PhysicalDeviceUnitSID, frameTimestep);
+            return _chainHandler->HandleStartFrame(GraphicsChainHandler::LogicalDeviceUnitSID, frameTimestep);
         }
         //--------------------------------------------------------------------------
 
         void VulkanGraphicsBackend::EndFrame()
         {
-            KMP_ASSERT(_physicalDevice && _chainHandler);
+            KMP_ASSERT(_logicalDevice && _chainHandler);
 
-            _chainHandler->HandleEndFrame(GraphicsChainHandler::PhysicalDeviceUnitSID);
+            _chainHandler->HandleEndFrame(GraphicsChainHandler::LogicalDeviceUnitSID);
 
             _currentBufferIndex = (_currentBufferIndex + 1) % NumConcurrentFrames;
         }
@@ -138,34 +155,35 @@ namespace Kmpleete
 
         void VulkanGraphicsBackend::RecreateResources()
         {
-            KMP_ASSERT(_physicalDevice);
+            KMP_ASSERT(_physicalDevice && _logicalDevice);
 
             if (not _window.IsIconified())
             {
                 _physicalDevice->RecreateResources();
+                _logicalDevice->RecreateResources();
             }
         }
         //--------------------------------------------------------------------------
 
         Nullable<Texture*> VulkanGraphicsBackend::CreateTexture(const Image& image, Assets::TextureSubTypeMaskBits subTypeMask)
         {
-            KMP_ASSERT(_physicalDevice);
+            KMP_ASSERT(_logicalDevice);
 
-            return _physicalDevice->GetLogicalDevice().CreateTexture(image, subTypeMask);
+            return _logicalDevice->CreateTexture(image, subTypeMask);
         }
         //--------------------------------------------------------------------------
 
         UInt32 VulkanGraphicsBackend::GetMultisampling() const
         {
-            KMP_ASSERT(_physicalDevice);
+            KMP_ASSERT(_logicalDevice);
 
-            return UInt32(_physicalDevice->GetLogicalDevice().GetMultisampling());
+            return UInt32(_logicalDevice->GetMultisampling());
         }
         //--------------------------------------------------------------------------
 
         void VulkanGraphicsBackend::SetMultisampling(UInt32 samples) KMP_PROFILING(ProfileLevelImportant)
         {
-            KMP_ASSERT(_physicalDevice);
+            KMP_ASSERT(_logicalDevice);
 
             if (not Math::IsPowerOf2(samples))
             {
@@ -178,28 +196,28 @@ namespace Kmpleete
                 return;
             }
 
-            _physicalDevice->GetLogicalDevice().SetMultisampling(VkSampleCountFlagBits(samples));
+            _logicalDevice->SetMultisampling(VkSampleCountFlagBits(samples));
         }}
         //--------------------------------------------------------------------------
 
         bool VulkanGraphicsBackend::IsVSync() const
         {
-            KMP_ASSERT(_physicalDevice);
+            KMP_ASSERT(_logicalDevice);
 
-            return _physicalDevice->GetLogicalDevice().IsVSync();
+            return _logicalDevice->IsVSync();
         }
         //--------------------------------------------------------------------------
 
         void VulkanGraphicsBackend::SetVSync(bool vSync) KMP_PROFILING(ProfileLevelImportant)
         {
-            KMP_ASSERT(_physicalDevice);
+            KMP_ASSERT(_logicalDevice);
 
             if (IsVSync() == vSync)
             {
                 return;
             }
 
-            _physicalDevice->GetLogicalDevice().SetVSync(vSync);
+            _logicalDevice->SetVSync(vSync);
         }}
         //--------------------------------------------------------------------------
 
@@ -281,19 +299,23 @@ namespace Kmpleete
             _surface.reset(new VulkanGraphicsSurface(_window, _instance));
             KMP_ASSERT(_surface);
 
-            _physicalDevice.reset(new VulkanPhysicalDevice(*_chainHandler.get(), _window, _currentBufferIndex, _instance, _surface->GetVkSurface()));
+            _physicalDevice.reset(new VulkanPhysicalDevice(_window, _currentBufferIndex, _instance, _surface->GetVkSurface()));
             KMP_ASSERT(_physicalDevice);
+
+            _logicalDevice.reset(new VulkanLogicalDevice(*_chainHandler.get(), *_physicalDevice.get(), _surface->GetVkSurface(), _window, _currentBufferIndex));
+            KMP_ASSERT(_logicalDevice);
         }
         //--------------------------------------------------------------------------
 
         void VulkanGraphicsBackend::_Finalize()
         {
-            KMP_ASSERT(_instance && _physicalDevice && _surface);
+            KMP_ASSERT(_instance && _physicalDevice && _surface && _logicalDevice);
 
 #if not defined (KMP_CONFIG_TYPE_PRODUCTION)
             VKCommands::DestroyDebugUtilsMessengerEXT(_instance, _debugMessenger, nullptr);
 #endif
 
+            _logicalDevice.reset();
             _physicalDevice.reset();
             _surface.reset();
 

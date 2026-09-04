@@ -50,7 +50,7 @@ namespace Kmpleete
     void PushConstantsFrameListener::_Initialize()
     {
         auto& vulkanPhysicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
-        auto& vulkanDevice = vulkanPhysicalDevice.GetLogicalDevice();
+        auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
         _InitializeBuffers(vulkanDevice);
         _InitializePipeline(vulkanDevice, vulkanPhysicalDevice.GetVulkanContext());
@@ -126,7 +126,7 @@ namespace Kmpleete
     void PushConstantsFrameListener::Render()
     {
         auto& vulkanGraphicsBackend = dynamic_cast<Graphics::VulkanGraphicsBackend&>(_graphicsBackend);
-        const auto& vulkanDevice = vulkanGraphicsBackend.GetPhysicalDevice().GetLogicalDevice();
+        const auto& vulkanDevice = vulkanGraphicsBackend.GetLogicalDevice();
         const auto& vulkanTextureAttachmentManager = vulkanDevice.GetTextureAttachmentManager();
         const auto& renderer = vulkanDevice.GetRenderer();
         const auto drawArea = VkRect2D{ VkOffset2D{.x = 0, .y = 0 }, vulkanDevice.GetCurrentExtent() };

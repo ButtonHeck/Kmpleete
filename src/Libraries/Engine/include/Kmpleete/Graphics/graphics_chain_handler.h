@@ -19,7 +19,6 @@ namespace Kmpleete
             KMP_LOG_CLASSNAME(GraphicsChainHandler)
 
         public:
-            static constexpr auto PhysicalDeviceUnitSID = "PhysicalDevice"_sid;
             static constexpr auto LogicalDeviceUnitSID = "LogicalDevice"_sid;
             static constexpr auto SwapchainUnitSID = "Swapchain"_sid;
             static constexpr auto RendererUnitSID = "Renderer"_sid;

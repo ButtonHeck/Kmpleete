@@ -213,8 +213,8 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        VulkanPhysicalDevice::VulkanPhysicalDevice(GraphicsChainHandler& chainHandler, const Window& window, const UInt32& currentBufferIndex, VkInstance instance, VkSurfaceKHR surface)
-            : PhysicalDevice(chainHandler)
+        VulkanPhysicalDevice::VulkanPhysicalDevice(const Window& window, const UInt32& currentBufferIndex, VkInstance instance, VkSurfaceKHR surface)
+            : PhysicalDevice()
               KMP_PROFILE_CONSTRUCTOR_START_DERIVED_CLASS()
             , _window(window)
             , _currentBufferIndex(currentBufferIndex)
@@ -224,7 +224,6 @@ namespace Kmpleete
             , _formatDelegate(nullptr)
             , _vulkanContext()
             , _memoryTypeDelegate(nullptr)
-            , _logicalDevice(nullptr)
         {
             _Initialize();
 
@@ -240,27 +239,13 @@ namespace Kmpleete
 
         void VulkanPhysicalDevice::RecreateResources() KMP_PROFILING(ProfileLevelMinor)
         {
-            KMP_ASSERT(_logicalDevice);
+            KMP_ASSERT(_physicalDevice && _surface);
 
-            _UpdateSurfaceInfo();
-            _logicalDevice->RecreateResources();
+            auto surfaceAndPresentModeProperties = QuerySurfaceAndPresentModeProperties(_physicalDevice, _surface);
+            _vulkanContext.surfaceCapabilities = surfaceAndPresentModeProperties.surfaceCapabilities;
+            _vulkanContext.surfaceFormats = std::move(surfaceAndPresentModeProperties.surfaceFormats);
+            _vulkanContext.presentModes = std::move(surfaceAndPresentModeProperties.presentModes);
         }}
-        //--------------------------------------------------------------------------
-
-        const VulkanLogicalDevice& VulkanPhysicalDevice::GetLogicalDevice() const noexcept
-        {
-            KMP_ASSERT(_logicalDevice);
-
-            return *_logicalDevice.get();
-        }
-        //--------------------------------------------------------------------------
-
-        VulkanLogicalDevice& VulkanPhysicalDevice::GetLogicalDevice() noexcept
-        {
-            KMP_ASSERT(_logicalDevice);
-
-            return *_logicalDevice.get();
-        }
         //--------------------------------------------------------------------------
 
         VkPhysicalDevice VulkanPhysicalDevice::GetVkPhysicalDevice() const noexcept
@@ -311,36 +296,16 @@ namespace Kmpleete
 
             _memoryTypeDelegate.reset(new VulkanMemoryTypeDelegate(_vulkanContext.memoryProperties));
             KMP_ASSERT(_memoryTypeDelegate);
-
-            _logicalDevice.reset(new VulkanLogicalDevice(_chainHandler, _physicalDevice, _surface, _vulkanContext, *_memoryTypeDelegate.get(), *_formatDelegate.get(), _window, _currentBufferIndex));
-            KMP_ASSERT(_logicalDevice);
         }
         //--------------------------------------------------------------------------
 
         void VulkanPhysicalDevice::_Finalize()
         {
-            KMP_ASSERT(_logicalDevice && _memoryTypeDelegate && _formatDelegate);
+            KMP_ASSERT(_memoryTypeDelegate && _formatDelegate);
 
-            _logicalDevice.reset();
             _memoryTypeDelegate.reset();
             _formatDelegate.reset();
         }
-        //--------------------------------------------------------------------------
-
-        bool VulkanPhysicalDevice::_StartFrame(float frameTimestep) KMP_PROFILING(ProfileLevelImportant)
-        {
-            KMP_ASSERT(_logicalDevice);
-
-            return _chainHandler.HandleStartFrame(GraphicsChainHandler::LogicalDeviceUnitSID, frameTimestep);
-        }}
-        //--------------------------------------------------------------------------
-
-        void VulkanPhysicalDevice::_EndFrame() KMP_PROFILING(ProfileLevelImportant)
-        {
-            KMP_ASSERT(_logicalDevice);
-
-            _chainHandler.HandleEndFrame(GraphicsChainHandler::LogicalDeviceUnitSID);
-        }}
         //--------------------------------------------------------------------------
 
         Vector<VkPhysicalDevice> VulkanPhysicalDevice::_GetListOfPhysicalDevices() const KMP_PROFILING(ProfileLevelImportant)
@@ -397,17 +362,6 @@ namespace Kmpleete
                     );
                 }
             }
-        }}
-        //--------------------------------------------------------------------------
-
-        void VulkanPhysicalDevice::_UpdateSurfaceInfo() KMP_PROFILING(ProfileLevelMinorVerbose)
-        {
-            KMP_ASSERT(_physicalDevice && _surface);
-
-            auto surfaceAndPresentModeProperties = QuerySurfaceAndPresentModeProperties(_physicalDevice, _surface);
-            _vulkanContext.surfaceCapabilities = surfaceAndPresentModeProperties.surfaceCapabilities;
-            _vulkanContext.surfaceFormats = std::move(surfaceAndPresentModeProperties.surfaceFormats);
-            _vulkanContext.presentModes = std::move(surfaceAndPresentModeProperties.presentModes);
         }}
         //--------------------------------------------------------------------------
 
