@@ -48,7 +48,6 @@ namespace Kmpleete
 
             KMP_NODISCARD virtual const GraphicsSurface& GetGraphicsSurface() const noexcept = 0;
             KMP_NODISCARD virtual const PhysicalDevice& GetPhysicalDevice() const noexcept = 0;
-            KMP_NODISCARD virtual PhysicalDevice& GetPhysicalDevice() noexcept = 0;
             KMP_NODISCARD virtual const LogicalDevice& GetLogicalDevice() const noexcept = 0;
             KMP_NODISCARD virtual LogicalDevice& GetLogicalDevice() noexcept = 0;
 

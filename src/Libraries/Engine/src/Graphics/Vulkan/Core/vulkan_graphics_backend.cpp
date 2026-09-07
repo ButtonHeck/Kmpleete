@@ -111,14 +111,6 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        VulkanPhysicalDevice& VulkanGraphicsBackend::GetPhysicalDevice() noexcept
-        {
-            KMP_ASSERT(_physicalDevice);
-
-            return *_physicalDevice.get();
-        }
-        //--------------------------------------------------------------------------
-
         const VulkanLogicalDevice& VulkanGraphicsBackend::GetLogicalDevice() const noexcept
         {
             KMP_ASSERT(_logicalDevice);

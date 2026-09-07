@@ -82,7 +82,7 @@ namespace Kmpleete
 
     void UniformBuffersFrameListener::_Initialize()
     {
-        auto& vulkanPhysicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
+        const auto& vulkanPhysicalDevice = dynamic_cast<const Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
         auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
         _InitializeCamera();
@@ -233,7 +233,7 @@ namespace Kmpleete
 
     void UniformBuffersFrameListener::Render()
     {
-        auto& vulkanGraphicsBackend = dynamic_cast<Graphics::VulkanGraphicsBackend&>(_graphicsBackend);
+        const auto& vulkanGraphicsBackend = dynamic_cast<const Graphics::VulkanGraphicsBackend&>(_graphicsBackend);
         const auto& vulkanDevice = vulkanGraphicsBackend.GetLogicalDevice();
         const auto& vulkanBufferManager = vulkanDevice.GetBufferManager();
         const auto& renderer = vulkanDevice.GetRenderer();

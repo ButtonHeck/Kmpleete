@@ -79,7 +79,7 @@ namespace Kmpleete
 
     void EditorFrameListener::_InitializeGraphics() KMP_PROFILING(ProfileLevelImportant)
     {
-        auto& vulkanPhysicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
+        const auto& vulkanPhysicalDevice = dynamic_cast<const Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
         auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
         const auto& vulkanContext = vulkanPhysicalDevice.GetVulkanContext();
 
@@ -98,8 +98,8 @@ namespace Kmpleete
         ImGuiUtils::Context* context = nullptr;
         if (_graphicsBackend.GetType() == Graphics::GraphicsBackendType::Vulkan)
         {
-            const auto& vulkanBackend = dynamic_cast<Graphics::VulkanGraphicsBackend&>(_graphicsBackend);
-            auto& physicalDevice = dynamic_cast<Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
+            const auto& vulkanBackend = dynamic_cast<const Graphics::VulkanGraphicsBackend&>(_graphicsBackend);
+            const auto& physicalDevice = dynamic_cast<const Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
             auto& logicalDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
             logicalDevice.GetDescriptorSetManager().AllocateAuxDescriptorPool("ImGui_Pool"_sid, 100, {
@@ -241,7 +241,7 @@ namespace Kmpleete
     {
         if (_graphicsBackend.GetType() == Graphics::GraphicsBackendType::Vulkan)
         {
-            auto& vulkanLogicalDevice = dynamic_cast<const Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
+            const auto& vulkanLogicalDevice = dynamic_cast<const Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
             const auto& vulkanRenderer = vulkanLogicalDevice.GetRenderer();
             auto commandBuffer = vulkanRenderer.GetCurrentCommandBuffer();
             const auto& vulkanTextureAttachmentManager = vulkanLogicalDevice.GetTextureAttachmentManager();

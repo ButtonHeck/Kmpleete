@@ -33,7 +33,6 @@ namespace Kmpleete
 
             KMP_NODISCARD const GraphicsSurface& GetGraphicsSurface() const noexcept override;
             KMP_NODISCARD const VulkanPhysicalDevice& GetPhysicalDevice() const noexcept override;
-            KMP_NODISCARD VulkanPhysicalDevice& GetPhysicalDevice() noexcept override;
             KMP_NODISCARD const VulkanLogicalDevice& GetLogicalDevice() const noexcept override;
             KMP_NODISCARD VulkanLogicalDevice& GetLogicalDevice() noexcept override;
 
