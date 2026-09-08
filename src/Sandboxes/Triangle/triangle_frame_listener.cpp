@@ -120,70 +120,49 @@ namespace Kmpleete
         _camera.SetOrthographicParameters(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 10.0f);
         _camera.SetApplyAspectRatioFix(true);
 
-        _inputManager->MapInputToCallback(Input::Code::Key_W, "move_up"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveUp, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_W, "move_up"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveUp, _inputManager->GetActionValue("move_up"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Key_S, "move_down"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveDown, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_S, "move_down"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveDown, _inputManager->GetActionValue("move_down"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Key_A, "move_left"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveLeft, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_A, "move_left"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveLeft, _inputManager->GetActionValue("move_left"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Key_D, "move_right"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveRight, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_D, "move_right"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveRight, _inputManager->GetActionValue("move_right"_sid) == Input::ButtonPressed);
         });
 #else
-        _inputManager->MapInputToCallback(Input::Code::Key_W, "move_forward"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveForward, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_W, "move_forward"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveForward, _inputManager->GetActionValue("move_forward"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Key_S, "move_backward"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveBackward, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_S, "move_backward"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveBackward, _inputManager->GetActionValue("move_backward"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Key_A, "move_left"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveLeft, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_A, "move_left"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveLeft, _inputManager->GetActionValue("move_left"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Key_D, "move_right"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveRight, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_D, "move_right"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveRight, _inputManager->GetActionValue("move_right"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Key_Space, "move_up"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveUp, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_Space, "move_up"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveUp, _inputManager->GetActionValue("move_up"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Key_LeftShift, "move_down"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveDown, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_LeftShift, "move_down"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveDown, _inputManager->GetActionValue("move_down"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Mouse_Move, "rotate"_sid, [this](Input::InputControlValue value) {
-            if (_mainWindow.GetCursorMode() == Window::CursorMode::Default)
+        _inputManager->MapInputToCallback(Input::Code::Mouse_Move, "rotate"_sid, [this]() {
+            if (_mainWindow.GetCursorMode() != Window::CursorMode::Default)
             {
-                return true;
+                const auto rotationValue = _inputManager->GetActionValue<Math::Point2I>("rotate"_sid);
+                _camera.Rotate(Math::Vec3F(-rotationValue.y * _camera.GetRotationSpeed(), rotationValue.x * _camera.GetRotationSpeed(), 0.0f));
             }
-
-            const auto rotationValue = std::get<Math::Point2I>(value);
-            _camera.Rotate(Math::Vec3F(-rotationValue.y * _camera.GetRotationSpeed(), rotationValue.x * _camera.GetRotationSpeed(), 0.0f));
-            return true;
         });
 #endif
 
-        _inputManager->MapInputToCallback({ Input::Code::Mouse_ButtonRight, Input::PressNoModsCondition }, "switch_camera"_sid, [this](Input::InputControlValue) {
-            if (_mainWindow.GetCursorMode() == Window::CursorMode::Default)
-            {
-                _mainWindow.SetCursorMode(Window::CursorMode::Disabled);
-            }
-            else
-            {
-                _mainWindow.SetCursorMode(Window::CursorMode::Default);
-            }
-
-            return true;
+        _inputManager->MapInputToCallback({ Input::Code::Mouse_ButtonRight, Input::PressNoModsCondition }, "switch_camera"_sid, [this]() {
+            const auto isCursorModeDefault = _mainWindow.GetCursorMode() == Window::CursorMode::Default;
+            _mainWindow.SetCursorMode(isCursorModeDefault ? Window::CursorMode::Disabled : Window::CursorMode::Default);
         });
     }
     //--------------------------------------------------------------------------

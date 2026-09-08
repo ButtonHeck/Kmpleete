@@ -66,7 +66,7 @@ namespace Kmpleete
             void ResetMouseMove() noexcept;
             void UpdateTimerActions(float frameTimestep);
 
-            template<typename ValueType> requires (IsAnyOfType<ValueType, int, float, Math::Point2I>)
+            template<typename ValueType = int> requires (IsAnyOfType<ValueType, int, float, Math::Point2I>)
             KMP_NODISCARD ValueType GetActionValue(ActionIdentifier actionId) KMP_PROFILING(ProfileLevelImportantVerbose)
             {
                 if (not _actionToInputCodesMap.contains(actionId))

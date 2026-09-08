@@ -103,21 +103,17 @@ namespace Kmpleete
         _camera.SetOrthographicParameters(-1.0f, 1.0f, -1.0f, 1.0f, 0.1f, 10.0f);
         _camera.SetApplyAspectRatioFix(true);
 
-        _inputManager->MapInputToCallback(Input::Code::Key_W, "move_up"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveUp, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_W, "move_up"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveUp, _inputManager->GetActionValue("move_up"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Key_S, "move_down"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveDown, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_S, "move_down"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveDown, _inputManager->GetActionValue("move_down"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Key_A, "move_left"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveLeft, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_A, "move_left"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveLeft, _inputManager->GetActionValue("move_left"_sid) == Input::ButtonPressed);
         });
-        _inputManager->MapInputToCallback(Input::Code::Key_D, "move_right"_sid, [this](Input::InputControlValue value) {
-            _camera.Move(Graphics::Camera::MoveRight, std::get<int>(value) != 0);
-            return true;
+        _inputManager->MapInputToCallback(Input::Code::Key_D, "move_right"_sid, [this]() {
+            _camera.Move(Graphics::Camera::MoveRight, _inputManager->GetActionValue("move_right"_sid) == Input::ButtonPressed);
         });
     }
     //--------------------------------------------------------------------------

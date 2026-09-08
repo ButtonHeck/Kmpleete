@@ -38,7 +38,7 @@ namespace Kmpleete
         using ActionCallbackTag = StringID;
 
         //! Alias for an action callback function signature
-        using ActionCallback = Function<bool(InputControlValue)>;
+        using ActionCallback = Function<void()>;
 
 
         //! An ActionCallback with its tag number

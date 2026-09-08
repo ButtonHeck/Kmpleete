@@ -80,11 +80,7 @@ namespace Kmpleete
             for (size_t i = 0; i < taggedCallbacks.size(); i++)
             {
                 auto& taggedCallback = taggedCallbacks[i];
-                const auto eventProcessed = taggedCallback.callback(actionEvent.value);
-                if (eventProcessed)
-                {
-                    return;
-                }
+                taggedCallback.callback();
             }
         }
         //--------------------------------------------------------------------------
@@ -376,9 +372,8 @@ namespace Kmpleete
 
             if (_inputCodeToTimedConditionsMap.contains(code))
             {
-                isActivation
-                    ? _inputCodeToTimedConditionsMap[code].Activate()
-                    : _inputCodeToTimedConditionsMap[code].Deactivate();
+                auto& timeCondition = _inputCodeToTimedConditionsMap[code];
+                isActivation ? timeCondition.Activate() : timeCondition.Deactivate();
             }
         }
         //--------------------------------------------------------------------------
@@ -396,9 +391,10 @@ namespace Kmpleete
             {
                 const auto& conditions = _actionToInputCodesMap.at(actionId);
                 std::for_each(conditions.cbegin(), conditions.cend(), [&](const InputCodeWithCondition& codeWithCondition) {
-                    if ((codeWithCondition.condition.value != EmptyValue && value != codeWithCondition.condition.value) ||
-                        (codeWithCondition.condition.modifierMask != Input::Modifier::None && (_modifiersMask & codeWithCondition.condition.modifierMask) != codeWithCondition.condition.modifierMask) ||
-                        (codeWithCondition.condition.timerTriggerMs > 0.0f && _inputCodeToTimedConditionsMap.contains(code) && _inputCodeToTimedConditionsMap.at(code).currentMs < codeWithCondition.condition.timerTriggerMs))
+                    const auto& condition = codeWithCondition.condition;
+                    if ((condition.value != EmptyValue && condition.value != value) ||
+                        (condition.modifierMask != Input::Modifier::None && (_modifiersMask & condition.modifierMask) != condition.modifierMask) ||
+                        (condition.timerTriggerMs > 0.0f && _inputCodeToTimedConditionsMap.contains(code) && _inputCodeToTimedConditionsMap.at(code).currentMs < condition.timerTriggerMs))
                     {
                         return;
                     }
