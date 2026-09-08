@@ -121,10 +121,21 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        void InputManager::ResetMouseMove() noexcept
+        void InputManager::ResetMouseMove() noexcept KMP_PROFILING(ProfileLevelImportantVerbose)
         {
+            const auto& accumulatedMove = _controlStates[Code::Mouse_Move];
+            const auto& accumulatedMoveValue = std::get<Math::Point2I>(accumulatedMove);
+            if (accumulatedMoveValue.x != 0 || accumulatedMoveValue.y != 0)
+            {
+                auto moveEvents = _CreateActionEvents(Input::Code::Mouse_Move, accumulatedMove);
+                Utils::MergeVectors<ActionEvent>(moveEvents, _actionEvents);
+
+                auto positionEvents = _CreateActionEvents(Input::Code::Mouse_Position, _controlStates[Code::Mouse_Position]);
+                Utils::MergeVectors<ActionEvent>(positionEvents, _actionEvents);
+            }
+
             _controlStates[Code::Mouse_Move] = Math::Point2I();
-        }
+        }}
         //--------------------------------------------------------------------------
 
         void InputManager::UpdateTimerActions(float frameTimestep) KMP_PROFILING(ProfileLevelImportantVerbose)
@@ -302,15 +313,12 @@ namespace Kmpleete
             const auto newMousePosition = Math::Point2I(mouseMoveEvent.GetX(), mouseMoveEvent.GetY());
             const auto mouseMove = newMousePosition - _mousePosition;
 
-            auto moveEvents = _CreateActionEvents(Input::Code::Mouse_Move, mouseMove);
-            Utils::MergeVectors<ActionEvent>(moveEvents, _actionEvents);
-
-            auto positionEvents = _CreateActionEvents(Input::Code::Mouse_Position, newMousePosition);
-            Utils::MergeVectors<ActionEvent>(positionEvents, _actionEvents);
+            auto storedMouseMove = std::get<Math::Point2I>(_controlStates[Code::Mouse_Move]);
+            storedMouseMove += mouseMove;
+            _controlStates[Code::Mouse_Move] = storedMouseMove;
 
             _mousePosition = newMousePosition;
             _controlStates[Code::Mouse_Position] = _mousePosition;
-            _controlStates[Code::Mouse_Move] = mouseMove;
         }
         //--------------------------------------------------------------------------
 
