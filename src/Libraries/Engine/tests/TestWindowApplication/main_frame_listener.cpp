@@ -84,31 +84,27 @@ namespace Kmpleete
         _inputManager->MapInputToAction({ Input::Code::Key_S, Input::PressNoModsCondition }, "move_backward"_sid);
         _inputManager->MapInputToAction({ Input::Code::Key_A, Input::PressNoModsCondition }, "move_left"_sid);
         _inputManager->MapInputToAction({ Input::Code::Key_D, Input::PressNoModsCondition }, "move_right"_sid);
-        _inputManager->MapInputToCallback({ Input::Code::Key_LeftControl, Input::PressNoModsCondition }, "crouch"_sid, [this](Input::InputControlValue) {
+        _inputManager->MapInputToCallback({ Input::Code::Key_LeftControl, Input::PressNoModsCondition }, "crouch"_sid, [this]() {
             _emulatorPlayerCrawling = false;
             _emulatorPlayerCrouching = not _emulatorPlayerCrouching;
-            return true;
         });
-        _inputManager->MapInputToCallback({ Input::Code::Key_LeftControl, { Input::ButtonPressedValue, Input::Modifier::None, 1000.0f } }, "crawl"_sid, [this](Input::InputControlValue) {
+        _inputManager->MapInputToCallback({ Input::Code::Key_LeftControl, { Input::ButtonPressedValue, Input::Modifier::None, 1000.0f } }, "crawl"_sid, [this]() {
             _emulatorPlayerCrawling = true;
             _emulatorPlayerCrouching = false;
-            return true;
         });
         _inputManager->MapInputToAction(Input::Code::Mouse_Position, "mouse_tracking"_sid);
         _inputManager->MapInputToAction(Input::Code::Mouse_Move, "mouse_move_tracking"_sid);
-        _inputManager->MapActionToCallback("mouse_tracking"_sid, [this](Input::InputControlValue value) {
-            _emulatorMousePosCb = std::get<Math::Point2I>(value);
-            return true;
+        _inputManager->MapActionToCallback("mouse_tracking"_sid, [this]() {
+            _emulatorMousePosCb = _inputManager->GetActionValue<Math::Point2I>("mouse_tracking"_sid);
         });
-        _inputManager->MapActionToCallback("mouse_move_tracking"_sid, [this](Input::InputControlValue value) {
-            _emulatorMouseMoveCb = std::get<Math::Point2I>(value);
-            return true;
+        _inputManager->MapActionToCallback("mouse_move_tracking"_sid, [this]() {
+            _emulatorMouseMoveCb = _inputManager->GetActionValue<Math::Point2I>("mouse_move_tracking"_sid);
         });
 
-        _actionDefaultTagCallbackDoubleRegistrationCheck = _inputManager->MapActionToCallback("duplicate_default_tag_check"_sid, [](Input::InputControlValue){ return true; });
-        _actionDefaultTagCallbackDoubleRegistrationCheck = _inputManager->MapActionToCallback("duplicate_default_tag_check"_sid, [](Input::InputControlValue){ return true; });
-        _actionNonDefaultTagCallbackDoubleRegistrationCheck = _inputManager->MapActionToCallback("duplicate_tag_check"_sid, Input::TaggedActionCallback{ .tag = "bzz"_sid, .callback = [](Input::InputControlValue) { return true; } });
-        _actionNonDefaultTagCallbackDoubleRegistrationCheck = _inputManager->MapActionToCallback("duplicate_tag_check"_sid, Input::TaggedActionCallback{ .tag = "bzz"_sid, .callback = [](Input::InputControlValue) { return true; } });
+        _actionDefaultTagCallbackDoubleRegistrationCheck = _inputManager->MapActionToCallback("duplicate_default_tag_check"_sid, [](){});
+        _actionDefaultTagCallbackDoubleRegistrationCheck = _inputManager->MapActionToCallback("duplicate_default_tag_check"_sid, [](){});
+        _actionNonDefaultTagCallbackDoubleRegistrationCheck = _inputManager->MapActionToCallback("duplicate_tag_check"_sid, Input::TaggedActionCallback{ .tag = "bzz"_sid, .callback = [](){} });
+        _actionNonDefaultTagCallbackDoubleRegistrationCheck = _inputManager->MapActionToCallback("duplicate_tag_check"_sid, Input::TaggedActionCallback{ .tag = "bzz"_sid, .callback = [](){} });
         _unmapUnregisteredActionCheck = _inputManager->UnmapActionFromCallback("unregistered_action"_sid, "bzz"_sid);
         _inputToActionDoubleRegistrationCheck = _inputManager->MapInputToAction({ Input::Code::Key_W, Input::PressNoModsCondition }, "move_forward"_sid);
         _unmapInvalidInputFromActionCheck |= _inputManager->UnmapInputFromAction(Input::Code::Key_M, "bzz"_sid);

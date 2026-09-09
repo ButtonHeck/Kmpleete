@@ -36,17 +36,14 @@ namespace Kmpleete
         , _systemMetricsManager(systemMetricsManager)
         , _needCheckImguiIniFile(true)
     {
-        inputManager.MapInputToCallback({ Input::Code::Key_Q, { Input::ButtonPressedValue, Input::Modifier::Ctrl } }, "editor_quit"_sid, [&](Input::InputControlValue) {
+        inputManager.MapInputToCallback({ Input::Code::Key_Q, { Input::ButtonPressedValue, Input::Modifier::Ctrl } }, "editor_quit"_sid, [this]() {
             _popups.quit = true;
-            return true;
         });
-        inputManager.MapInputToCallback({ Input::Code::Key_Enter, { Input::ButtonPressedValue, Input::Modifier::Alt } }, "editor_screenmode"_sid, [&](Input::InputControlValue) {
+        inputManager.MapInputToCallback({ Input::Code::Key_Enter, { Input::ButtonPressedValue, Input::Modifier::Alt } }, "editor_screenmode"_sid, [this]() {
             _SwitchFullscreen();
-            return true;
         });
-        inputManager.MapInputToCallback({ Input::Code::Key_T, { Input::ButtonPressedValue, Input::Modifier::Ctrl } }, "editor_always_on_top"_sid, [&](Input::InputControlValue) {
+        inputManager.MapInputToCallback({ Input::Code::Key_T, { Input::ButtonPressedValue, Input::Modifier::Ctrl } }, "editor_always_on_top"_sid, [this]() {
             _SwitchAlwaysOnTop();
-            return true;
         });
 
         KMP_PROFILE_CONSTRUCTOR_END()
