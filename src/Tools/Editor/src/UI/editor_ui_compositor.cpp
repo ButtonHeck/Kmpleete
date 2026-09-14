@@ -35,16 +35,13 @@ namespace Kmpleete
         , _localizationManager(localizationManager)
         , _systemMetricsManager(systemMetricsManager)
         , _needCheckImguiIniFile(true)
+        , _commandQuit(_popups)
+        , _commandSwitchFullscreen(_mainWindow)
+        , _commandSwitchAlwaysOnTop(_mainWindow)
     {
-        inputManager.MapInputToCallback({ Input::Code::Key_Q, { Input::ButtonPressedValue, Input::Modifier::Ctrl } }, "editor_quit"_sid, [this]() {
-            _popups.quit = true;
-        });
-        inputManager.MapInputToCallback({ Input::Code::Key_Enter, { Input::ButtonPressedValue, Input::Modifier::Alt } }, "editor_screenmode"_sid, [this]() {
-            _SwitchFullscreen();
-        });
-        inputManager.MapInputToCallback({ Input::Code::Key_T, { Input::ButtonPressedValue, Input::Modifier::Ctrl } }, "editor_always_on_top"_sid, [this]() {
-            _SwitchAlwaysOnTop();
-        });
+        inputManager.MapInputToCallback({ Input::Code::Key_Q, { Input::ButtonPressedValue, Input::Modifier::Ctrl } }, "editor_quit"_sid, _commandQuit);
+        inputManager.MapInputToCallback({ Input::Code::Key_Enter, { Input::ButtonPressedValue, Input::Modifier::Alt } }, "editor_screenmode"_sid, _commandSwitchFullscreen);
+        inputManager.MapInputToCallback({ Input::Code::Key_T, { Input::ButtonPressedValue, Input::Modifier::Ctrl } }, "editor_always_on_top"_sid, _commandSwitchAlwaysOnTop);
 
         KMP_PROFILE_CONSTRUCTOR_END()
     }
@@ -162,7 +159,7 @@ namespace Kmpleete
     {
         if (ImGui::MenuItem(_localizationManager.Translation(SidTrDomainEditor, "Quit"_sid).c_str(), "Ctrl+Q"))
         {
-            _popups.quit = true;
+            _commandQuit.Execute();
         }
     }}
     //--------------------------------------------------------------------------
@@ -183,7 +180,7 @@ namespace Kmpleete
         auto isAlwaysOnTop = _mainWindow.IsAlwaysOnTop();
         if (ImGui::MenuItem(_localizationManager.Translation(SidTrDomainEditor, "Always on top"_sid).c_str(), "Ctrl+T", &isAlwaysOnTop, isWindowed))
         {
-            _mainWindow.SetAlwaysOnTop(isAlwaysOnTop);
+            _commandSwitchAlwaysOnTop.Execute();
         }
     }}
     //--------------------------------------------------------------------------
@@ -207,18 +204,6 @@ namespace Kmpleete
             _mainWindow.SetShouldClose(true);
             _popups.quit = false;
         }
-    }}
-    //--------------------------------------------------------------------------
-
-    void EditorUICompositor::_SwitchFullscreen() KMP_PROFILING(ProfileLevelImportantVerbose)
-    {
-        _mainWindow.SetScreenMode(_mainWindow.IsWindowedFullscreen() ? Window::ScreenMode::Windowed : Window::ScreenMode::WindowedFullscreen);
-    }}
-    //--------------------------------------------------------------------------
-
-    void EditorUICompositor::_SwitchAlwaysOnTop() KMP_PROFILING(ProfileLevelImportantVerbose)
-    {
-        _mainWindow.SetAlwaysOnTop(not _mainWindow.IsAlwaysOnTop());
     }}
     //--------------------------------------------------------------------------
 
@@ -283,7 +268,7 @@ namespace Kmpleete
 
     bool EditorUICompositor::OnWindowCloseEvent(Events::WindowCloseEvent&) KMP_PROFILING(ProfileLevelMinor)
     {
-        _popups.quit = true;
+        _commandQuit.Execute();
         return true;
     }}
     //--------------------------------------------------------------------------

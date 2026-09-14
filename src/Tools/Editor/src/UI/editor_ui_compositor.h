@@ -5,6 +5,7 @@
 #include "Kmpleete/Window/window.h"
 #include "Kmpleete/Event/window_events.h"
 #include "Kmpleete/ImGui/implementation.h"
+#include "Kmpleete/Core/command.h"
 #include "Kmpleete/Profile/profiler_fwd.h"
 
 
@@ -62,9 +63,6 @@ namespace Kmpleete
         void _ComposePopups();
         void _PopupQuit();
 
-        void _SwitchFullscreen();
-        void _SwitchAlwaysOnTop();
-
     private:
         struct _UIComponentsState
         {
@@ -84,6 +82,53 @@ namespace Kmpleete
         _UIComponentsState _state;
         _UIPopupsState _popups;
         bool _needCheckImguiIniFile;
+
+    private:
+        class CommandQuit : public Command
+        {
+        public:
+            explicit CommandQuit(_UIPopupsState& popups) : _popups(popups) {}
+
+            void Execute() override
+            {
+                _popups.quit = true;
+            }
+
+        private:
+            _UIPopupsState& _popups;
+        };
+
+        class CommandSwitchFullscreen : public Command
+        {
+        public:
+            explicit CommandSwitchFullscreen(Window& window) : _window(window) {}
+
+            void Execute() override
+            {
+                _window.SetScreenMode(_window.IsWindowedFullscreen() ? Window::ScreenMode::Windowed : Window::ScreenMode::WindowedFullscreen);
+            }
+
+        private:
+            Window& _window;
+        };
+
+        class CommandSwitchAlwaysOnTop : public Command
+        {
+        public:
+            explicit CommandSwitchAlwaysOnTop(Window& window) : _window(window) {}
+
+            void Execute() override
+            {
+                _window.SetAlwaysOnTop(not _window.IsAlwaysOnTop());
+            }
+
+        private:
+            Window& _window;
+        };
+        
+        CommandQuit _commandQuit;
+        CommandSwitchFullscreen _commandSwitchFullscreen;
+        CommandSwitchAlwaysOnTop _commandSwitchAlwaysOnTop;
     };
     //--------------------------------------------------------------------------
 }

@@ -17,6 +17,7 @@ AddTargetSourcesGroup(Kmpleete "Core"
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Core/system_metrics_manager.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Core/stacktrace.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Core/exception_handler.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Core/command.h
     ${CMAKE_CURRENT_LIST_DIR}/src/Core/uuid.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Core/program_options.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Core/memory_checker.cpp
@@ -26,6 +27,7 @@ AddTargetSourcesGroup(Kmpleete "Core"
     ${CMAKE_CURRENT_LIST_DIR}/src/Core/system_metrics_manager.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Core/stacktrace.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Core/exception_handler.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/Core/command.cpp
 )
 AddTargetSourcesGroup(Kmpleete "Application"
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Application/application.h
