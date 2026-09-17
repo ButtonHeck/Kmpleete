@@ -3,6 +3,7 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Window/window.h"
+#include "Kmpleete/Window/window_commands.h"
 #include "Kmpleete/Event/window_events.h"
 #include "Kmpleete/ImGui/implementation.h"
 #include "Kmpleete/Core/command.h"
@@ -96,34 +97,6 @@ namespace Kmpleete
 
         private:
             _UIPopupsState& _popups;
-        };
-
-        class CommandSwitchFullscreen : public Command
-        {
-        public:
-            explicit CommandSwitchFullscreen(Window& window) : _window(window) {}
-
-            void Execute() override
-            {
-                _window.SetScreenMode(_window.IsWindowedFullscreen() ? Window::ScreenMode::Windowed : Window::ScreenMode::WindowedFullscreen);
-            }
-
-        private:
-            Window& _window;
-        };
-
-        class CommandSwitchAlwaysOnTop : public Command
-        {
-        public:
-            explicit CommandSwitchAlwaysOnTop(Window& window) : _window(window) {}
-
-            void Execute() override
-            {
-                _window.SetAlwaysOnTop(not _window.IsAlwaysOnTop());
-            }
-
-        private:
-            Window& _window;
         };
         
         CommandQuit _commandQuit;

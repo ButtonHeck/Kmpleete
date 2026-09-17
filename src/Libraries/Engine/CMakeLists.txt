@@ -50,11 +50,13 @@ AddTargetSourcesGroup(Kmpleete "Window"
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Window/window_cursor.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Window/window_cursor_glfw.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Window/window_native_platform_type.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Window/window_commands.h
     ${CMAKE_CURRENT_LIST_DIR}/src/Window/window.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Window/window_backend.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Window/window_backend_glfw.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Window/window_glfw.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Window/window_cursor_glfw.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/Window/window_commands.cpp
 )
 AddTargetSourcesGroup(Kmpleete "Event"
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Event/event.h
