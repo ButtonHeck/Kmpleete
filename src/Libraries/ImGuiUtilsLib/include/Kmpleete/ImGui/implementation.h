@@ -5,7 +5,7 @@
 #include "Kmpleete/Base/string_id.h"
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/ImGui/context.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <imgui.h>
 

@@ -5,7 +5,7 @@
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_memory_type_delegate.h"
 #include "Kmpleete/Graphics/Vulkan/Texture/vulkan_image.h"
 #include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_buffer.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
 

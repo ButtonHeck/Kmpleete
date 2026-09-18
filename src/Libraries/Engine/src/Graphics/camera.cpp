@@ -1,7 +1,6 @@
 #include "Kmpleete/Graphics/camera.h"
 #include "Kmpleete/Math/math.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

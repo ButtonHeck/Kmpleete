@@ -6,7 +6,7 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/optional.h"
 #include "Kmpleete/Core/settings_document.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log_class_macro.h"
 
 

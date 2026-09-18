@@ -5,7 +5,7 @@
 #include "Kmpleete/Base/functional.h"
 #include "Kmpleete/Localization/localization_base.h"
 #include "Kmpleete/Localization/localization_library.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log_class_macro.h"
 
 #include <boost/locale.hpp>

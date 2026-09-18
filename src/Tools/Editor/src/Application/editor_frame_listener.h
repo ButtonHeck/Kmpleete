@@ -11,7 +11,7 @@
 #include "Kmpleete/Event/application_events.h"
 #include "Kmpleete/Event/event_handler_guard.h"
 #include "Kmpleete/ImGui/implementation.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log_class_macro.h"
 
 

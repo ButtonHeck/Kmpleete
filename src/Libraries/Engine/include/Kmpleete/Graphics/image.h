@@ -7,7 +7,7 @@
 #include "Kmpleete/Graphics/graphics_base.h"
 #include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Math/geometry.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

@@ -8,7 +8,7 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Log/log_class_macro.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
 

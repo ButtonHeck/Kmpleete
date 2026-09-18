@@ -15,7 +15,6 @@
 #include "Kmpleete/Window/window.h"
 #include "Kmpleete/Math/math.h"
 #include "Kmpleete/Math/geometry.h"
-#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log.h"
 
 #include <limits>

@@ -4,7 +4,6 @@
 #include "Kmpleete/Graphics/Vulkan/Utils/presets.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
 #include "Kmpleete/Graphics/image.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

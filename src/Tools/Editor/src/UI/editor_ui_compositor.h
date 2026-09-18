@@ -7,7 +7,7 @@
 #include "Kmpleete/Event/window_events.h"
 #include "Kmpleete/ImGui/implementation.h"
 #include "Kmpleete/Core/command.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

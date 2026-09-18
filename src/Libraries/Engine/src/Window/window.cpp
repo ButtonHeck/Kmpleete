@@ -3,7 +3,6 @@
 #include "Kmpleete/Core/settings_document.h"
 #include "Kmpleete/Base/exception.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

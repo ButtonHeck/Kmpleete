@@ -3,7 +3,6 @@
 #include "Kmpleete/ImGui/context_vulkan.h"
 #include "Kmpleete/Utils/string_utils.h"
 #include "Kmpleete/Filesystem/filesystem.h"
-#include "Kmpleete/Profile/profiler.h"
 
 #include <forkawesome-webfont.h>
 

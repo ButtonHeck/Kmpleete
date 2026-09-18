@@ -1,5 +1,4 @@
 #include "Kmpleete/Graphics/perspective_camera.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

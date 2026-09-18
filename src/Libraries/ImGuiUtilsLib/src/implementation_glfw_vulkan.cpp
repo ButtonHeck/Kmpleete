@@ -1,6 +1,5 @@
 #include "Kmpleete/ImGui/implementation_glfw_vulkan.h"
 #include "Kmpleete/Base/named_bool.h"
-#include "Kmpleete/Profile/profiler.h"
 
 #include <GLFW/glfw3.h>
 #include <imgui.h>

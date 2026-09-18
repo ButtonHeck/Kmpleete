@@ -9,7 +9,6 @@
 #include "Kmpleete/Filesystem/filesystem.h"
 #include "Kmpleete/Event/key_events.h"
 #include "Kmpleete/Event/window_events.h"
-#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log.h"
 
 #include <thread>

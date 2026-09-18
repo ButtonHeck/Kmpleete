@@ -4,7 +4,7 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Math/geometry.h"
 #include "Kmpleete/Log/log_class_macro.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

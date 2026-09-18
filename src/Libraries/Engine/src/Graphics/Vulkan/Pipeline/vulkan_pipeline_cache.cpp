@@ -4,7 +4,6 @@
 #include "Kmpleete/Filesystem/filesystem.h"
 #include "Kmpleete/Core/assertion.h"
 #include "Kmpleete/Base/named_bool.h"
-#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log.h"
 
 

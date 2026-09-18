@@ -4,7 +4,6 @@
 #include "Kmpleete/Graphics/Vulkan/Utils/initializers.h"
 #include "Kmpleete/Graphics/graphics_base.h"
 #include "Kmpleete/Core/assertion.h"
-#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log.h"
 
 

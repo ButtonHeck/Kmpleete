@@ -5,7 +5,7 @@
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_physical_device.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_logical_device.h"
 #include "Kmpleete/Log/log_class_macro.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
 

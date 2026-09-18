@@ -1,11 +1,34 @@
 #pragma once
 
-#include "Kmpleete/Profile/profiler_fwd.h"
+//! Helper macro definition to manually turn on/off profiling in the code (static builds only)
+//! for Debug and Release builds
+#define KMP_PROFILE_MANUAL_SET true
 
-#if defined(KMP_PROFILE)
+namespace Kmpleete
+{
+    //! Enumeration of the profiling levels from the most important (0) to the least (4).
+    //! There is no strict rule which level in which function should be used, but the common
+    //! rule in this project is to use ProfileLevelAlways in constructors/destructors and functions
+    //! like Initialize/Finalize, ProfileLevelImportant(Verbose) for somewhat "heavy" and
+    //! important functions, and ProfileLevelMinor(Verbose) for any other functions
+    enum ProfileLevel : unsigned int
+    {
+        ProfileLevelAlways = 0,
+        ProfileLevelImportant = 1,
+        ProfileLevelImportantVerbose = 2,
+        ProfileLevelMinor = 3,
+        ProfileLevelMinorVerbose = 4
+    };
+    //--------------------------------------------------------------------------
+}
+
+
+#if ((not defined KMP_BUILD_STATIC || KMP_PROFILE_MANUAL_SET) && not defined (KMP_CONFIG_TYPE_PRODUCTION)) || defined (KMP_CONFIG_TYPE_RELWITHDEBINFO)
+#define KMP_PROFILE
 
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/type_traits.h"
+#include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/macro.h"
 #include "Kmpleete/Log/log_class_macro.h"
@@ -207,6 +230,17 @@ namespace Kmpleete
 #define KMP_PROFILING(level) { KMP_PROFILE_FUNCTION(level);
 
 
+//! Helper macro for declaring profiler timer for non-copyable objects' constructors, should be added before any other class member
+#define KMP_PROFILE_CONSTRUCTOR_DECLARE() \
+    private:\
+    UPtr<ProfilerTimer> _constructorProfilerTimer;
+
+//! Helper macro for declaring profiler timer for copyable objects' constructors, should be added before any other class member
+#define KMP_PROFILE_CONSTRUCTOR_DECLARE_COPYABLE() \
+    private:\
+    Ptr<ProfilerTimer> _constructorProfilerTimer;
+
+
 //! Shortcut macro for profiling non-copyable objects' constructors including members initializer lists stage
 #define KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS() \
     _constructorProfilerTimer(CreateUPtr<ProfilerTimer>("")) ,
@@ -275,6 +309,8 @@ namespace Kmpleete
 #define KMP_PROFILE_FUNCTION(level)
 #define KMP_PROFILING(level) {
 
+#define KMP_PROFILE_CONSTRUCTOR_DECLARE()
+#define KMP_PROFILE_CONSTRUCTOR_DECLARE_COPYABLE()
 #define KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()
 #define KMP_PROFILE_CONSTRUCTOR_START_DERIVED_CLASS()
 #define KMP_PROFILE_CONSTRUCTOR_END()

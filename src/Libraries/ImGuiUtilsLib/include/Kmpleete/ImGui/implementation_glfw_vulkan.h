@@ -3,7 +3,7 @@
 #include "Kmpleete/ImGui/implementation.h"
 #include "Kmpleete/ImGui/context_vulkan.h"
 #include "Kmpleete/Base/nullability.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
 

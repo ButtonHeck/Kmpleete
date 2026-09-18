@@ -1,7 +1,6 @@
 #include "Kmpleete/Localization/localization_dictionary.h"
 #include "Kmpleete/Core/assertion.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

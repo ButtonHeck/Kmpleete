@@ -17,7 +17,7 @@
 #include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/function_utils.h"
 #include "Kmpleete/Log/log_class_macro.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
 

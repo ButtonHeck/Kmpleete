@@ -4,7 +4,6 @@
 #include "Kmpleete/Graphics/Vulkan/Utils/result_description.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
 #include "Kmpleete/Core/assertion.h"
-#include "Kmpleete/Profile/profiler.h"
 
 #include <cstring>
 

@@ -5,7 +5,7 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Base/types_aliases.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log_class_macro.h"
 
 

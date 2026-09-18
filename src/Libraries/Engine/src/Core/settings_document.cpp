@@ -1,6 +1,5 @@
 #include "Kmpleete/Core/settings_document.h"
 #include "Kmpleete/Core/assertion.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

@@ -1,6 +1,5 @@
 #include "Kmpleete/Assets/texture_asset.h"
 #include "Kmpleete/Core/assertion.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

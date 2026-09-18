@@ -1,5 +1,4 @@
 #include "Kmpleete/Assets/asset.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

@@ -1,7 +1,6 @@
 #include "Kmpleete/Graphics/Vulkan/Texture/vulkan_texture_base.h"
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_image_creator_delegate.h"
 #include "Kmpleete/Core/assertion.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

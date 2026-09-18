@@ -5,7 +5,7 @@
 #include "Kmpleete/Graphics/Vulkan/Texture/vulkan_texture_base.h"
 #include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_buffer.h"
 #include "Kmpleete/Log/log_class_macro.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
 

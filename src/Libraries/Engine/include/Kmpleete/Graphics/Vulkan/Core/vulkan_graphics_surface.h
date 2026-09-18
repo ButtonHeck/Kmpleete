@@ -2,7 +2,7 @@
 
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Graphics/graphics_surface.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
 

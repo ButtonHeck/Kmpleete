@@ -8,7 +8,7 @@
 #include "Kmpleete/Graphics/graphics_base.h"
 #include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_buffer.h"
 #include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_vertex_buffer.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log_class_macro.h"
 
 #include <vulkan/vulkan.h>

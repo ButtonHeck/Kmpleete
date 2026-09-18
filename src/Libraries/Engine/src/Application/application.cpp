@@ -7,7 +7,6 @@
 #include "Kmpleete/Utils/function_utils.h"
 #include "Kmpleete/Filesystem/filesystem.h"
 #include "Kmpleete/Base/exception.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

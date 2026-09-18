@@ -6,7 +6,6 @@
 #include "Kmpleete/Base/named_bool.h"
 #include "Kmpleete/Base/exception.h"
 #include "Kmpleete/Core/assertion.h"
-#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log.h"
 
 

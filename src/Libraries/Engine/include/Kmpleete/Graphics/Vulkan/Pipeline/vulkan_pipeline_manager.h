@@ -10,7 +10,7 @@
 #include "Kmpleete/Graphics/Vulkan/Pipeline/vulkan_pipeline_cache.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_context.h"
 #include "Kmpleete/Log/log_class_macro.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
 

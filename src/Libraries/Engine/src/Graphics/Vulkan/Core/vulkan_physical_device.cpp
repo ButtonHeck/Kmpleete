@@ -7,7 +7,6 @@
 #include "Kmpleete/Core/assertion.h"
 #include "Kmpleete/Window/window.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

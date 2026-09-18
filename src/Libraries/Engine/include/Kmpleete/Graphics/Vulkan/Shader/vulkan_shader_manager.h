@@ -9,7 +9,7 @@
 #include "Kmpleete/Graphics/Vulkan/Shader/vulkan_shader_module.h"
 #include "Kmpleete/Graphics/Vulkan/Shader/vulkan_shader_load_parameters.h"
 #include "Kmpleete/Log/log_class_macro.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
 

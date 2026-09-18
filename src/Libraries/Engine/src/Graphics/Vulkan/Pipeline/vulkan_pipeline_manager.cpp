@@ -4,7 +4,6 @@
 #include "Kmpleete/Graphics/Vulkan/Utils/result_description.h"
 #include "Kmpleete/Core/assertion.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

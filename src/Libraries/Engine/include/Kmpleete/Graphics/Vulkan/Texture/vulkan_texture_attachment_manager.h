@@ -8,7 +8,7 @@
 #include "Kmpleete/Graphics/Vulkan/Texture/vulkan_texture_attachment.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_swapchain.h"
 #include "Kmpleete/Log/log_class_macro.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
 

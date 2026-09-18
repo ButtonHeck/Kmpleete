@@ -9,7 +9,6 @@
 #include "Kmpleete/Base/named_bool.h"
 #include "Kmpleete/Core/assertion.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 
 #include <algorithm>
 

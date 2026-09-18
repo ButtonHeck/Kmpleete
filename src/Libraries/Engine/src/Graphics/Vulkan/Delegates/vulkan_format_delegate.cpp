@@ -1,7 +1,6 @@
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_format_delegate.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
 #include "Kmpleete/Base/exception.h"
-#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log.h"
 
 

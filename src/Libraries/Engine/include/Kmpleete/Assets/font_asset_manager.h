@@ -6,7 +6,7 @@
 #include "Kmpleete/Base/string_id.h"
 #include "Kmpleete/Assets/font_asset.h"
 #include "Kmpleete/Log/log_class_macro.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
 struct FT_LibraryRec_;

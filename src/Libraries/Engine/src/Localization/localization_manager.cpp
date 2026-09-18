@@ -5,7 +5,6 @@
 #include "Kmpleete/Filesystem/filesystem.h"
 #include "Kmpleete/Base/exception.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Event/application_events.h"
 #include "Kmpleete/Event/event_queue.h"
 

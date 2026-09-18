@@ -1,7 +1,6 @@
 #include "Kmpleete/Core/system_metrics_manager.h"
 #include "Kmpleete/Core/assertion.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 
 #if defined (KMP_PLATFORM_WINDOWS)
     #include <Windows.h>

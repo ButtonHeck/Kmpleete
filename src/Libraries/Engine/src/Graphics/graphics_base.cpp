@@ -1,6 +1,5 @@
 #include "Kmpleete/Graphics/graphics_base.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 
 #include <algorithm>
 

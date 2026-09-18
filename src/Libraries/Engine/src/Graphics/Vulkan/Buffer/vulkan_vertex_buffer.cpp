@@ -3,7 +3,6 @@
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_memory_type_delegate.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/initializers.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

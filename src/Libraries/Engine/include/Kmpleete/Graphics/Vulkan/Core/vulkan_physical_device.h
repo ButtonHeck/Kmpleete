@@ -7,7 +7,7 @@
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_memory_type_delegate.h"
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_format_delegate.h"
 #include "Kmpleete/Log/log_class_macro.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
 

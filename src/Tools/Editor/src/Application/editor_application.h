@@ -4,7 +4,7 @@
 
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Application/window_application.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log_class_macro.h"
 
 

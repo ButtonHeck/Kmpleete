@@ -9,7 +9,6 @@
 #include "Kmpleete/Graphics/image.h"
 #include "Kmpleete/Math/geometry.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 
 #define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>

@@ -1,5 +1,4 @@
 #include "Kmpleete/ImGui/context_vulkan.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

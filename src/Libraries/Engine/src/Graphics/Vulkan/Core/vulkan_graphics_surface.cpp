@@ -4,7 +4,6 @@
 #include "Kmpleete/Window/window.h"
 #include "Kmpleete/Core/assertion.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 
 #if defined (KMP_WINDOW_BACKEND_GLFW)
     #define GLFW_INCLUDE_NONE

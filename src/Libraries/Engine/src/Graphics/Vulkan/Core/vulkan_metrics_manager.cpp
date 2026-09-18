@@ -1,7 +1,6 @@
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_metrics_manager.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/initializers.h"
 #include "Kmpleete/Core/assertion.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

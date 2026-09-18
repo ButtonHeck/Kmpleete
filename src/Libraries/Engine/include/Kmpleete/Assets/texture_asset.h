@@ -7,7 +7,7 @@
 #include "Kmpleete/Base/nullability.h"
 #include "Kmpleete/Graphics/texture.h"
 #include "Kmpleete/Assets/asset.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

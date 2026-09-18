@@ -10,7 +10,6 @@
 #include "Kmpleete/Base/exception.h"
 #include "Kmpleete/Version/kmpleete_version.h"
 #include "Kmpleete/Log/log.h"
-#include "Kmpleete/Profile/profiler.h"
 
 #if defined (KMP_WINDOW_BACKEND_GLFW)
     #define GLFW_INCLUDE_NONE

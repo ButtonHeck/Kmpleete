@@ -2,7 +2,7 @@
 
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/ImGui/context.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 
 #include <backends/imgui_impl_vulkan.h>
 

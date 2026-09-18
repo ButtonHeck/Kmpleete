@@ -9,7 +9,7 @@
 #include "Kmpleete/Time/clock.h"
 #include "Kmpleete/Base/nullability.h"
 #include "Kmpleete/Input/input_manager.h"
-#include "Kmpleete/Profile/profiler_fwd.h"
+#include "Kmpleete/Profile/profiler.h"
 #include "Kmpleete/Log/log_class_macro.h"
 
 
