@@ -91,6 +91,9 @@ namespace Kmpleete
             static_cast<ImTextureID>(imguiImpl.GetTexture("_flag_russian"_sid))
         };
 
+        static const auto englishLanguageName = _localizationManager.Translation(KMP_TR_DOMAIN_ENGINE, "English", LocaleEnUTF8Keyword);
+        static const auto russianLanguageName = _localizationManager.Translation(KMP_TR_DOMAIN_ENGINE, "Russian", LocaleRuUTF8Keyword);
+
         int languageIndex = 0;
         if (_localizationManager.GetLocale() == LocaleEnUTF8Keyword)
         {
@@ -111,10 +114,10 @@ namespace Kmpleete
         if (ImGui::BeginPopup(IdPopup_ChangeLanguage))
         {
             const auto EngButtonClicked = ImGui::ImageButton(languageIcons[0], iconSize);
-            ImGuiUtils::SetItemTooltip(_localizationManager.Translation(SidTrDomainEngine, "English"_sid).c_str());
+            ImGuiUtils::SetItemTooltip(englishLanguageName.c_str());
 
             const auto RusButtonClicked = ImGui::ImageButton(languageIcons[1], iconSize);
-            ImGuiUtils::SetItemTooltip(_localizationManager.Translation(SidTrDomainEngine, "Russian"_sid).c_str());
+            ImGuiUtils::SetItemTooltip(russianLanguageName.c_str());
 
             if (EngButtonClicked)
             {
