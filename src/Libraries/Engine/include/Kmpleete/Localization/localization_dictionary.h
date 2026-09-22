@@ -11,9 +11,9 @@
 namespace Kmpleete
 {
     //! Localization storage class, responsible for storing all kind of translations for
-    //! a dedicated domain. Storage structures for translations are implemented as a 
-    //! map (locale identifier as key) of maps ([contexted|plural]source identifier as a key) of 
-    //! actual translations. Although it is not prohibited to use this class as is, dictionary is supposed
+    //! a dedicated domain. Storage structures for translations are implemented as
+    //! maps ([contexted|plural]source identifier as a key) of actual translations.
+    //! Although it is not prohibited to use this class as is, dictionary is supposed
     //! to be used as a delegate for LocalizationLibrary class
     //! @see LocalizationLibrary
     class KMP_API LocalizationDictionary
@@ -23,11 +23,11 @@ namespace Kmpleete
         KMP_DISABLE_COPY_MOVE(LocalizationDictionary)
 
     public:
-        explicit LocalizationDictionary(const DomainStrSID& domain, const LocaleStrSID& localeSid = SidTrInvalidLocale) noexcept;
+        explicit LocalizationDictionary(const DomainStrSID& domain) noexcept;
         ~LocalizationDictionary() = default;
 
         KMP_NODISCARD const DomainStrSID& GetDomain() const noexcept;
-        void SetLocale(const LocaleStrSID& localeSid) noexcept;
+        void Clear() noexcept;
 
         void Add(const SourceStrSID& sourceSid, const TranslationStr& translation);
         void Add(const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, 
@@ -49,18 +49,12 @@ namespace Kmpleete
         using TranslationPluralMap = HashMap<PluralSource, PluralTranslations, PluralSourceHash>;
         using ContextedTranslationPluralMap = HashMap<ContextedPluralSource, PluralTranslations, ContextedPluralSourceHash>;
 
-        using LocalizedTranslationMap = HashMap<LocaleStrSID, TranslationMap>;
-        using LocalizedContextedTranslationMap = HashMap<LocaleStrSID, ContextedTranslationMap>;
-        using LocalizedTranslationPluralMap = HashMap<LocaleStrSID, TranslationPluralMap>;
-        using LocalizedContextedTranslationPluralMap = HashMap<LocaleStrSID, ContextedTranslationPluralMap>;
-
     private:
         const DomainStrSID _domain;
-        LocaleStrSID _currentLocaleSid;
-        LocalizedTranslationMap _translationMap;
-        LocalizedContextedTranslationMap _translationCtxMap;
-        LocalizedTranslationPluralMap _translationPluralMap;
-        LocalizedContextedTranslationPluralMap _translationCtxPluralMap;
+        TranslationMap _translationMap;
+        ContextedTranslationMap _translationCtxMap;
+        TranslationPluralMap _translationPluralMap;
+        ContextedTranslationPluralMap _translationCtxPluralMap;
     };
     //--------------------------------------------------------------------------
 }

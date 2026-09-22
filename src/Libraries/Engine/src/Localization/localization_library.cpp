@@ -25,7 +25,7 @@ namespace Kmpleete
             {
                 if (dictionary)
                 {
-                    dictionary->SetLocale(localeSid);
+                    dictionary->Clear();
                 }
             }
         }
@@ -46,7 +46,7 @@ namespace Kmpleete
             return false;
         }
 
-        _dictionaryMap.insert(std::make_pair(domainSid, CreateUPtr<LocalizationDictionary>(domainSid, _currentLocaleSid)));
+        _dictionaryMap.insert(std::make_pair(domainSid, CreateUPtr<LocalizationDictionary>(domainSid)));
         return true;
     }}
     //--------------------------------------------------------------------------
