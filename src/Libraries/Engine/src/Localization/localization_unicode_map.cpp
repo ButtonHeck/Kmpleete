@@ -1,5 +1,6 @@
 #include "Kmpleete/Localization/localization_unicode_map.h"
 #include "Kmpleete/Log/log.h"
+#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete
@@ -10,7 +11,7 @@ namespace Kmpleete
         /*static*/ HashMap<LocaleStr, CodepointVector> UnicodeMap::_localeCodepointRanges;
 
 
-        bool UnicodeMap::Initialize()
+        bool UnicodeMap::Initialize() KMP_PROFILING(ProfileLevelAlways)
         {
             if (_initialized)
             {
@@ -33,7 +34,7 @@ namespace Kmpleete
             _initialized = true;
 
             return true;
-        }
+        }}
         //--------------------------------------------------------------------------
 
         const CodepointVector& UnicodeMap::GetCodepointVector(const LocaleStr& locale)

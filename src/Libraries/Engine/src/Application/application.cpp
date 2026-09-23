@@ -64,8 +64,11 @@ namespace Kmpleete
         _localizationManager = CreateUPtr<LocalizationManager>(messagesPath);
         KMP_ASSERT(_localizationManager);
 
-        KMP_MB_UNUSED const auto unicodeMapsInitialized = Localization::UnicodeMap::Initialize();
-        KMP_ASSERT(unicodeMapsInitialized);
+        const auto unicodeMapsInitialized = Localization::UnicodeMap::Initialize();
+        if (not unicodeMapsInitialized)
+        {
+            throw RuntimeError("Failed to initialize Unicode codepoints maps");
+        }
 
         _settingsManager = CreateUPtr<SettingsManager>(parameters.settingsFilepath.empty()
             ? applicationPath / parameters.defaultSettingsFileName
