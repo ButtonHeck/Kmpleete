@@ -3,6 +3,7 @@
 #include "Kmpleete/Application/application_context.h"
 #include "Kmpleete/Localization/localization_manager.h"
 #include "Kmpleete/Localization/localization_base.h"
+#include "Kmpleete/Localization/localization_unicode_map.h"
 #include "Kmpleete/Utils/function_utils.h"
 #include "Kmpleete/Utils/string_utils.h"
 #include "Kmpleete/Core/assertion.h"
@@ -69,59 +70,11 @@ namespace Kmpleete
     using namespace Graphics::VKBits;
 
     Map<wchar_t, Graphics::FontCharacter> cyrillicLocaleCharactersMap;
-    Vector<wchar_t> cyrillicLocaleCodes;
-
-    void InitializeCyrillicLocaleCodes()
-    {
-        static constexpr wchar_t cyrillicStart = 0x0410;
-        static constexpr wchar_t cyrillicEnd = 0x044F;
-        static constexpr wchar_t cyrillicCapitalIo = 0x0401;
-        static constexpr wchar_t cyrillicSmallIo = 0x0451;
-
-        static constexpr wchar_t basicLatinSymbolsStart = 0x0020;
-        static constexpr wchar_t basicLatinSymbolsEnd = 0x0040;
-        static constexpr wchar_t basicLatinCapitalLettersStart = 0x0041;
-        static constexpr wchar_t basicLatinCapitalLettersEnd = 0x005A;
-        static constexpr wchar_t basicLatinSmallLettersStart = 0x0061;
-        static constexpr wchar_t basicLatinSmallLettersEnd = 0x007A;
-        static constexpr wchar_t basicLatinSymbols2Start = 0x005B;
-        static constexpr wchar_t basicLatinSymbols2End = 0x0060;
-        static constexpr wchar_t basicLatinSymbols3Start = 0x007B;
-        static constexpr wchar_t basicLatinSymbols3End = 0x007E;
-
-        for (wchar_t c = cyrillicStart; c <= cyrillicEnd; c++)
-        {
-            cyrillicLocaleCodes.push_back(c);
-        }
-        cyrillicLocaleCodes.push_back(cyrillicCapitalIo);
-        cyrillicLocaleCodes.push_back(cyrillicSmallIo);
-
-        for (wchar_t c = basicLatinSymbolsStart; c <= basicLatinSymbolsEnd; c++)
-        {
-            cyrillicLocaleCodes.push_back(c);
-        }
-        for (wchar_t c = basicLatinCapitalLettersStart; c <= basicLatinCapitalLettersEnd; c++)
-        {
-            cyrillicLocaleCodes.push_back(c);
-        }
-        for (wchar_t c = basicLatinSmallLettersStart; c <= basicLatinSmallLettersEnd; c++)
-        {
-            cyrillicLocaleCodes.push_back(c);
-        }
-        for (wchar_t c = basicLatinSymbols2Start; c <= basicLatinSymbols2End; c++)
-        {
-            cyrillicLocaleCodes.push_back(c);
-        }
-        for (wchar_t c = basicLatinSymbols3Start; c <= basicLatinSymbols3End; c++)
-        {
-            cyrillicLocaleCodes.push_back(c);
-        }
-    }
-    //--------------------------------------------------------------------------
 
     void CalculateAtlasSize(FT_FaceRec_* ftFace, unsigned int& atlasWidth, unsigned int& atlasHeight)
     {
-        for (const auto& c : cyrillicLocaleCodes)
+        const auto& cyrillicCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleRuUTF8Keyword);
+        for (const auto& c : cyrillicCodepoints)
         {
             if ((FT_Load_Char(ftFace, c, FT_LOAD_RENDER) != FT_Err_Ok) || (FT_Render_Glyph(ftFace->glyph, FT_RENDER_MODE_SDF) != FT_Err_Ok))
             {
@@ -139,7 +92,8 @@ namespace Kmpleete
         BinaryBuffer atlasData(atlasWidth * atlasHeight, 0);
         unsigned int offsetX = 0;
 
-        for (const auto& c : cyrillicLocaleCodes)
+        const auto& cyrillicCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleRuUTF8Keyword);
+        for (const auto& c : cyrillicCodepoints)
         {
             if ((FT_Load_Char(ftFace, c, FT_LOAD_RENDER) != FT_Err_Ok) || (FT_Render_Glyph(ftFace->glyph, FT_RENDER_MODE_SDF) != FT_Err_Ok))
             {
@@ -249,7 +203,6 @@ namespace Kmpleete
         const auto& vulkanPhysicalDevice = dynamic_cast<const Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
         auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
-        InitializeCyrillicLocaleCodes();
         _TestCreateFontAtlas();
         _InitializeBuffers(vulkanDevice);
         _InitializeUniformBuffers(vulkanDevice);
