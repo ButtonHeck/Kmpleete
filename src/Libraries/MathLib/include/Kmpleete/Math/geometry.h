@@ -142,5 +142,9 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
         static constexpr Mat4 IdentityMatrix = Mat4(1.0f);
+
+
+        KMP_NODISCARD KMP_API Vec2F ToNDC(float px, float py, const Vec2F& framebufferSize);
+        //--------------------------------------------------------------------------
     }
 }
