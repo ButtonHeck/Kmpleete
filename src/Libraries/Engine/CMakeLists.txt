@@ -93,6 +93,7 @@ AddTargetSourcesGroup(Kmpleete "Graphics"
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/texture.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/font.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/font_character.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/font_atlas.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/camera.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/orthographic_camera.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/perspective_camera.h
@@ -108,6 +109,7 @@ AddTargetSourcesGroup(Kmpleete "Graphics"
     ${CMAKE_CURRENT_LIST_DIR}/src/Graphics/renderer.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Graphics/image.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Graphics/font.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/Graphics/font_atlas.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Graphics/camera.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Graphics/orthographic_camera.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/Graphics/perspective_camera.cpp
