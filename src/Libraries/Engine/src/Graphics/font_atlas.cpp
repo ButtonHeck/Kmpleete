@@ -27,7 +27,7 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        Vector<FontCharacterVertex> FontAtlas::GenerateTextVertices(const WString& text, float x, float y, float scale, const Math::Vec2F& framebufferSize) KMP_PROFILING(ProfileLevelImportant)
+        Vector<FontCharacterVertex> FontAtlas::GenerateTextVertices(const WString& text, float x, float y, float scale, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
         {
             Vector<FontCharacterVertex> vertices;
             vertices.reserve(6 * text.size());
@@ -39,7 +39,7 @@ namespace Kmpleete
                     continue;
                 }
 
-                const auto& fontChar = _fontCharacters[c];
+                const auto& fontChar = _fontCharacters.at(c);
                 float xpos = x + fontChar.bearing.x * scale;
                 float ypos = y + (fontChar.size.y - fontChar.bearing.y) * scale;
                 float w = fontChar.size.x * scale;
@@ -63,6 +63,12 @@ namespace Kmpleete
 
             return vertices;
         }}
+        //--------------------------------------------------------------------------
+
+        const Image& FontAtlas::GetImage() const noexcept
+        {
+            return *_atlasImage.get();
+        }
         //--------------------------------------------------------------------------
 
         void FontAtlas::_CalculateAtlasSize(const CodepointVector& codepoints) KMP_PROFILING(ProfileLevelImportant)

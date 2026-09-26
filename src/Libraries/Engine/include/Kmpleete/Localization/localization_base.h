@@ -27,6 +27,7 @@ namespace Kmpleete
 
     static constexpr auto LocaleEnName = "English";
     static constexpr auto LocaleRuName = "Russian";
+    static constexpr auto SupportedLocalesCount = 2;
 
     static constexpr auto SidTrInvalidLocale = static_cast<StringID>(0);
     static constexpr auto SidTrLocaleEnName = ToStringID(LocaleEnName);

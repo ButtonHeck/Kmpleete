@@ -2,6 +2,10 @@
 
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
+#include "Kmpleete/Base/pointers.h"
+#include "Kmpleete/Base/optional.h"
+#include "Kmpleete/Graphics/font_atlas.h"
+#include "Kmpleete/Localization/localization_base.h"
 #include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
@@ -69,6 +73,7 @@ namespace Kmpleete
             KMP_NODISCARD const BinaryBuffer& GetBuffer() const noexcept;
             KMP_NODISCARD const Parameters& GetParameters() const noexcept;
             KMP_NODISCARD bool HasStyle(Parameters::Style flag) const noexcept;
+            KMP_NODISCARD OptionalRef<const FontAtlas> GetAtlas(const LocaleStrSID& localeSid) const noexcept;
 
             //TODO: remove
             KMP_NODISCARD FT_FaceRec_* GetFtFace() const { return _freetypeFace; }
@@ -76,11 +81,13 @@ namespace Kmpleete
         private:
             void _UpdateParameters() noexcept;
             void _UpdateSizeMetrics() noexcept;
+            void _UpdateAtlases();
 
         private:
             FT_FaceRec_* _freetypeFace;
             BinaryBuffer _fontBuffer;
             Parameters _parameters;
+            HashMap<LocaleStrSID, UPtr<FontAtlas>> _atlases;
         };
         //--------------------------------------------------------------------------
     }

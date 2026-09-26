@@ -27,7 +27,8 @@ namespace Kmpleete
             FontAtlas(FT_FaceRec_* freetypeFace, const CodepointVector& codepoints);
             ~FontAtlas() = default;
 
-            KMP_NODISCARD Vector<FontCharacterVertex> GenerateTextVertices(const WString& text, float x, float y, float scale, const Math::Vec2F& framebufferSize);
+            KMP_NODISCARD Vector<FontCharacterVertex> GenerateTextVertices(const WString& text, float x, float y, float scale, const Math::Vec2F& framebufferSize) const;
+            KMP_NODISCARD const Image& GetImage() const noexcept;
 
         private:
             void _CalculateAtlasSize(const CodepointVector& codepoints);

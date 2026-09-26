@@ -2,6 +2,8 @@
 #include "Kmpleete/Filesystem/filesystem.h"
 #include "Kmpleete/Base/exception.h"
 #include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Localization/localization_base.h"
+#include "Kmpleete/Localization/localization_unicode_map.h"
 #include "Kmpleete/Log/log.h"
 
 #include <ft2build.h>
@@ -98,6 +100,18 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
+        OptionalRef<const FontAtlas> Font::GetAtlas(const LocaleStrSID& localeSid) const noexcept
+        {
+            if (_atlases.contains(localeSid))
+            {
+                return *_atlases.at(localeSid).get();
+            }
+
+            KMP_LOG_ERROR("cannot find atlas for locale SID '{}'", localeSid);
+            return std::nullopt;
+        }
+        //--------------------------------------------------------------------------
+
         void Font::_UpdateParameters() noexcept
         {
             KMP_ASSERT(_freetypeFace);
@@ -123,7 +137,6 @@ namespace Kmpleete
             _parameters.ascender = _freetypeFace->ascender;
             _parameters.descender = _freetypeFace->descender;
             _parameters.maxAdvance = _freetypeFace->max_advance_width;
-
         }
         //--------------------------------------------------------------------------
 
@@ -136,7 +149,32 @@ namespace Kmpleete
             _parameters.sizeMetrics.xScale = _freetypeFace->size->metrics.x_scale >> 16;
             _parameters.sizeMetrics.yScale = _freetypeFace->size->metrics.y_scale >> 16;
             _parameters.sizeMetrics.height = _freetypeFace->size->metrics.height >> 6;
+
+            _UpdateAtlases();
         }
+        //--------------------------------------------------------------------------
+
+        void Font::_UpdateAtlases() KMP_PROFILING(ProfileLevelImportant)
+        {
+            KMP_ASSERT(_freetypeFace);
+
+            _atlases.clear();
+            _atlases.reserve(SupportedLocalesCount);
+
+            const auto& enLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleEnUTF8Keyword);
+            const auto [iterator, hasEmplaced] = _atlases.emplace(SidTrLocaleEnName, CreateUPtr<FontAtlas>(_freetypeFace, enLocaleCodepoints));
+            if (not hasEmplaced)
+            {
+                KMP_LOG_ERROR("failed to create English locale atlas object");
+            }
+
+            const auto& ruLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleRuUTF8Keyword);
+            const auto [iterator, hasEmplaced] = _atlases.emplace(SidTrLocaleRuName, CreateUPtr<FontAtlas>(_freetypeFace, ruLocaleCodepoints));
+            if (not hasEmplaced)
+            {
+                KMP_LOG_ERROR("failed to create Russian locale atlas object");
+            }
+        }}
         //--------------------------------------------------------------------------
     }
 }
