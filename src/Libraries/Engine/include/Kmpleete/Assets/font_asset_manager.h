@@ -14,6 +14,12 @@ struct FT_LibraryRec_;
 
 namespace Kmpleete
 {
+    namespace Graphics
+    {
+        class GraphicsBackend;
+    }
+
+
     namespace Assets
     {
         //! Manager of font assets, responsible for initializing FreeType for font-related routines,
@@ -30,7 +36,7 @@ namespace Kmpleete
         public:
             static constexpr StringID DefaultFontSID = 0;
 
-            FontAssetManager();
+            explicit FontAssetManager(Graphics::GraphicsBackend& graphicsBackend);
             ~FontAssetManager();
 
             bool CreateAsset(StringID fontSid, BinaryBuffer&& fontData, FontSubTypeMaskBits subTypeMask);
@@ -52,6 +58,7 @@ namespace Kmpleete
             KMP_NODISCARD bool _AddFontToStorage(StringID sid, BinaryBuffer&& fontData, FontSubTypeMaskBits subTypeMask);
 
         private:
+            Graphics::GraphicsBackend& _graphicsBackend;
             FT_LibraryRec_* _freetypeLibInstance;
             StringIDHashMap<UPtr<Assets::FontAsset>> _fonts;
         };

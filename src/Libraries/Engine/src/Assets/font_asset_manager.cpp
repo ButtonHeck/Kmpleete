@@ -3,6 +3,7 @@
 #include "Kmpleete/Base/exception.h"
 #include "Kmpleete/Core/assertion.h"
 #include "Kmpleete/Filesystem/filesystem.h"
+#include "Kmpleete/Graphics/graphics_backend.h"
 #include "Kmpleete/Log/log.h"
 
 #include <ft2build.h>
@@ -19,9 +20,10 @@ namespace Kmpleete
 {
     namespace Assets
     {
-        FontAssetManager::FontAssetManager()
+        FontAssetManager::FontAssetManager(Graphics::GraphicsBackend& graphicsBackend)
             : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()
-              _freetypeLibInstance(nullptr)
+              _graphicsBackend(graphicsBackend)
+            , _freetypeLibInstance(nullptr)
         {
             _Initialize();
 

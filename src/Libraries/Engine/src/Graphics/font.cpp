@@ -161,18 +161,21 @@ namespace Kmpleete
             _atlases.clear();
             _atlases.reserve(SupportedLocalesCount);
 
-            const auto& enLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleEnUTF8Keyword);
-            const auto [iterator, hasEmplaced] = _atlases.emplace(SidTrLocaleEnName, CreateUPtr<FontAtlas>(_freetypeFace, enLocaleCodepoints));
-            if (not hasEmplaced)
             {
-                KMP_LOG_ERROR("failed to create English locale atlas object");
+                const auto& enLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleEnUTF8Keyword);
+                const auto [iterator, hasEmplaced] = _atlases.emplace(SidTrLocaleEnName, CreateUPtr<FontAtlas>(_freetypeFace, enLocaleCodepoints));
+                if (not hasEmplaced)
+                {
+                    KMP_LOG_ERROR("failed to create English locale atlas object");
+                }
             }
-
-            const auto& ruLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleRuUTF8Keyword);
-            const auto [iterator, hasEmplaced] = _atlases.emplace(SidTrLocaleRuName, CreateUPtr<FontAtlas>(_freetypeFace, ruLocaleCodepoints));
-            if (not hasEmplaced)
             {
-                KMP_LOG_ERROR("failed to create Russian locale atlas object");
+                const auto& ruLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleRuUTF8Keyword);
+                const auto [iterator, hasEmplaced] = _atlases.emplace(SidTrLocaleRuName, CreateUPtr<FontAtlas>(_freetypeFace, ruLocaleCodepoints));
+                if (not hasEmplaced)
+                {
+                    KMP_LOG_ERROR("failed to create Russian locale atlas object");
+                }
             }
         }}
         //--------------------------------------------------------------------------

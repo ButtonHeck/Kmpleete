@@ -1,20 +1,38 @@
 #include "Kmpleete/Assets/font_asset_manager.h"
 #include "Kmpleete/Graphics/font.h"
+#include "Kmpleete/Graphics/graphics_backend.h"
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Base/string_id.h"
+#include "Kmpleete/Window/window_backend.h"
+#include "Kmpleete/Window/window.h"
 #include "Kmpleete/Utils/string_utils.h"
+#include "Kmpleete/Localization/localization_unicode_map.h"
 
 #include <catch2/catch_test_macros.hpp>
 
 
 using namespace Kmpleete;
 using namespace Kmpleete::Assets;
+using namespace Kmpleete::Graphics;
+
+
+static UPtr<GraphicsBackend> prepareBackend(GraphicsBackendType type)
+{
+    auto windowBackend = Kmpleete::WindowBackend::Create(type);
+    auto& mainWindow = windowBackend->CreateMainWindow();
+
+    return GraphicsBackend::Create(mainWindow);
+}
+//--------------------------------------------------------------------------
 
 
 TEST_CASE("FontAssetManager creation", "[graphics][font_asset_manager][asset][font]")
 {
+    const auto graphicsBackend = prepareBackend(GraphicsBackendType::Vulkan);
+    REQUIRE_NOTHROW(Kmpleete::Localization::UnicodeMap::Initialize());
+
     UPtr<FontAssetManager> fontAssetManager;
-    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager()));
+    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager(*graphicsBackend.get())));
     REQUIRE(fontAssetManager);
 
     const auto fontsCount = fontAssetManager->GetAssetsCount();
@@ -25,8 +43,11 @@ TEST_CASE("FontAssetManager creation", "[graphics][font_asset_manager][asset][fo
 
 TEST_CASE("FontAssetManager default font usage", "[graphics][font_asset_manager][asset][font]")
 {
+    const auto graphicsBackend = prepareBackend(GraphicsBackendType::Vulkan);
+    REQUIRE_NOTHROW(Kmpleete::Localization::UnicodeMap::Initialize());
+
     UPtr<FontAssetManager> fontAssetManager;
-    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager()));
+    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager(*graphicsBackend.get())));
     REQUIRE(fontAssetManager);
 
     bool ok = false;
@@ -60,8 +81,11 @@ TEST_CASE("FontAssetManager default font usage", "[graphics][font_asset_manager]
 
 TEST_CASE("FontAssetManager font functions", "[graphics][font_asset_manager][asset][font]")
 {
+    const auto graphicsBackend = prepareBackend(GraphicsBackendType::Vulkan);
+    REQUIRE_NOTHROW(Kmpleete::Localization::UnicodeMap::Initialize());
+
     UPtr<FontAssetManager> fontAssetManager;
-    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager()));
+    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager(*graphicsBackend.get())));
     REQUIRE(fontAssetManager);
 
     // loading from filepath

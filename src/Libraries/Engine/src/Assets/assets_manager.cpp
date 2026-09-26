@@ -152,7 +152,7 @@ namespace Kmpleete
             _textureAssetManager.reset(new TextureAssetManager(_graphicsBackend));
             KMP_ASSERT(_textureAssetManager);
 
-            _fontAssetManager.reset(new FontAssetManager());
+            _fontAssetManager.reset(new FontAssetManager(_graphicsBackend));
             KMP_ASSERT(_fontAssetManager);
         }
         //--------------------------------------------------------------------------
