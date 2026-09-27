@@ -280,7 +280,7 @@ namespace Kmpleete
         {
             KMP_ASSERT(_freetypeLibInstance);
 
-            const auto [iterator, hasEmplaced] = _fonts.emplace(sid, CreateUPtr<Assets::FontAsset>(sid, *_freetypeLibInstance, std::move(fontData), subTypeMask));
+            const auto [iterator, hasEmplaced] = _fonts.emplace(sid, CreateUPtr<Assets::FontAsset>(_graphicsBackend, sid, *_freetypeLibInstance, std::move(fontData), subTypeMask));
             return hasEmplaced;
         }}
         //--------------------------------------------------------------------------
