@@ -162,16 +162,16 @@ namespace Kmpleete
             _atlases.reserve(SupportedLocalesCount);
 
             {
-                const auto& enLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleEnUTF8Keyword);
-                const auto [iterator, hasEmplaced] = _atlases.emplace(SidTrLocaleEnName, CreateUPtr<FontAtlas>(_freetypeFace, enLocaleCodepoints));
+                const auto& enLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(SidLocaleEnUTF8);
+                const auto [iterator, hasEmplaced] = _atlases.emplace(SidLocaleEnUTF8, CreateUPtr<FontAtlas>(_freetypeFace, enLocaleCodepoints));
                 if (not hasEmplaced)
                 {
                     KMP_LOG_ERROR("failed to create English locale atlas object");
                 }
             }
             {
-                const auto& ruLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleRuUTF8Keyword);
-                const auto [iterator, hasEmplaced] = _atlases.emplace(SidTrLocaleRuName, CreateUPtr<FontAtlas>(_freetypeFace, ruLocaleCodepoints));
+                const auto& ruLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(SidLocaleRuUTF8);
+                const auto [iterator, hasEmplaced] = _atlases.emplace(SidLocaleRuUTF8, CreateUPtr<FontAtlas>(_freetypeFace, ruLocaleCodepoints));
                 if (not hasEmplaced)
                 {
                     KMP_LOG_ERROR("failed to create Russian locale atlas object");

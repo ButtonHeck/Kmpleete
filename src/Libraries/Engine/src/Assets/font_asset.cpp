@@ -80,28 +80,28 @@ namespace Kmpleete
             const auto atlasTextureMask = TextureSubTypeMaskBits(TextureSubTypeMaskBits::RGB | TextureSubTypeMaskBits::NoMipmap);
 
             {
-                const auto& atlasImage = _font.GetAtlas(SidTrLocaleEnName);
+                const auto& atlasImage = _font.GetAtlas(SidLocaleEnUTF8);
                 if (not atlasImage.has_value())
                 {
                     KMP_LOG_ERROR("failed to get English locale atlas image from font object for asset '{}'", _sid);
                 }
 
                 UPtr<Graphics::Texture> atlasTexturePtr(_graphicsBackend.CreateTexture(atlasImage.value().get().GetImage(), atlasTextureMask));
-                const auto [iterator, hasEmplaced] = _atlasesTextures.emplace(SidTrLocaleEnName, std::move(atlasTexturePtr));
+                const auto [iterator, hasEmplaced] = _atlasesTextures.emplace(SidLocaleEnUTF8, std::move(atlasTexturePtr));
                 if (not hasEmplaced)
                 {
                     KMP_LOG_ERROR("failed to create English locale atlas texture from font object for asset '{}'", _sid);
                 }
             }
             {
-                const auto& atlasImage = _font.GetAtlas(SidTrLocaleRuName);
+                const auto& atlasImage = _font.GetAtlas(SidLocaleRuUTF8);
                 if (not atlasImage.has_value())
                 {
                     KMP_LOG_ERROR("failed to get Russian locale atlas image from font object for asset '{}'", _sid);
                 }
 
                 UPtr<Graphics::Texture> atlasTexturePtr(_graphicsBackend.CreateTexture(atlasImage.value().get().GetImage(), atlasTextureMask));
-                const auto [iterator, hasEmplaced] = _atlasesTextures.emplace(SidTrLocaleRuName, std::move(atlasTexturePtr));
+                const auto [iterator, hasEmplaced] = _atlasesTextures.emplace(SidLocaleRuUTF8, std::move(atlasTexturePtr));
                 if (not hasEmplaced)
                 {
                     KMP_LOG_ERROR("failed to create Russian locale atlas texture from font object for asset '{}'", _sid);
