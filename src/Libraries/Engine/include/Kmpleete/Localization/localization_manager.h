@@ -52,10 +52,11 @@ namespace Kmpleete
         ~LocalizationManager() = default;
 
         void SetLocaleChangeRequest(const LocaleStr& localeString);
-        void ProcessLocaleChangeRequest(RequestPasskey);
+        bool ProcessLocaleChangeRequest(RequestPasskey);
 
         bool SetLocale(const LocaleStr& localeString);
         KMP_NODISCARD const LocaleStr& GetLocale() const noexcept;
+        KMP_NODISCARD const LocaleStrSID& GetLocaleSID() const noexcept;
 
         void AddMessagesPath(const String& path);
 
@@ -106,6 +107,7 @@ namespace Kmpleete
         boost::locale::generator _localeGenerator;
         UPtr<LocalizationLibrary> _library;
         LocaleStr _currentLocale;
+        LocaleStrSID _currentLocaleSid;
         LocaleChangeRequest _localeChangeRequest;
     };
     //--------------------------------------------------------------------------

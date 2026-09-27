@@ -22,6 +22,7 @@ namespace Kmpleete
           _localeGenerator()
         , _library(CreateUPtr<LocalizationLibrary>())
         , _currentLocale(std::locale().name())
+        , _currentLocaleSid(ToStringID(_currentLocale))
         , _localeChangeRequest({ false, LocaleEnUTF8Keyword })
     {
         if (not initialMessagesPath.empty())
@@ -45,15 +46,16 @@ namespace Kmpleete
     }}
     //--------------------------------------------------------------------------
 
-    void LocalizationManager::ProcessLocaleChangeRequest(RequestPasskey) KMP_PROFILING(ProfileLevelMinor)
+    bool LocalizationManager::ProcessLocaleChangeRequest(RequestPasskey) KMP_PROFILING(ProfileLevelMinor)
     {
         if (not _localeChangeRequest.pending)
         {
-            return;
+            return false;
         }
 
         _localeChangeRequest.pending = false;
         SetLocale(_localeChangeRequest.newLocale);
+        return true;
     }}
     //--------------------------------------------------------------------------
 
@@ -72,6 +74,12 @@ namespace Kmpleete
     const LocaleStr& LocalizationManager::GetLocale() const noexcept
     {
         return _currentLocale;
+    }
+    //--------------------------------------------------------------------------
+
+    const LocaleStrSID& LocalizationManager::GetLocaleSID() const noexcept
+    {
+        return _currentLocaleSid;
     }
     //--------------------------------------------------------------------------
 
@@ -300,6 +308,7 @@ namespace Kmpleete
         {
             const auto testLocale = localeString.empty() ? std::locale::classic() : std::locale(localeString);
             _currentLocale = testLocale.name();
+            _currentLocaleSid = ToStringID(_currentLocale);
             std::setlocale(LC_ALL, _currentLocale.c_str());
 
             _library->SetLocale(_currentLocale);
