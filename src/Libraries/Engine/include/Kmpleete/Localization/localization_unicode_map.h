@@ -19,7 +19,7 @@ namespace Kmpleete
         public:
             KMP_NODISCARD static bool Initialize();
 
-            KMP_NODISCARD static const CodepointVector& GetCodepointVector(const LocaleStr& locale);
+            KMP_NODISCARD static const CodepointVector& GetCodepointVector(const LocaleStrSID& localeSid);
 
         private:
             KMP_NODISCARD static bool _InitializeEn();
@@ -27,7 +27,7 @@ namespace Kmpleete
             
         private:
             static bool _initialized;
-            static HashMap<LocaleStr, CodepointVector> _localeCodepointRanges;
+            static HashMap<LocaleStrSID, CodepointVector> _localeCodepointRanges;
         };
         //--------------------------------------------------------------------------
     }

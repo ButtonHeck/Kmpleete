@@ -16,6 +16,7 @@ namespace Kmpleete
     static constexpr auto TranslateDeferKeyword = "TranslateDefer";
     static constexpr auto TranslateCtxDeferKeyword = "TranslateCtxDefer";
 
+
 #if defined (KMP_COMPILER_MSVC)
     static constexpr auto LocaleEnUTF8Keyword = "en_US.UTF-8";
     static constexpr auto LocaleRuUTF8Keyword = "ru_RU.UTF-8";
@@ -24,6 +25,11 @@ namespace Kmpleete
     static constexpr auto LocaleEnUTF8Keyword = "en_US.UTF-8"s;
     static constexpr auto LocaleRuUTF8Keyword = "ru_RU.UTF-8"s;
 #endif
+
+    static constexpr auto SidLocaleInvalid = static_cast<StringID>(0);
+    static constexpr auto SidLocaleEnUTF8 = ToStringID(LocaleEnUTF8Keyword);
+    static constexpr auto SidLocaleRuUTF8 = ToStringID(LocaleRuUTF8Keyword);
+
 
     static constexpr auto LocaleEnName = "English";
     static constexpr auto LocaleRuName = "Russian";

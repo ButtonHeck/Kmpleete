@@ -8,7 +8,7 @@ namespace Kmpleete
     namespace Localization
     {
         /*static*/ bool UnicodeMap::_initialized = false;
-        /*static*/ HashMap<LocaleStr, CodepointVector> UnicodeMap::_localeCodepointRanges;
+        /*static*/ HashMap<LocaleStrSID, CodepointVector> UnicodeMap::_localeCodepointRanges;
 
 
         bool UnicodeMap::Initialize() KMP_PROFILING(ProfileLevelAlways)
@@ -37,17 +37,17 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-        const CodepointVector& UnicodeMap::GetCodepointVector(const LocaleStr& locale)
+        const CodepointVector& UnicodeMap::GetCodepointVector(const LocaleStrSID& localeSid)
         {
             static const CodepointVector invalidVector{};
             
-            if (not _localeCodepointRanges.contains(locale))
+            if (not _localeCodepointRanges.contains(localeSid))
             {
-                KMP_LOG_ERROR("cannot find codepoints for locale '{}'", locale);
+                KMP_LOG_ERROR("cannot find codepoints for locale '{}'", localeSid);
                 return invalidVector;
             }
 
-            return _localeCodepointRanges[locale];
+            return _localeCodepointRanges[localeSid];
         }
         //--------------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ namespace Kmpleete
                 localeCodes.push_back(c);
             }
 
-            const auto [iterator, hasEmplaced] = _localeCodepointRanges.emplace(LocaleEnUTF8Keyword, localeCodes);
+            const auto [iterator, hasEmplaced] = _localeCodepointRanges.emplace(SidLocaleEnUTF8, localeCodes);
             return hasEmplaced;
         }
         //--------------------------------------------------------------------------
@@ -132,7 +132,7 @@ namespace Kmpleete
                 localeCodes.push_back(c);
             }
 
-            const auto [iterator, hasEmplaced] = _localeCodepointRanges.emplace(LocaleRuUTF8Keyword, localeCodes);
+            const auto [iterator, hasEmplaced] = _localeCodepointRanges.emplace(SidLocaleRuUTF8, localeCodes);
             return hasEmplaced;
         }
         //--------------------------------------------------------------------------
