@@ -156,7 +156,7 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        Nullable<Texture*> VulkanGraphicsBackend::CreateTexture(const Image& image, Assets::TextureSubTypeMaskBits subTypeMask)
+        Nullable<Texture*> VulkanGraphicsBackend::CreateTexture(const Image& image, Assets::TextureSubTypeMaskBits subTypeMask) const
         {
             KMP_ASSERT(_logicalDevice);
 

@@ -40,7 +40,7 @@ namespace Kmpleete
             void EndFrame() override;
             void RecreateResources() override;
 
-            KMP_NODISCARD Nullable<Texture*> CreateTexture(const Image& image, Assets::TextureSubTypeMaskBits subTypeMask) override;
+            KMP_NODISCARD Nullable<Texture*> CreateTexture(const Image& image, Assets::TextureSubTypeMaskBits subTypeMask) const override;
 
             KMP_NODISCARD UInt32 GetMultisampling() const override;
             void SetMultisampling(UInt32 samples) override;

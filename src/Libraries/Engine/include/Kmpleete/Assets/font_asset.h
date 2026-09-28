@@ -41,13 +41,17 @@ namespace Kmpleete
 
             KMP_NODISCARD const Graphics::Font& GetFont() const noexcept;
             KMP_NODISCARD Graphics::Font& GetFont() noexcept;
-            KMP_NODISCARD OptionalRef<Graphics::Texture> GetAtlasTexture(const LocaleStrSID& localeSid) const noexcept;
+            KMP_NODISCARD OptionalRef<Graphics::Texture> GetAtlasTexture(const LocaleStrSID& localeSid) noexcept;
 
             bool SetPointSize(UInt8 size, UInt32 dpi = 0);
             bool SetPixelSize(UInt8 size);
 
+            void ProcessLocaleChange(const LocaleStrSID& localeSid);
+
         private:
-            void _UpdateAtlasesTextures();
+            void _InitializeAtlasesTexturesStorage();
+            void _UpdateExistingAtlasesTextures();
+            KMP_NODISCARD UPtr<Graphics::Texture> _CreateAtlasTexture(const LocaleStrSID& localeSid) const;
 
         private:
             Graphics::GraphicsBackend& _graphicsBackend;

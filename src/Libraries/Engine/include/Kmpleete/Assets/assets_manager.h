@@ -26,7 +26,7 @@ namespace Kmpleete
             KMP_DISABLE_COPY_MOVE(AssetsManager)
 
         public:
-            AssetsManager(const Filepath& dataPath, Graphics::GraphicsBackend& graphicsBackend, const LocaleStr& currentLocale);
+            AssetsManager(const Filepath& dataPath, Graphics::GraphicsBackend& graphicsBackend, const LocaleStrSID& currentLocaleSid);
             ~AssetsManager();
 
             KMP_NODISCARD const TextureAssetManager& GetTextureAssetManager() const noexcept;
@@ -39,6 +39,8 @@ namespace Kmpleete
 
             KMP_NODISCARD bool LoadAssets(const Vector<StringID>& assetsSids);
             KMP_NODISCARD bool UnloadAssets(const Vector<StringID>& assetsSids);
+
+            void ProcessLocaleChange();
 
         private:
             void _Initialize();
@@ -53,7 +55,7 @@ namespace Kmpleete
 
         private:
             const Filepath& _dataPath;
-            const LocaleStr& _currentLocale;
+            const LocaleStrSID& _currentLocaleSid;
             Graphics::GraphicsBackend& _graphicsBackend;
             UPtr<TextureAssetManager> _textureAssetManager;
             UPtr<FontAssetManager> _fontAssetManager;

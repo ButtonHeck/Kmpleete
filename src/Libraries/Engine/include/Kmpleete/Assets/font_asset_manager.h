@@ -5,6 +5,7 @@
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Base/string_id.h"
 #include "Kmpleete/Assets/font_asset.h"
+#include "Kmpleete/Localization/localization_base.h"
 #include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
@@ -36,7 +37,7 @@ namespace Kmpleete
         public:
             static constexpr StringID DefaultFontSID = 0;
 
-            explicit FontAssetManager(Graphics::GraphicsBackend& graphicsBackend);
+            FontAssetManager(Graphics::GraphicsBackend& graphicsBackend, const LocaleStrSID& currentLocaleSid);
             ~FontAssetManager();
 
             bool CreateAsset(StringID fontSid, BinaryBuffer&& fontData, FontSubTypeMaskBits subTypeMask);
@@ -50,6 +51,8 @@ namespace Kmpleete
 
             KMP_NODISCARD UInt64 GetAssetsCount() const noexcept;
 
+            void ProcessLocaleChange();
+
         private:
             void _Initialize();
             void _Finalize();
@@ -59,6 +62,7 @@ namespace Kmpleete
 
         private:
             Graphics::GraphicsBackend& _graphicsBackend;
+            const LocaleStrSID& _currentLocaleSid;
             FT_LibraryRec_* _freetypeLibInstance;
             StringIDHashMap<UPtr<Assets::FontAsset>> _fonts;
         };

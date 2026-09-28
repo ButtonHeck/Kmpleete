@@ -32,7 +32,7 @@ TEST_CASE("FontAssetManager creation", "[graphics][font_asset_manager][asset][fo
     REQUIRE_NOTHROW(Kmpleete::Localization::UnicodeMap::Initialize());
 
     UPtr<FontAssetManager> fontAssetManager;
-    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager(*graphicsBackend.get())));
+    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager(*graphicsBackend.get(), Kmpleete::SidLocaleEnUTF8)));
     REQUIRE(fontAssetManager);
 
     const auto fontsCount = fontAssetManager->GetAssetsCount();
@@ -47,7 +47,7 @@ TEST_CASE("FontAssetManager default font usage", "[graphics][font_asset_manager]
     REQUIRE_NOTHROW(Kmpleete::Localization::UnicodeMap::Initialize());
 
     UPtr<FontAssetManager> fontAssetManager;
-    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager(*graphicsBackend.get())));
+    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager(*graphicsBackend.get(), Kmpleete::SidLocaleEnUTF8)));
     REQUIRE(fontAssetManager);
 
     bool ok = false;
@@ -85,7 +85,7 @@ TEST_CASE("FontAssetManager font functions", "[graphics][font_asset_manager][ass
     REQUIRE_NOTHROW(Kmpleete::Localization::UnicodeMap::Initialize());
 
     UPtr<FontAssetManager> fontAssetManager;
-    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager(*graphicsBackend.get())));
+    REQUIRE_NOTHROW(fontAssetManager.reset(new FontAssetManager(*graphicsBackend.get(), Kmpleete::SidLocaleEnUTF8)));
     REQUIRE(fontAssetManager);
 
     // loading from filepath

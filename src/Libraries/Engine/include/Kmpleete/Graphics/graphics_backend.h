@@ -55,8 +55,8 @@ namespace Kmpleete
             virtual void EndFrame() = 0;
             virtual void RecreateResources() = 0;
 
-            KMP_NODISCARD virtual Nullable<Texture*> CreateTexture(const Filepath& filepath, Assets::TextureSubTypeMaskBits subTypeMask, bool flipVertically = false);
-            KMP_NODISCARD virtual Nullable<Texture*> CreateTexture(const Image& image, Assets::TextureSubTypeMaskBits subTypeMask) = 0;
+            KMP_NODISCARD virtual Nullable<Texture*> CreateTexture(const Filepath& filepath, Assets::TextureSubTypeMaskBits subTypeMask, bool flipVertically = false) const;
+            KMP_NODISCARD virtual Nullable<Texture*> CreateTexture(const Image& image, Assets::TextureSubTypeMaskBits subTypeMask) const = 0;
 
             KMP_NODISCARD virtual UInt32 GetMultisampling() const = 0;
             virtual void SetMultisampling(UInt32 samples) = 0;

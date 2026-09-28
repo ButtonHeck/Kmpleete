@@ -38,7 +38,7 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        Nullable<Texture*> GraphicsBackend::CreateTexture(const Filepath& filepath, Assets::TextureSubTypeMaskBits subTypeMask, bool flipVertically /*= false*/) KMP_PROFILING(ProfileLevelAlways)
+        Nullable<Texture*> GraphicsBackend::CreateTexture(const Filepath& filepath, Assets::TextureSubTypeMaskBits subTypeMask, bool flipVertically /*= false*/) const KMP_PROFILING(ProfileLevelAlways)
         {
             try
             {

@@ -11,10 +11,10 @@ namespace Kmpleete
 {
     namespace Assets
     {
-        AssetsManager::AssetsManager(const Filepath& dataPath, Graphics::GraphicsBackend& graphicsBackend, const LocaleStr& currentLocale)
+        AssetsManager::AssetsManager(const Filepath& dataPath, Graphics::GraphicsBackend& graphicsBackend, const LocaleStrSID& currentLocaleSid)
             : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()
               _dataPath(dataPath)
-            , _currentLocale(currentLocale)
+            , _currentLocaleSid(currentLocaleSid)
             , _graphicsBackend(graphicsBackend)
             , _textureAssetManager(nullptr)
             , _fontAssetManager(nullptr)
@@ -147,12 +147,20 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
+        void AssetsManager::ProcessLocaleChange() KMP_PROFILING(ProfileLevelImportant)
+        {
+            KMP_ASSERT(_fontAssetManager);
+
+            _fontAssetManager->ProcessLocaleChange();
+        }}
+        //--------------------------------------------------------------------------
+
         void AssetsManager::_Initialize()
         {
             _textureAssetManager.reset(new TextureAssetManager(_graphicsBackend));
             KMP_ASSERT(_textureAssetManager);
 
-            _fontAssetManager.reset(new FontAssetManager(_graphicsBackend));
+            _fontAssetManager.reset(new FontAssetManager(_graphicsBackend, _currentLocaleSid));
             KMP_ASSERT(_fontAssetManager);
         }
         //--------------------------------------------------------------------------

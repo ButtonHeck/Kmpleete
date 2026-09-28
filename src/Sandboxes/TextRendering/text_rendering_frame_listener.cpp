@@ -73,7 +73,7 @@ namespace Kmpleete
 
     void CalculateAtlasSize(FT_FaceRec_* ftFace, unsigned int& atlasWidth, unsigned int& atlasHeight)
     {
-        const auto& cyrillicCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleRuUTF8Keyword);
+        const auto& cyrillicCodepoints = Localization::UnicodeMap::GetCodepointVector(SidLocaleRuUTF8);
         for (const auto& c : cyrillicCodepoints)
         {
             if ((FT_Load_Char(ftFace, c, FT_LOAD_RENDER) != FT_Err_Ok) || (FT_Render_Glyph(ftFace->glyph, FT_RENDER_MODE_SDF) != FT_Err_Ok))
@@ -92,7 +92,7 @@ namespace Kmpleete
         BinaryBuffer atlasData(atlasWidth * atlasHeight, 0);
         unsigned int offsetX = 0;
 
-        const auto& cyrillicCodepoints = Localization::UnicodeMap::GetCodepointVector(LocaleRuUTF8Keyword);
+        const auto& cyrillicCodepoints = Localization::UnicodeMap::GetCodepointVector(SidLocaleRuUTF8);
         for (const auto& c : cyrillicCodepoints)
         {
             if ((FT_Load_Char(ftFace, c, FT_LOAD_RENDER) != FT_Err_Ok) || (FT_Render_Glyph(ftFace->glyph, FT_RENDER_MODE_SDF) != FT_Err_Ok))
