@@ -48,7 +48,7 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        OptionalRef<Graphics::Texture> FontAsset::GetAtlasTexture(const LocaleStrSID& localeSid) noexcept
+        OptionalRef<const Graphics::Texture> FontAsset::GetAtlasTexture(const LocaleStrSID& localeSid) const noexcept
         {
             if (_atlasesTextures.contains(localeSid))
             {

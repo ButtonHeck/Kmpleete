@@ -41,7 +41,7 @@ namespace Kmpleete
 
             KMP_NODISCARD const Graphics::Font& GetFont() const noexcept;
             KMP_NODISCARD Graphics::Font& GetFont() noexcept;
-            KMP_NODISCARD OptionalRef<Graphics::Texture> GetAtlasTexture(const LocaleStrSID& localeSid) noexcept;
+            KMP_NODISCARD OptionalRef<const Graphics::Texture> GetAtlasTexture(const LocaleStrSID& localeSid) const noexcept;
 
             bool SetPointSize(UInt8 size, UInt32 dpi = 0);
             bool SetPixelSize(UInt8 size);
@@ -56,7 +56,7 @@ namespace Kmpleete
         private:
             Graphics::GraphicsBackend& _graphicsBackend;
             Graphics::Font _font;
-            HashMap<LocaleStrSID, UPtr<Graphics::Texture>> _atlasesTextures;
+            mutable HashMap<LocaleStrSID, UPtr<Graphics::Texture>> _atlasesTextures;
         };
         //--------------------------------------------------------------------------
     }

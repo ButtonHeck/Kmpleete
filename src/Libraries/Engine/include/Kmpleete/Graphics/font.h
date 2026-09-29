@@ -75,9 +75,6 @@ namespace Kmpleete
             KMP_NODISCARD bool HasStyle(Parameters::Style flag) const noexcept;
             KMP_NODISCARD OptionalRef<const FontAtlas> GetAtlas(const LocaleStrSID& localeSid) const noexcept;
 
-            //TODO: remove
-            KMP_NODISCARD FT_FaceRec_* GetFtFace() const { return _freetypeFace; }
-
         private:
             void _UpdateParameters() noexcept;
             void _UpdateSizeMetrics() noexcept;
