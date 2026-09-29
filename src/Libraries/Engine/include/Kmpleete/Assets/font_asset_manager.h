@@ -37,7 +37,7 @@ namespace Kmpleete
         public:
             static constexpr StringID DefaultFontSID = 0;
 
-            FontAssetManager(Graphics::GraphicsBackend& graphicsBackend, const LocaleStrSID& currentLocaleSid);
+            explicit FontAssetManager(Graphics::GraphicsBackend& graphicsBackend);
             ~FontAssetManager();
 
             bool CreateAsset(StringID fontSid, BinaryBuffer&& fontData, FontSubTypeMaskBits subTypeMask);
@@ -51,7 +51,7 @@ namespace Kmpleete
 
             KMP_NODISCARD UInt64 GetAssetsCount() const noexcept;
 
-            void ProcessLocaleChange();
+            void ProcessLocaleChange(const LocaleStrSID& localeSid);
 
         private:
             void _Initialize();
@@ -62,7 +62,6 @@ namespace Kmpleete
 
         private:
             Graphics::GraphicsBackend& _graphicsBackend;
-            const LocaleStrSID& _currentLocaleSid;
             FT_LibraryRec_* _freetypeLibInstance;
             StringIDHashMap<UPtr<Assets::FontAsset>> _fonts;
         };

@@ -20,10 +20,9 @@ namespace Kmpleete
 {
     namespace Assets
     {
-        FontAssetManager::FontAssetManager(Graphics::GraphicsBackend& graphicsBackend, const LocaleStrSID& currentLocaleSid)
+        FontAssetManager::FontAssetManager(Graphics::GraphicsBackend& graphicsBackend)
             : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()
               _graphicsBackend(graphicsBackend)
-            , _currentLocaleSid(currentLocaleSid)
             , _freetypeLibInstance(nullptr)
         {
             _Initialize();
@@ -125,11 +124,11 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        void FontAssetManager::ProcessLocaleChange() KMP_PROFILING(ProfileLevelImportantVerbose)
+        void FontAssetManager::ProcessLocaleChange(const LocaleStrSID& localeSid) KMP_PROFILING(ProfileLevelImportantVerbose)
         {
             for (auto& [fontSid, font] : _fonts)
             {
-                font->ProcessLocaleChange(_currentLocaleSid);
+                font->ProcessLocaleChange(localeSid);
             }
         }}
         //--------------------------------------------------------------------------

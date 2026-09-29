@@ -124,7 +124,7 @@ namespace Kmpleete
         _inputManager = CreateUPtr<Input::InputManager>();
         KMP_ASSERT(_inputManager);
 
-        _assetsManager = CreateUPtr<Assets::AssetsManager>(ApplicationContext::GetApplicationDataPath(), *_graphicsBackend.get(), _localizationManager->GetLocaleSID());
+        _assetsManager = CreateUPtr<Assets::AssetsManager>(ApplicationContext::GetApplicationDataPath(), *_graphicsBackend.get());
         KMP_ASSERT(_assetsManager);
 
         _frameListenerManager = CreateUPtr<FrameListenerManager>();
@@ -207,7 +207,7 @@ namespace Kmpleete
 
         if (_localizationManager->ProcessLocaleChangeRequest(LocalizationManager::RequestPasskey{}))
         {
-            _assetsManager->ProcessLocaleChange();
+            _assetsManager->ProcessLocaleChange(_localizationManager->GetLocaleSID());
         }
 
         return true;
