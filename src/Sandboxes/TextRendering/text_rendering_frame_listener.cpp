@@ -35,9 +35,6 @@
 #include "Kmpleete/Assets/font_asset_manager.h"
 #include "Kmpleete/Assets/font_asset.h"
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
-
 
 namespace Kmpleete
 {
@@ -69,117 +66,6 @@ namespace Kmpleete
 
     using namespace Graphics::VKBits;
 
-    Map<wchar_t, Graphics::FontCharacter> cyrillicLocaleCharactersMap;
-
-    void CalculateAtlasSize(FT_FaceRec_* ftFace, unsigned int& atlasWidth, unsigned int& atlasHeight)
-    {
-        const auto& cyrillicCodepoints = Localization::UnicodeMap::GetCodepointVector(SidLocaleRuUTF8);
-        for (const auto& c : cyrillicCodepoints)
-        {
-            if ((FT_Load_Char(ftFace, c, FT_LOAD_RENDER) != FT_Err_Ok) || (FT_Render_Glyph(ftFace->glyph, FT_RENDER_MODE_SDF) != FT_Err_Ok))
-            {
-                continue;
-            }
-
-            atlasWidth += ftFace->glyph->bitmap.width + 1;
-            atlasHeight = std::max(atlasHeight, ftFace->glyph->bitmap.rows);
-        }
-    }
-    //--------------------------------------------------------------------------
-
-    BinaryBuffer CalculateAtlasData(FT_FaceRec_* ftFace, unsigned int atlasWidth, unsigned int atlasHeight)
-    {
-        BinaryBuffer atlasData(atlasWidth * atlasHeight, 0);
-        unsigned int offsetX = 0;
-
-        const auto& cyrillicCodepoints = Localization::UnicodeMap::GetCodepointVector(SidLocaleRuUTF8);
-        for (const auto& c : cyrillicCodepoints)
-        {
-            if ((FT_Load_Char(ftFace, c, FT_LOAD_RENDER) != FT_Err_Ok) || (FT_Render_Glyph(ftFace->glyph, FT_RENDER_MODE_SDF) != FT_Err_Ok))
-            {
-                continue;
-            }
-
-            FT_Bitmap& bitmap = ftFace->glyph->bitmap;
-            for (unsigned int y = 0; y < bitmap.rows; y++)
-            {
-                for (unsigned int x = 0; x < bitmap.width; x++)
-                {
-                    unsigned int atlasIndex = y * atlasWidth + (offsetX + x);
-                    unsigned int glyphIndex = y * bitmap.width + x;
-                    atlasData[atlasIndex] = bitmap.buffer[glyphIndex];
-                }
-            }
-
-            Graphics::FontCharacter character = {
-                .uvMin = { float(offsetX) / float(atlasWidth), 0.0f },
-                .uvMax = { float(offsetX + bitmap.width) / float(atlasWidth), float(bitmap.rows) / float(atlasHeight) },
-                .size = { int(bitmap.width), int(bitmap.rows) },
-                .bearing = { ftFace->glyph->bitmap_left, ftFace->glyph->bitmap_top },
-                .advance = (unsigned int)ftFace->glyph->advance.x
-            };
-
-            cyrillicLocaleCharactersMap[c] = character;
-            offsetX += bitmap.width + 1;
-        }
-
-        return atlasData;
-    }
-    //--------------------------------------------------------------------------
-
-    Graphics::Image GenerateTextureAtlas(FT_FaceRec_* ftFace)
-    {
-        unsigned int atlasWidth = 0;
-        unsigned int atlasHeight = 0;
-        CalculateAtlasSize(ftFace, atlasWidth, atlasHeight);
-        const auto atlasData = CalculateAtlasData(ftFace, atlasWidth, atlasHeight);
-
-        return Graphics::Image(atlasData.data(), int(atlasData.size()), { atlasWidth, atlasHeight }, Graphics::ImageChannels::Grey);
-    }
-    //--------------------------------------------------------------------------
-
-    Vector<Graphics::FontCharacterVertex> GenerateTextVertices(const WString& text, float x, float y, float scale, float screenWidth, float screenHeight)
-    {
-        Vector<Graphics::FontCharacterVertex> vertices;
-        vertices.reserve(6);
-
-        for (const auto& c : text)
-        {
-            if (cyrillicLocaleCharactersMap.find(c) == cyrillicLocaleCharactersMap.end())
-            {
-                continue;
-            }
-
-            const auto& ch = cyrillicLocaleCharactersMap[c];
-            float xpos = x + ch.bearing.x * scale;
-            float ypos = y + (ch.size.y - ch.bearing.y) * scale;
-            float w = ch.size.x * scale;
-            float h = ch.size.y * scale;
-
-            auto toNDC = [&](float px, float py) {
-                return Math::Vec2F((px / screenWidth) * 2.0f - 1.0f, (py / screenHeight) * 2.0f - 1.0f);
-            };
-
-            const auto p1 = toNDC(xpos, ypos - h);
-            const auto p2 = toNDC(xpos, ypos);
-            const auto p3 = toNDC(xpos + w, ypos);
-            const auto p4 = toNDC(xpos + w, ypos - h);
-
-            vertices.push_back({ p1, Math::Vec2F(ch.uvMin.x, ch.uvMin.y) });
-            vertices.push_back({ p2, Math::Vec2F(ch.uvMin.x, ch.uvMax.y) });
-            vertices.push_back({ p3, Math::Vec2F(ch.uvMax.x, ch.uvMax.y) });
-
-            vertices.push_back({ p1, Math::Vec2F(ch.uvMin.x, ch.uvMin.y) });
-            vertices.push_back({ p3, Math::Vec2F(ch.uvMax.x, ch.uvMax.y) });
-            vertices.push_back({ p4, Math::Vec2F(ch.uvMax.x, ch.uvMin.y) });
-
-            x += (ch.advance >> 6) * scale;
-        }
-
-        return vertices;
-    }
-    //--------------------------------------------------------------------------
-
 
     TextRenderingFrameListener::TextRenderingFrameListener(FrameListenerManager& frameListenerManager, Window& mainWindow, Graphics::GraphicsBackend& graphicsBackend, 
                                                            Assets::AssetsManager& assetsManager, LocalizationManager& localizationManager)
@@ -203,21 +89,10 @@ namespace Kmpleete
         const auto& vulkanPhysicalDevice = dynamic_cast<const Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
         auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
-        _TestCreateFontAtlas();
         _InitializeBuffers(vulkanDevice);
         _InitializeUniformBuffers(vulkanDevice);
         _InitializePipeline(vulkanDevice, vulkanPhysicalDevice.GetVulkanContext());
         _InitializeImGui();
-    }
-    //--------------------------------------------------------------------------
-
-    void TextRenderingFrameListener::_TestCreateFontAtlas()
-    {
-        const auto& defaultFontAsset = _assetsManager.GetFontAssetManager().GetAsset(Assets::FontAssetManager::DefaultFontSID);
-        Graphics::Image atlasImage = GenerateTextureAtlas(defaultFontAsset.GetFont().GetFtFace());
-        const auto subTypeMask = Assets::TextureSubTypeMaskBits(Assets::TextureSubTypeMaskBits::RGB | Assets::TextureSubTypeMaskBits::NoMipmap);
-        KMP_MB_UNUSED const auto atlasTextureCreated = _assetsManager.GetTextureAssetManager().CreateAsset(TextureFontAtlas_SID, atlasImage, subTypeMask);
-        KMP_ASSERT(atlasTextureCreated);
     }
     //--------------------------------------------------------------------------
 
@@ -231,7 +106,10 @@ namespace Kmpleete
         const auto& vulkanRenderer = vulkanDevice.GetRenderer();
 
         const auto windowFramebufferSize = _mainWindow.GetFramebufferSize();
-        const auto vertices = GenerateTextVertices(wideAlphabet, 100.0f, 100.0f, 1.0f, float(windowFramebufferSize.x), float(windowFramebufferSize.y));
+        const auto& defaultFontAsset = _assetsManager.GetFontAssetManager().GetAsset(Assets::FontAssetManager::DefaultFontSID);
+        const auto& defaultFont = defaultFontAsset.GetFont();
+        const auto& defaultFontAtlas = defaultFont.GetAtlas(_localizationManager.GetLocaleSID()).value().get();
+        const auto vertices = defaultFontAtlas.GenerateTextVertices(wideAlphabet, 0.0f, 100.0f, 1.0f, windowFramebufferSize);
         const auto vertexBufferSize = UInt32(vertices.size() * sizeof(Graphics::FontCharacterVertex));
         _verticesCount = UInt32(vertices.size());
 
@@ -255,7 +133,9 @@ namespace Kmpleete
 
     void TextRenderingFrameListener::_InitializeUniformBuffers(Graphics::VulkanLogicalDevice& vulkanDevice)
     {
-        auto& textureAssetManager = _assetsManager.GetTextureAssetManager();
+        const auto& defaultFontAsset = _assetsManager.GetFontAssetManager().GetAsset(Assets::FontAssetManager::DefaultFontSID);
+        const auto currentLocaleSid = _localizationManager.GetLocaleSID();
+        const auto& defaultFontAtlasTexture = defaultFontAsset.GetAtlasTexture(currentLocaleSid);
         auto& descriptorSetManager = vulkanDevice.GetDescriptorSetManager();
         const auto& samplersStorage = vulkanDevice.GetSamplersStorage();
 
@@ -269,7 +149,7 @@ namespace Kmpleete
             descriptorSetManager.SetSamplerDescriptor(FontDS_SID, 0, "per frame"_true, i, samplersStorage.GetSampler(Graphics::SamplerDefaultLinearSid), SamplerBindingIndex);
             descriptorSetManager.SetSampledImageDescriptor(
                 FontDS_SID, 0, "per frame"_true, i,
-                dynamic_cast<Graphics::VulkanTexture&>(textureAssetManager.GetAsset(TextureFontAtlas_SID).GetTexture()).GetVkImageView(), TextureBindingIndex
+                dynamic_cast<const Graphics::VulkanTexture&>(defaultFontAtlasTexture.value().get()).GetVkImageView(), TextureBindingIndex
             );
         }
     }
