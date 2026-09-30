@@ -45,6 +45,7 @@ namespace Kmpleete
             VkResult Flush(VkDeviceSize size = VK_WHOLE_SIZE, VkDeviceSize offset = 0);
             VkResult Invalidate(VkDeviceSize size = VK_WHOLE_SIZE, VkDeviceSize offset = 0);
             void CopyToMappedMemory(UInt32 mappedOffset, void* data, VkDeviceSize size);
+            void Resize(const VulkanMemoryTypeDelegate& memoryTypeDelegate, VkDeviceSize size);
 
             KMP_NODISCARD VkBuffer GetVkBuffer() const noexcept;
             KMP_NODISCARD VkDeviceSize GetSize() const noexcept;
@@ -63,7 +64,7 @@ namespace Kmpleete
             KMP_NODISCARD bool IsShaderDeviceAddressBuffer() const noexcept;
 
         private:
-            void _Initialize(const VulkanMemoryTypeDelegate& memoryTypeDelegate, const VulkanBufferParameters& parameters);
+            void _Initialize(const VulkanMemoryTypeDelegate& memoryTypeDelegate);
             void _Finalize();
 
         protected:
@@ -75,6 +76,7 @@ namespace Kmpleete
             VkDeviceSize _size;
             void* _mapped;
             VkBufferUsageFlags _usageFlags;
+            VkMemoryPropertyFlags _memoryPropertyFlags;
         };
         //--------------------------------------------------------------------------
 

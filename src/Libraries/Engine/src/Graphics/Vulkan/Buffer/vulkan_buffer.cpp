@@ -23,8 +23,9 @@ namespace Kmpleete
             , _size(parameters.size)
             , _mapped(nullptr)
             , _usageFlags(parameters.usageFlags)
+            , _memoryPropertyFlags(parameters.memoryPropertyFlags)
         {
-            _Initialize(memoryTypeDelegate, parameters);
+            _Initialize(memoryTypeDelegate);
 
             KMP_PROFILE_CONSTRUCTOR_END()
         }
@@ -38,6 +39,7 @@ namespace Kmpleete
             , _size(other._size)
             , _mapped(other._mapped)
             , _usageFlags(other._usageFlags)
+            , _memoryPropertyFlags(other._memoryPropertyFlags)
         {
             other._device = VK_NULL_HANDLE;
             other._buffer = VK_NULL_HANDLE;
@@ -66,6 +68,7 @@ namespace Kmpleete
             _size = other._size;
             _mapped = other._mapped;
             _usageFlags = other._usageFlags;
+            _memoryPropertyFlags = other._memoryPropertyFlags;
 
             other.Unmap();
             other._device = VK_NULL_HANDLE;
@@ -141,6 +144,14 @@ namespace Kmpleete
             KMP_ASSERT(_mapped);
 
             memcpy((char*)_mapped + mappedOffset, data, size);
+        }}
+        //--------------------------------------------------------------------------
+
+        void VulkanBuffer::Resize(const VulkanMemoryTypeDelegate& memoryTypeDelegate, VkDeviceSize size) KMP_PROFILING(ProfileLevelMinor)
+        {
+            _Finalize();
+            _size = size;
+            _Initialize(memoryTypeDelegate);
         }}
         //--------------------------------------------------------------------------
 
@@ -230,7 +241,7 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        void VulkanBuffer::_Initialize(const VulkanMemoryTypeDelegate& memoryTypeDelegate, const VulkanBufferParameters& parameters)
+        void VulkanBuffer::_Initialize(const VulkanMemoryTypeDelegate& memoryTypeDelegate)
         {
             KMP_ASSERT(_device);
 
@@ -240,7 +251,7 @@ namespace Kmpleete
             VKUtils::CheckResult(result, "VulkanBuffer: failed to create buffer object");
             KMP_ASSERT(_buffer);
 
-            auto bufferMemoryContext = memoryTypeDelegate.GetBufferMemoryContext(_device, _buffer, parameters.memoryPropertyFlags);
+            auto bufferMemoryContext = memoryTypeDelegate.GetBufferMemoryContext(_device, _buffer, _memoryPropertyFlags);
             VkMemoryAllocateFlagsInfoKHR allocateFlagsInfo = VKUtils::InitVkMemoryAllocateFlagsInfoKHR();
             if (IsShaderDeviceAddressBuffer())
             {
