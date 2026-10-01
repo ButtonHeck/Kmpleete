@@ -117,11 +117,10 @@ namespace Kmpleete
         };
         const auto verticesResolveBufferSize = UInt32(verticesResolve.size() * sizeof(VertexResolve));
 
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateBuffer({ VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, vertexBufferSize + verticesResolveBufferSize });
-        stagingBuffer.Map();
-        stagingBuffer.CopyToMappedMemory(0, (char*)vertices.data(), vertexBufferSize);
-        stagingBuffer.CopyToMappedMemory(vertexBufferSize, (char*)verticesResolve.data(), verticesResolveBufferSize);
-        stagingBuffer.Unmap("flush"_true);
+        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateBuffer(VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, {
+            { 0, (char*)vertices.data(), vertexBufferSize },
+            { vertexBufferSize, (char*)verticesResolve.data(), verticesResolveBufferSize }
+        });
 
         vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize });
         auto vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);

@@ -304,10 +304,7 @@ namespace Kmpleete
         const auto vertices = _GenerateTextVertices();
         const auto vertexBufferSize = UInt32(vertices.size() * sizeof(Graphics::FontCharacterVertex));
 
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateBuffer({ VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, vertexBufferSize });
-        stagingBuffer.Map();
-        stagingBuffer.CopyToMappedMemory(0, (char*)vertices.data(), vertexBufferSize);
-        stagingBuffer.Unmap("flush"_true);
+        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateBuffer(VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, {{ 0, (char*)vertices.data(), vertexBufferSize }});
 
         Graphics::VulkanVertexBuffer* vertexBuffer = nullptr;
         if (create)
