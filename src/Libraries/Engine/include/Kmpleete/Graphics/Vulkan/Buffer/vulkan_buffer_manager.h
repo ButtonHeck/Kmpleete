@@ -44,7 +44,8 @@ namespace Kmpleete
             bool CreateBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, bool perFrame = false);
 
             KMP_NODISCARD VulkanVertexBuffer CreateVertexBuffer(const VulkanBufferParameters& parameters) const;
-            bool CreateVertexBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, bool perFrame = false);
+            bool CreateVertexBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, 
+                                    const Vector<BufferLayout>& layouts = {}, bool perFrame = false);
 
             KMP_NODISCARD VulkanBuffer CreateIndexBuffer(const VulkanBufferParameters& parameters) const;
             bool CreateIndexBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, bool perFrame = false);

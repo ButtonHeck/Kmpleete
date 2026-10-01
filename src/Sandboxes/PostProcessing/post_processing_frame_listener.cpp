@@ -122,19 +122,22 @@ namespace Kmpleete
             { vertexBufferSize, (char*)verticesResolve.data(), verticesResolveBufferSize }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize });
-        auto vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
-        vertexBuffer->AddLayout(Graphics::BufferLayout{
-            Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex },
-            Graphics::BufferElement{ Graphics::ShaderDataType::Float4, VertexColorAttributeIndex }
+        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize }, {
+            Graphics::BufferLayout{
+                Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex },
+                Graphics::BufferElement{ Graphics::ShaderDataType::Float4, VertexColorAttributeIndex }
+            }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBufferResolve_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, verticesResolveBufferSize });
-        auto vertexBufferResolve = vulkanBufferManager.GetVertexBuffer(VertexBufferResolve_SID);
-        vertexBufferResolve->AddLayout(Graphics::BufferLayout{
-            Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex },
-            Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexTexCoordAttributeIndex }
+        vulkanBufferManager.CreateVertexBuffer(VertexBufferResolve_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, verticesResolveBufferSize }, {
+            Graphics::BufferLayout{
+                Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex },
+                Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexTexCoordAttributeIndex }
+            }
         });
+        
+        auto vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
+        auto vertexBufferResolve = vulkanBufferManager.GetVertexBuffer(VertexBufferResolve_SID);
 
         renderer.CopyBuffers(stagingBuffer, {
             { *vertexBuffer, 0, 0, vertexBufferSize },

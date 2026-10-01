@@ -309,19 +309,19 @@ namespace Kmpleete
         Graphics::VulkanVertexBuffer* vertexBuffer = nullptr;
         if (create)
         {
-            vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize });
-            vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
-            vertexBuffer->AddLayout(Graphics::BufferLayout{
-                Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex },
-                Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexUVAttributeIndex }
+            vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize }, {
+                Graphics::BufferLayout{
+                    Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex },
+                    Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexUVAttributeIndex }
+                }
             });
         }
         else
         {
             vulkanBufferManager.ResizeBuffer(VertexBuffer_SID, vertexBufferSize);
-            vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
         }
 
+        vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
         vulkanRenderer.CopyBuffers(stagingBuffer, {
             { *vertexBuffer, 0, 0, vertexBufferSize }
         }, vulkanDevice.GetGraphicsQueue());

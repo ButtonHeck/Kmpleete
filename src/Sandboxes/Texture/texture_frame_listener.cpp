@@ -190,14 +190,16 @@ namespace Kmpleete
             { vertexBufferSize, (char*)indices.data(), indexBufferSize }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize });
-        auto vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
-        vertexBuffer->AddLayout(Graphics::BufferLayout{
-            Graphics::BufferElement{ Graphics::ShaderDataType::Float3, VertexPositionAttributeIndex },
-            Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexUVAttributeIndex }
+        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize }, {
+            Graphics::BufferLayout{
+                Graphics::BufferElement{ Graphics::ShaderDataType::Float3, VertexPositionAttributeIndex },
+                Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexUVAttributeIndex }
+            }
         });
 
         vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, indexBufferSize });
+
+        auto vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
         auto indexBuffer = vulkanBufferManager.GetBuffer(IndexBuffer_SID);
 
         vulkanRenderer.CopyBuffers(stagingBuffer, {

@@ -102,7 +102,8 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-        bool VulkanBufferManager::CreateVertexBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, bool perFrame /*= false*/) KMP_PROFILING(ProfileLevelImportant)
+        bool VulkanBufferManager::CreateVertexBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, 
+                                                     const Vector<BufferLayout>& layouts /*= {}*/, bool perFrame /*= false*/) KMP_PROFILING(ProfileLevelImportant)
         {
             if (perFrame)
             {
@@ -122,6 +123,10 @@ namespace Kmpleete
                 for (auto i = 0; i < NumConcurrentFrames; i++)
                 {
                     _perFrameVertexBuffers[bufferSid][i].reset(_CreateVertexBufferPtr(parameters));
+                    for (const auto& bufferLayout : layouts)
+                    {
+                        _perFrameVertexBuffers[bufferSid][i]->AddLayout(bufferLayout);
+                    }
                 }
 
                 return true;
@@ -134,7 +139,12 @@ namespace Kmpleete
                     return true;
                 }
 
-                const auto [iterator, hasEmplaced] = _vertexBuffers.emplace(bufferSid, _CreateVertexBufferPtr(parameters));
+                auto newBuffer = _CreateVertexBufferPtr(parameters);
+                for (const auto& bufferLayout : layouts)
+                {
+                    newBuffer->AddLayout(bufferLayout);
+                }
+                const auto [iterator, hasEmplaced] = _vertexBuffers.emplace(bufferSid, newBuffer);
                 return hasEmplaced;
             }
         }}

@@ -103,18 +103,21 @@ namespace Kmpleete
             { fixedColorBufferSize, (char*)bufferedColorVertices.data(), bufferedColorBufferSize }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBufferFixed_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, fixedColorBufferSize });
-        auto vertexBufferFixedColor = vulkanBufferManager.GetVertexBuffer(VertexBufferFixed_SID);
-        vertexBufferFixedColor->AddLayout(Graphics::BufferLayout{
-            Graphics::BufferElement{ Graphics::ShaderDataType::Float2, 0 }
+        vulkanBufferManager.CreateVertexBuffer(VertexBufferFixed_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, fixedColorBufferSize }, {
+            Graphics::BufferLayout{
+                Graphics::BufferElement{ Graphics::ShaderDataType::Float2, 0 }
+            }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBufferBuffered_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, bufferedColorBufferSize });
-        auto vertexBufferBufferedColor = vulkanBufferManager.GetVertexBuffer(VertexBufferBuffered_SID);
-        vertexBufferBufferedColor->AddLayout(Graphics::BufferLayout{
-            Graphics::BufferElement{ Graphics::ShaderDataType::Float2, 0 },
-            Graphics::BufferElement{ Graphics::ShaderDataType::Float4, 1 },
+        vulkanBufferManager.CreateVertexBuffer(VertexBufferBuffered_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, bufferedColorBufferSize }, {
+            Graphics::BufferLayout{
+                Graphics::BufferElement{ Graphics::ShaderDataType::Float2, 0 },
+                Graphics::BufferElement{ Graphics::ShaderDataType::Float4, 1 },
+            }
         });
+        
+        auto vertexBufferFixedColor = vulkanBufferManager.GetVertexBuffer(VertexBufferFixed_SID);
+        auto vertexBufferBufferedColor = vulkanBufferManager.GetVertexBuffer(VertexBufferBuffered_SID);
 
         renderer.CopyBuffers(stagingBuffer, {
             { *vertexBufferFixedColor, 0, 0, fixedColorBufferSize },
