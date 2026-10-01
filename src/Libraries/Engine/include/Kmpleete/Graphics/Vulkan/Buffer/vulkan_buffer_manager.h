@@ -61,6 +61,9 @@ namespace Kmpleete
             KMP_NODISCARD Nullable<VulkanVertexBuffer*> GetVertexBuffer(StringID bufferSid) const noexcept;
             KMP_NODISCARD Nullable<VulkanVertexBuffer*> GetVertexBuffer(StringID bufferSid, UInt32 index) const noexcept;
 
+            void ResizeBuffer(StringID bufferSid, VkDeviceSize size);
+            void ResizeBuffers(StringID bufferSid, VkDeviceSize size);
+
         private:
             KMP_NODISCARD VulkanBuffer _CreateBuffer(const VulkanBufferParameters& parameters) const;
             KMP_NODISCARD Nullable<VulkanBuffer*> _CreateBufferPtr(const VulkanBufferParameters& parameters) const;

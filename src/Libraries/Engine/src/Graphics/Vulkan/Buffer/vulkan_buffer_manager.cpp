@@ -358,6 +358,47 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
 
+        void VulkanBufferManager::ResizeBuffer(StringID bufferSid, VkDeviceSize size) KMP_PROFILING(ProfileLevelImportantVerbose)
+        {
+            if (_buffers.contains(bufferSid))
+            {
+                _buffers.at(bufferSid)->Resize(_memoryTypeDelegate, size);
+                return;
+            }
+            if (_vertexBuffers.contains(bufferSid))
+            {
+                _vertexBuffers.at(bufferSid)->Resize(_memoryTypeDelegate, size);
+                return;
+            }
+
+            KMP_LOG_ERROR("failed to resize buffer with sid '{}'", bufferSid);
+        }}
+        //--------------------------------------------------------------------------
+
+        void VulkanBufferManager::ResizeBuffers(StringID bufferSid, VkDeviceSize size) KMP_PROFILING(ProfileLevelImportantVerbose)
+        {
+            if (_perFrameBuffers.contains(bufferSid))
+            {
+                for (auto i = 0; i < NumConcurrentFrames; i++)
+                {
+                    _perFrameBuffers.at(bufferSid)[i]->Resize(_memoryTypeDelegate, size);
+                }
+                return;
+            }
+            if (_perFrameVertexBuffers.contains(bufferSid))
+            {
+                for (auto i = 0; i < NumConcurrentFrames; i++)
+                {
+                    _perFrameVertexBuffers.at(bufferSid)[i]->Resize(_memoryTypeDelegate, size);
+                }
+                return;
+            }
+
+            KMP_LOG_ERROR("failed to resize per-frame buffers with sid '{}'", bufferSid);
+        }}
+        //--------------------------------------------------------------------------
+
+
         VulkanBuffer VulkanBufferManager::_CreateBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportantVerbose)
         {
             return VulkanBuffer(_memoryTypeDelegate, _device, parameters);
