@@ -8,7 +8,6 @@
 #include "Kmpleete/Utils/string_utils.h"
 #include "Kmpleete/Core/assertion.h"
 #include "Kmpleete/Graphics/font.h"
-#include "Kmpleete/Graphics/font_character.h"
 #include "Kmpleete/Graphics/image.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_graphics_base.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_graphics_backend.h"
@@ -63,6 +62,8 @@ namespace Kmpleete
     static constexpr auto VertexBuffer_SID = "vertex_buffer"_sid;
     static constexpr auto UniformBuffers_SID = "uniform_buffers"_sid;
 
+    static constexpr auto TranslationDomain = ToStringID(KMP_TR_DOMAIN_TEXT_RENDERING);
+
 
     using namespace Graphics::VKBits;
 
@@ -77,6 +78,7 @@ namespace Kmpleete
         , _imguiImpl(nullptr)
         , _verticesCount(0)
         , _windowContentScaleHandler(_eventDispatcher, KMP_BIND(TextRenderingFrameListener::_OnWindowContentScaleEvent))
+        , _windowFramebufferResizeHandler(_eventDispatcher, KMP_BIND(TextRenderingFrameListener::_OnWindowFramebufferResizeEvent))
         , _localeChangeHandler(_eventDispatcher, KMP_BIND(TextRenderingFrameListener::_OnLocaleChangeEvent))
     {
         _FillDictionary();
@@ -89,45 +91,10 @@ namespace Kmpleete
         const auto& vulkanPhysicalDevice = dynamic_cast<const Graphics::VulkanPhysicalDevice&>(_graphicsBackend.GetPhysicalDevice());
         auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
 
-        _InitializeBuffers(vulkanDevice);
+        _UpdateTextBuffer(true);
         _InitializeUniformBuffers(vulkanDevice);
         _InitializePipeline(vulkanDevice, vulkanPhysicalDevice.GetVulkanContext());
         _InitializeImGui();
-    }
-    //--------------------------------------------------------------------------
-
-    void TextRenderingFrameListener::_InitializeBuffers(Graphics::VulkanLogicalDevice& vulkanDevice)
-    {
-        const auto domainSid = ToStringID(KMP_TR_DOMAIN_TEXT_RENDERING);
-        const auto& alphabet = _localizationManager.Translation(domainSid, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"_sid);
-        const auto wideAlphabet = Utils::NarrowToWide(Utils::Utf8ToNarrow(alphabet));
-
-        auto& vulkanBufferManager = vulkanDevice.GetBufferManager();
-        const auto& vulkanRenderer = vulkanDevice.GetRenderer();
-
-        const auto windowFramebufferSize = _mainWindow.GetFramebufferSize();
-        const auto& defaultFontAsset = _assetsManager.GetFontAssetManager().GetAsset(Assets::FontAssetManager::DefaultFontSID);
-        const auto& defaultFont = defaultFontAsset.GetFont();
-        const auto& defaultFontAtlas = defaultFont.GetAtlas(_localizationManager.GetLocaleSID()).value().get();
-        const auto vertices = defaultFontAtlas.GenerateTextVertices(wideAlphabet, 0.0f, 100.0f, 1.0f, windowFramebufferSize);
-        const auto vertexBufferSize = UInt32(vertices.size() * sizeof(Graphics::FontCharacterVertex));
-        _verticesCount = UInt32(vertices.size());
-
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateBuffer({ VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, vertexBufferSize });
-        stagingBuffer.Map();
-        stagingBuffer.CopyToMappedMemory(0, (char*)vertices.data(), vertexBufferSize);
-        stagingBuffer.Unmap("flush"_true);
-
-        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize });
-        auto vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
-        vertexBuffer->AddLayout(Graphics::BufferLayout{
-            Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex },
-            Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexUVAttributeIndex }
-        });
-
-        vulkanRenderer.CopyBuffers(stagingBuffer, {
-            { *vertexBuffer, 0, 0, vertexBufferSize }
-        }, vulkanDevice.GetGraphicsQueue());
     }
     //--------------------------------------------------------------------------
 
@@ -306,6 +273,14 @@ namespace Kmpleete
     }
     //--------------------------------------------------------------------------
 
+    bool TextRenderingFrameListener::_OnWindowFramebufferResizeEvent(Events::WindowFramebufferResizeEvent&)
+    {
+        _UpdateTextBuffer(false);
+
+        return true;
+    }
+    //--------------------------------------------------------------------------
+
     bool TextRenderingFrameListener::_OnLocaleChangeEvent(Events::LocaleChangeEvent&)
     {
         _FillDictionary();
@@ -317,6 +292,57 @@ namespace Kmpleete
     {
         _localizationManager.Translate(KMP_TR_DOMAIN_TEXT_RENDERING, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
         _localizationManager.Translate(KMP_TR_DOMAIN_TEXT_RENDERING, "0123456789!@#$%^&*()'~`,./<>+-_=;:?");
+    }
+    //--------------------------------------------------------------------------
+
+    void TextRenderingFrameListener::_UpdateTextBuffer(bool create)
+    {
+        auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
+        auto& vulkanBufferManager = vulkanDevice.GetBufferManager();
+        const auto& vulkanRenderer = vulkanDevice.GetRenderer();
+
+        const auto vertices = _GenerateTextVertices();
+        const auto vertexBufferSize = UInt32(vertices.size() * sizeof(Graphics::FontCharacterVertex));
+
+        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateBuffer({ VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, vertexBufferSize });
+        stagingBuffer.Map();
+        stagingBuffer.CopyToMappedMemory(0, (char*)vertices.data(), vertexBufferSize);
+        stagingBuffer.Unmap("flush"_true);
+
+        Graphics::VulkanVertexBuffer* vertexBuffer = nullptr;
+        if (create)
+        {
+            vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize });
+            vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
+            vertexBuffer->AddLayout(Graphics::BufferLayout{
+                Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex },
+                Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexUVAttributeIndex }
+            });
+        }
+        else
+        {
+            vulkanBufferManager.ResizeBuffer(VertexBuffer_SID, vertexBufferSize);
+            vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
+        }
+
+        vulkanRenderer.CopyBuffers(stagingBuffer, {
+            { *vertexBuffer, 0, 0, vertexBufferSize }
+        }, vulkanDevice.GetGraphicsQueue());
+    }
+    //--------------------------------------------------------------------------
+
+    Vector<Graphics::FontCharacterVertex> TextRenderingFrameListener::_GenerateTextVertices()
+    {
+        const auto& alphabet = _localizationManager.Translation(TranslationDomain, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"_sid);
+        const auto wideAlphabet = Utils::NarrowToWide(Utils::Utf8ToNarrow(alphabet));
+
+        const auto windowFramebufferSize = _mainWindow.GetFramebufferSize();
+        const auto& defaultFont = _assetsManager.GetFontAssetManager().GetAsset(Assets::FontAssetManager::DefaultFontSID).GetFont();
+        const auto& defaultFontAtlas = defaultFont.GetAtlas(_localizationManager.GetLocaleSID()).value().get();
+        const auto vertices = defaultFontAtlas.GenerateTextVertices(wideAlphabet, 0.0f, 100.0f, 1.0f, windowFramebufferSize);
+        _verticesCount = UInt32(vertices.size());
+
+        return vertices;
     }
     //--------------------------------------------------------------------------
 }
