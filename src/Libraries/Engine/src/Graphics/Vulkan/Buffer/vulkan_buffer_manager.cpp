@@ -2,6 +2,7 @@
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_memory_type_delegate.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
 #include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Base/named_bool.h"
 #include "Kmpleete/Log/log.h"
 
 
@@ -30,6 +31,29 @@ namespace Kmpleete
         VulkanBuffer VulkanBufferManager::CreateBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportant)
         {
             return _CreateBuffer(parameters);
+        }}
+        //--------------------------------------------------------------------------
+
+        VulkanBuffer VulkanBufferManager::CreateBuffer(VkBufferUsageFlags usageFlags, VkMemoryPropertyFlags memoryPropertyFlags, 
+                                                       const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters) const KMP_PROFILING(ProfileLevelImportant)
+        {
+            VulkanBufferParameters parameters{ .usageFlags = usageFlags, .memoryPropertyFlags = memoryPropertyFlags, .size = 0 };
+            VkDeviceSize summarySize = 0;
+            for (const auto& dataMapping : dataMappingParameters)
+            {
+                summarySize += dataMapping.size;
+            }
+            parameters.size = summarySize;
+
+            auto buffer = _CreateBuffer(parameters);
+            buffer.Map();
+            for (const auto& dataMapping : dataMappingParameters)
+            {
+                buffer.CopyToMappedMemory(dataMapping);
+            }
+            buffer.Unmap("flush"_true);
+
+            return buffer;
         }}
         //--------------------------------------------------------------------------
 

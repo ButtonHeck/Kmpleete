@@ -139,6 +139,12 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
+        void VulkanBuffer::CopyToMappedMemory(const VulkanBufferDataMappingParameters& parameters)
+        {
+            CopyToMappedMemory(parameters.mappedOffset, parameters.data, parameters.size);
+        }
+        //--------------------------------------------------------------------------
+
         void VulkanBuffer::CopyToMappedMemory(UInt32 mappedOffset, void* data, VkDeviceSize size) KMP_PROFILING(ProfileLevelMinor)
         {
             KMP_ASSERT(_mapped);
