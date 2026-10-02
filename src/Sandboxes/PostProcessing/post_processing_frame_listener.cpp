@@ -117,7 +117,7 @@ namespace Kmpleete
         };
         const auto verticesResolveBufferSize = UInt32(verticesResolve.size() * sizeof(VertexResolve));
 
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateBuffer(VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, {
+        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({
             { 0, (char*)vertices.data(), vertexBufferSize },
             { vertexBufferSize, (char*)verticesResolve.data(), verticesResolveBufferSize }
         });
@@ -135,13 +135,10 @@ namespace Kmpleete
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexTexCoordAttributeIndex }
             }
         });
-        
-        auto vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
-        auto vertexBufferResolve = vulkanBufferManager.GetVertexBuffer(VertexBufferResolve_SID);
 
         renderer.CopyBuffers(stagingBuffer, {
-            { *vertexBuffer, 0, 0, vertexBufferSize },
-            { *vertexBufferResolve, vertexBufferSize, 0, verticesResolveBufferSize }
+            { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize },
+            { *vulkanBufferManager.GetVertexBuffer(VertexBufferResolve_SID), vertexBufferSize, 0, verticesResolveBufferSize }
         }, vulkanDevice.GetGraphicsQueue());
     }
     //--------------------------------------------------------------------------

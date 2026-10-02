@@ -140,7 +140,7 @@ namespace Kmpleete
         drawIndexedIndirectCommands.push_back(indexedCommand);
         const auto drawIndexedInstanceBufferSize = UInt32(drawIndexedIndirectCommands.size() * sizeof(VkDrawIndexedIndirectCommand));
 
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateBuffer(VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, {
+        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({
             { 0, (char*)vertices.data(), vertexBufferSize },
             { vertexBufferSize, (char*)instanceData.data(), instanceBufferSize },
             { vertexBufferSize + instanceBufferSize, (char*)indices.data(), indexBufferSize },
@@ -164,17 +164,12 @@ namespace Kmpleete
         vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, indexBufferSize });
         vulkanBufferManager.CreateIndirectBuffer(IndirectBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, drawInstancedBufferSize + drawIndexedInstanceBufferSize });
 
-        auto vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
-        auto vertexBufferInstanced = vulkanBufferManager.GetVertexBuffer(VertexBufferInstanced_SID);
-        auto indexBuffer = vulkanBufferManager.GetBuffer(IndexBuffer_SID);
-        auto indirectBuffer = vulkanBufferManager.GetBuffer(IndirectBuffer_SID);
-
         renderer.CopyBuffers(stagingBuffer, {
-            { *vertexBuffer, 0, 0, vertexBufferSize },
-            { *vertexBufferInstanced, vertexBufferSize, 0, instanceBufferSize },
-            { *indexBuffer, vertexBufferSize + instanceBufferSize, 0, indexBufferSize },
-            { *indirectBuffer, vertexBufferSize + instanceBufferSize + indexBufferSize, 0, drawInstancedBufferSize },
-            { *indirectBuffer, vertexBufferSize + instanceBufferSize + indexBufferSize + drawInstancedBufferSize, drawInstancedBufferSize, drawIndexedInstanceBufferSize }
+            { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize },
+            { *vulkanBufferManager.GetVertexBuffer(VertexBufferInstanced_SID), vertexBufferSize, 0, instanceBufferSize },
+            { *vulkanBufferManager.GetBuffer(IndexBuffer_SID), vertexBufferSize + instanceBufferSize, 0, indexBufferSize },
+            { *vulkanBufferManager.GetBuffer(IndirectBuffer_SID), vertexBufferSize + instanceBufferSize + indexBufferSize, 0, drawInstancedBufferSize },
+            { *vulkanBufferManager.GetBuffer(IndirectBuffer_SID), vertexBufferSize + instanceBufferSize + indexBufferSize + drawInstancedBufferSize, drawInstancedBufferSize, drawIndexedInstanceBufferSize }
         }, vulkanDevice.GetGraphicsQueue());
     }
     //--------------------------------------------------------------------------

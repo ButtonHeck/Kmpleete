@@ -185,7 +185,7 @@ namespace Kmpleete
         _indexCount = UInt32(indices.size());
         UInt32 indexBufferSize = _indexCount * sizeof(UInt32);
 
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateBuffer(VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, {
+        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({
             { 0, (char*)vertices.data(), vertexBufferSize },
             { vertexBufferSize, (char*)indices.data(), indexBufferSize }
         });
@@ -199,12 +199,9 @@ namespace Kmpleete
 
         vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, indexBufferSize });
 
-        auto vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
-        auto indexBuffer = vulkanBufferManager.GetBuffer(IndexBuffer_SID);
-
         vulkanRenderer.CopyBuffers(stagingBuffer, {
-            { *vertexBuffer, 0, 0, vertexBufferSize },
-            { *indexBuffer, vertexBufferSize, 0, indexBufferSize }
+            { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize },
+            { *vulkanBufferManager.GetBuffer(IndexBuffer_SID), vertexBufferSize, 0, indexBufferSize }
         }, vulkanDevice.GetGraphicsQueue());
     }
     //--------------------------------------------------------------------------

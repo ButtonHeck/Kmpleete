@@ -28,6 +28,13 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
 
+        VulkanBuffer VulkanBufferManager::CreateStagingBuffer(const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters) const
+        {
+            return CreateBuffer(VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, dataMappingParameters);
+        }
+        //--------------------------------------------------------------------------
+
+
         VulkanBuffer VulkanBufferManager::CreateBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportant)
         {
             return _CreateBuffer(parameters);

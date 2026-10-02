@@ -69,7 +69,7 @@ namespace Kmpleete
         };
         const auto vertexBufferSize = UInt32(vertices.size() * sizeof(Vertex));
 
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateBuffer(VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, {{ 0, (char*)vertices.data(), vertexBufferSize }});
+        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({{ 0, (char*)vertices.data(), vertexBufferSize }});
 
         vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize }, {
             Graphics::BufferLayout{
@@ -77,10 +77,8 @@ namespace Kmpleete
             }
         });
         
-        auto vertexBuffer = vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID);
-
         renderer.CopyBuffers(stagingBuffer, {
-            { *vertexBuffer, 0, 0, vertexBufferSize }
+            { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize }
         }, vulkanDevice.GetGraphicsQueue());
 
         for (auto i = 0; i < InstancesCount; i++)
