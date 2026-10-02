@@ -39,8 +39,8 @@ namespace Kmpleete
             struct BufferCopyParameters
             {
                 VulkanBuffer& destinationBuffer;
-                VkDeviceSize srcOfset;
-                VkDeviceSize dstOfset;
+                VkDeviceSize srcOffset;
+                VkDeviceSize dstOffset;
                 VkDeviceSize size;
             };
             //--------------------------------------------------------------------------

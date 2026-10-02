@@ -662,7 +662,7 @@ namespace Kmpleete
             copyCommandBuffer.Begin();
             for (const auto& singleCopyParameters : copyParameters)
             {
-                CopyBuffer(copyCommandBuffer, stagingBuffer, singleCopyParameters.destinationBuffer, singleCopyParameters.srcOfset, singleCopyParameters.dstOfset, singleCopyParameters.size);
+                CopyBuffer(copyCommandBuffer, stagingBuffer, singleCopyParameters.destinationBuffer, singleCopyParameters.srcOffset, singleCopyParameters.dstOffset, singleCopyParameters.size);
             }
             copyCommandBuffer.End();
 
