@@ -354,8 +354,14 @@ namespace Kmpleete
                 return _buffers.at(bufferSid).get();
             }
 
-            KMP_LOG_ERROR("failed to find buffer with sid '{}'", bufferSid);
-            return nullptr;
+            auto vertexBuffer = GetVertexBuffer(bufferSid);
+            if (not vertexBuffer)
+            {
+                KMP_LOG_ERROR("failed to find buffer with sid '{}'", bufferSid);
+                return nullptr;
+            }
+
+            return vertexBuffer;
         }
         //--------------------------------------------------------------------------
 
@@ -372,8 +378,14 @@ namespace Kmpleete
                 return _perFrameBuffers.at(bufferSid)[index].get();
             }
 
-            KMP_LOG_ERROR("failed to find per-frame buffer with sid '{}'", bufferSid);
-            return nullptr;
+            auto vertexBuffer = GetVertexBuffer(bufferSid, index);
+            if (not vertexBuffer)
+            {
+                KMP_LOG_ERROR("failed to find per-frame buffer with sid '{}'", bufferSid);
+                return nullptr;
+            }
+
+            return vertexBuffer;
         }
         //--------------------------------------------------------------------------
 
