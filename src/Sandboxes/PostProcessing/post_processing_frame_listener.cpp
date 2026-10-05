@@ -122,14 +122,14 @@ namespace Kmpleete
             { vertexBufferSize, (char*)verticesResolve.data(), verticesResolveBufferSize }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize }, {
+        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex },
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float4, VertexColorAttributeIndex }
             }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBufferResolve_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, verticesResolveBufferSize }, {
+        vulkanBufferManager.CreateVertexBuffer(VertexBufferResolve_SID, verticesResolveBufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex },
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexTexCoordAttributeIndex }
@@ -155,7 +155,7 @@ namespace Kmpleete
         const auto postProcessingUniformsLayout = descriptorSetManager.AddDescriptorSetLayout(PostProcessingDSLayout_SID, { textureLayoutBinding, samplerLayoutBinding, uboLayoutBinding });
         descriptorSetManager.AllocateDescriptorSets(postProcessingUniformsLayout, PostProcessingSet_SID, 1, "per frame"_true);
 
-        vulkanBufferManager.CreateUniformBuffer(UniformBuffersResolve_SID, { 0, VK_Memory_HostVisible | VK_Memory_HostCoherent, sizeof(VkExtent2D) }, "per frame"_true);
+        vulkanBufferManager.CreateUniformBuffer(UniformBuffersResolve_SID, sizeof(VkExtent2D), "per frame"_true);
         for (auto i = 0; i < Graphics::NumConcurrentFrames; i++)
         {
             auto uniformBuffer = vulkanBufferManager.GetBuffer(UniformBuffersResolve_SID, i);

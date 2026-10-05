@@ -103,9 +103,9 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
 
-        VulkanVertexBuffer VulkanBufferManager::CreateVertexBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportant)
+        bool VulkanBufferManager::CreateVertexBuffer(StringID bufferSid, VkDeviceSize size, const Vector<BufferLayout>& layouts /*= {}*/, bool perFrame /*= false*/) KMP_PROFILING(ProfileLevelImportant)
         {
-            return _CreateVertexBuffer(parameters);
+            return CreateVertexBuffer(bufferSid, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, size }, layouts, perFrame);
         }}
         //--------------------------------------------------------------------------
 
@@ -158,9 +158,9 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
 
-        VulkanBuffer VulkanBufferManager::CreateIndexBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportant)
+        bool VulkanBufferManager::CreateIndexBuffer(StringID bufferSid, VkDeviceSize size, bool perFrame /*= false*/) KMP_PROFILING(ProfileLevelImportant)
         {
-            return _CreateIndexBuffer(parameters);
+            return CreateIndexBuffer(bufferSid, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, size }, perFrame);
         }}
         //--------------------------------------------------------------------------
 
@@ -203,9 +203,9 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
 
-        VulkanBuffer VulkanBufferManager::CreateUniformBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportant)
+        bool VulkanBufferManager::CreateUniformBuffer(StringID bufferSid, VkDeviceSize size, bool perFrame /*= false*/) KMP_PROFILING(ProfileLevelImportant)
         {
-            return _CreateUniformBuffer(parameters);
+            return CreateUniformBuffer(bufferSid, { 0, VK_Memory_HostVisible | VK_Memory_HostCoherent, size }, perFrame);
         }}
         //--------------------------------------------------------------------------
 
@@ -248,9 +248,9 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
 
-        VulkanBuffer VulkanBufferManager::CreateStorageBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportant)
+        bool VulkanBufferManager::CreateStorageBuffer(StringID bufferSid, VkDeviceSize size, bool perFrame /*= false*/) KMP_PROFILING(ProfileLevelImportant)
         {
-            return _CreateStorageBuffer(parameters);
+            return CreateStorageBuffer(bufferSid, { 0, VK_Memory_HostVisible | VK_Memory_HostCoherent, size }, perFrame);
         }}
         //--------------------------------------------------------------------------
 
@@ -293,9 +293,9 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
 
-        VulkanBuffer VulkanBufferManager::CreateIndirectBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportant)
+        bool VulkanBufferManager::CreateIndirectBuffer(StringID bufferSid, VkDeviceSize size, bool perFrame /*= false*/) KMP_PROFILING(ProfileLevelImportant)
         {
-            return _CreateIndirectBuffer(parameters);
+            return CreateIndirectBuffer(bufferSid, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, size }, perFrame);
         }}
         //--------------------------------------------------------------------------
 
@@ -452,32 +452,10 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-
-        VulkanVertexBuffer VulkanBufferManager::_CreateVertexBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportantVerbose)
-        {
-            return VulkanVertexBuffer(_memoryTypeDelegate, _device, VulkanBufferParameters{
-                .usageFlags = VK_BufferUsage_Vertex | parameters.usageFlags,
-                .memoryPropertyFlags = parameters.memoryPropertyFlags,
-                .size = parameters.size
-            });
-        }}
-        //--------------------------------------------------------------------------
-
         Nullable<VulkanVertexBuffer*> VulkanBufferManager::_CreateVertexBufferPtr(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportantVerbose)
         {
             return new VulkanVertexBuffer(_memoryTypeDelegate, _device, VulkanBufferParameters{
                 .usageFlags = VK_BufferUsage_Vertex | parameters.usageFlags,
-                .memoryPropertyFlags = parameters.memoryPropertyFlags,
-                .size = parameters.size
-            });
-        }}
-        //--------------------------------------------------------------------------
-
-
-        VulkanBuffer VulkanBufferManager::_CreateIndexBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportantVerbose)
-        {
-            return VulkanBuffer(_memoryTypeDelegate, _device, VulkanBufferParameters{
-                .usageFlags = VK_BufferUsage_Index | parameters.usageFlags,
                 .memoryPropertyFlags = parameters.memoryPropertyFlags,
                 .size = parameters.size
             });
@@ -494,17 +472,6 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-
-        VulkanBuffer VulkanBufferManager::_CreateUniformBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportantVerbose)
-        {
-            return VulkanBuffer(_memoryTypeDelegate, _device, VulkanBufferParameters{
-                .usageFlags = VK_BufferUsage_Uniform | parameters.usageFlags,
-                .memoryPropertyFlags = parameters.memoryPropertyFlags,
-                .size = parameters.size
-            });
-        }}
-        //--------------------------------------------------------------------------
-
         Nullable<VulkanBuffer*> VulkanBufferManager::_CreateUniformBufferPtr(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportantVerbose)
         {
             return new VulkanBuffer(_memoryTypeDelegate, _device, VulkanBufferParameters{
@@ -515,32 +482,10 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-
-        VulkanBuffer VulkanBufferManager::_CreateStorageBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportantVerbose)
-        {
-            return VulkanBuffer(_memoryTypeDelegate, _device, VulkanBufferParameters{
-                .usageFlags = VK_BufferUsage_Storage | parameters.usageFlags,
-                .memoryPropertyFlags = parameters.memoryPropertyFlags,
-                .size = parameters.size
-            });
-        }}
-        //--------------------------------------------------------------------------
-
         Nullable<VulkanBuffer*> VulkanBufferManager::_CreateStorageBufferPtr(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportantVerbose)
         {
             return new VulkanBuffer(_memoryTypeDelegate, _device, VulkanBufferParameters{
                 .usageFlags = VK_BufferUsage_Storage | parameters.usageFlags,
-                .memoryPropertyFlags = parameters.memoryPropertyFlags,
-                .size = parameters.size
-            });
-        }}
-        //--------------------------------------------------------------------------
-
-
-        VulkanBuffer VulkanBufferManager::_CreateIndirectBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportantVerbose)
-        {
-            return VulkanBuffer(_memoryTypeDelegate, _device, VulkanBufferParameters{
-                .usageFlags = VK_BufferUsage_Indirect | parameters.usageFlags,
                 .memoryPropertyFlags = parameters.memoryPropertyFlags,
                 .size = parameters.size
             });

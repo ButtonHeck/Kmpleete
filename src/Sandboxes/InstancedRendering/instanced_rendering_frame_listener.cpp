@@ -125,25 +125,25 @@ namespace Kmpleete
             { vertexBufferSize + vertexInstancedBufferSize + vertexColorsInstancedBufferSize, (char*)indices.data(), indexBufferSize }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize }, {
+        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex }
             }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBufferPosInstanced_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexInstancedBufferSize }, {
+        vulkanBufferManager.CreateVertexBuffer(VertexBufferPosInstanced_SID, vertexInstancedBufferSize, {
             Graphics::BufferLayout({
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionInstancedAttributeIndex }
             }, "instanced"_true)
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBufferColorsInstanced_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexColorsInstancedBufferSize }, {
+        vulkanBufferManager.CreateVertexBuffer(VertexBufferColorsInstanced_SID, vertexColorsInstancedBufferSize, {
             Graphics::BufferLayout({
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float4, VertexColorInstancedAttributeIndex }
             }, "instanced"_true)
         });
 
-        vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, indexBufferSize });
+        vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, indexBufferSize);
 
         renderer.CopyBuffers(stagingBuffer, {
             { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize },

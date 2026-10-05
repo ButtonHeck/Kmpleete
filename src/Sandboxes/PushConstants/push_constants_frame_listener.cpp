@@ -71,7 +71,7 @@ namespace Kmpleete
 
         Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({{ 0, (char*)vertices.data(), vertexBufferSize }});
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize }, {
+        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex }
             }

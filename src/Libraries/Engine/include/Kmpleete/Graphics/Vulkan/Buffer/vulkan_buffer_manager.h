@@ -45,20 +45,20 @@ namespace Kmpleete
                                                     const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters) const;
             bool CreateBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, bool perFrame = false);
 
-            KMP_NODISCARD VulkanVertexBuffer CreateVertexBuffer(const VulkanBufferParameters& parameters) const;
+            bool CreateVertexBuffer(StringID bufferSid, VkDeviceSize size, const Vector<BufferLayout>& layouts = {}, bool perFrame = false);
             bool CreateVertexBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, 
                                     const Vector<BufferLayout>& layouts = {}, bool perFrame = false);
 
-            KMP_NODISCARD VulkanBuffer CreateIndexBuffer(const VulkanBufferParameters& parameters) const;
+            bool CreateIndexBuffer(StringID bufferSid, VkDeviceSize size, bool perFrame = false);
             bool CreateIndexBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, bool perFrame = false);
 
-            KMP_NODISCARD VulkanBuffer CreateUniformBuffer(const VulkanBufferParameters& parameters) const;
+            bool CreateUniformBuffer(StringID bufferSid, VkDeviceSize size, bool perFrame = false);
             bool CreateUniformBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, bool perFrame = false);
 
-            KMP_NODISCARD VulkanBuffer CreateStorageBuffer(const VulkanBufferParameters& parameters) const;
+            bool CreateStorageBuffer(StringID bufferSid, VkDeviceSize size, bool perFrame = false);
             bool CreateStorageBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, bool perFrame = false);
 
-            KMP_NODISCARD VulkanBuffer CreateIndirectBuffer(const VulkanBufferParameters& parameters) const;
+            bool CreateIndirectBuffer(StringID bufferSid, VkDeviceSize size, bool perFrame = false);
             bool CreateIndirectBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, bool perFrame = false);
 
             KMP_NODISCARD Nullable<VulkanBuffer*> GetBuffer(StringID bufferSid) const noexcept;
@@ -71,21 +71,12 @@ namespace Kmpleete
 
         private:
             KMP_NODISCARD VulkanBuffer _CreateBuffer(const VulkanBufferParameters& parameters) const;
+
             KMP_NODISCARD Nullable<VulkanBuffer*> _CreateBufferPtr(const VulkanBufferParameters& parameters) const;
-
-            KMP_NODISCARD VulkanVertexBuffer _CreateVertexBuffer(const VulkanBufferParameters& parameters) const;
             KMP_NODISCARD Nullable<VulkanVertexBuffer*> _CreateVertexBufferPtr(const VulkanBufferParameters& parameters) const;
-
-            KMP_NODISCARD VulkanBuffer _CreateIndexBuffer(const VulkanBufferParameters& parameters) const;
             KMP_NODISCARD Nullable<VulkanBuffer*> _CreateIndexBufferPtr(const VulkanBufferParameters& parameters) const;
-
-            KMP_NODISCARD VulkanBuffer _CreateUniformBuffer(const VulkanBufferParameters& parameters) const;
             KMP_NODISCARD Nullable<VulkanBuffer*> _CreateUniformBufferPtr(const VulkanBufferParameters& parameters) const;
-
-            KMP_NODISCARD VulkanBuffer _CreateStorageBuffer(const VulkanBufferParameters& parameters) const;
             KMP_NODISCARD Nullable<VulkanBuffer*> _CreateStorageBufferPtr(const VulkanBufferParameters& parameters) const;
-
-            KMP_NODISCARD VulkanBuffer _CreateIndirectBuffer(const VulkanBufferParameters& parameters) const;
             KMP_NODISCARD Nullable<VulkanBuffer*> _CreateIndirectBufferPtr(const VulkanBufferParameters& parameters) const;
 
         private:

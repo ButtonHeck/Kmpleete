@@ -132,7 +132,7 @@ namespace Kmpleete
 
         Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({{ 0, (char*)vertices.data(), vertexBufferSize }});
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize }, {
+        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float3, VertexPositionAttributeIndex }
             }
@@ -166,8 +166,8 @@ namespace Kmpleete
         const auto matricesLayout = descriptorSetManager.AddDescriptorSetLayout(MatricesDSLayout_SID, { viewProjectionLayoutBinding, instanceModelsLayoutBinding });
         descriptorSetManager.AllocateDescriptorSets(matricesLayout, MatricesDS_SID, 1, "per frame"_true);
 
-        vulkanBufferManager.CreateUniformBuffer(UniformBufferCommon_SID, { 0, VK_Memory_HostVisible | VK_Memory_HostCoherent, sizeof(CommonShaderData) }, "per frame"_true);
-        vulkanBufferManager.CreateUniformBuffer(UniformBufferInstanced_SID, { 0, VK_Memory_HostVisible | VK_Memory_HostCoherent, instanceBufferSize }, "per frame"_true);
+        vulkanBufferManager.CreateUniformBuffer(UniformBufferCommon_SID, sizeof(CommonShaderData), "per frame"_true);
+        vulkanBufferManager.CreateUniformBuffer(UniformBufferInstanced_SID, instanceBufferSize, "per frame"_true);
         for (auto i = 0; i < Graphics::NumConcurrentFrames; i++)
         {
             auto uniformBufferCommon = vulkanBufferManager.GetBuffer(UniformBufferCommon_SID, i);

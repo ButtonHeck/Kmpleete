@@ -219,14 +219,14 @@ namespace Kmpleete
             { vertexBufferSize + indexBufferSize, (char*)vertices2.data(), vertex2BufferSize }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize + vertex2BufferSize }, {
+        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize + vertex2BufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float3, VertexPositionAttributeIndex },
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float4, VertexColorAttributeIndex }
             }
         });
 
-        vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, indexBufferSize });
+        vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, indexBufferSize);
 
         renderer.CopyBuffers(stagingBuffer, {
             { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize },
@@ -249,8 +249,8 @@ namespace Kmpleete
         const auto colorMultiplierLayout = descriptorSetManager.AddDescriptorSetLayout(ColorMultiplierDSLayout_SID, { colorMultiplierLayoutBinding });
         descriptorSetManager.AllocateDescriptorSets(colorMultiplierLayout, ColorMultiplierDS_SID, 1, "per frame"_true);
 
-        vulkanBufferManager.CreateUniformBuffer(UniformBuffersColorMultiplier_SID, { 0, VK_Memory_HostVisible | VK_Memory_HostCoherent, sizeof(ShaderData) }, "per frame"_true);
-        vulkanBufferManager.CreateUniformBuffer(UniformBuffersMatrices_SID, { 0, VK_Memory_HostVisible | VK_Memory_HostCoherent, sizeof(MatrixShaderData) }, "per frame"_true);
+        vulkanBufferManager.CreateUniformBuffer(UniformBuffersColorMultiplier_SID, sizeof(ShaderData), "per frame"_true);
+        vulkanBufferManager.CreateUniformBuffer(UniformBuffersMatrices_SID, sizeof(MatrixShaderData), "per frame"_true);
         for (auto i = 0; i < Graphics::NumConcurrentFrames; i++)
         {
             auto uniformBuffer = vulkanBufferManager.GetBuffer(UniformBuffersColorMultiplier_SID, i);

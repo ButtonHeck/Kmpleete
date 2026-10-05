@@ -103,13 +103,13 @@ namespace Kmpleete
             { fixedColorBufferSize, (char*)bufferedColorVertices.data(), bufferedColorBufferSize }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBufferFixed_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, fixedColorBufferSize }, {
+        vulkanBufferManager.CreateVertexBuffer(VertexBufferFixed_SID, fixedColorBufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float2, 0 }
             }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBufferBuffered_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, bufferedColorBufferSize }, {
+        vulkanBufferManager.CreateVertexBuffer(VertexBufferBuffered_SID, bufferedColorBufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float2, 0 },
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float4, 1 },

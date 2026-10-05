@@ -178,13 +178,13 @@ namespace Kmpleete
             { vertexBufferSize, (char*)indices.data(), indexBufferSize }
         });
 
-        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, vertexBufferSize }, {
+        vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float3, VertexPositionAttributeIndex }
             }
         });
 
-        vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, { VK_BufferUsage_TransferDst, VK_Memory_DeviceLocal, indexBufferSize });
+        vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, indexBufferSize);
 
         vulkanRenderer.CopyBuffers(stagingBuffer, {
             { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize },
@@ -229,8 +229,8 @@ namespace Kmpleete
             color->a = 1.0f;
         }
 
-        vulkanBufferManager.CreateStorageBuffer(StorageBuffersMatrices_SID, { 0, VK_Memory_HostVisible | VK_Memory_HostCoherent, sizeof(MatricesShaderData) }, "per frame"_true);
-        vulkanBufferManager.CreateStorageBuffer(StorageBuffersColors_SID, { 0, VK_Memory_HostVisible | VK_Memory_HostCoherent, colorsInstanceBufferSize }, "per frame"_true);
+        vulkanBufferManager.CreateStorageBuffer(StorageBuffersMatrices_SID, sizeof(MatricesShaderData), "per frame"_true);
+        vulkanBufferManager.CreateStorageBuffer(StorageBuffersColors_SID, colorsInstanceBufferSize, "per frame"_true);
         for (auto i = 0; i < Graphics::NumConcurrentFrames; i++)
         {
             auto storageBufferMatrices = vulkanBufferManager.GetBuffer(StorageBuffersMatrices_SID, i);
