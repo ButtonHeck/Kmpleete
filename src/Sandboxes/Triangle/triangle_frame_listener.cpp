@@ -215,9 +215,9 @@ namespace Kmpleete
 
         Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({
             { 0, (char*)vertices.data(), vertexBufferSize },
-            { vertexBufferSize, (char*)indices.data(), indexBufferSize },
-            { vertexBufferSize + indexBufferSize, (char*)vertices2.data(), vertex2BufferSize }
-        });
+            { 0, (char*)indices.data(), indexBufferSize },
+            { 0, (char*)vertices2.data(), vertex2BufferSize }
+        }, "auto offset adjacent"_true);
 
         vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize + vertex2BufferSize, {
             Graphics::BufferLayout{

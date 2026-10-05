@@ -38,11 +38,11 @@ namespace Kmpleete
             VulkanBufferManager(VkDevice device, const VulkanMemoryTypeDelegate& memoryTypeDelegate);
             ~VulkanBufferManager() = default;
 
-            KMP_NODISCARD VulkanBuffer CreateStagingBuffer(const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters) const;
+            KMP_NODISCARD VulkanBuffer CreateStagingBuffer(const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters, bool autoOffsetAdjacent = false) const;
 
             KMP_NODISCARD VulkanBuffer CreateBuffer(const VulkanBufferParameters& parameters) const;
             KMP_NODISCARD VulkanBuffer CreateBuffer(VkBufferUsageFlags usageFlags, VkMemoryPropertyFlags memoryPropertyFlags, 
-                                                    const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters) const;
+                                                    const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters, bool autoOffsetAdjacent = false) const;
             bool CreateBuffer(StringID bufferSid, const VulkanBufferParameters& parameters, bool perFrame = false);
 
             bool CreateVertexBuffer(StringID bufferSid, VkDeviceSize size, const Vector<BufferLayout>& layouts = {}, bool perFrame = false);

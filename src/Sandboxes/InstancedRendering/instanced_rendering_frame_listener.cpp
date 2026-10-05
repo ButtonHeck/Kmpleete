@@ -120,10 +120,10 @@ namespace Kmpleete
 
         Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({
             { 0, (char*)vertices.data(), vertexBufferSize },
-            { vertexBufferSize, (char*)verticesInstanced.data(), vertexInstancedBufferSize },
-            { vertexBufferSize + vertexInstancedBufferSize, (char*)verticesColorsInstanced.data(), vertexColorsInstancedBufferSize },
-            { vertexBufferSize + vertexInstancedBufferSize + vertexColorsInstancedBufferSize, (char*)indices.data(), indexBufferSize }
-        });
+            { 0, (char*)verticesInstanced.data(), vertexInstancedBufferSize },
+            { 0, (char*)verticesColorsInstanced.data(), vertexColorsInstancedBufferSize },
+            { 0, (char*)indices.data(), indexBufferSize }
+        }, "auto offset adjacent"_true);
 
         vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize, {
             Graphics::BufferLayout{
