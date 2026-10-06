@@ -15,13 +15,14 @@ namespace Kmpleete
 
 
         VulkanRenderer::VulkanRenderer(GraphicsChainHandler& chainHandler, VkDevice device, const UInt32& currentBufferIndex, const VulkanPipelineManager& pipelineManager,
-                                       const VulkanShaderManager& shaderManager, UInt32 graphicsFamilyIndex, const VulkanSwapchain& swapchain)
+                                       const VulkanShaderManager& shaderManager, UInt32 graphicsFamilyIndex, const VulkanSwapchain& swapchain, const VulkanBufferManager& bufferManager)
             : Renderer(chainHandler)
               KMP_PROFILE_CONSTRUCTOR_START_DERIVED_CLASS()
             , _currentBufferIndex(currentBufferIndex)
             , _pipelineManager(pipelineManager)
             , _shaderManager(shaderManager)
             , _swapchain(swapchain)
+            , _bufferManager(bufferManager)
             , _device(device)
             , _commandPool(nullptr)
             , _drawCommandBuffers()

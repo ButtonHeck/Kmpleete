@@ -12,6 +12,7 @@
 #include "Kmpleete/Graphics/Vulkan/Pipeline/vulkan_graphics_pipeline.h"
 #include "Kmpleete/Graphics/Vulkan/Pipeline/vulkan_pipeline_manager.h"
 #include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_buffer.h"
+#include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_buffer_manager.h"
 #include "Kmpleete/Graphics/Vulkan/Shader/vulkan_shader_manager.h"
 #include "Kmpleete/Graphics/Vulkan/Texture/vulkan_texture_attachment.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
@@ -37,7 +38,7 @@ namespace Kmpleete
 
         public:
             VulkanRenderer(GraphicsChainHandler& chainHandler, VkDevice device, const UInt32& currentBufferIndex, const VulkanPipelineManager& pipelineManager,
-                           const VulkanShaderManager& shaderManager, UInt32 graphicsFamilyIndex, const VulkanSwapchain& swapchain);
+                           const VulkanShaderManager& shaderManager, UInt32 graphicsFamilyIndex, const VulkanSwapchain& swapchain, const VulkanBufferManager& bufferManager);
             ~VulkanRenderer();
 
             void BeginRendering(const VkRect2D& renderArea, const Vector<VkRenderingAttachmentInfo>& colorAttachments) const;
@@ -129,6 +130,7 @@ namespace Kmpleete
             const VulkanPipelineManager& _pipelineManager;
             const VulkanShaderManager& _shaderManager;
             const VulkanSwapchain& _swapchain;
+            const VulkanBufferManager& _bufferManager;
 
             VkDevice _device;
             UPtr<VulkanCommandPool> _commandPool;

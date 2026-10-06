@@ -553,9 +553,10 @@ namespace Kmpleete
 
         void VulkanLogicalDevice::_CreateRenderer() KMP_PROFILING(ProfileLevelImportant)
         {
-            KMP_ASSERT(_device && _swapchain);
+            KMP_ASSERT(_device && _swapchain && _bufferManager);
 
-            _renderer.reset(new VulkanRenderer(_chainHandler, _device, _currentBufferIndex, *_pipelineManager.get(), *_shaderManager.get(), _vulkanContext.graphicsFamilyIndex, *_swapchain.get()));
+            _renderer.reset(new VulkanRenderer(_chainHandler, _device, _currentBufferIndex, *_pipelineManager.get(), 
+                                               *_shaderManager.get(), _vulkanContext.graphicsFamilyIndex, *_swapchain.get(), *_bufferManager.get()));
             KMP_ASSERT(_renderer);
         }}
         //--------------------------------------------------------------------------
