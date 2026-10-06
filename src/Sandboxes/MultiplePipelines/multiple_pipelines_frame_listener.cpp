@@ -117,8 +117,8 @@ namespace Kmpleete
         });
         
         renderer.CopyBuffers(stagingBuffer, {
-            { *vulkanBufferManager.GetVertexBuffer(VertexBufferFixed_SID), 0, 0, fixedColorBufferSize },
-            { *vulkanBufferManager.GetVertexBuffer(VertexBufferBuffered_SID), fixedColorBufferSize, 0, bufferedColorBufferSize }
+            { VertexBufferFixed_SID, 0, 0, fixedColorBufferSize },
+            { VertexBufferBuffered_SID, fixedColorBufferSize, 0, bufferedColorBufferSize }
         }, vulkanDevice.GetGraphicsQueue());
     }
     //--------------------------------------------------------------------------

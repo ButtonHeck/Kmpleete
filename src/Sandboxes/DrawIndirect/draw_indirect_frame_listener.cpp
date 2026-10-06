@@ -165,11 +165,11 @@ namespace Kmpleete
         vulkanBufferManager.CreateIndirectBuffer(IndirectBuffer_SID, drawInstancedBufferSize + drawIndexedInstanceBufferSize);
 
         renderer.CopyBuffers(stagingBuffer, {
-            { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize },
-            { *vulkanBufferManager.GetVertexBuffer(VertexBufferInstanced_SID), vertexBufferSize, 0, instanceBufferSize },
-            { *vulkanBufferManager.GetBuffer(IndexBuffer_SID), vertexBufferSize + instanceBufferSize, 0, indexBufferSize },
-            { *vulkanBufferManager.GetBuffer(IndirectBuffer_SID), vertexBufferSize + instanceBufferSize + indexBufferSize, 0, drawInstancedBufferSize },
-            { *vulkanBufferManager.GetBuffer(IndirectBuffer_SID), vertexBufferSize + instanceBufferSize + indexBufferSize + drawInstancedBufferSize, drawInstancedBufferSize, drawIndexedInstanceBufferSize }
+            { VertexBuffer_SID, 0, 0, vertexBufferSize },
+            { VertexBufferInstanced_SID, vertexBufferSize, 0, instanceBufferSize },
+            { IndexBuffer_SID, vertexBufferSize + instanceBufferSize, 0, indexBufferSize },
+            { IndirectBuffer_SID, vertexBufferSize + instanceBufferSize + indexBufferSize, 0, drawInstancedBufferSize },
+            { IndirectBuffer_SID, vertexBufferSize + instanceBufferSize + indexBufferSize + drawInstancedBufferSize, drawInstancedBufferSize, drawIndexedInstanceBufferSize }
         }, vulkanDevice.GetGraphicsQueue());
     }
     //--------------------------------------------------------------------------

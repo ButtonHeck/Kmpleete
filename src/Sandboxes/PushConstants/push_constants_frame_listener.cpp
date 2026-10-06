@@ -78,7 +78,7 @@ namespace Kmpleete
         });
         
         renderer.CopyBuffers(stagingBuffer, {
-            { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize }
+            { VertexBuffer_SID, 0, 0, vertexBufferSize }
         }, vulkanDevice.GetGraphicsQueue());
 
         for (auto i = 0; i < InstancesCount; i++)

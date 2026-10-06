@@ -663,7 +663,14 @@ namespace Kmpleete
             copyCommandBuffer.Begin();
             for (const auto& singleCopyParameters : copyParameters)
             {
-                CopyBuffer(copyCommandBuffer, stagingBuffer, singleCopyParameters.destinationBuffer, singleCopyParameters.srcOffset, singleCopyParameters.dstOffset, singleCopyParameters.size);
+                auto destinationBuffer = _bufferManager.GetBuffer(singleCopyParameters.destinationBufferSid);
+                if (not destinationBuffer)
+                {
+                    KMP_LOG_WARN("cannot find destination buffer '{}' for copying", singleCopyParameters.destinationBufferSid);
+                    continue;
+                }
+
+                CopyBuffer(copyCommandBuffer, stagingBuffer, *destinationBuffer, singleCopyParameters.srcOffset, singleCopyParameters.dstOffset, singleCopyParameters.size);
             }
             copyCommandBuffer.End();
 

@@ -187,8 +187,8 @@ namespace Kmpleete
         vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, indexBufferSize);
 
         vulkanRenderer.CopyBuffers(stagingBuffer, {
-            { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize },
-            { *vulkanBufferManager.GetBuffer(IndexBuffer_SID), vertexBufferSize, 0, indexBufferSize }
+            { VertexBuffer_SID, 0, 0, vertexBufferSize },
+            { IndexBuffer_SID, vertexBufferSize, 0, indexBufferSize }
         }, vulkanDevice.GetGraphicsQueue());
     }
     //--------------------------------------------------------------------------

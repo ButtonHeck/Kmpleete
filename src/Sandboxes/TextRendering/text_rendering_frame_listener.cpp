@@ -321,7 +321,7 @@ namespace Kmpleete
         }
 
         vulkanRenderer.CopyBuffers(stagingBuffer, {
-            { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize }
+            { VertexBuffer_SID, 0, 0, vertexBufferSize }
         }, vulkanDevice.GetGraphicsQueue());
     }
     //--------------------------------------------------------------------------

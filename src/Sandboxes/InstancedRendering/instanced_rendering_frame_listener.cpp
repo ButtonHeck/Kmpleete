@@ -146,10 +146,10 @@ namespace Kmpleete
         vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, indexBufferSize);
 
         renderer.CopyBuffers(stagingBuffer, {
-            { *vulkanBufferManager.GetVertexBuffer(VertexBuffer_SID), 0, 0, vertexBufferSize },
-            { *vulkanBufferManager.GetVertexBuffer(VertexBufferPosInstanced_SID), vertexBufferSize, 0, vertexInstancedBufferSize },
-            { *vulkanBufferManager.GetVertexBuffer(VertexBufferColorsInstanced_SID), vertexBufferSize + vertexInstancedBufferSize, 0, vertexColorsInstancedBufferSize },
-            { *vulkanBufferManager.GetBuffer(IndexBuffer_SID), vertexBufferSize + vertexInstancedBufferSize + vertexColorsInstancedBufferSize, 0, indexBufferSize }
+            { VertexBuffer_SID, 0, 0, vertexBufferSize },
+            { VertexBufferPosInstanced_SID, vertexBufferSize, 0, vertexInstancedBufferSize },
+            { VertexBufferColorsInstanced_SID, vertexBufferSize + vertexInstancedBufferSize, 0, vertexColorsInstancedBufferSize },
+            { IndexBuffer_SID, vertexBufferSize + vertexInstancedBufferSize + vertexColorsInstancedBufferSize, 0, indexBufferSize }
         }, vulkanDevice.GetGraphicsQueue());
     }
     //--------------------------------------------------------------------------

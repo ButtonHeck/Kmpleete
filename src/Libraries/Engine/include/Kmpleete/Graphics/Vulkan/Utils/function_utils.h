@@ -2,6 +2,7 @@
 
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
+#include "Kmpleete/Base/string_id.h"
 
 #include <vulkan/vulkan.h>
 
@@ -13,9 +14,6 @@ namespace Kmpleete
 
     namespace Graphics
     {
-        class VulkanBuffer;
-
-
         namespace VKUtils
         {
             //! Helper parameters struct for memory barrier insertion functions
@@ -35,10 +33,9 @@ namespace Kmpleete
 
 
             //! Helper parameters struct for copy buffers regions
-            //! @see VulkanBuffer
             struct BufferCopyParameters
             {
-                VulkanBuffer& destinationBuffer;
+                StringID destinationBufferSid;
                 VkDeviceSize srcOffset;
                 VkDeviceSize dstOffset;
                 VkDeviceSize size;
