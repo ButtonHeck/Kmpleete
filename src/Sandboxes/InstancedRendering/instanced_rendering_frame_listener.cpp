@@ -147,10 +147,10 @@ namespace Kmpleete
 
         renderer.CopyBuffers(stagingBuffer, {
             { VertexBuffer_SID, 0, 0, vertexBufferSize },
-            { VertexBufferPosInstanced_SID, vertexBufferSize, 0, vertexInstancedBufferSize },
-            { VertexBufferColorsInstanced_SID, vertexBufferSize + vertexInstancedBufferSize, 0, vertexColorsInstancedBufferSize },
-            { IndexBuffer_SID, vertexBufferSize + vertexInstancedBufferSize + vertexColorsInstancedBufferSize, 0, indexBufferSize }
-        }, vulkanDevice.GetGraphicsQueue());
+            { VertexBufferPosInstanced_SID, 0, 0, vertexInstancedBufferSize },
+            { VertexBufferColorsInstanced_SID, 0, 0, vertexColorsInstancedBufferSize },
+            { IndexBuffer_SID, 0, 0, indexBufferSize }
+        }, vulkanDevice.GetGraphicsQueue(), "auto copy offset adjacent"_true);
     }
     //--------------------------------------------------------------------------
 

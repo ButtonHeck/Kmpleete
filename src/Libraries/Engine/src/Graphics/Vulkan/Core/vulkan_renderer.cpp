@@ -657,10 +657,12 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-        void VulkanRenderer::CopyBuffers(const VulkanBuffer& stagingBuffer, const Vector<VKUtils::BufferCopyParameters>& copyParameters, const VulkanQueue& queue) const KMP_PROFILING(ProfileLevelImportantVerbose)
+        void VulkanRenderer::CopyBuffers(const VulkanBuffer& stagingBuffer, const Vector<VKUtils::BufferCopyParameters>& copyParameters, 
+                                         const VulkanQueue& queue, bool autoCopyOffsetAdjacent /*= false*/) const KMP_PROFILING(ProfileLevelImportantVerbose)
         {
             const auto copyCommandBuffer = CreateCommandBuffer();
             copyCommandBuffer.Begin();
+            VkDeviceSize copySrcOffset = 0;
             for (const auto& singleCopyParameters : copyParameters)
             {
                 auto destinationBuffer = _bufferManager.GetBuffer(singleCopyParameters.destinationBufferSid);
@@ -670,7 +672,15 @@ namespace Kmpleete
                     continue;
                 }
 
-                CopyBuffer(copyCommandBuffer, stagingBuffer, *destinationBuffer, singleCopyParameters.srcOffset, singleCopyParameters.dstOffset, singleCopyParameters.size);
+                if (autoCopyOffsetAdjacent)
+                {
+                    CopyBuffer(copyCommandBuffer, stagingBuffer, *destinationBuffer, copySrcOffset, singleCopyParameters.dstOffset, singleCopyParameters.size);
+                    copySrcOffset += singleCopyParameters.size;
+                }
+                else
+                {
+                    CopyBuffer(copyCommandBuffer, stagingBuffer, *destinationBuffer, singleCopyParameters.srcOffset, singleCopyParameters.dstOffset, singleCopyParameters.size);
+                }
             }
             copyCommandBuffer.End();
 

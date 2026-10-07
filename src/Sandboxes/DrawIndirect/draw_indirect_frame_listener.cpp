@@ -166,11 +166,11 @@ namespace Kmpleete
 
         renderer.CopyBuffers(stagingBuffer, {
             { VertexBuffer_SID, 0, 0, vertexBufferSize },
-            { VertexBufferInstanced_SID, vertexBufferSize, 0, instanceBufferSize },
-            { IndexBuffer_SID, vertexBufferSize + instanceBufferSize, 0, indexBufferSize },
-            { IndirectBuffer_SID, vertexBufferSize + instanceBufferSize + indexBufferSize, 0, drawInstancedBufferSize },
-            { IndirectBuffer_SID, vertexBufferSize + instanceBufferSize + indexBufferSize + drawInstancedBufferSize, drawInstancedBufferSize, drawIndexedInstanceBufferSize }
-        }, vulkanDevice.GetGraphicsQueue());
+            { VertexBufferInstanced_SID, 0, 0, instanceBufferSize },
+            { IndexBuffer_SID, 0, 0, indexBufferSize },
+            { IndirectBuffer_SID, 0, 0, drawInstancedBufferSize },
+            { IndirectBuffer_SID, 0, drawInstancedBufferSize, drawIndexedInstanceBufferSize }
+        }, vulkanDevice.GetGraphicsQueue(), "auto copy offset adjacent"_true);
     }
     //--------------------------------------------------------------------------
 

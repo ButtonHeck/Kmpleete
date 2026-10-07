@@ -230,9 +230,9 @@ namespace Kmpleete
 
         renderer.CopyBuffers(stagingBuffer, {
             { VertexBuffer_SID, 0, 0, vertexBufferSize },
-            { IndexBuffer_SID, vertexBufferSize, 0, indexBufferSize },
-            { VertexBuffer_SID, vertexBufferSize + indexBufferSize, vertexBufferSize, vertex2BufferSize }
-        }, vulkanDevice.GetGraphicsQueue());
+            { IndexBuffer_SID, 0, 0, indexBufferSize },
+            { VertexBuffer_SID, 0, vertexBufferSize, vertex2BufferSize }
+        }, vulkanDevice.GetGraphicsQueue(), "auto copy offset adjacent"_true);
     }
     //--------------------------------------------------------------------------
 
