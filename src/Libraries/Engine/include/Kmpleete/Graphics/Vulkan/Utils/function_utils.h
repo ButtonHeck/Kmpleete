@@ -42,6 +42,17 @@ namespace Kmpleete
             };
             //--------------------------------------------------------------------------
 
+            //! Helper parameters struct for copy buffers regions, where each subsequent
+            //! srcOffset is based on sizes of previous regions
+            struct BufferCopyAdjacentParameters
+            {
+                StringID destinationBufferSid;
+                VkDeviceSize dstOffset;
+                VkDeviceSize size;
+            };
+            //--------------------------------------------------------------------------
+
+
             KMP_API void InsertImageMemoryBarrier(const MemoryBarrierParameters& barrierParameters);
 
             KMP_NODISCARD KMP_API VkImageViewType ImageTypeToViewType(VkImageType imageType, bool array = false) noexcept;

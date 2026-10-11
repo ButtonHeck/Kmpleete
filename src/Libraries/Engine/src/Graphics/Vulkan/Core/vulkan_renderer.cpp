@@ -657,8 +657,28 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-        void VulkanRenderer::CopyBuffers(const VulkanBuffer& stagingBuffer, const Vector<VKUtils::BufferCopyParameters>& copyParameters, 
-                                         const VulkanQueue& queue, bool autoCopyOffsetAdjacent /*= false*/) const KMP_PROFILING(ProfileLevelImportantVerbose)
+        void VulkanRenderer::CopyBuffers(const VulkanBuffer& stagingBuffer, const Vector<VKUtils::BufferCopyParameters>& copyParameters, const VulkanQueue& queue) const KMP_PROFILING(ProfileLevelImportantVerbose)
+        {
+            const auto copyCommandBuffer = CreateCommandBuffer();
+            copyCommandBuffer.Begin();
+            for (const auto& singleCopyParameters : copyParameters)
+            {
+                auto destinationBuffer = _bufferManager.GetBuffer(singleCopyParameters.destinationBufferSid);
+                if (not destinationBuffer)
+                {
+                    KMP_LOG_WARN("cannot find destination buffer '{}' for copying", singleCopyParameters.destinationBufferSid);
+                    continue;
+                }
+
+                CopyBuffer(copyCommandBuffer, stagingBuffer, *destinationBuffer, singleCopyParameters.srcOffset, singleCopyParameters.dstOffset, singleCopyParameters.size);
+            }
+            copyCommandBuffer.End();
+
+            queue.SyncSubmit(copyCommandBuffer);
+        }}
+        //--------------------------------------------------------------------------
+
+        void VulkanRenderer::CopyBuffersAdjacent(const VulkanBuffer& stagingBuffer, const Vector<VKUtils::BufferCopyAdjacentParameters>& copyParameters, const VulkanQueue& queue) const KMP_PROFILING(ProfileLevelImportantVerbose)
         {
             const auto copyCommandBuffer = CreateCommandBuffer();
             copyCommandBuffer.Begin();
@@ -672,15 +692,8 @@ namespace Kmpleete
                     continue;
                 }
 
-                if (autoCopyOffsetAdjacent)
-                {
-                    CopyBuffer(copyCommandBuffer, stagingBuffer, *destinationBuffer, copySrcOffset, singleCopyParameters.dstOffset, singleCopyParameters.size);
-                    copySrcOffset += singleCopyParameters.size;
-                }
-                else
-                {
-                    CopyBuffer(copyCommandBuffer, stagingBuffer, *destinationBuffer, singleCopyParameters.srcOffset, singleCopyParameters.dstOffset, singleCopyParameters.size);
-                }
+                CopyBuffer(copyCommandBuffer, stagingBuffer, *destinationBuffer, copySrcOffset, singleCopyParameters.dstOffset, singleCopyParameters.size);
+                copySrcOffset += singleCopyParameters.size;
             }
             copyCommandBuffer.End();
 

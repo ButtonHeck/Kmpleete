@@ -145,12 +145,12 @@ namespace Kmpleete
 
         vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, indexBufferSize);
 
-        renderer.CopyBuffers(stagingBuffer, {
-            { VertexBuffer_SID, 0, 0, vertexBufferSize },
-            { VertexBufferPosInstanced_SID, 0, 0, vertexInstancedBufferSize },
-            { VertexBufferColorsInstanced_SID, 0, 0, vertexColorsInstancedBufferSize },
-            { IndexBuffer_SID, 0, 0, indexBufferSize }
-        }, vulkanDevice.GetGraphicsQueue(), "auto copy offset adjacent"_true);
+        renderer.CopyBuffersAdjacent(stagingBuffer, {
+            { VertexBuffer_SID, 0, vertexBufferSize },
+            { VertexBufferPosInstanced_SID, 0, vertexInstancedBufferSize },
+            { VertexBufferColorsInstanced_SID, 0, vertexColorsInstancedBufferSize },
+            { IndexBuffer_SID, 0, indexBufferSize }
+        }, vulkanDevice.GetGraphicsQueue());
     }
     //--------------------------------------------------------------------------
 

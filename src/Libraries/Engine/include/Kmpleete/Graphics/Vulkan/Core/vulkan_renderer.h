@@ -113,7 +113,8 @@ namespace Kmpleete
             void CopyBuffer(const VulkanCommandBuffer& commandBuffer, const VulkanBuffer& sourceBuffer, const VulkanBuffer& destinationBuffer, VkDeviceSize srcOffset, VkDeviceSize dstOffset, VkDeviceSize size) const;
             void CopyBuffer(const VulkanCommandBuffer& commandBuffer, const VulkanBuffer& sourceBuffer, const VulkanBuffer& destinationBuffer, const VkBufferCopy& copyRegion) const;
             void CopyBuffer(const VulkanCommandBuffer& commandBuffer, const VulkanBuffer& sourceBuffer, const VulkanBuffer& destinationBuffer, const Vector<VkBufferCopy>& copyRegions) const;
-            void CopyBuffers(const VulkanBuffer& stagingBuffer, const Vector<VKUtils::BufferCopyParameters>& copyParameters, const VulkanQueue& queue, bool autoCopyOffsetAdjacent = false) const;
+            void CopyBuffers(const VulkanBuffer& stagingBuffer, const Vector<VKUtils::BufferCopyParameters>& copyParameters, const VulkanQueue& queue) const;
+            void CopyBuffersAdjacent(const VulkanBuffer& stagingBuffer, const Vector<VKUtils::BufferCopyAdjacentParameters>& copyParameters, const VulkanQueue& queue) const;
 
             KMP_NODISCARD VulkanCommandBuffer CreateCommandBuffer() const;
             KMP_NODISCARD VkCommandBuffer GetCurrentCommandBuffer() const noexcept;
