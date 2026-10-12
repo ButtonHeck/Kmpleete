@@ -678,6 +678,13 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
+        void VulkanRenderer::CopyBuffers(const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters, const Vector<VKUtils::BufferCopyParameters>& copyParameters, const VulkanQueue& queue) const KMP_PROFILING(ProfileLevelImportantVerbose)
+        {
+            const auto stagingBuffer = _bufferManager.CreateStagingBuffer(dataMappingParameters);
+            CopyBuffers(stagingBuffer, copyParameters, queue);
+        }}
+        //--------------------------------------------------------------------------
+
         void VulkanRenderer::CopyBuffersAdjacent(const VulkanBuffer& stagingBuffer, const Vector<VKUtils::BufferCopyAdjacentParameters>& copyParameters, const VulkanQueue& queue) const KMP_PROFILING(ProfileLevelImportantVerbose)
         {
             const auto copyCommandBuffer = CreateCommandBuffer();
@@ -698,6 +705,13 @@ namespace Kmpleete
             copyCommandBuffer.End();
 
             queue.SyncSubmit(copyCommandBuffer);
+        }}
+        //--------------------------------------------------------------------------
+
+        void VulkanRenderer::CopyBuffersAdjacent(const Vector<VulkanBufferDataMappingParametersAdjacent>& dataMappingParameters, const Vector<VKUtils::BufferCopyAdjacentParameters>& copyParameters, const VulkanQueue& queue) const KMP_PROFILING(ProfileLevelImportantVerbose)
+        {
+            const auto stagingBuffer = _bufferManager.CreateStagingBufferAdjacent(dataMappingParameters);
+            CopyBuffersAdjacent(stagingBuffer, copyParameters, queue);
         }}
         //--------------------------------------------------------------------------
 

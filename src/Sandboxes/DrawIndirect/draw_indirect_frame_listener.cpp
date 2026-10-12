@@ -140,14 +140,6 @@ namespace Kmpleete
         drawIndexedIndirectCommands.push_back(indexedCommand);
         const auto drawIndexedInstanceBufferSize = UInt32(drawIndexedIndirectCommands.size() * sizeof(VkDrawIndexedIndirectCommand));
 
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBufferAdjacent({
-            { (char*)vertices.data(), vertexBufferSize },
-            { (char*)instanceData.data(), instanceBufferSize },
-            { (char*)indices.data(), indexBufferSize },
-            { (char*)drawIndirectCommands.data(), drawInstancedBufferSize },
-            { (char*)drawIndexedIndirectCommands.data(), drawIndexedInstanceBufferSize }
-        });
-
         vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float2, VertexPositionAttributeIndex }
@@ -164,7 +156,13 @@ namespace Kmpleete
         vulkanBufferManager.CreateIndexBuffer(IndexBuffer_SID, indexBufferSize);
         vulkanBufferManager.CreateIndirectBuffer(IndirectBuffer_SID, drawInstancedBufferSize + drawIndexedInstanceBufferSize);
 
-        renderer.CopyBuffersAdjacent(stagingBuffer, {
+        renderer.CopyBuffersAdjacent({
+            { (char*)vertices.data(), vertexBufferSize },
+            { (char*)instanceData.data(), instanceBufferSize },
+            { (char*)indices.data(), indexBufferSize },
+            { (char*)drawIndirectCommands.data(), drawInstancedBufferSize },
+            { (char*)drawIndexedIndirectCommands.data(), drawIndexedInstanceBufferSize }
+        }, {
             { VertexBuffer_SID, 0, vertexBufferSize },
             { VertexBufferInstanced_SID, 0, instanceBufferSize },
             { IndexBuffer_SID, 0, indexBufferSize },

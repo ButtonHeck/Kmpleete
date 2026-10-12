@@ -98,11 +98,6 @@ namespace Kmpleete
         };
         const auto bufferedColorBufferSize = UInt32(bufferedColorVertices.size() * sizeof(BufferedColorVertex));
 
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({
-            { 0, (char*)fixedColorVertices.data(), fixedColorBufferSize },
-            { fixedColorBufferSize, (char*)bufferedColorVertices.data(), bufferedColorBufferSize }
-        });
-
         vulkanBufferManager.CreateVertexBuffer(VertexBufferFixed_SID, fixedColorBufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float2, 0 }
@@ -116,7 +111,10 @@ namespace Kmpleete
             }
         });
         
-        renderer.CopyBuffers(stagingBuffer, {
+        renderer.CopyBuffers({
+            { 0, (char*)fixedColorVertices.data(), fixedColorBufferSize },
+            { fixedColorBufferSize, (char*)bufferedColorVertices.data(), bufferedColorBufferSize }
+        }, {
             { VertexBufferFixed_SID, 0, 0, fixedColorBufferSize },
             { VertexBufferBuffered_SID, fixedColorBufferSize, 0, bufferedColorBufferSize }
         }, vulkanDevice.GetGraphicsQueue());

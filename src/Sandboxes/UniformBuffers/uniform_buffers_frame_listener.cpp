@@ -130,15 +130,15 @@ namespace Kmpleete
         };
         const auto vertexBufferSize = UInt32(vertices.size() * sizeof(Vertex));
 
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({{ 0, (char*)vertices.data(), vertexBufferSize }});
-
         vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize, {
             Graphics::BufferLayout{
                 Graphics::BufferElement{ Graphics::ShaderDataType::Float3, VertexPositionAttributeIndex }
             }
         });
 
-        vulkanRenderer.CopyBuffers(stagingBuffer, {
+        vulkanRenderer.CopyBuffers({
+            { 0, (char*)vertices.data(), vertexBufferSize }
+        }, {
             { VertexBuffer_SID, 0, 0, vertexBufferSize }
         }, vulkanDevice.GetGraphicsQueue());
     }
