@@ -36,6 +36,16 @@ namespace Kmpleete
         };
         //--------------------------------------------------------------------------
 
+        //! Helper struct for storing buffer's data CPU->GPU transfer parameters, where
+        //! each subsequent offset is based on sizes of previous entries
+        //! @see VulkanBuffer
+        struct VulkanBufferDataMappingParametersAdjacent
+        {
+            void* data;
+            VkDeviceSize size;
+        };
+        //--------------------------------------------------------------------------
+
 
         //! Base class of a Vulkan buffer object, supports memory management functionality such as: (un)mapping,
         //! flushing, invalidation, copying. Buffer's intentional usage can be acquired either by using VkBufferUsageFlags getter or 

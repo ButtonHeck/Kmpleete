@@ -140,13 +140,13 @@ namespace Kmpleete
         drawIndexedIndirectCommands.push_back(indexedCommand);
         const auto drawIndexedInstanceBufferSize = UInt32(drawIndexedIndirectCommands.size() * sizeof(VkDrawIndexedIndirectCommand));
 
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({
-            { 0, (char*)vertices.data(), vertexBufferSize },
-            { 0, (char*)instanceData.data(), instanceBufferSize },
-            { 0, (char*)indices.data(), indexBufferSize },
-            { 0, (char*)drawIndirectCommands.data(), drawInstancedBufferSize },
-            { 0, (char*)drawIndexedIndirectCommands.data(), drawIndexedInstanceBufferSize }
-        }, "auto offset adjacent"_true);
+        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBufferAdjacent({
+            { (char*)vertices.data(), vertexBufferSize },
+            { (char*)instanceData.data(), instanceBufferSize },
+            { (char*)indices.data(), indexBufferSize },
+            { (char*)drawIndirectCommands.data(), drawInstancedBufferSize },
+            { (char*)drawIndexedIndirectCommands.data(), drawIndexedInstanceBufferSize }
+        });
 
         vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize, {
             Graphics::BufferLayout{

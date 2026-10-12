@@ -28,13 +28,6 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
 
-        VulkanBuffer VulkanBufferManager::CreateStagingBuffer(const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters, bool autoOffsetAdjacent /*= false*/) const
-        {
-            return CreateBuffer(VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, dataMappingParameters, autoOffsetAdjacent);
-        }
-        //--------------------------------------------------------------------------
-
-
         VulkanBuffer VulkanBufferManager::CreateBuffer(const VulkanBufferParameters& parameters) const KMP_PROFILING(ProfileLevelImportant)
         {
             return _CreateBuffer(parameters);
@@ -42,7 +35,30 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
         VulkanBuffer VulkanBufferManager::CreateBuffer(VkBufferUsageFlags usageFlags, VkMemoryPropertyFlags memoryPropertyFlags, 
-                                                       const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters, bool autoOffsetAdjacent /*= false*/) const KMP_PROFILING(ProfileLevelImportant)
+                                                       const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters) const KMP_PROFILING(ProfileLevelImportant)
+        {
+            VulkanBufferParameters parameters{ .usageFlags = usageFlags, .memoryPropertyFlags = memoryPropertyFlags, .size = 0 };
+            VkDeviceSize summarySize = 0;
+            for (const auto& dataMapping : dataMappingParameters)
+            {
+                summarySize += dataMapping.size;
+            }
+            parameters.size = summarySize;
+
+            auto buffer = _CreateBuffer(parameters);
+            buffer.Map();
+            for (const auto& dataMapping : dataMappingParameters)
+            {
+                buffer.CopyToMappedMemory(dataMapping);
+            }
+            buffer.Unmap("flush"_true);
+
+            return buffer;
+        }}
+        //--------------------------------------------------------------------------
+
+        VulkanBuffer VulkanBufferManager::CreateBufferAdjacent(VkBufferUsageFlags usageFlags, VkMemoryPropertyFlags memoryPropertyFlags, 
+                                                               const Vector<VulkanBufferDataMappingParametersAdjacent>& dataMappingParameters) const KMP_PROFILING(ProfileLevelImportant)
         {
             VulkanBufferParameters parameters{ .usageFlags = usageFlags, .memoryPropertyFlags = memoryPropertyFlags, .size = 0 };
             VkDeviceSize summarySize = 0;
@@ -57,15 +73,8 @@ namespace Kmpleete
             UInt32 mappedOffset = 0;
             for (const auto& dataMapping : dataMappingParameters)
             {
-                if (autoOffsetAdjacent)
-                {
-                    buffer.CopyToMappedMemory(mappedOffset, dataMapping.data, dataMapping.size);
-                    mappedOffset += UInt32(dataMapping.size);
-                }
-                else
-                {
-                    buffer.CopyToMappedMemory(dataMapping);
-                }
+                buffer.CopyToMappedMemory(mappedOffset, dataMapping.data, dataMapping.size);
+                mappedOffset += UInt32(dataMapping.size);
             }
             buffer.Unmap("flush"_true);
 
@@ -109,6 +118,19 @@ namespace Kmpleete
                 return hasEmplaced;
             }
         }}
+        //--------------------------------------------------------------------------
+
+
+        VulkanBuffer VulkanBufferManager::CreateStagingBuffer(const Vector<VulkanBufferDataMappingParameters>& dataMappingParameters) const
+        {
+            return CreateBuffer(VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, dataMappingParameters);
+        }
+        //--------------------------------------------------------------------------
+
+        VulkanBuffer VulkanBufferManager::CreateStagingBufferAdjacent(const Vector<VulkanBufferDataMappingParametersAdjacent>& dataMappingParameters) const
+        {
+            return CreateBufferAdjacent(VK_BufferUsage_TransferSrc, VK_Memory_HostVisible, dataMappingParameters);
+        }
         //--------------------------------------------------------------------------
 
 

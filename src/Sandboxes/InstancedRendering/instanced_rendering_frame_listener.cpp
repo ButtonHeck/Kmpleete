@@ -118,12 +118,12 @@ namespace Kmpleete
         _indexCount = UInt32(indices.size());
         UInt32 indexBufferSize = _indexCount * sizeof(UInt32);
 
-        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBuffer({
-            { 0, (char*)vertices.data(), vertexBufferSize },
-            { 0, (char*)verticesInstanced.data(), vertexInstancedBufferSize },
-            { 0, (char*)verticesColorsInstanced.data(), vertexColorsInstancedBufferSize },
-            { 0, (char*)indices.data(), indexBufferSize }
-        }, "auto offset adjacent"_true);
+        Graphics::VulkanBuffer stagingBuffer = vulkanBufferManager.CreateStagingBufferAdjacent({
+            { (char*)vertices.data(), vertexBufferSize },
+            { (char*)verticesInstanced.data(), vertexInstancedBufferSize },
+            { (char*)verticesColorsInstanced.data(), vertexColorsInstancedBufferSize },
+            { (char*)indices.data(), indexBufferSize }
+        });
 
         vulkanBufferManager.CreateVertexBuffer(VertexBuffer_SID, vertexBufferSize, {
             Graphics::BufferLayout{
