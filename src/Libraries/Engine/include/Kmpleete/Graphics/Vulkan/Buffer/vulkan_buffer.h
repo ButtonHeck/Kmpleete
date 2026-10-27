@@ -26,8 +26,16 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
 
-        //! Helper struct for storing buffers's data CPU->GPU transfer parameters
+        //! Helper struct for storing a single data chunk CPU->GPU transfer parameters into a mapped buffer region.
+        //! Describes a memcpy-like write of size bytes from the CPU-side data pointer into the mapped
+        //! buffer memory at byte offset mappedOffset relative to the mapped base pointer. When a Vector
+        //! of such parameters is passed to buffer creation functions, the
+        //! resulting buffer size equals the summary of all sizes, so each chunk must satisfy
+        //! mappedOffset + size <= resulting buffer size. Explicit offsets allow non-contiguous placement
+        //! (e.g. alignment padding), unlike VulkanBufferDataMappingParametersAdjacent where offsets are
+        //! accumulated from sizes of previous entries automatically.
         //! @see VulkanBuffer
+        //! @see VulkanBufferDataMappingParametersAdjacent
         struct VulkanBufferDataMappingParameters
         {
             UInt32 mappedOffset;
@@ -36,9 +44,14 @@ namespace Kmpleete
         };
         //--------------------------------------------------------------------------
 
-        //! Helper struct for storing buffer's data CPU->GPU transfer parameters, where
-        //! each subsequent offset is based on sizes of previous entries
+        //! Helper struct for storing a single data chunk CPU->GPU transfer parameters into a mapped buffer region,
+        //! where the destination offset is not specified explicitly but accumulated from the sizes of previous
+        //! entries. When a Vector of such parameters is passed to buffer creation functions
+        //! chunks are packed back-to-back in vector order starting at offset 0, and
+        //! the resulting buffer size equals the summary of all sizes. This is a more compact alternative to
+        //! VulkanBufferDataMappingParameters for contiguous layouts without padding.
         //! @see VulkanBuffer
+        //! @see VulkanBufferDataMappingParameters
         struct VulkanBufferDataMappingParametersAdjacent
         {
             void* data;
