@@ -57,7 +57,7 @@ namespace Kmpleete
             catch (KMP_MB_UNUSED const RuntimeError& er)
             {
                 KMP_LOG_ERROR("failed to create shader module with sid '{}' from '{}'", moduleSid, filepathBinary);
-                return std::nullopt;
+                return NullOptional;
             }
         }}
         //--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ namespace Kmpleete
             catch (KMP_MB_UNUSED const RuntimeError& er)
             {
                 KMP_LOG_ERROR("failed to create shader module with sid '{}' from binary", moduleSid);
-                return std::nullopt;
+                return NullOptional;
             }
         }}
         //--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ namespace Kmpleete
             }
 
             KMP_LOG_ERROR("shader module with sid '{}' not found", moduleSid);
-            return std::nullopt;
+            return NullOptional;
         }}
         //--------------------------------------------------------------------------
 

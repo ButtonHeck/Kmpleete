@@ -156,7 +156,7 @@ namespace Kmpleete
             }
             
             KMP_LOG_ERROR("graphics pipeline with sid '{}' not found", pipelineSid);
-            return std::nullopt;
+            return NullOptional;
         }
         //--------------------------------------------------------------------------
     }

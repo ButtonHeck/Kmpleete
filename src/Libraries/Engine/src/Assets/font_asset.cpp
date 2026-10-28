@@ -61,7 +61,7 @@ namespace Kmpleete
                 if (not atlasTexture)
                 {
                     KMP_LOG_ERROR("failed to create '{}' locale texture atlas for asset '{}'", localeSid, _sid);
-                    std::nullopt;
+                    return NullOptional;
                 }
 
                 _atlasesTextures[localeSid] = std::move(atlasTexture);
@@ -69,7 +69,7 @@ namespace Kmpleete
             }
 
             KMP_LOG_ERROR("failed to find font atlas texture for sid '{}' for locale '{}'", _sid, localeSid);
-            return std::nullopt;
+            return NullOptional;
         }
         //--------------------------------------------------------------------------
 

@@ -79,7 +79,7 @@ namespace Kmpleete
             else
             {
                 KMP_LOG_ERROR_FN("StringToShaderType: shader type for string '{}' not found", shaderTypeString);
-                return std::nullopt;
+                return NullOptional;
             }
         }
         //--------------------------------------------------------------------------

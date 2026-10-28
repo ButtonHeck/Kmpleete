@@ -337,7 +337,7 @@ namespace Kmpleete
         catch (KMP_MB_UNUSED const RuntimeError& error)
         {
             KMP_LOG_ERROR("failed to add cursor '{}' from '{}' - {}", name, filepath, error.what());
-            return std::nullopt;
+            return NullOptional;
         }
 
         return std::cref(*_cursors.at(name).get());
@@ -349,7 +349,7 @@ namespace Kmpleete
         if (not _cursors.contains(name))
         {
             KMP_LOG_WARN("cannot find cursor named '{}'", name);
-            return std::nullopt;
+            return NullOptional;
         }
 
         return std::cref(*_cursors.at(name).get());

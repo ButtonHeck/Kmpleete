@@ -33,7 +33,7 @@ namespace Kmpleete
             return std::ref(*_namedSettingsDocuments.at(name).get());
         }
 
-        return std::nullopt;
+        return NullOptional;
     }}
     //--------------------------------------------------------------------------
 

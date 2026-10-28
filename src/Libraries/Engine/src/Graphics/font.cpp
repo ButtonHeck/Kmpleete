@@ -108,7 +108,7 @@ namespace Kmpleete
             }
 
             KMP_LOG_ERROR("cannot find atlas for locale SID '{}'", localeSid);
-            return std::nullopt;
+            return NullOptional;
         }
         //--------------------------------------------------------------------------
 

@@ -82,7 +82,7 @@ namespace Kmpleete
             }
 
             KMP_LOG_ERROR("texture attachment with sid '{}' not found", attachmentSid);
-            return std::nullopt;
+            return NullOptional;
         }
         //--------------------------------------------------------------------------
 

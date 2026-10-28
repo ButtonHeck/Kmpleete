@@ -16,4 +16,6 @@ namespace Kmpleete
 
     template<typename T>
     using OptionalRef = Optional<Ref<T>>;
+
+    static constexpr std::nullopt_t NullOptional = std::nullopt;
 }
