@@ -28,11 +28,12 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        Vector<FontCharacterVertex> FontAtlas::GenerateTextVertices(const WString& text, float x, float y, float scale, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
+        Vector<FontCharacterVertex> FontAtlas::GenerateTextVertices(const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
         {
             Vector<FontCharacterVertex> vertices;
             vertices.reserve(6 * text.size());
 
+            const auto scale = pixelSize / float(_parameters.sizeMetrics.xPixelsPerEM);
             for (const auto& c : text)
             {
                 if (_fontCharacters.find(c) == _fontCharacters.end())
