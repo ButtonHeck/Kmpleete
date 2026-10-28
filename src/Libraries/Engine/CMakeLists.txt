@@ -92,6 +92,7 @@ AddTargetSourcesGroup(Kmpleete "Graphics"
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/image.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/texture.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/font.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/font_parameters.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/font_character.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/font_atlas.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Graphics/camera.h

@@ -4,6 +4,7 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Base/optional.h"
+#include "Kmpleete/Graphics/font_parameters.h"
 #include "Kmpleete/Graphics/font_atlas.h"
 #include "Kmpleete/Localization/localization_base.h"
 #include "Kmpleete/Log/log_class_macro.h"
@@ -27,40 +28,7 @@ namespace Kmpleete
             KMP_DISABLE_COPY_MOVE(Font)
 
         public:
-            static constexpr auto DefaultFontPixelSize = 48;
-
-        public:
-            struct Parameters
-            {
-                enum Style : UInt8
-                {
-                    Regular    = 0,
-                    Italic     = 1 << 0,
-                    Bold       = 1 << 1,
-                    ItalicBold = Italic | Bold
-                };
-
-                struct SizeMetrics
-                {
-                    UInt16 xPixelsPerEM = 0;
-                    UInt16 yPixelsPerEM = 0;
-                    Int32 xScale = 0;
-                    Int32 yScale = 0;
-                    Int32 height = 0;
-                };
-
-                String familyName = "";
-                UInt8 style = Style::Regular;
-                bool scalable = true;
-                bool monospace = false;
-                Int32 numGlyphs = 0;
-                UInt16 unitsPerEM = 0;
-                Int16 lineHeight = 0;
-                Int16 ascender = 0;
-                Int16 descender = 0;
-                Int16 maxAdvance = 0;
-                SizeMetrics sizeMetrics = {};
-            };
+            static constexpr auto DefaultFontPixelSize = 48;            
 
         public:
             Font(FT_LibraryRec_& freetypeLib, BinaryBuffer&& fontBuffer);
@@ -71,8 +39,8 @@ namespace Kmpleete
             bool SetPixelSize(UInt8 size);
 
             KMP_NODISCARD const BinaryBuffer& GetBuffer() const noexcept;
-            KMP_NODISCARD const Parameters& GetParameters() const noexcept;
-            KMP_NODISCARD bool HasStyle(Parameters::Style flag) const noexcept;
+            KMP_NODISCARD const FontParameters& GetParameters() const noexcept;
+            KMP_NODISCARD bool HasStyle(FontParameters::Style flag) const noexcept;
             KMP_NODISCARD OptionalRef<const FontAtlas> GetAtlas(const LocaleStrSID& localeSid) const noexcept;
 
         private:
@@ -83,7 +51,7 @@ namespace Kmpleete
         private:
             FT_FaceRec_* _freetypeFace;
             BinaryBuffer _fontBuffer;
-            Parameters _parameters;
+            FontParameters _parameters;
             HashMap<LocaleStrSID, UPtr<FontAtlas>> _atlases;
         };
         //--------------------------------------------------------------------------

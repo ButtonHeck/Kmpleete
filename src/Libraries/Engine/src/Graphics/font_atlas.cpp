@@ -10,9 +10,10 @@ namespace Kmpleete
 {
     namespace Graphics
     {
-        FontAtlas::FontAtlas(FT_FaceRec_* freetypeFace, const CodepointVector& codepoints)
+        FontAtlas::FontAtlas(FT_FaceRec_* freetypeFace, const FontParameters& parameters, const CodepointVector& codepoints)
             : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()
               _freetypeFace(freetypeFace)
+            , _parameters(parameters)
             , _width(0)
             , _height(0)
             , _atlasImage(nullptr)

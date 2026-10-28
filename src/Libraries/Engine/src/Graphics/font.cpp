@@ -88,13 +88,13 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        const Font::Parameters& Font::GetParameters() const noexcept
+        const FontParameters& Font::GetParameters() const noexcept
         {
             return _parameters;
         }
         //--------------------------------------------------------------------------
 
-        bool Font::HasStyle(Parameters::Style flag) const noexcept
+        bool Font::HasStyle(FontParameters::Style flag) const noexcept
         {
             return (_parameters.style & static_cast<UInt8>(flag)) != 0;
         }
@@ -119,14 +119,14 @@ namespace Kmpleete
             _parameters.familyName = _freetypeFace->family_name;
 
             const auto style = _freetypeFace->style_flags;
-            _parameters.style = Parameters::Style::Regular;
+            _parameters.style = FontParameters::Style::Regular;
             if (style & FT_STYLE_FLAG_BOLD)
             {
-                _parameters.style |= Parameters::Style::Bold;
+                _parameters.style |= FontParameters::Style::Bold;
             }
             if (style & FT_STYLE_FLAG_ITALIC)
             {
-                _parameters.style |= Parameters::Style::Italic;
+                _parameters.style |= FontParameters::Style::Italic;
             }
 
             _parameters.scalable = _freetypeFace->face_flags & FT_FACE_FLAG_SCALABLE;
@@ -163,7 +163,7 @@ namespace Kmpleete
 
             {
                 const auto& enLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(SidLocaleEnUTF8);
-                const auto [iterator, hasEmplaced] = _atlases.emplace(SidLocaleEnUTF8, CreateUPtr<FontAtlas>(_freetypeFace, enLocaleCodepoints));
+                const auto [iterator, hasEmplaced] = _atlases.emplace(SidLocaleEnUTF8, CreateUPtr<FontAtlas>(_freetypeFace, _parameters, enLocaleCodepoints));
                 if (not hasEmplaced)
                 {
                     KMP_LOG_ERROR("failed to create English locale atlas object");
@@ -171,7 +171,7 @@ namespace Kmpleete
             }
             {
                 const auto& ruLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(SidLocaleRuUTF8);
-                const auto [iterator, hasEmplaced] = _atlases.emplace(SidLocaleRuUTF8, CreateUPtr<FontAtlas>(_freetypeFace, ruLocaleCodepoints));
+                const auto [iterator, hasEmplaced] = _atlases.emplace(SidLocaleRuUTF8, CreateUPtr<FontAtlas>(_freetypeFace, _parameters, ruLocaleCodepoints));
                 if (not hasEmplaced)
                 {
                     KMP_LOG_ERROR("failed to create Russian locale atlas object");
