@@ -24,6 +24,8 @@ namespace Kmpleete
         private:
             KMP_NODISCARD static bool _InitializeEn();
             KMP_NODISCARD static bool _InitializeRu();
+
+            static void _addASCIITable(CodepointVector& codepoints);
             
         private:
             static bool _initialized;

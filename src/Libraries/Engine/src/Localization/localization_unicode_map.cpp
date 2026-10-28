@@ -55,40 +55,7 @@ namespace Kmpleete
         {
             CodepointVector localeCodes;
 
-            static constexpr wchar_t basicLatinCapitalLettersStart = 0x0041;
-            static constexpr wchar_t basicLatinCapitalLettersEnd = 0x005A;
-            for (wchar_t c = basicLatinCapitalLettersStart; c <= basicLatinCapitalLettersEnd; c++)
-            {
-                localeCodes.push_back(c);
-            }
-
-            static constexpr wchar_t basicLatinSmallLettersStart = 0x0061;
-            static constexpr wchar_t basicLatinSmallLettersEnd = 0x007A;
-            for (wchar_t c = basicLatinSmallLettersStart; c <= basicLatinSmallLettersEnd; c++)
-            {
-                localeCodes.push_back(c);
-            }
-
-            static constexpr wchar_t basicLatinSymbolsStart = 0x0020;
-            static constexpr wchar_t basicLatinSymbolsEnd = 0x0040;
-            for (wchar_t c = basicLatinSymbolsStart; c <= basicLatinSymbolsEnd; c++)
-            {
-                localeCodes.push_back(c);
-            }
-
-            static constexpr wchar_t basicLatinSymbols2Start = 0x005B;
-            static constexpr wchar_t basicLatinSymbols2End = 0x0060;
-            for (wchar_t c = basicLatinSymbols2Start; c <= basicLatinSymbols2End; c++)
-            {
-                localeCodes.push_back(c);
-            }
-
-            static constexpr wchar_t basicLatinSymbols3Start = 0x007B;
-            static constexpr wchar_t basicLatinSymbols3End = 0x007E;
-            for (wchar_t c = basicLatinSymbols3Start; c <= basicLatinSymbols3End; c++)
-            {
-                localeCodes.push_back(c);
-            }
+            _addASCIITable(localeCodes);
 
             const auto [iterator, hasEmplaced] = _localeCodepointRanges.emplace(SidLocaleEnUTF8, localeCodes);
             return hasEmplaced;
@@ -98,6 +65,8 @@ namespace Kmpleete
         bool UnicodeMap::_InitializeRu()
         {
             CodepointVector localeCodes;
+
+            _addASCIITable(localeCodes);
 
             static constexpr wchar_t cyrillicStart = 0x0410;
             static constexpr wchar_t cyrillicEnd = 0x044F;
@@ -111,29 +80,52 @@ namespace Kmpleete
             localeCodes.push_back(cyrillicCapitalIo);
             localeCodes.push_back(cyrillicSmallIo);
 
+            const auto [iterator, hasEmplaced] = _localeCodepointRanges.emplace(SidLocaleRuUTF8, localeCodes);
+            return hasEmplaced;
+        }
+        //--------------------------------------------------------------------------
+
+        void UnicodeMap::_addASCIITable(CodepointVector& codepoints)
+        {
+            static constexpr wchar_t basicLatinCapitalLettersStart = 0x0041;
+            static constexpr wchar_t basicLatinCapitalLettersEnd = 0x005A;
+            // A-Z
+            for (wchar_t c = basicLatinCapitalLettersStart; c <= basicLatinCapitalLettersEnd; c++)
+            {
+                codepoints.push_back(c);
+            }
+
+            static constexpr wchar_t basicLatinSmallLettersStart = 0x0061;
+            static constexpr wchar_t basicLatinSmallLettersEnd = 0x007A;
+            // a-z
+            for (wchar_t c = basicLatinSmallLettersStart; c <= basicLatinSmallLettersEnd; c++)
+            {
+                codepoints.push_back(c);
+            }
+
             static constexpr wchar_t basicLatinSymbolsStart = 0x0020;
             static constexpr wchar_t basicLatinSymbolsEnd = 0x0040;
+            // whitespace, !"#$%&'()*+,-./0123456789:;<=>?@
             for (wchar_t c = basicLatinSymbolsStart; c <= basicLatinSymbolsEnd; c++)
             {
-                localeCodes.push_back(c);
+                codepoints.push_back(c);
             }
 
             static constexpr wchar_t basicLatinSymbols2Start = 0x005B;
             static constexpr wchar_t basicLatinSymbols2End = 0x0060;
+            // backslash, []^_`
             for (wchar_t c = basicLatinSymbols2Start; c <= basicLatinSymbols2End; c++)
             {
-                localeCodes.push_back(c);
+                codepoints.push_back(c);
             }
 
             static constexpr wchar_t basicLatinSymbols3Start = 0x007B;
             static constexpr wchar_t basicLatinSymbols3End = 0x007E;
+            // {|}~
             for (wchar_t c = basicLatinSymbols3Start; c <= basicLatinSymbols3End; c++)
             {
-                localeCodes.push_back(c);
+                codepoints.push_back(c);
             }
-
-            const auto [iterator, hasEmplaced] = _localeCodepointRanges.emplace(SidLocaleRuUTF8, localeCodes);
-            return hasEmplaced;
         }
         //--------------------------------------------------------------------------
     }
