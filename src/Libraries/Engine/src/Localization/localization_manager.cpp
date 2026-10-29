@@ -129,7 +129,7 @@ namespace Kmpleete
     {
         KMP_ASSERT(_library);
 
-        const auto translation = Localization::Translate(domain, source);
+        const auto translation = Localization::Functions::Translate(domain, source);
         const auto domainSid = ToStringID(KMP_SID_PARAM(domain));
         const auto sourceSid = ToStringID(KMP_SID_PARAM(source));
         _library->Add(domainSid, sourceSid, translation);
@@ -142,7 +142,7 @@ namespace Kmpleete
     {
         KMP_ASSERT(_library);
 
-        const auto translation = Localization::Translate(domain, sourceSingular, sourcePlural, count);
+        const auto translation = Localization::Functions::Translate(domain, sourceSingular, sourcePlural, count);
         const auto domainSid = ToStringID(KMP_SID_PARAM(domain));
         const auto sourceSingularSid = ToStringID(KMP_SID_PARAM(sourceSingular));
         const auto sourcePluralSid = ToStringID(KMP_SID_PARAM(sourcePlural));
@@ -157,7 +157,7 @@ namespace Kmpleete
     {
         KMP_ASSERT(_library);
 
-        const auto translation = Localization::TranslateCtx(domain, source, context);
+        const auto translation = Localization::Functions::TranslateCtx(domain, source, context);
         const auto domainSid = ToStringID(KMP_SID_PARAM(domain));
         const auto sourceSid = ToStringID(KMP_SID_PARAM(source));
         const auto contextSid = ToStringID(KMP_SID_PARAM(context));
@@ -172,7 +172,7 @@ namespace Kmpleete
     {
         KMP_ASSERT(_library);
 
-        const auto translation = Localization::TranslateCtx(domain, sourceSingular, sourcePlural, count, context);
+        const auto translation = Localization::Functions::TranslateCtx(domain, sourceSingular, sourcePlural, count, context);
         const auto domainSid = ToStringID(KMP_SID_PARAM(domain));
         const auto sourceSingularSid = ToStringID(KMP_SID_PARAM(sourceSingular));
         const auto sourcePluralSid = ToStringID(KMP_SID_PARAM(sourcePlural));
@@ -205,7 +205,7 @@ namespace Kmpleete
     TranslationStr LocalizationManager::TranslationFormatted(const DomainStrSID& domainSid, const SourceStrSID& sourceSidSingular, 
                                                              const SourceStrSID& sourceSidPlural, int count) const KMP_PROFILING(ProfileLevelImportantVerbose)
     {
-        return Localization::Format(Translation(domainSid, sourceSidSingular, sourceSidPlural, count), count);
+        return Localization::Functions::Format(Translation(domainSid, sourceSidSingular, sourceSidPlural, count), count);
     }}
     //--------------------------------------------------------------------------
 
@@ -222,7 +222,7 @@ namespace Kmpleete
     TranslationStr LocalizationManager::TranslationCtxFormatted(const DomainStrSID& domainSid, const SourceStrSID& sourceSidSingular, 
                                                                 const SourceStrSID& sourceSidPlural, int count, const ContextStrSID& contextSid) const KMP_PROFILING(ProfileLevelImportantVerbose)
     {
-        return Localization::Format(TranslationCtx(domainSid, sourceSidSingular, sourceSidPlural, count, contextSid), count);
+        return Localization::Functions::Format(TranslationCtx(domainSid, sourceSidSingular, sourceSidPlural, count, contextSid), count);
     }}
     //--------------------------------------------------------------------------
 
@@ -251,29 +251,29 @@ namespace Kmpleete
 
     TranslationStr LocalizationManager::Translation(const DomainStr& domain, const SourceStr& source, const LocaleStr& localeString) KMP_PROFILING(ProfileLevelImportantVerbose)
     {
-        const auto translation = Localization::Translate(domain, source, _localeGenerator(localeString));
+        const auto translation = Localization::Functions::Translate(domain, source, _localeGenerator(localeString));
         return translation;
     }}
     //--------------------------------------------------------------------------
 
     TranslationStr LocalizationManager::Translation(const DomainStr& domain, const SourceStr& sourceSingular, const SourceStr& sourcePlural, int count, const LocaleStr& localeString) KMP_PROFILING(ProfileLevelImportantVerbose)
     {
-        const auto translation = Localization::Translate(domain, sourceSingular, sourcePlural, count, _localeGenerator(localeString));
-        return Localization::Format(translation, count);
+        const auto translation = Localization::Functions::Translate(domain, sourceSingular, sourcePlural, count, _localeGenerator(localeString));
+        return Localization::Functions::Format(translation, count);
     }}
     //--------------------------------------------------------------------------
 
     TranslationStr LocalizationManager::TranslationCtx(const DomainStr& domain, const SourceStr& source, const ContextStr& context, const LocaleStr& localeString) KMP_PROFILING(ProfileLevelImportantVerbose)
     {
-        const auto translation = Localization::TranslateCtx(domain, source, context, _localeGenerator(localeString));
+        const auto translation = Localization::Functions::TranslateCtx(domain, source, context, _localeGenerator(localeString));
         return translation;
     }}
     //--------------------------------------------------------------------------
 
     TranslationStr LocalizationManager::TranslationCtx(const DomainStr& domain, const SourceStr& sourceSingular, const SourceStr& sourcePlural, int count, const ContextStr& context, const LocaleStr& localeString) KMP_PROFILING(ProfileLevelImportantVerbose)
     {
-        const auto translation = Localization::TranslateCtx(domain, sourceSingular, sourcePlural, count, context, _localeGenerator(localeString));
-        return Localization::Format(translation, count);
+        const auto translation = Localization::Functions::TranslateCtx(domain, sourceSingular, sourcePlural, count, context, _localeGenerator(localeString));
+        return Localization::Functions::Format(translation, count);
     }}
     //--------------------------------------------------------------------------
 
