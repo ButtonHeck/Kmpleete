@@ -36,7 +36,7 @@ namespace Kmpleete
 
 
     EditorFrameListener::EditorFrameListener(FrameListenerManager& frameListenerManager, Window& mainWindow, Graphics::GraphicsBackend& graphicsBackend, Assets::AssetsManager& assetsManager,
-                                             LocalizationManager& localizationManager, SystemMetricsManager& systemMetricsManager, Input::InputManager& inputManager)
+                                             Localization::LocalizationManager& localizationManager, SystemMetricsManager& systemMetricsManager, Input::InputManager& inputManager)
         : FrameListener(frameListenerManager, "EditorFrameListener"_sid, 0)
           KMP_PROFILE_CONSTRUCTOR_START_DERIVED_CLASS()
         , _systemMetricsManager(systemMetricsManager)

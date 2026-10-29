@@ -100,7 +100,7 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        OptionalRef<const FontAtlas> Font::GetAtlas(const LocaleStrSID& localeSid) const noexcept
+        OptionalRef<const FontAtlas> Font::GetAtlas(const Localization::LocaleStrSID& localeSid) const noexcept
         {
             if (_atlases.contains(localeSid))
             {
@@ -112,7 +112,7 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        Vector<FontCharacterVertex> Font::GenerateTextVertices(const LocaleStrSID& localeSid, const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
+        Vector<FontCharacterVertex> Font::GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
         {
             const auto& atlasOptional = GetAtlas(localeSid);
             if (not atlasOptional.has_value())
@@ -126,7 +126,7 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-        Vector<FontCharacterVertex> Font::GenerateTextVertices(const LocaleStrSID& localeSid, const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
+        Vector<FontCharacterVertex> Font::GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
         {
             const auto& atlasOptional = GetAtlas(localeSid);
             if (not atlasOptional.has_value())
@@ -187,19 +187,19 @@ namespace Kmpleete
             KMP_ASSERT(_freetypeFace);
 
             _atlases.clear();
-            _atlases.reserve(SupportedLocalesCount);
+            _atlases.reserve(Localization::SupportedLocalesCount);
 
             {
-                const auto& enLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(SidLocaleEnUTF8);
-                const auto [iterator, hasEmplaced] = _atlases.emplace(SidLocaleEnUTF8, CreateUPtr<FontAtlas>(_freetypeFace, _parameters, enLocaleCodepoints));
+                const auto& enLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(Localization::SidLocaleEnUTF8);
+                const auto [iterator, hasEmplaced] = _atlases.emplace(Localization::SidLocaleEnUTF8, CreateUPtr<FontAtlas>(_freetypeFace, _parameters, enLocaleCodepoints));
                 if (not hasEmplaced)
                 {
                     KMP_LOG_ERROR("failed to create English locale atlas object");
                 }
             }
             {
-                const auto& ruLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(SidLocaleRuUTF8);
-                const auto [iterator, hasEmplaced] = _atlases.emplace(SidLocaleRuUTF8, CreateUPtr<FontAtlas>(_freetypeFace, _parameters, ruLocaleCodepoints));
+                const auto& ruLocaleCodepoints = Localization::UnicodeMap::GetCodepointVector(Localization::SidLocaleRuUTF8);
+                const auto [iterator, hasEmplaced] = _atlases.emplace(Localization::SidLocaleRuUTF8, CreateUPtr<FontAtlas>(_freetypeFace, _parameters, ruLocaleCodepoints));
                 if (not hasEmplaced)
                 {
                     KMP_LOG_ERROR("failed to create Russian locale atlas object");

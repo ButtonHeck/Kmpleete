@@ -51,7 +51,7 @@ namespace Kmpleete
         bool _running;
 
         UPtr<SystemMetricsManager> _systemMetricsManager;
-        UPtr<LocalizationManager> _localizationManager;
+        UPtr<Localization::LocalizationManager> _localizationManager;
         UPtr<SettingsManager> _settingsManager;
     };
     //--------------------------------------------------------------------------

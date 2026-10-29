@@ -25,7 +25,7 @@ namespace Kmpleete
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:
-            FontAtlas(FT_FaceRec_* freetypeFace, const FontParameters& parameters, const CodepointVector& codepoints);
+            FontAtlas(FT_FaceRec_* freetypeFace, const FontParameters& parameters, const Localization::CodepointVector& codepoints);
             ~FontAtlas() = default;
 
             KMP_NODISCARD Vector<FontCharacterVertex> GenerateTextVertices(const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const;
@@ -33,17 +33,17 @@ namespace Kmpleete
             KMP_NODISCARD const Image& GetImage() const noexcept;
 
         private:
-            void _CalculateAtlasSize(const CodepointVector& codepoints);
-            void _CreateImage(const CodepointVector& codepoints);
+            void _CalculateAtlasSize(const Localization::CodepointVector& codepoints);
+            void _CreateImage(const Localization::CodepointVector& codepoints);
 
-            KMP_NODISCARD bool _RenderGlyph(const Codepoint& codepoint);
+            KMP_NODISCARD bool _RenderGlyph(const Localization::Codepoint& codepoint);
 
         private:
             FT_FaceRec_* _freetypeFace;
             const FontParameters& _parameters;
             unsigned int _width;
             unsigned int _height;
-            HashMap<Codepoint, FontCharacter> _fontCharacters;
+            HashMap<Localization::Codepoint, FontCharacter> _fontCharacters;
             UPtr<Image> _atlasImage;
         };
         //--------------------------------------------------------------------------

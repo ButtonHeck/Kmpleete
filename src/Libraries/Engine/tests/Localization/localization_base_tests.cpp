@@ -5,7 +5,7 @@
 
 TEST_CASE("Plurality form english", "[localization][locale]")
 {
-    using namespace Kmpleete;
+    using namespace Kmpleete::Localization;
     const auto& pluralityFormDispatcherEn = GetPluralityDispatcher(LocaleEnUTF8Keyword);
 
     REQUIRE(pluralityFormDispatcherEn.GetPluralityForm(1) == PluralityFormSingular);
@@ -22,7 +22,7 @@ TEST_CASE("Plurality form english", "[localization][locale]")
 
 TEST_CASE("Plurality form russian", "[localization][locale]")
 {
-    using namespace Kmpleete;
+    using namespace Kmpleete::Localization;
     const auto& pluralityFormDispatcherRu = GetPluralityDispatcher(LocaleRuUTF8Keyword);
 
     REQUIRE(pluralityFormDispatcherRu.GetPluralityForm(1) == PluralityFormSingular);

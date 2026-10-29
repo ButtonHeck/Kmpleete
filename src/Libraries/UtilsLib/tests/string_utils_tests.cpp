@@ -222,7 +222,7 @@ TEST_CASE("ToSStream", "[utils][string]")
 
 TEST_CASE("Utf8ToNarrow english", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto englishString = Kmpleete::String("bear");
@@ -233,7 +233,7 @@ TEST_CASE("Utf8ToNarrow english", "[utils][string]")
 
 TEST_CASE("Utf8ToNarrow cyrillic", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     auto cyrillicStr = Kmpleete::String("абв");
@@ -274,7 +274,7 @@ TEST_CASE("Utf8ToNarrow cyrillic", "[utils][string]")
 
 TEST_CASE("Utf8ToNarrow mixed", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto mixedString = Kmpleete::String("bear абв");
@@ -305,7 +305,7 @@ TEST_CASE("Utf8ToNarrow mixed", "[utils][string]")
 
 TEST_CASE("NarrowToUtf8 english", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto englishString = Kmpleete::String("bear");
@@ -316,7 +316,7 @@ TEST_CASE("NarrowToUtf8 english", "[utils][string]")
 
 TEST_CASE("NarrowToUtf8 cyrillic", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto cyrillicStr = Kmpleete::String({ static_cast<char>(0xE0), static_cast<char>(0xE1), static_cast<char>(0xE2) });
@@ -333,7 +333,7 @@ TEST_CASE("NarrowToUtf8 cyrillic", "[utils][string]")
 
 TEST_CASE("NarrowToUtf8 mixed", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto mixedStr = Kmpleete::String({
@@ -366,7 +366,7 @@ TEST_CASE("NarrowToUtf8 mixed", "[utils][string]")
 
 TEST_CASE("Conversion ping-pong Utf8", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto str = Kmpleete::String("12 test абв АБ_В!\"№;%:?*");
@@ -381,7 +381,7 @@ TEST_CASE("Conversion ping-pong Utf8", "[utils][string]")
 
 TEST_CASE("NarrowToWide english", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     auto wstr = Kmpleete::Utils::NarrowToWide("basic");
@@ -395,7 +395,7 @@ TEST_CASE("NarrowToWide english", "[utils][string]")
 
 TEST_CASE("NarrowToWide cyrillic", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
 #if defined (KMP_PLATFORM_WINDOWS)
@@ -414,7 +414,7 @@ TEST_CASE("NarrowToWide cyrillic", "[utils][string]")
 
 TEST_CASE("NarrowToWide mixed", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
 #if defined (KMP_PLATFORM_WINDOWS)
@@ -437,7 +437,7 @@ TEST_CASE("NarrowToWide mixed", "[utils][string]")
 
 TEST_CASE("WideToNarrow english", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto wstr = Kmpleete::WString(L"abc-def");
@@ -447,7 +447,7 @@ TEST_CASE("WideToNarrow english", "[utils][string]")
 
 TEST_CASE("WideToNarrow cyrillic", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto wstr = Kmpleete::WString({ static_cast<wchar_t>(0x430), static_cast<wchar_t>(0x431), static_cast<wchar_t>(0x432) });
@@ -470,7 +470,7 @@ TEST_CASE("WideToNarrow cyrillic", "[utils][string]")
 
 TEST_CASE("WideToNarrow mixed", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto wstr = Kmpleete::WString({ L'a', static_cast<wchar_t>(0x430), L'b', static_cast<wchar_t>(0x431), L'c', static_cast<wchar_t>(0x432) });
@@ -501,7 +501,7 @@ TEST_CASE("WideToNarrow mixed", "[utils][string]")
 
 TEST_CASE("Conversion ping-pong wide-narrow", "[utils][string]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto str = Kmpleete::String("12 test абв АБ_В!\"№;%:?*");

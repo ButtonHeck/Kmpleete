@@ -20,11 +20,11 @@ namespace Kmpleete
         {
             EVENT_CLASS_TYPE(LocaleChangeEventTypeStr)
 
-            explicit LocaleChangeEvent(const LocaleStr& locale) noexcept
+            explicit LocaleChangeEvent(const Localization::LocaleStr& locale) noexcept
                 : _locale(locale)
             {}
 
-            KMP_NODISCARD const LocaleStr& GetLocale() const noexcept
+            KMP_NODISCARD const Localization::LocaleStr& GetLocale() const noexcept
             {
                 return _locale;
             }
@@ -35,7 +35,7 @@ namespace Kmpleete
             }
 
         private:
-            const LocaleStr _locale;
+            const Localization::LocaleStr _locale;
         };
         //--------------------------------------------------------------------------
     }

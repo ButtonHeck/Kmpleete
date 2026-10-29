@@ -40,7 +40,7 @@ namespace Kmpleete
             KMP_NODISCARD bool LoadAssets(const Vector<StringID>& assetsSids);
             KMP_NODISCARD bool UnloadAssets(const Vector<StringID>& assetsSids);
 
-            void ProcessLocaleChange(const LocaleStrSID& localeSid);
+            void ProcessLocaleChange(const Localization::LocaleStrSID& localeSid);
 
         private:
             void _Initialize();

@@ -10,51 +10,54 @@
 
 namespace Kmpleete
 {
-    //! Localization storage class, responsible for storing all kind of translations for
-    //! a dedicated domain. Storage structures for translations are implemented as
-    //! maps ([contexted|plural]source identifier as a key) of actual translations.
-    //! Although it is not prohibited to use this class as is, dictionary is supposed
-    //! to be used as a delegate for LocalizationLibrary class
-    //! @see LocalizationLibrary
-    class KMP_API LocalizationDictionary
+    namespace Localization
     {
-        KMP_LOG_CLASSNAME(LocalizationDictionary)
-        KMP_PROFILE_CONSTRUCTOR_DECLARE()
-        KMP_DISABLE_COPY_MOVE(LocalizationDictionary)
+        //! Localization storage class, responsible for storing all kind of translations for
+        //! a dedicated domain. Storage structures for translations are implemented as
+        //! maps ([contexted|plural]source identifier as a key) of actual translations.
+        //! Although it is not prohibited to use this class as is, dictionary is supposed
+        //! to be used as a delegate for LocalizationLibrary class
+        //! @see LocalizationLibrary
+        class KMP_API LocalizationDictionary
+        {
+            KMP_LOG_CLASSNAME(LocalizationDictionary)
+            KMP_PROFILE_CONSTRUCTOR_DECLARE()
+            KMP_DISABLE_COPY_MOVE(LocalizationDictionary)
 
-    public:
-        explicit LocalizationDictionary(const DomainStrSID& domain) noexcept;
-        ~LocalizationDictionary() = default;
+        public:
+            explicit LocalizationDictionary(const DomainStrSID& domain) noexcept;
+            ~LocalizationDictionary() = default;
 
-        KMP_NODISCARD const DomainStrSID& GetDomain() const noexcept;
-        void Clear() noexcept;
+            KMP_NODISCARD const DomainStrSID& GetDomain() const noexcept;
+            void Clear() noexcept;
 
-        void Add(const SourceStrSID& sourceSid, const TranslationStr& translation);
-        void Add(const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, 
-                 PluralityForm pluralityForm, const TranslationStr& translation);
-        void Add(const SourceStrSID& sourceSid, const ContextStrSID& contextSid, const TranslationStr& translation);
-        void Add(const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, 
-                 PluralityForm pluralityForm, const ContextStrSID& contextSid, const TranslationStr& translation);
+            void Add(const SourceStrSID& sourceSid, const TranslationStr& translation);
+            void Add(const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, 
+                     PluralityForm pluralityForm, const TranslationStr& translation);
+            void Add(const SourceStrSID& sourceSid, const ContextStrSID& contextSid, const TranslationStr& translation);
+            void Add(const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, 
+                     PluralityForm pluralityForm, const ContextStrSID& contextSid, const TranslationStr& translation);
 
-        KMP_NODISCARD const TranslationStr& Get(const SourceStrSID& sourceSid);
-        KMP_NODISCARD const TranslationStr& Get(const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, PluralityForm pluralityForm);
-        KMP_NODISCARD const TranslationStr& Get(const SourceStrSID& sourceSid, const ContextStrSID& contextSid);
-        KMP_NODISCARD const TranslationStr& Get(const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, 
-                                                PluralityForm pluralityForm, const ContextStrSID& contextSid);
+            KMP_NODISCARD const TranslationStr& Get(const SourceStrSID& sourceSid);
+            KMP_NODISCARD const TranslationStr& Get(const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, PluralityForm pluralityForm);
+            KMP_NODISCARD const TranslationStr& Get(const SourceStrSID& sourceSid, const ContextStrSID& contextSid);
+            KMP_NODISCARD const TranslationStr& Get(const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, 
+                                                    PluralityForm pluralityForm, const ContextStrSID& contextSid);
 
-    private:
-        using TranslationMap = HashMap<SourceStrSID, TranslationStr>;
-        using ContextedTranslationMap = HashMap<ContextedSource, TranslationStr, ContextedSourceHash>;
-        using PluralTranslations = Array<TranslationStr, PluralityFormCount>;
-        using TranslationPluralMap = HashMap<PluralSource, PluralTranslations, PluralSourceHash>;
-        using ContextedTranslationPluralMap = HashMap<ContextedPluralSource, PluralTranslations, ContextedPluralSourceHash>;
+        private:
+            using TranslationMap = HashMap<SourceStrSID, TranslationStr>;
+            using ContextedTranslationMap = HashMap<ContextedSource, TranslationStr, ContextedSourceHash>;
+            using PluralTranslations = Array<TranslationStr, PluralityFormCount>;
+            using TranslationPluralMap = HashMap<PluralSource, PluralTranslations, PluralSourceHash>;
+            using ContextedTranslationPluralMap = HashMap<ContextedPluralSource, PluralTranslations, ContextedPluralSourceHash>;
 
-    private:
-        const DomainStrSID _domain;
-        TranslationMap _translationMap;
-        ContextedTranslationMap _translationCtxMap;
-        TranslationPluralMap _translationPluralMap;
-        ContextedTranslationPluralMap _translationCtxPluralMap;
-    };
-    //--------------------------------------------------------------------------
+        private:
+            const DomainStrSID _domain;
+            TranslationMap _translationMap;
+            ContextedTranslationMap _translationCtxMap;
+            TranslationPluralMap _translationPluralMap;
+            ContextedTranslationPluralMap _translationCtxPluralMap;
+        };
+        //--------------------------------------------------------------------------
+    }
 }

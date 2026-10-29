@@ -48,7 +48,7 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        OptionalRef<const Graphics::Texture> FontAsset::GetAtlasTexture(const LocaleStrSID& localeSid) const noexcept
+        OptionalRef<const Graphics::Texture> FontAsset::GetAtlasTexture(const Localization::LocaleStrSID& localeSid) const noexcept
         {
             if (_atlasesTextures.contains(localeSid))
             {
@@ -89,7 +89,7 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-        void FontAsset::ProcessLocaleChange(const LocaleStrSID& localeSid) KMP_PROFILING(ProfileLevelMinor)
+        void FontAsset::ProcessLocaleChange(const Localization::LocaleStrSID& localeSid) KMP_PROFILING(ProfileLevelMinor)
         {
             _InitializeAtlasesTexturesStorage();
 
@@ -107,10 +107,10 @@ namespace Kmpleete
         void FontAsset::_InitializeAtlasesTexturesStorage()
         {
             _atlasesTextures.clear();
-            _atlasesTextures.reserve(SupportedLocalesCount);
+            _atlasesTextures.reserve(Localization::SupportedLocalesCount);
 
-            _atlasesTextures[SidLocaleEnUTF8] = nullptr;
-            _atlasesTextures[SidLocaleRuUTF8] = nullptr;
+            _atlasesTextures[Localization::SidLocaleEnUTF8] = nullptr;
+            _atlasesTextures[Localization::SidLocaleRuUTF8] = nullptr;
         }
         //--------------------------------------------------------------------------
 
@@ -135,7 +135,7 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-        UPtr<Graphics::Texture> FontAsset::_CreateAtlasTexture(const LocaleStrSID& localeSid) const KMP_PROFILING(ProfileLevelImportantVerbose)
+        UPtr<Graphics::Texture> FontAsset::_CreateAtlasTexture(const Localization::LocaleStrSID& localeSid) const KMP_PROFILING(ProfileLevelImportantVerbose)
         {
             const auto& atlasImage = _font.GetAtlas(localeSid);
             if (not atlasImage.has_value())

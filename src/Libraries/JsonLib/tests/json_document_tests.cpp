@@ -345,7 +345,7 @@ TEST_CASE("Json document add children during filling another object", "[json][re
 
 TEST_CASE("Json document save to file and read from file", "[json][reader][writer][document]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto settingsFilepath = Kmpleete::Filesystem::GetCurrentFilepath().append("json_document_test_temp.json");
@@ -411,7 +411,7 @@ TEST_CASE("Json document save with unescaped quotes", "[json][reader][writer][do
 
 TEST_CASE("Json document save/load with cyrillic path", "[json][reader][writer][document]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     auto settingsFilepath = Kmpleete::Filesystem::GetCurrentFilepath();

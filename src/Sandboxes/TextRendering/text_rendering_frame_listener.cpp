@@ -69,7 +69,7 @@ namespace Kmpleete
 
 
     TextRenderingFrameListener::TextRenderingFrameListener(FrameListenerManager& frameListenerManager, Window& mainWindow, Graphics::GraphicsBackend& graphicsBackend, 
-                                                           Assets::AssetsManager& assetsManager, LocalizationManager& localizationManager)
+                                                           Assets::AssetsManager& assetsManager, Localization::LocalizationManager& localizationManager)
         : FrameListener(frameListenerManager, "main_frame_listener"_sid, 0)
         , _mainWindow(mainWindow)
         , _graphicsBackend(graphicsBackend)

@@ -10,7 +10,7 @@ namespace Kmpleete
 {
     namespace Graphics
     {
-        FontAtlas::FontAtlas(FT_FaceRec_* freetypeFace, const FontParameters& parameters, const CodepointVector& codepoints)
+        FontAtlas::FontAtlas(FT_FaceRec_* freetypeFace, const FontParameters& parameters, const Localization::CodepointVector& codepoints)
             : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()
               _freetypeFace(freetypeFace)
             , _parameters(parameters)
@@ -79,7 +79,7 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        void FontAtlas::_CalculateAtlasSize(const CodepointVector& codepoints) KMP_PROFILING(ProfileLevelImportant)
+        void FontAtlas::_CalculateAtlasSize(const Localization::CodepointVector& codepoints) KMP_PROFILING(ProfileLevelImportant)
         {
             for (const auto& codepoint : codepoints)
             {
@@ -94,7 +94,7 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-        void FontAtlas::_CreateImage(const CodepointVector& codepoints) KMP_PROFILING(ProfileLevelImportant)
+        void FontAtlas::_CreateImage(const Localization::CodepointVector& codepoints) KMP_PROFILING(ProfileLevelImportant)
         {
             BinaryBuffer atlasBuffer(_width * _height, 0);
             unsigned int offsetX = 0;
@@ -134,7 +134,7 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-        bool FontAtlas::_RenderGlyph(const Codepoint& codepoint)
+        bool FontAtlas::_RenderGlyph(const Localization::Codepoint& codepoint)
         {
             return (FT_Load_Char(_freetypeFace, codepoint, FT_LOAD_RENDER) == FT_Err_Ok) && (FT_Render_Glyph(_freetypeFace->glyph, FT_RENDER_MODE_SDF) == FT_Err_Ok);
         }

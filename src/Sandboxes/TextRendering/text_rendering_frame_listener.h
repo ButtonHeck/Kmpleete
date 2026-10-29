@@ -13,7 +13,10 @@
 
 namespace Kmpleete
 {
-    class LocalizationManager;
+    namespace Localization
+    {
+        class LocalizationManager;
+    }
 
     namespace Assets
     {
@@ -33,7 +36,7 @@ namespace Kmpleete
 
     public:
         TextRenderingFrameListener(FrameListenerManager& frameListenerManager, Window& mainWindow, Graphics::GraphicsBackend& graphicsBackend,
-                                   Assets::AssetsManager& assetsManager, LocalizationManager& localizationManager);
+                                   Assets::AssetsManager& assetsManager, Localization::LocalizationManager& localizationManager);
         ~TextRenderingFrameListener() = default;
 
         void Render() override;
@@ -60,7 +63,7 @@ namespace Kmpleete
         Window& _mainWindow;
         Graphics::GraphicsBackend& _graphicsBackend;
         Assets::AssetsManager& _assetsManager;
-        LocalizationManager& _localizationManager;
+        Localization::LocalizationManager& _localizationManager;
         UPtr<ImGuiUtils::ImGuiImplementation> _imguiImpl;
         UInt32 _verticesCount;
 

@@ -9,6 +9,7 @@
 
 
 using namespace Kmpleete; // for _sid literal and Utils
+using namespace Kmpleete::Localization;
 static constexpr auto SidTrDomainTests = ToStringID(KMP_TR_DOMAIN_TESTS);
 
 

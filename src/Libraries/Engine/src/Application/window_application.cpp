@@ -205,7 +205,7 @@ namespace Kmpleete
             _graphicsBackend->EndFrame();
         }
 
-        if (_localizationManager->ProcessLocaleChangeRequest(LocalizationManager::RequestPasskey{}))
+        if (_localizationManager->ProcessLocaleChangeRequest(Localization::LocalizationManager::RequestPasskey{}))
         {
             _assetsManager->ProcessLocaleChange(_localizationManager->GetLocaleSID());
         }

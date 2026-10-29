@@ -183,7 +183,7 @@ TEST_CASE("Rapidjson escaped quotes", "[json][reader]")
 
 TEST_CASE("Rapidjson cyrillic use", "[json][reader]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const char* JsonString = R"rjs(

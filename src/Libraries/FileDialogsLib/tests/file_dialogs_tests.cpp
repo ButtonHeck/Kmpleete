@@ -8,7 +8,7 @@
 
 TEST_CASE("File dialog open single file - OPEN", "[file_dialogs][open]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto file = Kmpleete::FileDialogs::OpenFile("Open any single file", Kmpleete::Filesystem::GetCurrentFilepath());
@@ -25,7 +25,7 @@ TEST_CASE("File dialog open single file - CANCEL", "[file_dialogs][open]")
 
 TEST_CASE("File dialog open single file - OPEN json", "[file_dialogs][open]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto file = Kmpleete::FileDialogs::OpenFile("Open any single json file", Kmpleete::Filesystem::GetCurrentFilepath(), { "JSON Files", "*.json" });
@@ -37,7 +37,7 @@ TEST_CASE("File dialog open single file - OPEN json", "[file_dialogs][open]")
 
 TEST_CASE("File dialog open single file - OPEN manual name non-existent", "[file_dialogs][open]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto file = Kmpleete::FileDialogs::OpenFile("Open any manually entered non-existing file", Kmpleete::Filesystem::GetCurrentFilepath());
@@ -48,7 +48,7 @@ TEST_CASE("File dialog open single file - OPEN manual name non-existent", "[file
 
 TEST_CASE("File dialog open single file - OPEN manual name existing", "[file_dialogs][open]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto file = Kmpleete::FileDialogs::OpenFile("Open any manually entered existing file", Kmpleete::Filesystem::GetCurrentFilepath());
@@ -59,7 +59,7 @@ TEST_CASE("File dialog open single file - OPEN manual name existing", "[file_dia
 
 TEST_CASE("File dialog open single file - OPEN manual name existing non-match filter", "[file_dialogs][open]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto file = Kmpleete::FileDialogs::OpenFile("Open any manually entered existing file that do not match filter", Kmpleete::Filesystem::GetCurrentFilepath(), { "JSON Files", "*.json" });
@@ -72,7 +72,7 @@ TEST_CASE("File dialog open single file - OPEN manual name existing non-match fi
 
 TEST_CASE("File dialog open multiple files - OPEN", "[file_dialogs][open]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto files = Kmpleete::FileDialogs::OpenFiles("Open any multiple files", Kmpleete::Filesystem::GetCurrentFilepath());
@@ -101,7 +101,7 @@ TEST_CASE("File dialog open multiple files - CANCEL", "[file_dialogs][open]")
 
 TEST_CASE("File dialog open multiple files - OPEN json", "[file_dialogs][open]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto files = Kmpleete::FileDialogs::OpenFiles("Open any multiple json files", Kmpleete::Filesystem::GetCurrentFilepath(), { "JSON Files", "*.json" });
@@ -125,7 +125,7 @@ TEST_CASE("File dialog open multiple files - OPEN json", "[file_dialogs][open]")
 
 TEST_CASE("File dialog open multiple files - OPEN manual names non-existent", "[file_dialogs][open]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto files = Kmpleete::FileDialogs::OpenFiles("Open any manually entered non-existing files", Kmpleete::Filesystem::GetCurrentFilepath());
@@ -148,7 +148,7 @@ TEST_CASE("File dialog open multiple files - OPEN manual names non-existent", "[
 
 TEST_CASE("File dialog open multiple files - OPEN manual names existent", "[file_dialogs][open]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto files = Kmpleete::FileDialogs::OpenFiles("Open any manually entered existing files", Kmpleete::Filesystem::GetCurrentFilepath());
@@ -173,7 +173,7 @@ TEST_CASE("File dialog open multiple files - OPEN manual names existent", "[file
 
 TEST_CASE("File dialog save file - SAVE new", "[file_dialogs][save]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     KMP_MB_UNUSED const auto res = Kmpleete::FileDialogs::OpenMessage("File dialog save", "In the next dialog save to any new file", Kmpleete::FileDialogs::MessageChoice::Ok);
@@ -192,7 +192,7 @@ TEST_CASE("File dialog save file - CANCEL", "[file_dialogs][save]")
 
 TEST_CASE("File dialog save file - SAVE overwrite", "[file_dialogs][save]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     KMP_MB_UNUSED const auto res = Kmpleete::FileDialogs::OpenMessage("File dialog save", "In the next dialog save to any existing file", Kmpleete::FileDialogs::MessageChoice::Ok);
@@ -204,7 +204,7 @@ TEST_CASE("File dialog save file - SAVE overwrite", "[file_dialogs][save]")
 
 TEST_CASE("File dialog save file - SAVE new non-matching filter", "[file_dialogs][save]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     KMP_MB_UNUSED const auto res = Kmpleete::FileDialogs::OpenMessage("File dialog save", "In the next dialog save to any new file that do not match filter", Kmpleete::FileDialogs::MessageChoice::Ok);
@@ -216,7 +216,7 @@ TEST_CASE("File dialog save file - SAVE new non-matching filter", "[file_dialogs
 
 TEST_CASE("File dialog save file - Cyrillic characters", "[file_dialogs][open]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     KMP_MB_UNUSED const auto res = Kmpleete::FileDialogs::OpenMessage("File dialog save", "In the next dialog save to new file with cyrillic characters", Kmpleete::FileDialogs::MessageChoice::Ok);
@@ -229,7 +229,7 @@ TEST_CASE("File dialog save file - Cyrillic characters", "[file_dialogs][open]")
 
 TEST_CASE("File dialog open folder - OPEN", "[file_dialogs][folder]")
 {
-    auto localizationManager = Kmpleete::LocalizationManager();
+    auto localizationManager = Kmpleete::Localization::LocalizationManager();
     localizationManager.SetLocale("ru_RU.UTF8");
 
     const auto folder = Kmpleete::FileDialogs::OpenDirectory("Open any directory", Kmpleete::Filesystem::GetCurrentFilepath());

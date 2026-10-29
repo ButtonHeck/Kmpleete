@@ -124,7 +124,7 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        void FontAssetManager::ProcessLocaleChange(const LocaleStrSID& localeSid) KMP_PROFILING(ProfileLevelImportantVerbose)
+        void FontAssetManager::ProcessLocaleChange(const Localization::LocaleStrSID& localeSid) KMP_PROFILING(ProfileLevelImportantVerbose)
         {
             for (auto& [fontSid, font] : _fonts)
             {

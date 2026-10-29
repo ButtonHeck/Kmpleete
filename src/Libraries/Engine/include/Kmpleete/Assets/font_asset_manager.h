@@ -51,7 +51,7 @@ namespace Kmpleete
 
             KMP_NODISCARD UInt64 GetAssetsCount() const noexcept;
 
-            void ProcessLocaleChange(const LocaleStrSID& localeSid);
+            void ProcessLocaleChange(const Localization::LocaleStrSID& localeSid);
 
         private:
             void _Initialize();

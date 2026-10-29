@@ -26,7 +26,7 @@ namespace Kmpleete
     static constexpr auto MetricsFractionalStr = "MetricsFractional";
 
 
-    EditorUICompositor::EditorUICompositor(Window& mainWindow, Assets::AssetsManager& assetsManager, LocalizationManager& localizationManager, 
+    EditorUICompositor::EditorUICompositor(Window& mainWindow, Assets::AssetsManager& assetsManager, Localization::LocalizationManager& localizationManager,
                                            const SystemMetricsManager& systemMetricsManager, Input::InputManager& inputManager)
         : KMP_PROFILE_CONSTRUCTOR_START_BASE_CLASS()
           _mainWindow(mainWindow)
@@ -91,15 +91,15 @@ namespace Kmpleete
             static_cast<ImTextureID>(imguiImpl.GetTexture("_flag_russian"_sid))
         };
 
-        static const auto englishLanguageName = _localizationManager.Translation(KMP_TR_DOMAIN_ENGINE, "English", LocaleEnUTF8Keyword);
-        static const auto russianLanguageName = _localizationManager.Translation(KMP_TR_DOMAIN_ENGINE, "Russian", LocaleRuUTF8Keyword);
+        static const auto englishLanguageName = _localizationManager.Translation(KMP_TR_DOMAIN_ENGINE, "English", Localization::LocaleEnUTF8Keyword);
+        static const auto russianLanguageName = _localizationManager.Translation(KMP_TR_DOMAIN_ENGINE, "Russian", Localization::LocaleRuUTF8Keyword);
 
         int languageIndex = 0;
-        if (_localizationManager.GetLocale() == LocaleEnUTF8Keyword)
+        if (_localizationManager.GetLocale() == Localization::LocaleEnUTF8Keyword)
         {
             languageIndex = 0;
         }
-        else if (_localizationManager.GetLocale() == LocaleRuUTF8Keyword)
+        else if (_localizationManager.GetLocale() == Localization::LocaleRuUTF8Keyword)
         {
             languageIndex = 1;
         }
@@ -121,11 +121,11 @@ namespace Kmpleete
 
             if (EngButtonClicked)
             {
-                _localizationManager.SetLocaleChangeRequest(LocaleEnUTF8Keyword);
+                _localizationManager.SetLocaleChangeRequest(Localization::LocaleEnUTF8Keyword);
             }
             else if (RusButtonClicked)
             {
-                _localizationManager.SetLocaleChangeRequest(LocaleRuUTF8Keyword);
+                _localizationManager.SetLocaleChangeRequest(Localization::LocaleRuUTF8Keyword);
             }
 
             ImGui::EndPopup();

@@ -12,9 +12,13 @@
 
 namespace Kmpleete
 {
-    class LocalizationManager;
     class SystemMetricsManager;
     class SettingsDocument;
+
+    namespace Localization
+    {
+        class LocalizationManager;
+    }
 
     namespace Assets
     {
@@ -38,7 +42,7 @@ namespace Kmpleete
         KMP_DISABLE_COPY_MOVE(EditorUICompositor)
 
     public:
-        EditorUICompositor(Window& mainWindow, Assets::AssetsManager& assetsManager, LocalizationManager& localizationManager, 
+        EditorUICompositor(Window& mainWindow, Assets::AssetsManager& assetsManager, Localization::LocalizationManager& localizationManager,
                            const SystemMetricsManager& systemMetricsManager, Input::InputManager& inputManager);
         ~EditorUICompositor() = default;
 
@@ -78,7 +82,7 @@ namespace Kmpleete
     private:
         Window& _mainWindow;
         Assets::AssetsManager& _assetsManager;
-        LocalizationManager& _localizationManager;
+        Localization::LocalizationManager& _localizationManager;
         const SystemMetricsManager& _systemMetricsManager;
         _UIComponentsState _state;
         _UIPopupsState _popups;

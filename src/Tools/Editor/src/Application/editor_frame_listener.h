@@ -17,8 +17,12 @@
 
 namespace Kmpleete
 {
-    class LocalizationManager;
     class SystemMetricsManager;
+
+    namespace Localization
+    {
+        class LocalizationManager;
+    }
 
     namespace Graphics
     {
@@ -44,7 +48,7 @@ namespace Kmpleete
 
     public:
         EditorFrameListener(FrameListenerManager& frameListenerManager, Window& mainWindow, Graphics::GraphicsBackend& graphicsBackend, Assets::AssetsManager& assetsManager,
-                            LocalizationManager& localizationManager, SystemMetricsManager& systemMetricsManager, Input::InputManager& inputManager);
+                            Localization::LocalizationManager& localizationManager, SystemMetricsManager& systemMetricsManager, Input::InputManager& inputManager);
         ~EditorFrameListener();
 
         void Update(float frameTimestep, bool applicationIsIconified) override;
@@ -84,7 +88,7 @@ namespace Kmpleete
         Window& _mainWindow;
         Graphics::GraphicsBackend& _graphicsBackend;
         Assets::AssetsManager& _assetsManager;
-        LocalizationManager& _localizationManager;
+        Localization::LocalizationManager& _localizationManager;
         UPtr<ImGuiUtils::ImGuiImplementation> _imguiImpl;
         UPtr<EditorUICompositor> _uiCompositor;
         Time::Timer _metricsTimer;
