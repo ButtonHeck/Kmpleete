@@ -333,8 +333,7 @@ namespace Kmpleete
 
         const auto windowFramebufferSize = _mainWindow.GetFramebufferSize();
         const auto& defaultFont = _assetsManager.GetFontAssetManager().GetAsset(Assets::FontAssetManager::DefaultFontSID).GetFont();
-        const auto& defaultFontAtlas = defaultFont.GetAtlas(_localizationManager.GetLocaleSID()).value().get();
-        const auto vertices = defaultFontAtlas.GenerateTextVertices(wideAlphabet, 0.0f, 100.0f, 48.0f, windowFramebufferSize);
+        const auto vertices = defaultFont.GenerateTextVertices(_localizationManager.GetLocaleSID(), wideAlphabet, 0.0f, 100.0f, 48.0f, windowFramebufferSize);
         _verticesCount = UInt32(vertices.size());
 
         return vertices;

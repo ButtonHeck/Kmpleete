@@ -112,6 +112,34 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
+        Vector<FontCharacterVertex> Font::GenerateTextVertices(const LocaleStrSID& localeSid, const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
+        {
+            const auto& atlasOptional = GetAtlas(localeSid);
+            if (not atlasOptional.has_value())
+            {
+                KMP_LOG_ERROR("cannot find atlas for locale '{}' to generate text vertices", localeSid);
+                return Vector<FontCharacterVertex>();
+            }
+
+            const auto& atlas = atlasOptional.value().get();
+            return atlas.GenerateTextVertices(text, x, y, framebufferSize);
+        }}
+        //--------------------------------------------------------------------------
+
+        Vector<FontCharacterVertex> Font::GenerateTextVertices(const LocaleStrSID& localeSid, const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
+        {
+            const auto& atlasOptional = GetAtlas(localeSid);
+            if (not atlasOptional.has_value())
+            {
+                KMP_LOG_ERROR("cannot find atlas for locale '{}' to generate text vertices", localeSid);
+                return Vector<FontCharacterVertex>();
+            }
+
+            const auto& atlas = atlasOptional.value().get();
+            return atlas.GenerateTextVertices(text, x, y, pixelSize, framebufferSize);
+        }}
+        //--------------------------------------------------------------------------
+
         void Font::_UpdateParameters() noexcept
         {
             KMP_ASSERT(_freetypeFace);
