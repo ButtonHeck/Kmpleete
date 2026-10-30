@@ -19,6 +19,13 @@ AddTargetSourcesGroup(BaseLib "Base"
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Base/functional.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Base/named_bool.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Base/exception.h
+    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Base/source_location_utils.h
+)
+
+target_compile_options(BaseLib INTERFACE
+    $<$<CXX_COMPILER_ID:GNU>:-std=c++20 -fno-char8_t -Wall -Wextra -Werror -Wno-missing-field-initializers>
+    $<$<CXX_COMPILER_ID:Clang>:-std=c++20 -fno-char8_t -Wall -Wextra -Werror -Wno-missing-field-initializers>
+    $<$<CXX_COMPILER_ID:MSVC>:-std:c++20 /Zc:char8_t- /Zc:preprocessor /W4 /WX /we4388 /wd4251 $<$<BOOL:${KMPLEETE_MULTIPROCESSOR_BUILD}>:/MP>>
 )
 
 target_include_directories(BaseLib

@@ -31,6 +31,7 @@ namespace Kmpleete
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/macro.h"
+#include "Kmpleete/Base/source_location_utils.h"
 #include "Kmpleete/Log/log_class_macro.h"
 
 #include <fstream>
@@ -148,54 +149,6 @@ namespace Kmpleete
         std::chrono::high_resolution_clock::time_point _start;
     };
     //--------------------------------------------------------------------------
-
-
-    namespace ProfilerUtils
-    {
-        //! Compile-time friendly struct for storing postprocessed name of a metrics unit
-        template<size_t length>
-        struct ReplaceResult
-        {
-            char data[length];
-        };
-
-        //! Helper function to prettify name of a metrics unit (like remove __cdecl, replace std:: with custom aliases etc.)
-        template<size_t lengthSrc, size_t lengthRemove, size_t lengthReplace>
-        consteval auto ReplaceString(const char(&src)[lengthSrc], const char(&remove)[lengthRemove], const char(&replace)[lengthReplace])
-        {
-            ReplaceResult<lengthSrc> result = {};
-
-            size_t srcIndex = 0;
-            size_t dstIndex = 0;
-            while (srcIndex < lengthSrc)
-            {
-                size_t matchIndex = 0;
-                while ((matchIndex < lengthRemove - 1) && (srcIndex + matchIndex < lengthSrc - 1) && (src[srcIndex + matchIndex] == remove[matchIndex]))
-                {
-                    matchIndex++;
-                }
-
-                if (matchIndex == lengthRemove - 1)
-                {
-                    size_t replaceIndex = 0;
-                    while (replaceIndex < lengthReplace - 1)
-                    {
-                        result.data[dstIndex++] = replace[replaceIndex++];
-                    }
-
-                    srcIndex += matchIndex;
-                }
-                else
-                {
-                    result.data[dstIndex++] = src[srcIndex];
-                    srcIndex++;
-                }
-            }
-
-            return result;
-        }
-    }
-    //--------------------------------------------------------------------------
 }
 
 //! Shortcut macros to begin/end profiling sessions
@@ -204,22 +157,22 @@ namespace Kmpleete
 
 //! The "meat" macro that formats metrics unit name
 #define _KMP_PROFILE_SCOPE_LINE2(name, line, level) \
-    constexpr auto fixedNameCdecl##line      = ::Kmpleete::ProfilerUtils::ReplaceString(name, "__cdecl ", "");\
-    constexpr auto fixedNameKmpleete##line   = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameCdecl##line.data, "Kmpleete::", "");\
-    constexpr auto fixedNameUPtr##line       = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameKmpleete##line.data, "std::unique_ptr", "UPtr");\
-    constexpr auto fixedNamePtr##line        = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameUPtr##line.data, "std::shared_ptr", "Ptr");\
-    constexpr auto fixedNameString##line     = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNamePtr##line.data, "std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >", "String");\
-    constexpr auto fixedNameWString##line    = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameString##line.data, "std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> >", "WString");\
-    constexpr auto fixedNameInt64##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameWString##line.data, "__int64", "int64");\
-    constexpr auto fixedNamePath##line       = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameInt64##line.data, "std::filesystem::path", "Filepath");\
-    constexpr auto fixedNameArray##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNamePath##line.data, "std::array", "Array");\
-    constexpr auto fixedNameClass##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameArray##line.data, "class ", "");\
-    constexpr auto fixedNameStruct##line     = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameClass##line.data, "struct ", "");\
-    constexpr auto fixedNameVector##line     = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameStruct##line.data, "std::vector", "Vector");\
-    constexpr auto fixedNameVoidParams##line = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameVector##line.data, "(void)", "()");\
-    constexpr auto fixedNameRapidjson##line  = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameVoidParams##line.data, "rapidjson::GenericDocument<rapidjson::UTF8<char>,rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>,rapidjson::CrtAllocator>", "rapidjson::Document");\
-    constexpr auto fixedName_T##line         = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameRapidjson##line.data, "_T *", "");\
-    constexpr auto fixedNameKHR_T##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedName_T##line.data, "KHR_T *", "");\
+    constexpr auto fixedNameCdecl##line      = ::Kmpleete::SourceLocation::ReplaceString(name, "__cdecl ", "");\
+    constexpr auto fixedNameKmpleete##line   = ::Kmpleete::SourceLocation::ReplaceString(fixedNameCdecl##line.data, "Kmpleete::", "");\
+    constexpr auto fixedNameUPtr##line       = ::Kmpleete::SourceLocation::ReplaceString(fixedNameKmpleete##line.data, "std::unique_ptr", "UPtr");\
+    constexpr auto fixedNamePtr##line        = ::Kmpleete::SourceLocation::ReplaceString(fixedNameUPtr##line.data, "std::shared_ptr", "Ptr");\
+    constexpr auto fixedNameString##line     = ::Kmpleete::SourceLocation::ReplaceString(fixedNamePtr##line.data, "std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >", "String");\
+    constexpr auto fixedNameWString##line    = ::Kmpleete::SourceLocation::ReplaceString(fixedNameString##line.data, "std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> >", "WString");\
+    constexpr auto fixedNameInt64##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedNameWString##line.data, "__int64", "int64");\
+    constexpr auto fixedNamePath##line       = ::Kmpleete::SourceLocation::ReplaceString(fixedNameInt64##line.data, "std::filesystem::path", "Filepath");\
+    constexpr auto fixedNameArray##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedNamePath##line.data, "std::array", "Array");\
+    constexpr auto fixedNameClass##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedNameArray##line.data, "class ", "");\
+    constexpr auto fixedNameStruct##line     = ::Kmpleete::SourceLocation::ReplaceString(fixedNameClass##line.data, "struct ", "");\
+    constexpr auto fixedNameVector##line     = ::Kmpleete::SourceLocation::ReplaceString(fixedNameStruct##line.data, "std::vector", "Vector");\
+    constexpr auto fixedNameVoidParams##line = ::Kmpleete::SourceLocation::ReplaceString(fixedNameVector##line.data, "(void)", "()");\
+    constexpr auto fixedNameRapidjson##line  = ::Kmpleete::SourceLocation::ReplaceString(fixedNameVoidParams##line.data, "rapidjson::GenericDocument<rapidjson::UTF8<char>,rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>,rapidjson::CrtAllocator>", "rapidjson::Document");\
+    constexpr auto fixedName_T##line         = ::Kmpleete::SourceLocation::ReplaceString(fixedNameRapidjson##line.data, "_T *", "");\
+    constexpr auto fixedNameKHR_T##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedName_T##line.data, "KHR_T *", "");\
     ::Kmpleete::ProfilerTimer timer##line(fixedNameKHR_T##line.data, level)
 #define _KMP_PROFILE_SCOPE_LINE(name, line, level) _KMP_PROFILE_SCOPE_LINE2(name, line, level)
 #define KMP_PROFILE_SCOPE(name, level) _KMP_PROFILE_SCOPE_LINE(name, __LINE__, level)
@@ -261,43 +214,43 @@ namespace Kmpleete
 
 //! Analogous to _KMP_PROFILE_SCOPE_LINE2 macro for non-copyable objects' constructors
 #define KMP_PROFILE_CONSTRUCTOR_END() \
-    constexpr auto fixedNameCdecl##line      = ::Kmpleete::ProfilerUtils::ReplaceString(KMP_FUNC_SIG, "__cdecl ", "");\
-    constexpr auto fixedNameKmpleete##line   = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameCdecl##line.data, "Kmpleete::", "");\
-    constexpr auto fixedNameUPtr##line       = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameKmpleete##line.data, "std::unique_ptr", "UPtr");\
-    constexpr auto fixedNamePtr##line        = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameUPtr##line.data, "std::shared_ptr", "Ptr");\
-    constexpr auto fixedNameString##line     = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNamePtr##line.data, "std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >", "String");\
-    constexpr auto fixedNameWString##line    = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameString##line.data, "std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> >", "WString");\
-    constexpr auto fixedNameInt64##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameWString##line.data, "__int64", "int64");\
-    constexpr auto fixedNamePath##line       = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameInt64##line.data, "std::filesystem::path", "Filepath");\
-    constexpr auto fixedNameArray##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNamePath##line.data, "std::array", "Array");\
-    constexpr auto fixedNameClass##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameArray##line.data, "class ", "");\
-    constexpr auto fixedNameStruct##line     = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameClass##line.data, "struct ", "");\
-    constexpr auto fixedNameVector##line     = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameStruct##line.data, "std::vector", "Vector");\
-    constexpr auto fixedNameVoidParams##line = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameVector##line.data, "(void)", "()");\
-    constexpr auto fixedNameRapidjson##line  = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameVoidParams##line.data, "rapidjson::GenericDocument<rapidjson::UTF8<char>,rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>,rapidjson::CrtAllocator>", "rapidjson::Document");\
-    constexpr auto fixedName_T##line         = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameRapidjson##line.data, "_T *", "");\
-    constexpr auto fixedNameKHR_T##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedName_T##line.data, "KHR_T *", "");\
+    constexpr auto fixedNameCdecl##line      = ::Kmpleete::SourceLocation::ReplaceString(KMP_FUNC_SIG, "__cdecl ", "");\
+    constexpr auto fixedNameKmpleete##line   = ::Kmpleete::SourceLocation::ReplaceString(fixedNameCdecl##line.data, "Kmpleete::", "");\
+    constexpr auto fixedNameUPtr##line       = ::Kmpleete::SourceLocation::ReplaceString(fixedNameKmpleete##line.data, "std::unique_ptr", "UPtr");\
+    constexpr auto fixedNamePtr##line        = ::Kmpleete::SourceLocation::ReplaceString(fixedNameUPtr##line.data, "std::shared_ptr", "Ptr");\
+    constexpr auto fixedNameString##line     = ::Kmpleete::SourceLocation::ReplaceString(fixedNamePtr##line.data, "std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >", "String");\
+    constexpr auto fixedNameWString##line    = ::Kmpleete::SourceLocation::ReplaceString(fixedNameString##line.data, "std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> >", "WString");\
+    constexpr auto fixedNameInt64##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedNameWString##line.data, "__int64", "int64");\
+    constexpr auto fixedNamePath##line       = ::Kmpleete::SourceLocation::ReplaceString(fixedNameInt64##line.data, "std::filesystem::path", "Filepath");\
+    constexpr auto fixedNameArray##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedNamePath##line.data, "std::array", "Array");\
+    constexpr auto fixedNameClass##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedNameArray##line.data, "class ", "");\
+    constexpr auto fixedNameStruct##line     = ::Kmpleete::SourceLocation::ReplaceString(fixedNameClass##line.data, "struct ", "");\
+    constexpr auto fixedNameVector##line     = ::Kmpleete::SourceLocation::ReplaceString(fixedNameStruct##line.data, "std::vector", "Vector");\
+    constexpr auto fixedNameVoidParams##line = ::Kmpleete::SourceLocation::ReplaceString(fixedNameVector##line.data, "(void)", "()");\
+    constexpr auto fixedNameRapidjson##line  = ::Kmpleete::SourceLocation::ReplaceString(fixedNameVoidParams##line.data, "rapidjson::GenericDocument<rapidjson::UTF8<char>,rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>,rapidjson::CrtAllocator>", "rapidjson::Document");\
+    constexpr auto fixedName_T##line         = ::Kmpleete::SourceLocation::ReplaceString(fixedNameRapidjson##line.data, "_T *", "");\
+    constexpr auto fixedNameKHR_T##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedName_T##line.data, "KHR_T *", "");\
     _constructorProfilerTimer->SetName(fixedNameKHR_T##line.data);\
     _constructorProfilerTimer.reset(nullptr);
 
 //! Analogous to _KMP_PROFILE_SCOPE_LINE2 macro for copyable objects' constructors
 #define KMP_PROFILE_CONSTRUCTOR_END_COPYABLE() \
-    constexpr auto fixedNameCdecl##line      = ::Kmpleete::ProfilerUtils::ReplaceString(KMP_FUNC_SIG, "__cdecl ", "");\
-    constexpr auto fixedNameKmpleete##line   = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameCdecl##line.data, "Kmpleete::", "");\
-    constexpr auto fixedNameUPtr##line       = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameKmpleete##line.data, "std::unique_ptr", "UPtr");\
-    constexpr auto fixedNamePtr##line        = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameUPtr##line.data, "std::shared_ptr", "Ptr");\
-    constexpr auto fixedNameString##line     = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNamePtr##line.data, "std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >", "String");\
-    constexpr auto fixedNameWString##line    = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameString##line.data, "std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> >", "WString");\
-    constexpr auto fixedNameInt64##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameWString##line.data, "__int64", "int64");\
-    constexpr auto fixedNamePath##line       = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameInt64##line.data, "std::filesystem::path", "Filepath");\
-    constexpr auto fixedNameArray##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNamePath##line.data, "std::array", "Array");\
-    constexpr auto fixedNameClass##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameArray##line.data, "class ", "");\
-    constexpr auto fixedNameStruct##line     = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameClass##line.data, "struct ", "");\
-    constexpr auto fixedNameVector##line     = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameStruct##line.data, "std::vector", "Vector");\
-    constexpr auto fixedNameVoidParams##line = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameVector##line.data, "(void)", "()");\
-    constexpr auto fixedNameRapidjson##line  = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameVoidParams##line.data, "rapidjson::GenericDocument<rapidjson::UTF8<char>,rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>,rapidjson::CrtAllocator>", "rapidjson::Document");\
-    constexpr auto fixedName_T##line         = ::Kmpleete::ProfilerUtils::ReplaceString(fixedNameRapidjson##line.data, "_T *", "");\
-    constexpr auto fixedNameKHR_T##line      = ::Kmpleete::ProfilerUtils::ReplaceString(fixedName_T##line.data, "KHR_T *", "");\
+    constexpr auto fixedNameCdecl##line      = ::Kmpleete::SourceLocation::ReplaceString(KMP_FUNC_SIG, "__cdecl ", "");\
+    constexpr auto fixedNameKmpleete##line   = ::Kmpleete::SourceLocation::ReplaceString(fixedNameCdecl##line.data, "Kmpleete::", "");\
+    constexpr auto fixedNameUPtr##line       = ::Kmpleete::SourceLocation::ReplaceString(fixedNameKmpleete##line.data, "std::unique_ptr", "UPtr");\
+    constexpr auto fixedNamePtr##line        = ::Kmpleete::SourceLocation::ReplaceString(fixedNameUPtr##line.data, "std::shared_ptr", "Ptr");\
+    constexpr auto fixedNameString##line     = ::Kmpleete::SourceLocation::ReplaceString(fixedNamePtr##line.data, "std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >", "String");\
+    constexpr auto fixedNameWString##line    = ::Kmpleete::SourceLocation::ReplaceString(fixedNameString##line.data, "std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> >", "WString");\
+    constexpr auto fixedNameInt64##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedNameWString##line.data, "__int64", "int64");\
+    constexpr auto fixedNamePath##line       = ::Kmpleete::SourceLocation::ReplaceString(fixedNameInt64##line.data, "std::filesystem::path", "Filepath");\
+    constexpr auto fixedNameArray##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedNamePath##line.data, "std::array", "Array");\
+    constexpr auto fixedNameClass##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedNameArray##line.data, "class ", "");\
+    constexpr auto fixedNameStruct##line     = ::Kmpleete::SourceLocation::ReplaceString(fixedNameClass##line.data, "struct ", "");\
+    constexpr auto fixedNameVector##line     = ::Kmpleete::SourceLocation::ReplaceString(fixedNameStruct##line.data, "std::vector", "Vector");\
+    constexpr auto fixedNameVoidParams##line = ::Kmpleete::SourceLocation::ReplaceString(fixedNameVector##line.data, "(void)", "()");\
+    constexpr auto fixedNameRapidjson##line  = ::Kmpleete::SourceLocation::ReplaceString(fixedNameVoidParams##line.data, "rapidjson::GenericDocument<rapidjson::UTF8<char>,rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>,rapidjson::CrtAllocator>", "rapidjson::Document");\
+    constexpr auto fixedName_T##line         = ::Kmpleete::SourceLocation::ReplaceString(fixedNameRapidjson##line.data, "_T *", "");\
+    constexpr auto fixedNameKHR_T##line      = ::Kmpleete::SourceLocation::ReplaceString(fixedName_T##line.data, "KHR_T *", "");\
     _constructorProfilerTimer->SetName(fixedNameKHR_T##line.data);\
     _constructorProfilerTimer.reset();
 
