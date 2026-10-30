@@ -86,9 +86,10 @@ namespace Kmpleete
 
         void LocalizationLibrary::Add(const DomainStrSID& domainSid, const SourceStrSID& sourceSid, const TranslationStr& translation) KMP_PROFILING(ProfileLevelMinorVerbose)
         {
-            if (_dictionaryMap.contains(domainSid))
+            const auto dictionaryIter = _dictionaryMap.find(domainSid);
+            if (dictionaryIter != _dictionaryMap.cend())
             {
-                auto& dictionary = _dictionaryMap.at(domainSid);
+                auto& dictionary = dictionaryIter->second;
                 if (dictionary)
                 {
                     dictionary->Add(sourceSid, translation);
@@ -100,9 +101,10 @@ namespace Kmpleete
         void LocalizationLibrary::Add(const DomainStrSID& domainSid, const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, 
                                       PluralityForm pluralityForm, const TranslationStr& translation) KMP_PROFILING(ProfileLevelMinorVerbose)
         {
-            if (_dictionaryMap.contains(domainSid))
+            const auto dictionaryIter = _dictionaryMap.find(domainSid);
+            if (dictionaryIter != _dictionaryMap.cend())
             {
-                auto& dictionary = _dictionaryMap.at(domainSid);
+                auto& dictionary = dictionaryIter->second;
                 if (dictionary)
                 {
                     dictionary->Add(sourceSidSingular, sourceSidPlural, pluralityForm, translation);
@@ -113,9 +115,10 @@ namespace Kmpleete
 
         void LocalizationLibrary::Add(const DomainStrSID& domainSid, const SourceStrSID& sourceSid, const ContextStrSID& contextSid, const TranslationStr& translation) KMP_PROFILING(ProfileLevelMinorVerbose)
         {
-            if (_dictionaryMap.contains(domainSid))
+            const auto dictionaryIter = _dictionaryMap.find(domainSid);
+            if (dictionaryIter != _dictionaryMap.cend())
             {
-                auto& dictionary = _dictionaryMap.at(domainSid);
+                auto& dictionary = dictionaryIter->second;
                 if (dictionary)
                 {
                     dictionary->Add(sourceSid, contextSid, translation);
@@ -127,9 +130,10 @@ namespace Kmpleete
         void LocalizationLibrary::Add(const DomainStrSID& domainSid, const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, 
                                       PluralityForm pluralityForm, const ContextStrSID& contextSid, const TranslationStr& translation) KMP_PROFILING(ProfileLevelMinorVerbose)
         {
-            if (_dictionaryMap.contains(domainSid))
+            const auto dictionaryIter = _dictionaryMap.find(domainSid);
+            if (dictionaryIter != _dictionaryMap.cend())
             {
-                auto& dictionary = _dictionaryMap.at(domainSid);
+                auto& dictionary = dictionaryIter->second;
                 if (dictionary)
                 {
                     dictionary->Add(sourceSidSingular, sourceSidPlural, pluralityForm, contextSid, translation);
@@ -140,9 +144,10 @@ namespace Kmpleete
 
         const TranslationStr& LocalizationLibrary::Get(const DomainStrSID& domainSid, const SourceStrSID& sourceSid) const KMP_PROFILING(ProfileLevelMinorVerbose)
         {
-            if (_dictionaryMap.contains(domainSid))
+            const auto dictionaryIter = _dictionaryMap.find(domainSid);
+            if (dictionaryIter != _dictionaryMap.cend())
             {
-                auto& dictionary = _dictionaryMap.at(domainSid);
+                auto& dictionary = dictionaryIter->second;
                 if (dictionary)
                 {
                     return dictionary->Get(sourceSid);
@@ -156,9 +161,10 @@ namespace Kmpleete
         const TranslationStr& LocalizationLibrary::Get(const DomainStrSID& domainSid, const SourceStrSID& sourceSidSingular, 
                                                        const SourceStrSID& sourceSidPlural, PluralityForm pluralityForm) const KMP_PROFILING(ProfileLevelMinorVerbose)
         {
-            if (_dictionaryMap.contains(domainSid))
+            const auto dictionaryIter = _dictionaryMap.find(domainSid);
+            if (dictionaryIter != _dictionaryMap.cend())
             {
-                auto& dictionary = _dictionaryMap.at(domainSid);
+                auto& dictionary = dictionaryIter->second;
                 if (dictionary)
                 {
                     return dictionary->Get(sourceSidSingular, sourceSidPlural, pluralityForm);
@@ -171,9 +177,10 @@ namespace Kmpleete
 
         const TranslationStr& LocalizationLibrary::Get(const DomainStrSID& domainSid, const SourceStrSID& sourceSid, const ContextStrSID& contextSid) const KMP_PROFILING(ProfileLevelMinorVerbose)
         {
-            if (_dictionaryMap.contains(domainSid))
+            const auto dictionaryIter = _dictionaryMap.find(domainSid);
+            if (dictionaryIter != _dictionaryMap.cend())
             {
-                auto& dictionary = _dictionaryMap.at(domainSid);
+                auto& dictionary = dictionaryIter->second;
                 if (dictionary)
                 {
                     return dictionary->Get(sourceSid, contextSid);
@@ -187,9 +194,10 @@ namespace Kmpleete
         const TranslationStr& LocalizationLibrary::Get(const DomainStrSID& domainSid, const SourceStrSID& sourceSidSingular, const SourceStrSID& sourceSidPlural, 
                                                        PluralityForm pluralityForm, const ContextStrSID& contextSid) const KMP_PROFILING(ProfileLevelMinorVerbose)
         {
-            if (_dictionaryMap.contains(domainSid))
+            const auto dictionaryIter = _dictionaryMap.find(domainSid);
+            if (dictionaryIter != _dictionaryMap.cend())
             {
-                auto& dictionary = _dictionaryMap.at(domainSid);
+                auto& dictionary = dictionaryIter->second;
                 if (dictionary)
                 {
                     return dictionary->Get(sourceSidSingular, sourceSidPlural, pluralityForm, contextSid);

@@ -67,25 +67,31 @@ namespace Kmpleete
 
         const Assets::TextureAsset& TextureAssetManager::GetAsset(StringID textureSid) const KMP_PROFILING(ProfileLevelImportant)
         {
-            if (not _textures.contains(textureSid))
+            KMP_ASSERT(_textures.contains(ErrorTextureSID));
+
+            const auto textureAssetIter = _textures.find(textureSid);
+            if (textureAssetIter == _textures.cend())
             {
                 KMP_LOG_WARN("texture '{}' not found", textureSid);
                 return *_textures.at(ErrorTextureSID);
             }
 
-            return *_textures.at(textureSid);
+            return *textureAssetIter->second;
         }}
         //--------------------------------------------------------------------------
 
         Assets::TextureAsset& TextureAssetManager::GetAsset(StringID textureSid) KMP_PROFILING(ProfileLevelImportant)
         {
-            if (not _textures.contains(textureSid))
+            KMP_ASSERT(_textures.contains(ErrorTextureSID));
+
+            const auto textureAssetIter = _textures.find(textureSid);
+            if (textureAssetIter == _textures.cend())
             {
                 KMP_LOG_WARN("texture '{}' not found", textureSid);
-                return *_textures.at(ErrorTextureSID);
+                return *_textures[ErrorTextureSID];
             }
 
-            return *_textures.at(textureSid);
+            return *textureAssetIter->second;
         }}
         //--------------------------------------------------------------------------
 

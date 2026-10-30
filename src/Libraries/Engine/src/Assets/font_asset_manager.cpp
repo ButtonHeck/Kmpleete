@@ -63,25 +63,31 @@ namespace Kmpleete
 
         const Assets::FontAsset& FontAssetManager::GetAsset(StringID fontSid) const KMP_PROFILING(ProfileLevelMinor)
         {
-            if (not _fonts.contains(fontSid))
+            KMP_ASSERT(_fonts.contains(DefaultFontSID));
+
+            const auto fontAssetIter = _fonts.find(fontSid);
+            if (fontAssetIter == _fonts.cend())
             {
                 KMP_LOG_ERROR("font '{}' not found", fontSid);
                 return *_fonts.at(DefaultFontSID);
             }
 
-            return *_fonts.at(fontSid);
+            return *fontAssetIter->second;
         }}
         //--------------------------------------------------------------------------
 
         Assets::FontAsset& FontAssetManager::GetAsset(StringID fontSid) KMP_PROFILING(ProfileLevelMinor)
         {
-            if (not _fonts.contains(fontSid))
+            KMP_ASSERT(_fonts.contains(DefaultFontSID));
+
+            const auto fontAssetIter = _fonts.find(fontSid);
+            if (fontAssetIter == _fonts.cend())
             {
                 KMP_LOG_ERROR("font '{}' not found", fontSid);
-                return *_fonts.at(DefaultFontSID);
+                return *_fonts[DefaultFontSID];
             }
 
-            return *_fonts.at(fontSid);
+            return *fontAssetIter->second;
         }}
         //--------------------------------------------------------------------------
 

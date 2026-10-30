@@ -371,9 +371,10 @@ namespace Kmpleete
 
         Nullable<VulkanBuffer*> VulkanBufferManager::GetBuffer(StringID bufferSid) const noexcept
         {
-            if (_buffers.contains(bufferSid))
+            const auto bufferIter = _buffers.find(bufferSid);
+            if (bufferIter != _buffers.cend())
             {
-                return _buffers.at(bufferSid).get();
+                return bufferIter->second.get();
             }
 
             auto vertexBuffer = GetVertexBuffer(bufferSid);
@@ -395,9 +396,10 @@ namespace Kmpleete
                 return nullptr;
             }
 
-            if (_perFrameBuffers.contains(bufferSid))
+            const auto perFrameBufferIter = _perFrameBuffers.find(bufferSid);
+            if (perFrameBufferIter != _perFrameBuffers.cend())
             {
-                return _perFrameBuffers.at(bufferSid)[index].get();
+                return perFrameBufferIter->second[index].get();
             }
 
             auto vertexBuffer = GetVertexBuffer(bufferSid, index);
@@ -413,9 +415,10 @@ namespace Kmpleete
 
         Nullable<VulkanVertexBuffer*> VulkanBufferManager::GetVertexBuffer(StringID bufferSid) const noexcept
         {
-            if (_vertexBuffers.contains(bufferSid))
+            const auto vertexBufferIter = _vertexBuffers.find(bufferSid);
+            if (vertexBufferIter != _vertexBuffers.cend())
             {
-                return _vertexBuffers.at(bufferSid).get();
+                return vertexBufferIter->second.get();
             }
 
             KMP_LOG_ERROR("failed to find vertex buffer with sid '{}'", bufferSid);
@@ -431,9 +434,10 @@ namespace Kmpleete
                 return nullptr;
             }
 
-            if (_perFrameVertexBuffers.contains(bufferSid))
+            const auto perFrameVertexBufferIter = _perFrameVertexBuffers.find(bufferSid);
+            if (perFrameVertexBufferIter != _perFrameVertexBuffers.cend())
             {
-                return _perFrameVertexBuffers.at(bufferSid)[index].get();
+                return perFrameVertexBufferIter->second[index].get();
             }
 
             KMP_LOG_ERROR("failed to find per-frame vertex buffer with sid '{}'", bufferSid);
@@ -444,14 +448,17 @@ namespace Kmpleete
 
         void VulkanBufferManager::ResizeBuffer(StringID bufferSid, VkDeviceSize size) KMP_PROFILING(ProfileLevelImportantVerbose)
         {
-            if (_buffers.contains(bufferSid))
+            const auto bufferIter = _buffers.find(bufferSid);
+            if (bufferIter != _buffers.cend())
             {
-                _buffers.at(bufferSid)->Resize(_memoryTypeDelegate, size);
+                bufferIter->second->Resize(_memoryTypeDelegate, size);
                 return;
             }
-            if (_vertexBuffers.contains(bufferSid))
+
+            const auto vertexBufferIter = _vertexBuffers.find(bufferSid);
+            if (vertexBufferIter != _vertexBuffers.cend())
             {
-                _vertexBuffers.at(bufferSid)->Resize(_memoryTypeDelegate, size);
+                vertexBufferIter->second->Resize(_memoryTypeDelegate, size);
                 return;
             }
 
@@ -461,19 +468,22 @@ namespace Kmpleete
 
         void VulkanBufferManager::ResizeBuffers(StringID bufferSid, VkDeviceSize size) KMP_PROFILING(ProfileLevelImportantVerbose)
         {
-            if (_perFrameBuffers.contains(bufferSid))
+            const auto perFrameBufferIter = _perFrameBuffers.find(bufferSid);
+            if (perFrameBufferIter != _perFrameBuffers.cend())
             {
                 for (auto i = 0; i < NumConcurrentFrames; i++)
                 {
-                    _perFrameBuffers.at(bufferSid)[i]->Resize(_memoryTypeDelegate, size);
+                    perFrameBufferIter->second[i]->Resize(_memoryTypeDelegate, size);
                 }
                 return;
             }
-            if (_perFrameVertexBuffers.contains(bufferSid))
+
+            const auto perFrameVertexBufferIter = _perFrameVertexBuffers.find(bufferSid);
+            if (perFrameVertexBufferIter != _perFrameVertexBuffers.cend())
             {
                 for (auto i = 0; i < NumConcurrentFrames; i++)
                 {
-                    _perFrameVertexBuffers.at(bufferSid)[i]->Resize(_memoryTypeDelegate, size);
+                    perFrameVertexBufferIter->second[i]->Resize(_memoryTypeDelegate, size);
                 }
                 return;
             }

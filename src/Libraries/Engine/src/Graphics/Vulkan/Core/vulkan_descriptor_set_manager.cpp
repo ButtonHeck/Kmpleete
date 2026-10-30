@@ -70,13 +70,14 @@ namespace Kmpleete
 
         VkDescriptorPool VulkanDescriptorSetManager::GetAuxDescriptorPool(StringID sid) const noexcept
         {
-            if (not _auxDescriptorPools.contains(sid))
+            const auto auxDescriptorPoolIter = _auxDescriptorPools.find(sid);
+            if (auxDescriptorPoolIter == _auxDescriptorPools.cend())
             {
                 KMP_LOG_ERROR("aux descriptor pool with sid '{}' not found", sid);
                 return VK_NULL_HANDLE;
             }
 
-            return _auxDescriptorPools.at(sid);
+            return auxDescriptorPoolIter->second;
         }
         //--------------------------------------------------------------------------
 
@@ -118,9 +119,10 @@ namespace Kmpleete
 
         VkDescriptorSetLayout VulkanDescriptorSetManager::GetDescriptorSetLayout(StringID layoutSid) const noexcept
         {
-            if (_descriptorSetLayouts.contains(layoutSid))
+            const auto descriptorSetLayoutIter = _descriptorSetLayouts.find(layoutSid);
+            if (descriptorSetLayoutIter != _descriptorSetLayouts.cend())
             {
-                return _descriptorSetLayouts.at(layoutSid);
+                return descriptorSetLayoutIter->second;
             }
 
             KMP_LOG_ERROR("descriptor set layout with sid '{}' not found", layoutSid);
@@ -143,13 +145,14 @@ namespace Kmpleete
 
         bool VulkanDescriptorSetManager::AllocateDescriptorSets(StringID layoutSid, StringID setSid, UInt32 setsCount, bool perFrame) 
         {
-            if (not _descriptorSetLayouts.contains(layoutSid))
+            const auto descriptorSetLayoutIter = _descriptorSetLayouts.find(layoutSid);
+            if (descriptorSetLayoutIter == _descriptorSetLayouts.cend())
             {
                 KMP_LOG_ERROR("cannot allocate '{}' descriptor sets with sid '{}' for layout '{}' - layout with given sid not found", setsCount, setSid, layoutSid);
                 return false;
             }
 
-            return AllocateDescriptorSets(_descriptorSetLayouts.at(layoutSid), setSid, setsCount, perFrame);
+            return AllocateDescriptorSets(descriptorSetLayoutIter->second, setSid, setsCount, perFrame);
         }
         //--------------------------------------------------------------------------
 
@@ -588,12 +591,13 @@ namespace Kmpleete
 
         VkDescriptorSet VulkanDescriptorSetManager::_GetDescriptorSet(const DescriptorSetStorage& storage, StringID setSid, UInt32 setIndex) const noexcept KMP_PROFILING(ProfileLevelImportantVerbose)
         {
-            if (not storage.contains(setSid))
+            const auto descriptorSetsIter = storage.find(setSid);
+            if (descriptorSetsIter == storage.cend())
             {
                 KMP_LOG_ERROR("cannot find descriptor set with sid '{}' - sid not found", setSid);
                 return VK_NULL_HANDLE;
             }
-            const auto& descriptorSets = storage.at(setSid);
+            const auto& descriptorSets = descriptorSetsIter->second;
 
             if (setIndex >= UInt32(descriptorSets.size()))
             {

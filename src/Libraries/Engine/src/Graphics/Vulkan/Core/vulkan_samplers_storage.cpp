@@ -34,10 +34,11 @@ namespace Kmpleete
 
         VkSampler VulkanSamplersStorage::AddSampler(StringID sid, const VkSamplerCreateInfo& createInfo) KMP_PROFILING(ProfileLevelImportant)
         {
-            if (_samplers.contains(sid))
+            const auto samplerIter = _samplers.find(sid);
+            if (samplerIter != _samplers.cend())
             {
                 KMP_LOG_WARN("sampler with sid '{}' already registered", sid);
-                return _samplers.at(sid);
+                return samplerIter->second;
             }
 
             try
@@ -60,13 +61,14 @@ namespace Kmpleete
 
         VkSampler VulkanSamplersStorage::GetSampler(StringID sid) const noexcept
         {
-            if (not _samplers.contains(sid))
+            const auto samplerIter = _samplers.find(sid);
+            if (samplerIter == _samplers.cend())
             {
                 KMP_LOG_ERROR("sampler with sid '{}' not found", sid);
                 return VK_NULL_HANDLE;
             }
 
-            return _samplers.at(sid);
+            return samplerIter->second;
         }
         //--------------------------------------------------------------------------
     }

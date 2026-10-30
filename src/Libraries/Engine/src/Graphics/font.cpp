@@ -102,9 +102,10 @@ namespace Kmpleete
 
         OptionalRef<const FontAtlas> Font::GetAtlas(const Localization::LocaleStrSID& localeSid) const noexcept
         {
-            if (_atlases.contains(localeSid))
+            const auto atlasIter = _atlases.find(localeSid);
+            if (atlasIter != _atlases.cend())
             {
-                return *_atlases.at(localeSid).get();
+                return *atlasIter->second.get();
             }
 
             KMP_LOG_ERROR("cannot find atlas for locale SID '{}'", localeSid);

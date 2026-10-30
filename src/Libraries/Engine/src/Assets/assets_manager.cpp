@@ -219,13 +219,14 @@ namespace Kmpleete
 
             for (const auto& sid : assetsSids)
             {
-                if (not _lookupMap.contains(sid))
+                const auto assetLookupInfoIter = _lookupMap.find(sid);
+                if (assetLookupInfoIter == _lookupMap.cend())
                 {
                     KMP_LOG_WARN("cannot load asset with sid '{}' - not found", sid);
                     continue;
                 }
 
-                lookupVector.push_back(_lookupMap.at(sid));
+                lookupVector.push_back(assetLookupInfoIter->second);
             }
 
             std::sort(lookupVector.begin(), lookupVector.end(), [](const AssetLookupInfo& info1, const AssetLookupInfo& info2) { return info1.filepath < info2.filepath; });

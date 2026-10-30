@@ -42,12 +42,13 @@ namespace Kmpleete
             const auto scale = pixelSize / float(_parameters.sizeMetrics.xPixelsPerEM);
             for (const auto& c : text)
             {
-                if (_fontCharacters.find(c) == _fontCharacters.end())
+                const auto fontCharIter = _fontCharacters.find(c);
+                if (fontCharIter == _fontCharacters.cend())
                 {
                     continue;
                 }
 
-                const auto& fontChar = _fontCharacters.at(c);
+                const auto& fontChar = fontCharIter->second;
                 float xpos = x + fontChar.bearing.x * scale;
                 float ypos = y + (fontChar.size.y - fontChar.bearing.y) * scale;
                 float w = fontChar.size.x * scale;

@@ -389,12 +389,13 @@ namespace Kmpleete
         Vector<ActionEvent> InputManager::_CreateActionEvents(InputCode code, InputControlValue value) const KMP_PROFILING(ProfileLevelImportant)
         {
             Vector<ActionEvent> actionEvents;
-            if (not _inputCodeToActionsMap.contains(code))
+            const auto actionIdsIter = _inputCodeToActionsMap.find(code);
+            if (actionIdsIter == _inputCodeToActionsMap.cend())
             {
                 return actionEvents;
             }
 
-            const auto& actionIds = _inputCodeToActionsMap.at(code);
+            const auto& actionIds = actionIdsIter->second;
             for (const auto& actionId : actionIds)
             {
                 const auto& conditions = _actionToInputCodesMap.at(actionId);

@@ -76,9 +76,10 @@ namespace Kmpleete
 
         OptionalRef<VulkanTextureAttachment> VulkanTextureAttachmentManager::GetTextureAttachment(StringID attachmentSid) const
         {
-            if (_textureAttachments.contains(attachmentSid))
+            const auto textureAttachmentIter = _textureAttachments.find(attachmentSid);
+            if (textureAttachmentIter != _textureAttachments.cend())
             {
-                return std::ref(*_textureAttachments.at(attachmentSid).get());
+                return *textureAttachmentIter->second.get();
             }
 
             KMP_LOG_ERROR("texture attachment with sid '{}' not found", attachmentSid);
@@ -90,13 +91,14 @@ namespace Kmpleete
                                                                                              VkResolveModeFlagBits resolveMode, VkImageLayout resolveImageLayout, 
                                                                                              bool useSwapchainForNonMSAA /*= false*/, bool useSwapchainSRGB /*= true*/) const KMP_PROFILING(ProfileLevelImportantVerbose)
         {
-            if (not _textureAttachments.contains(imageViewAttachmentSid))
+            const auto textureAttachmentIter = _textureAttachments.find(imageViewAttachmentSid);
+            if (textureAttachmentIter == _textureAttachments.cend())
             {
                 KMP_LOG_ERROR("texture attachment for image view with sid '{}' not found", imageViewAttachmentSid);
                 return preset;
             }
 
-            const auto& textureAttachment = _textureAttachments.at(imageViewAttachmentSid);
+            const auto& textureAttachment = textureAttachmentIter->second;
             if (textureAttachment->GetSamples() == VK_SampleCount_1)
             {
                 return _GetRenderingAttachmentInfoSingleSampled(preset, textureAttachment, useSwapchainForNonMSAA, useSwapchainSRGB);
@@ -186,13 +188,14 @@ namespace Kmpleete
             }
             else
             {
-                if (not _textureAttachments.contains(resolveImageViewAttachmentSid))
+                const auto textureAttachmentIter = _textureAttachments.find(resolveImageViewAttachmentSid);
+                if (textureAttachmentIter == _textureAttachments.cend())
                 {
                     KMP_LOG_ERROR("texture attachment for resolve image view with sid '{}' not found", resolveImageViewAttachmentSid);
                     return preset;
                 }
 
-                preset.resolveImageView = _textureAttachments.at(resolveImageViewAttachmentSid)->GetVkImageView();
+                preset.resolveImageView = textureAttachmentIter->second->GetVkImageView();
             }
 
             preset.resolveMode = resolveMode;

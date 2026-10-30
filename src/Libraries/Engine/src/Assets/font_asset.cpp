@@ -50,11 +50,12 @@ namespace Kmpleete
 
         OptionalRef<const Graphics::Texture> FontAsset::GetAtlasTexture(const Localization::LocaleStrSID& localeSid) const noexcept
         {
-            if (_atlasesTextures.contains(localeSid))
+            const auto atlasTextureIter = _atlasesTextures.find(localeSid);
+            if (atlasTextureIter != _atlasesTextures.cend())
             {
-                if (_atlasesTextures.at(localeSid) != nullptr)
+                if (atlasTextureIter->second != nullptr)
                 {
-                    return *_atlasesTextures.at(localeSid).get();
+                    return *atlasTextureIter->second.get();
                 }
 
                 auto atlasTexture = _CreateAtlasTexture(localeSid);

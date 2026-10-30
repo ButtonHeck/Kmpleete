@@ -28,9 +28,10 @@ namespace Kmpleete
 
     OptionalRef<SettingsDocument> SettingsManager::GetSettingsDocument(const String& name) const KMP_PROFILING(ProfileLevelImportantVerbose)
     {
-        if (_namedSettingsDocuments.contains(name))
+        const auto settingsDocumentIter = _namedSettingsDocuments.find(name);
+        if (settingsDocumentIter != _namedSettingsDocuments.cend())
         {
-            return std::ref(*_namedSettingsDocuments.at(name).get());
+            return *settingsDocumentIter->second.get();
         }
 
         return NullOptional;

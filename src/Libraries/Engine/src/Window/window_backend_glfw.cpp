@@ -226,9 +226,10 @@ namespace Kmpleete
 
     Nullable<Window*> WindowBackendGlfw::GetAuxWindow(const String& windowName) const KMP_PROFILING(ProfileLevelImportantVerbose)
     {
-        if (_auxWindows.contains(windowName))
+        const auto auxWindowIter = _auxWindows.find(windowName);
+        if (auxWindowIter != _auxWindows.cend())
         {
-            const auto& auxWindow = _auxWindows.at(windowName);
+            const auto& auxWindow = auxWindowIter->second;
             if (auxWindow)
             {
                 return auxWindow.get();
@@ -324,10 +325,11 @@ namespace Kmpleete
 
     OptionalRef<const WindowCursor> WindowBackendGlfw::AddCursor(const String& name, const Filepath& filepath, const Math::Point2I& hotspot /*= Math::Point2I()*/) KMP_PROFILING(ProfileLevelImportantVerbose)
     {
-        if (_cursors.contains(name))
+        const auto cursorIter = _cursors.find(name);
+        if (cursorIter != _cursors.cend())
         {
             KMP_LOG_WARN("cursor named '{}' already added", name);
-            return std::cref(*_cursors.at(name).get());
+            return *cursorIter->second.get();
         }
 
         try
@@ -340,19 +342,20 @@ namespace Kmpleete
             return NullOptional;
         }
 
-        return std::cref(*_cursors.at(name).get());
+        return *_cursors.at(name).get();
     }}
     //--------------------------------------------------------------------------
 
     OptionalRef<const WindowCursor> WindowBackendGlfw::GetCursor(const String& name) const KMP_PROFILING(ProfileLevelMinor)
     {
-        if (not _cursors.contains(name))
+        const auto cursorIter = _cursors.find(name);
+        if (cursorIter == _cursors.cend())
         {
             KMP_LOG_WARN("cannot find cursor named '{}'", name);
             return NullOptional;
         }
 
-        return std::cref(*_cursors.at(name).get());
+        return *cursorIter->second.get();
     }}
     //--------------------------------------------------------------------------
 

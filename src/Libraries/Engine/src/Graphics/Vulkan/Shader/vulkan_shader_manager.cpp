@@ -43,10 +43,11 @@ namespace Kmpleete
         {
             KMP_ASSERT(_device);
 
-            if (_shaderModules.contains(moduleSid))
+            const auto shaderModuleIter = _shaderModules.find(moduleSid);
+            if (shaderModuleIter != _shaderModules.cend())
             {
                 KMP_LOG_WARN("shader module with sid '{}' has already been created", moduleSid);
-                return *_shaderModules.at(moduleSid).get();
+                return *shaderModuleIter->second.get();
             }
 
             try
@@ -66,10 +67,11 @@ namespace Kmpleete
         {
             KMP_ASSERT(_device);
 
-            if (_shaderModules.contains(moduleSid))
+            const auto shaderModuleIter = _shaderModules.find(moduleSid);
+            if (shaderModuleIter != _shaderModules.cend())
             {
                 KMP_LOG_WARN("shader module with sid '{}' has already been created", moduleSid);
-                return *_shaderModules.at(moduleSid).get();
+                return *shaderModuleIter->second.get();
             }
 
             try
@@ -87,9 +89,10 @@ namespace Kmpleete
 
         OptionalRef<VulkanShaderModule> VulkanShaderManager::GetShaderModule(StringID moduleSid) const noexcept KMP_PROFILING(ProfileLevelImportant)
         {
-            if (_shaderModules.contains(moduleSid))
+            const auto shaderModuleIter = _shaderModules.find(moduleSid);
+            if (shaderModuleIter != _shaderModules.cend())
             {
-                return *_shaderModules.at(moduleSid).get();
+                return *shaderModuleIter->second.get();
             }
 
             KMP_LOG_ERROR("shader module with sid '{}' not found", moduleSid);
@@ -248,9 +251,10 @@ namespace Kmpleete
 
         VkShaderEXT VulkanShaderManager::GetVkShader(StringID shaderSid) const noexcept
         {
-            if (_shaderObjects.contains(shaderSid))
+            const auto shaderObjectIter = _shaderObjects.find(shaderSid);
+            if (shaderObjectIter != _shaderObjects.cend())
             {
-                const auto& shaderObject = _shaderObjects.at(shaderSid);
+                const auto& shaderObject = shaderObjectIter->second;
                 if (shaderObject)
                 {
                     return shaderObject->GetVkShader();

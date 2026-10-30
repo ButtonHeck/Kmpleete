@@ -78,9 +78,10 @@ namespace Kmpleete
 
         VkPipelineLayout VulkanPipelineManager::GetPipelineLayout(StringID layoutSid) const noexcept
         {
-            if (_layouts.contains(layoutSid))
+            const auto layoutIter = _layouts.find(layoutSid);
+            if (layoutIter != _layouts.cend())
             {
-                return _layouts.at(layoutSid);
+                return layoutIter->second;
             }
 
             KMP_LOG_ERROR("pipeline layout with sid '{}' not found", layoutSid);
@@ -138,9 +139,10 @@ namespace Kmpleete
             }
 
             VkPipelineCache pipelineCache = VK_NULL_HANDLE;
-            if (_pipelineCaches.contains(pipelineSid))
+            const auto pipelineCacheIter = _pipelineCaches.find(pipelineSid);
+            if (pipelineCacheIter != _pipelineCaches.cend())
             {
-                pipelineCache = _pipelineCaches.at(pipelineSid)->GetVkPipelineCache();
+                pipelineCache = pipelineCacheIter->second->GetVkPipelineCache();
             }
 
             const auto [iterator, hasEmplaced] = _pipelines.emplace(pipelineSid, CreateUPtr<VulkanGraphicsPipeline>(_device, pipelineSid, layout, pipelineCache, parameters));
@@ -150,9 +152,10 @@ namespace Kmpleete
 
         OptionalRef<VulkanGraphicsPipeline> VulkanPipelineManager::GetGraphicsPipeline(StringID pipelineSid) const
         {
-            if (_pipelines.contains(pipelineSid))
+            const auto pipelineIter = _pipelines.find(pipelineSid);
+            if (pipelineIter != _pipelines.cend())
             {
-                return *_pipelines.at(pipelineSid).get();
+                return *pipelineIter->second.get();
             }
             
             KMP_LOG_ERROR("graphics pipeline with sid '{}' not found", pipelineSid);
