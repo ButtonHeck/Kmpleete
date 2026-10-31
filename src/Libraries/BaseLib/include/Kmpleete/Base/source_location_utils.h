@@ -50,5 +50,53 @@ namespace Kmpleete
             return result;
         }
         //--------------------------------------------------------------------------
+
+        //! Helper function to strip function's full signature to a "ClassName::FunctionName" form
+        template<size_t lengthSrc>
+        consteval auto ShortenFunctionName(const char(&src)[lengthSrc])
+        {
+            ReplaceResult<lengthSrc> result = {};
+            size_t srcIndex = 0;
+
+            size_t functionNameEnd = lengthSrc;
+            while (srcIndex < lengthSrc - 1)
+            {
+                if (src[srcIndex] == '(')
+                {
+                    functionNameEnd = srcIndex;
+                    break;
+                }
+                srcIndex++;
+            }
+
+            srcIndex = functionNameEnd;
+            bool classLevelNamespaceFound = false;
+            size_t classNameBegin = 0;
+            while (srcIndex > 0)
+            {
+                if (src[srcIndex] == ':')
+                {
+                    if (not classLevelNamespaceFound)
+                    {
+                        classLevelNamespaceFound = true;
+                        srcIndex--;
+                    }
+                    else
+                    {
+                        classNameBegin = srcIndex + 1;
+                        break;
+                    }
+                }
+                srcIndex--;
+            }
+
+            for (size_t i = 0; i < (functionNameEnd - classNameBegin); i++)
+            {
+                result.data[i] = src[i + classNameBegin];
+            }
+
+            return result;
+        }
+        //--------------------------------------------------------------------------
     }
 }
