@@ -22,7 +22,7 @@ namespace Kmpleete
             return true;
         }
 
-        KMP_LOG_ERROR("cannot pop from empty scope");
+        KMP_LOG_ERROR("scope is empty");
         return false;
     }}
     //--------------------------------------------------------------------------

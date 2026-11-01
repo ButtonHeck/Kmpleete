@@ -6,7 +6,6 @@
 #include "Kmpleete/Json/json_reader.h"
 #include "Kmpleete/Json/json_writer.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 #include <rapidjson/fwd.h>
 #include <rapidjson/document.h>
@@ -21,7 +20,6 @@ namespace Kmpleete
     //! @see JsonWriter
     class KMP_API JsonDocument
     {
-        KMP_LOG_CLASSNAME(JsonDocument)
         KMP_PROFILE_CONSTRUCTOR_DECLARE()
         KMP_DISABLE_COPY_MOVE(JsonDocument)
 

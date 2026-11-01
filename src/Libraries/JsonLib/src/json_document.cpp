@@ -91,7 +91,7 @@ namespace Kmpleete
         _error = false;
         if (not Filesystem::FilepathExists(_filepath))
         {
-            KMP_LOG_WARN("failed to load due to insufficient filepath '{}'", _filepath);
+            KMP_LOG_WARN("filepath not exists '{}'", _filepath);
             _error = true;
             return false;
         }
@@ -112,7 +112,7 @@ namespace Kmpleete
 
         if (newDocument.HasParseError())
         {
-            KMP_LOG_ERROR("failed to load from '{}', JSON parsing error '{}'", _filepath, rapidjson::GetParseError_En(newDocument.GetParseError()));
+            KMP_LOG_ERROR("file '{}' JSON parsing error '{}'", _filepath, rapidjson::GetParseError_En(newDocument.GetParseError()));
             _error = true;
             return false;
         }
@@ -155,7 +155,7 @@ namespace Kmpleete
             }
         }
 
-        KMP_LOG_WARN("failed to write document in '{}'", _filepath);
+        KMP_LOG_WARN("failed to write in '{}'", _filepath);
         _error = true;
         return false;
     }}
@@ -185,7 +185,7 @@ namespace Kmpleete
             }
         }
 
-        KMP_LOG_WARN("failed to write document to string");
+        KMP_LOG_WARN("failed to write to string");
         _error = true;
         return String("");
     }}
@@ -212,7 +212,7 @@ namespace Kmpleete
     {
         if (name.empty())
         {
-            KMP_LOG_ERROR("cannot add child document - name is empty");
+            KMP_LOG_ERROR("name is empty");
             return false;
         }
 
@@ -518,12 +518,12 @@ namespace Kmpleete
 
         if (not Filesystem::WriteFile(_filepath, buffer.GetString(), "append"_false))
         {
-            KMP_LOG_WARN("failed to write document in '{}'", _filepath);
+            KMP_LOG_WARN("failed to write in '{}'", _filepath);
             _error = true;
             return false;
         }
 
-        KMP_LOG_INFO("document written successfully in '{}'", _filepath);
+        KMP_LOG_INFO("successfully written to '{}'", _filepath);
         _error = false;
         return true;
     }}
