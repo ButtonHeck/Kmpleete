@@ -8,7 +8,6 @@
 #include "Kmpleete/Graphics/Vulkan/Shader/vulkan_shader_object.h"
 #include "Kmpleete/Graphics/Vulkan/Shader/vulkan_shader_module.h"
 #include "Kmpleete/Graphics/Vulkan/Shader/vulkan_shader_load_parameters.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -28,7 +27,6 @@ namespace Kmpleete
         class KMP_API VulkanShaderManager
         {
             KMP_DISABLE_COPY_MOVE(VulkanShaderManager)
-            KMP_LOG_CLASSNAME(VulkanShaderManager)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

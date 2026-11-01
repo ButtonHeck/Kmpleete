@@ -22,7 +22,7 @@ namespace Kmpleete
             const auto freetypeFontInitError = FT_New_Memory_Face(&freetypeLib, _fontBuffer.data(), static_cast<FT_Long>(_fontBuffer.size()), 0, &_freetypeFace);
             if (freetypeFontInitError)
             {
-                KMP_LOG_ERROR("failed to load FreeType font from buffer");
+                KMP_LOG_ERROR("FreeType font face initialization from buffer error '{}'", freetypeFontInitError);
                 throw RuntimeError("Font: failed to load FreeType font from buffer");
             }
 
@@ -45,7 +45,7 @@ namespace Kmpleete
             const auto freetypeFontDoneError = FT_Done_Face(_freetypeFace);
             if (freetypeFontDoneError)
             {
-                KMP_LOG_ERROR("failed to destroy FreeType font instance");
+                KMP_LOG_ERROR("FreeType font face destruction error '{}'", freetypeFontDoneError);
             }
         }}
         //--------------------------------------------------------------------------

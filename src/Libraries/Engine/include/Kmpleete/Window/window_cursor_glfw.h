@@ -3,7 +3,6 @@
 #include "Kmpleete/Window/window_cursor.h"
 #include "Kmpleete/Math/geometry.h"
 #include "Kmpleete/Base/types_aliases.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 struct GLFWcursor;
@@ -16,7 +15,6 @@ namespace Kmpleete
     //! @see Window
     class KMP_API WindowCursorGlfw : public WindowCursor
     {
-        KMP_LOG_CLASSNAME(WindowCursorGlfw)
         KMP_DISABLE_COPY_MOVE(WindowCursorGlfw)
 
     public:

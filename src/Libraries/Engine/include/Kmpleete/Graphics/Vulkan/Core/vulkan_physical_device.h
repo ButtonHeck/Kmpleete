@@ -6,7 +6,6 @@
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_context.h"
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_memory_type_delegate.h"
 #include "Kmpleete/Graphics/Vulkan/Delegates/vulkan_format_delegate.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -23,7 +22,6 @@ namespace Kmpleete
         class KMP_API VulkanPhysicalDevice : public PhysicalDevice
         {
             KMP_DISABLE_COPY_MOVE(VulkanPhysicalDevice)
-            KMP_LOG_CLASSNAME(VulkanPhysicalDevice)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

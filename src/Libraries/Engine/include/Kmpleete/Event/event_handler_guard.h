@@ -40,7 +40,7 @@ namespace Kmpleete
                 }
                 catch (...)
                 {
-                    KMP_LOG_ERROR("failed to detach event handler");
+                    KMP_LOG_ERROR2("failed to detach event handler");
                 }
             }
 

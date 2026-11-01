@@ -35,7 +35,7 @@ namespace Kmpleete
             auto* texture = _graphicsBackend.CreateTexture(filepath, subTypeMask, flipVertically);
             if (texture == nullptr)
             {
-                KMP_LOG_ERROR("failed to create texture '{}'", filepath);
+                KMP_LOG_ERROR("failed to create texture from '{}'", filepath);
                 return false;
             }
 

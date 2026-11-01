@@ -98,7 +98,7 @@ namespace Kmpleete
                 return _controlStates[mouseCode] == ButtonPressedValue;
             }
 
-            KMP_LOG_WARN("IsMouseButtonPressed function accepts only codes in range [ Mouse_Button0 (0) ; Mouse_Button7 (7) ], but given value is '{}'", mouseCode);
+            KMP_LOG_WARN("accepts only codes in range [ Mouse_Button0 (0) ; Mouse_Button7 (7) ], but given value is '{}'", mouseCode);
             return false;
         }
         //--------------------------------------------------------------------------
@@ -116,7 +116,7 @@ namespace Kmpleete
                 return _controlStates[keyCode] == ButtonPressedValue;
             }
 
-            KMP_LOG_WARN("IsKeyButtonPressed function accepts only codes in range [ Key_Space (32) ; Key_Menu (348) ], but given value is '{}'", keyCode);
+            KMP_LOG_WARN("accepts only codes in range [ Key_Space (32) ; Key_Menu (348) ], but given value is '{}'", keyCode);
             return false;
         }
         //--------------------------------------------------------------------------
@@ -144,7 +144,7 @@ namespace Kmpleete
             {
                 if (not _IsValidInputCode(code))
                 {
-                    KMP_LOG_WARN("UpdateTimerActions accepts only codes in range [ Mouse_Button0 (0) ; Key_Menu (348) ], but given value is '{}'", code);
+                    KMP_LOG_WARN("accepts only codes in range [ Mouse_Button0 (0) ; Key_Menu (348) ], but given value is '{}'", code);
                     continue;
                 }
 

@@ -7,7 +7,6 @@
 #include "Kmpleete/Assets/texture_asset.h"
 #include "Kmpleete/Graphics/graphics_base.h"
 #include "Kmpleete/Graphics/graphics_backend.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 
@@ -28,7 +27,6 @@ namespace Kmpleete
         //! @see Assets::TextureAsset
         class KMP_API TextureAssetManager
         {
-            KMP_LOG_CLASSNAME(TextureAssetManager)
             KMP_DISABLE_COPY_MOVE(TextureAssetManager)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 

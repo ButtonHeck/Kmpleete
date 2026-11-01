@@ -7,7 +7,6 @@
 #include "Kmpleete/Application/frame_listener.h"
 #include "Kmpleete/Application/frame_listener_command.h"
 #include "Kmpleete/Event/event.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -24,7 +23,6 @@ namespace Kmpleete
     //! @see WindowApplication
     class KMP_API FrameListenerManager
     {
-        KMP_LOG_CLASSNAME(FrameListenerManager)
         KMP_DISABLE_COPY_MOVE(FrameListenerManager)
 
     public:

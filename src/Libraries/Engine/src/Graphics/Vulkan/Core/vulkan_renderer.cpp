@@ -106,7 +106,7 @@ namespace Kmpleete
         {
             if (not attachment.has_value())
             {
-                KMP_LOG_ERROR("cannot insert memory barrier for texture attachment wrapper with no value");
+                KMP_LOG_ERROR("texture attachment wrapper has no value");
                 return;
             }
 
@@ -475,7 +475,7 @@ namespace Kmpleete
             const auto pipeline = _pipelineManager.GetGraphicsPipeline(pipelineSid);
             if (not pipeline.has_value())
             {
-                KMP_LOG_ERROR("cannot bind pipeline with sid '{}' - pipeline not found", pipelineSid);
+                KMP_LOG_ERROR("pipeline '{}' not found", pipelineSid);
                 return false;
             }
 
@@ -491,7 +491,7 @@ namespace Kmpleete
             const auto pipelineLayout = _pipelineManager.GetPipelineLayout(layoutSid);
             if (pipelineLayout == VK_NULL_HANDLE)
             {
-                KMP_LOG_ERROR("cannot bind descriptor sets with pipeline layout sid '{}' - pipeline layout not found", layoutSid);
+                KMP_LOG_ERROR("pipeline layout '{}' not found", layoutSid);
                 return false;
             }
 
@@ -514,7 +514,7 @@ namespace Kmpleete
             const auto pipelineLayout = _pipelineManager.GetPipelineLayout(layoutSid);
             if (pipelineLayout == VK_NULL_HANDLE)
             {
-                KMP_LOG_ERROR("cannot push constants with pipeline layout sid '{}' - pipeline layout not found", layoutSid);
+                KMP_LOG_ERROR("pipeline layout '{}' not found", layoutSid);
                 return;
             }
 
@@ -528,7 +528,7 @@ namespace Kmpleete
 
             if (vertexBuffers.size() != offsets.size() || vertexBuffers.empty())
             {
-                KMP_LOG_ERROR("failed to bind vertex buffers - vertex buffers size doesn't match size of the offsets or vertex buffers are empty");
+                KMP_LOG_ERROR("vertex buffers size doesn't match size of the offsets or vertex buffers are empty");
                 return false;
             }
 
@@ -546,7 +546,7 @@ namespace Kmpleete
                 ((buffers.size() != strides.size()) && not strides.empty()) ||
                 buffers.empty())
             {
-                KMP_LOG_ERROR("failed to bind vertex buffers - vertex buffers size doesn't match size of the offsets/sizes/strides or vertex buffers are empty");
+                KMP_LOG_ERROR("vertex buffers size doesn't match size of the offsets/sizes/strides or vertex buffers are empty");
                 return;
             }
 
@@ -583,7 +583,7 @@ namespace Kmpleete
                     continue;
                 }
 
-                KMP_LOG_ERROR("cannot bind shader with sid '{}' - not found", shaderSid);
+                KMP_LOG_ERROR("shader '{}' not found", shaderSid);
             }
 
             VKCommands::CmdBindShadersEXT(_currentCommandBuffer, UInt32(stages.size()), stages.data(), shaders.data());
@@ -666,7 +666,7 @@ namespace Kmpleete
                 auto destinationBuffer = _bufferManager.GetBuffer(singleCopyParameters.destinationBufferSid);
                 if (not destinationBuffer)
                 {
-                    KMP_LOG_WARN("cannot find destination buffer '{}' for copying", singleCopyParameters.destinationBufferSid);
+                    KMP_LOG_WARN("destination buffer '{}' not found", singleCopyParameters.destinationBufferSid);
                     continue;
                 }
 
@@ -695,7 +695,7 @@ namespace Kmpleete
                 auto destinationBuffer = _bufferManager.GetBuffer(singleCopyParameters.destinationBufferSid);
                 if (not destinationBuffer)
                 {
-                    KMP_LOG_WARN("cannot find destination buffer '{}' for copying", singleCopyParameters.destinationBufferSid);
+                    KMP_LOG_WARN("destination buffer '{}' not found", singleCopyParameters.destinationBufferSid);
                     continue;
                 }
 

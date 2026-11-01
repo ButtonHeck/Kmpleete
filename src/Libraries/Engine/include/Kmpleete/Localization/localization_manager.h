@@ -6,7 +6,6 @@
 #include "Kmpleete/Localization/localization_base.h"
 #include "Kmpleete/Localization/localization_library.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 #include <boost/locale.hpp>
 
@@ -32,7 +31,6 @@ namespace Kmpleete
         //! @see LocalizationLibrary
         class KMP_API LocalizationManager
         {
-            KMP_LOG_CLASSNAME(LocalizationManager)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
             KMP_DISABLE_COPY_MOVE(LocalizationManager)
 

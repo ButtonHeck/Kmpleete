@@ -3,7 +3,6 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Base/types_aliases.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Core/program_options.h"
 #include "Kmpleete/Core/settings_manager.h"
 #include "Kmpleete/Core/system_metrics_manager.h"
@@ -30,7 +29,6 @@ namespace Kmpleete
     //! initialization and its settings management
     class KMP_API Application
     {
-        KMP_LOG_CLASSNAME(Application)
         KMP_PROFILE_CONSTRUCTOR_DECLARE()
         KMP_DISABLE_COPY_MOVE(Application)
 

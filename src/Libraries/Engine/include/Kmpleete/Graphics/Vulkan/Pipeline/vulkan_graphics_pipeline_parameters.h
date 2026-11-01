@@ -2,7 +2,6 @@
 
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 #include <vulkan/vulkan.h>
 
@@ -20,8 +19,6 @@ namespace Kmpleete
         //! @see VulkanGraphicsPipeline
         class KMP_API VulkanGraphicsPipelineParameters
         {
-            KMP_LOG_CLASSNAME(VulkanGraphicsPipelineParameters)
-
         public:
             //! Enumeration of categories of pipeline stages to copy from source object
             enum CopyParameters

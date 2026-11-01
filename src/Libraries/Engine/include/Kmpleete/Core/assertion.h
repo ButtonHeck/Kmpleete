@@ -6,7 +6,6 @@
 #include "Kmpleete/Base/macro.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Utils/string_utils.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 #include <sstream>
 
@@ -27,8 +26,6 @@ namespace Kmpleete
     //! during condition check (_WATCH versions). Excluded from "Production" builds
     class KMP_API Assertion
     {
-        KMP_LOG_CLASSNAME(Assertion)
-
     public:
         enum class Consequence
         {

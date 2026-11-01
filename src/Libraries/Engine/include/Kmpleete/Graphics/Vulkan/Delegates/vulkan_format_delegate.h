@@ -2,7 +2,6 @@
 
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -17,7 +16,6 @@ namespace Kmpleete
         class KMP_API VulkanFormatDelegate
         {
             KMP_DISABLE_COPY_MOVE(VulkanFormatDelegate)
-            KMP_LOG_CLASSNAME(VulkanFormatDelegate)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

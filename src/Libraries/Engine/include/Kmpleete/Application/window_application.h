@@ -10,7 +10,6 @@
 #include "Kmpleete/Base/nullability.h"
 #include "Kmpleete/Input/input_manager.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -45,7 +44,6 @@ namespace Kmpleete
     //! @see FrameListenerManager
     class KMP_API WindowApplication : public Application
     {
-        KMP_LOG_CLASSNAME(WindowApplication)
         KMP_PROFILE_CONSTRUCTOR_DECLARE()
         KMP_DISABLE_COPY_MOVE(WindowApplication)
 

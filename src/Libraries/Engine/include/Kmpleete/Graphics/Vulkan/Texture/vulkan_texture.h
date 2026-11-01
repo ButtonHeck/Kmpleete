@@ -4,7 +4,6 @@
 #include "Kmpleete/Graphics/texture.h"
 #include "Kmpleete/Graphics/Vulkan/Texture/vulkan_texture_base.h"
 #include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_buffer.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -23,7 +22,6 @@ namespace Kmpleete
         class KMP_API VulkanTexture : public Texture, public VulkanTextureBase
         {
             KMP_DISABLE_COPY_MOVE(VulkanTexture)
-            KMP_LOG_CLASSNAME(VulkanTexture)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

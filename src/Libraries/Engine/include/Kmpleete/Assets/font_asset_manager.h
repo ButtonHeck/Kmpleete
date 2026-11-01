@@ -6,7 +6,6 @@
 #include "Kmpleete/Base/string_id.h"
 #include "Kmpleete/Assets/font_asset.h"
 #include "Kmpleete/Localization/localization_base.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 
@@ -30,7 +29,6 @@ namespace Kmpleete
         //! @see Assets::FontAsset
         class KMP_API FontAssetManager
         {
-            KMP_LOG_CLASSNAME(FontAssetManager)
             KMP_DISABLE_COPY_MOVE(FontAssetManager)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 

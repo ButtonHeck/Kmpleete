@@ -3,7 +3,6 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/type_traits.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -17,7 +16,6 @@ namespace Kmpleete
         class KMP_API VulkanShaderModule
         {
             KMP_DISABLE_COPY(VulkanShaderModule)
-            KMP_LOG_CLASSNAME(VulkanShaderModule)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

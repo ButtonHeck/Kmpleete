@@ -1,5 +1,4 @@
 #include "Kmpleete/Window/window_commands.h"
-#include "Kmpleete/Profile/profiler.h"
 
 
 namespace Kmpleete

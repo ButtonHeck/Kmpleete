@@ -3,7 +3,6 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Window/window_backend.h"
 #include "Kmpleete/Window/window_cursor.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -12,7 +11,6 @@ namespace Kmpleete
     //! @see WindowBackend
     class KMP_API WindowBackendGlfw : public WindowBackend
     {
-        KMP_LOG_CLASSNAME(WindowBackendGlfw)
         KMP_DISABLE_COPY_MOVE(WindowBackendGlfw)
 
     public:

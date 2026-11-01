@@ -65,13 +65,13 @@ namespace Kmpleete
     {
         if (_mainWindow)
         {
-            KMP_LOG_WARN("main window already created!");
+            KMP_LOG_WARN("already created");
         }
         else
         {
             if (not _mainWindowSettings)
             {
-                KMP_LOG_WARN("main window settings were not found, provide default");
+                KMP_LOG_WARN("settings were not found, provide default");
                 _mainWindowSettings = CreateUPtr<Window::WindowSettings>(MainWindowName);
             }
 
@@ -418,7 +418,7 @@ namespace Kmpleete
 
         if (not settings.StartLoadObject(MainWindowStr))
         {
-            KMP_LOG_WARN("main window settings were not found");
+            KMP_LOG_WARN("settings were not found");
         }
         else
         {

@@ -43,7 +43,7 @@ namespace Kmpleete
             _windowsProcessHandle = GetCurrentProcess();
             if (not _windowsProcessHandle)
             {
-                KMP_LOG_ERROR("update failed on GetCurrentProcess handle");
+                KMP_LOG_ERROR("failed on GetCurrentProcess handle");
                 return false;
             }
         }
@@ -150,7 +150,7 @@ namespace Kmpleete
         memoryInfo.dwLength = sizeof(MEMORYSTATUSEX);
         if (not static_cast<bool>(GlobalMemoryStatusEx(&memoryInfo)))
         {
-            KMP_LOG_ERROR("initialization failed on GlobalMemoryStatusEx, error {}", GetLastError());
+            KMP_LOG_ERROR("GlobalMemoryStatusEx error {}", GetLastError());
             return false;
         }
 
@@ -161,7 +161,7 @@ namespace Kmpleete
         const auto error = sysinfo(&memoryInfo);
         if (error != 0)
         {
-            KMP_LOG_ERROR("initialization failed on sysinfo");
+            KMP_LOG_ERROR("sysinfo error");
             return false;
         }
     
@@ -201,7 +201,7 @@ namespace Kmpleete
         _windowsProcessHandle = GetCurrentProcess();
         if (not _windowsProcessHandle)
         {
-            KMP_LOG_ERROR("initialization failed on GetCurrentProcess handle");
+            KMP_LOG_ERROR("GetCurrentProcess handle failure");
             return false;
         }
 #endif
@@ -221,7 +221,7 @@ namespace Kmpleete
 
         if (not static_cast<bool>(GetProcessTimes(reinterpret_cast<HANDLE>(_windowsProcessHandle), &fTime, &fTime, &fSystem, &fUser)))
         {
-            KMP_LOG_ERROR("initialization failed on GetProcessTimes, error {}", GetLastError());
+            KMP_LOG_ERROR("GetProcessTimes error {}", GetLastError());
             return false;
         }
 
@@ -316,7 +316,7 @@ namespace Kmpleete
         PROCESS_MEMORY_COUNTERS_EX pmc;
         if (not static_cast<bool>(GetProcessMemoryInfo(reinterpret_cast<HANDLE>(_windowsProcessHandle), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc))))
         {
-            KMP_LOG_ERROR("update failed on GetProcessMemoryInfo, error {}", GetLastError());
+            KMP_LOG_ERROR("GetProcessMemoryInfo error {}", GetLastError());
             return false;
         }
 
@@ -389,7 +389,7 @@ namespace Kmpleete
 
         if (not static_cast<bool>(GetProcessTimes(reinterpret_cast<HANDLE>(_windowsProcessHandle), &fTime, &fTime, &fSystem, &fUser)))
         {
-            KMP_LOG_ERROR("update failed on GetProcessTimes, error {}", GetLastError());
+            KMP_LOG_ERROR("GetProcessTimes error {}", GetLastError());
             return false;
         }
 

@@ -7,7 +7,6 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/pointers.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -24,7 +23,6 @@ namespace Kmpleete
         class KMP_API VulkanSwapchain : public Swapchain
         {
             KMP_DISABLE_COPY_MOVE(VulkanSwapchain)
-            KMP_LOG_CLASSNAME(VulkanSwapchain)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

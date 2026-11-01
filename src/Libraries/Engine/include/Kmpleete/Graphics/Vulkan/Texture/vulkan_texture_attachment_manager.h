@@ -7,7 +7,6 @@
 #include "Kmpleete/Base/optional.h"
 #include "Kmpleete/Graphics/Vulkan/Texture/vulkan_texture_attachment.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_swapchain.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -29,7 +28,6 @@ namespace Kmpleete
         class KMP_API VulkanTextureAttachmentManager
         {
             KMP_DISABLE_COPY_MOVE(VulkanTextureAttachmentManager)
-            KMP_LOG_CLASSNAME(VulkanTextureAttachmentManager)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

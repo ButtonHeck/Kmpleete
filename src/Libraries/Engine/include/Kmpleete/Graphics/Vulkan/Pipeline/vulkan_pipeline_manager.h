@@ -9,7 +9,6 @@
 #include "Kmpleete/Graphics/Vulkan/Pipeline/vulkan_graphics_pipeline_parameters.h"
 #include "Kmpleete/Graphics/Vulkan/Pipeline/vulkan_pipeline_cache.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_context.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -28,7 +27,6 @@ namespace Kmpleete
         class KMP_API VulkanPipelineManager
         {
             KMP_DISABLE_COPY_MOVE(VulkanPipelineManager)
-            KMP_LOG_CLASSNAME(VulkanPipelineManager)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

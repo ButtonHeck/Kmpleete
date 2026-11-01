@@ -8,7 +8,6 @@
 #include "Kmpleete/Graphics/font_character.h"
 #include "Kmpleete/Graphics/font_atlas.h"
 #include "Kmpleete/Localization/localization_base.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 
@@ -24,7 +23,6 @@ namespace Kmpleete
         //! a file or from a binary buffer.
         class KMP_API Font
         {
-            KMP_LOG_CLASSNAME(Font)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
             KMP_DISABLE_COPY_MOVE(Font)
 

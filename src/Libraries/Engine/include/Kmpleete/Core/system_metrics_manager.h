@@ -3,7 +3,6 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/platform.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -13,7 +12,6 @@ namespace Kmpleete
     //! are determined by mode flags
     class KMP_API SystemMetricsManager
     {
-        KMP_LOG_CLASSNAME(SystemMetricsManager)
         KMP_PROFILE_CONSTRUCTOR_DECLARE()
         KMP_DISABLE_COPY_MOVE(SystemMetricsManager)
 

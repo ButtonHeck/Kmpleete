@@ -10,7 +10,6 @@
 #include "Kmpleete/Math/geometry.h"
 #include "Kmpleete/Graphics/graphics_base.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -29,7 +28,6 @@ namespace Kmpleete
     //! that it has an already created window named "Main".
     class KMP_API Window
     {
-        KMP_LOG_CLASSNAME(Window)
         KMP_PROFILE_CONSTRUCTOR_DECLARE()
         KMP_DISABLE_COPY_MOVE(Window)
 

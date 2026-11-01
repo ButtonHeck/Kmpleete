@@ -6,7 +6,6 @@
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -22,7 +21,6 @@ namespace Kmpleete
         //! @see LocalizationDictionary
         class KMP_API LocalizationLibrary
         {
-            KMP_LOG_CLASSNAME(LocalizationLibrary)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
             KMP_DISABLE_COPY_MOVE(LocalizationLibrary)
 

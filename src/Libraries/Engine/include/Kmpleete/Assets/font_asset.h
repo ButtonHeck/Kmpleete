@@ -10,7 +10,6 @@
 #include "Kmpleete/Localization/localization_base.h"
 #include "Kmpleete/Assets/asset.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 struct FT_LibraryRec_;
@@ -31,7 +30,6 @@ namespace Kmpleete
         //! @see Assets::Asset
         class KMP_API FontAsset : public Asset
         {
-            KMP_LOG_CLASSNAME(FontAsset)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

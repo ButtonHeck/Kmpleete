@@ -94,7 +94,7 @@ namespace Kmpleete
         const auto settings = _settingsManager->GetSettingsDocument(SettingsEntryName);
         if (not settings)
         {
-            KMP_LOG_WARN("failed to get settings entry for loading");
+            KMP_LOG_WARN("failed to get settings entry");
         }
 
         if (settings.has_value())
@@ -249,7 +249,7 @@ namespace Kmpleete
         auto settings = _settingsManager->PutSettingsDocument(SettingsEntryName);
         if (not settings)
         {
-            KMP_LOG_WARN("failed to create settings entry for saving");
+            KMP_LOG_WARN("failed to create settings entry");
             return;
         }
 
@@ -282,7 +282,7 @@ namespace Kmpleete
         _iconifiedFPS = settingsDocument.GetUInt(IconifiedFPSStr, IconifiedFPSMin);
         if (_iconifiedFPS < IconifiedFPSMin || _iconifiedFPS > IconifiedFPSMax)
         {
-            KMP_LOG_WARN("iconified FPS ({} from settings) required to be in range from 10 to 60, value will be clamped", _iconifiedFPS);
+            KMP_LOG_WARN("iconified FPS ({} from settings) required to be in range from {} to {}, value will be clamped", _iconifiedFPS, IconifiedFPSMin, IconifiedFPSMax);
             _iconifiedFPS = Math::Clamp(_iconifiedFPS, IconifiedFPSMin, IconifiedFPSMax);
         }
 

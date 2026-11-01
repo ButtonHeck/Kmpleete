@@ -121,7 +121,7 @@ struct fmt::formatter<Kmpleete::Filepath> : fmt::formatter<Kmpleete::String>
 
 
 //! Three sets of logging macros for all levels: first two are used for a class functions (with "ClassName::FunctionName" or just "ClassName" printed first),
-//! while the third one is used for free functions
+//! while the third one is used for logging without any preprocessing
 //! @see log_class_macro.h
 
 #define KMP_LOG_TRACE(...)          ::Kmpleete::Log::Trace("{}:  {}", (::Kmpleete::SourceLocation::ShortenFunctionName(KMP_FUNC_SIG)).data, fmt::format(__VA_ARGS__))

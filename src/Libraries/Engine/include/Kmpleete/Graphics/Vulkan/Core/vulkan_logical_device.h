@@ -27,7 +27,6 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/string_id.h"
 #include "Kmpleete/Base/optional.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -49,7 +48,6 @@ namespace Kmpleete
         class KMP_API VulkanLogicalDevice : public LogicalDevice
         {
             KMP_DISABLE_COPY_MOVE(VulkanLogicalDevice)
-            KMP_LOG_CLASSNAME(VulkanLogicalDevice)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

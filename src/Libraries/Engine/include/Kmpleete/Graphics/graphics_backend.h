@@ -11,7 +11,6 @@
 #include "Kmpleete/Graphics/graphics_chain_handler.h"
 #include "Kmpleete/Graphics/texture.h"
 #include "Kmpleete/Assets/assets_interface.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -30,7 +29,6 @@ namespace Kmpleete
         class KMP_API GraphicsBackend
         {
             KMP_DISABLE_COPY_MOVE(GraphicsBackend)
-            KMP_LOG_CLASSNAME(GraphicsBackend)
 
         protected:
             static constexpr auto SettingsEntryName = "GraphicsBackend";

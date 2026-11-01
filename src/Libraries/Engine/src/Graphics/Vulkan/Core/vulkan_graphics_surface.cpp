@@ -3,7 +3,6 @@
 #include "Kmpleete/Graphics/Vulkan/Utils/result_description.h"
 #include "Kmpleete/Window/window.h"
 #include "Kmpleete/Core/assertion.h"
-#include "Kmpleete/Log/log.h"
 
 #if defined (KMP_WINDOW_BACKEND_GLFW)
     #define GLFW_INCLUDE_NONE

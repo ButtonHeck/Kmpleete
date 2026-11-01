@@ -3,7 +3,6 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/pointers.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -14,7 +13,6 @@ namespace Kmpleete
         class KMP_API PhysicalDevice
         {
             KMP_DISABLE_COPY_MOVE(PhysicalDevice)
-            KMP_LOG_CLASSNAME(PhysicalDevice)
 
         public:
             struct GPUInfo

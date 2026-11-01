@@ -5,7 +5,6 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/nullability.h"
 #include "Kmpleete/Graphics/graphics_chain_unit.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -16,7 +15,6 @@ namespace Kmpleete
         class KMP_API GraphicsChainHandler
         {
             KMP_DISABLE_COPY_MOVE(GraphicsChainHandler)
-            KMP_LOG_CLASSNAME(GraphicsChainHandler)
 
         public:
             static constexpr auto LogicalDeviceUnitSID = "LogicalDevice"_sid;

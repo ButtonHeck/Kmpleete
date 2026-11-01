@@ -4,7 +4,6 @@
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_graphics_surface.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_physical_device.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_logical_device.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -23,7 +22,6 @@ namespace Kmpleete
         //! tracking current buffer index that is used by dependent objects.
         class KMP_API VulkanGraphicsBackend : public GraphicsBackend
         {
-            KMP_LOG_CLASSNAME(VulkanGraphicsBackend)
             KMP_DISABLE_COPY_MOVE(VulkanGraphicsBackend)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 

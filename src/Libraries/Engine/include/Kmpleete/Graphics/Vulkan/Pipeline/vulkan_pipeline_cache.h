@@ -3,7 +3,6 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Graphics/Vulkan/Core/vulkan_context.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -17,7 +16,6 @@ namespace Kmpleete
         class KMP_API VulkanPipelineCache
         {
             KMP_DISABLE_COPY_MOVE(VulkanPipelineCache)
-            KMP_LOG_CLASSNAME(VulkanPipelineCache)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

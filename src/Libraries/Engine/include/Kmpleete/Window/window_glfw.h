@@ -5,7 +5,6 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Window/window.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 struct GLFWwindow;
@@ -17,7 +16,6 @@ namespace Kmpleete
     //! GLFW implementation of a window object
     class KMP_API WindowGlfw : public Window
     {
-        KMP_LOG_CLASSNAME(WindowGlfw)
         KMP_PROFILE_CONSTRUCTOR_DECLARE()
         KMP_DISABLE_COPY_MOVE(WindowGlfw)
 

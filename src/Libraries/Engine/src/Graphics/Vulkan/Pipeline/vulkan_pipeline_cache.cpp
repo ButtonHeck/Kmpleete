@@ -43,7 +43,7 @@ namespace Kmpleete
             bool emptyCache = false;
             if (not Filesystem::FilepathExists(_binaryPath))
             {
-                KMP_LOG_WARN("cannot load pipeline cache from '{}' - file not found", _binaryPath);
+                KMP_LOG_WARN("pipeline cache file '{}' not found", _binaryPath);
                 emptyCache = true;
             }
 
@@ -53,13 +53,13 @@ namespace Kmpleete
             auto pipelineCacheCreateInfo = VKUtils::InitVkPipelineCacheCreateInfo();
             if (emptyCache)
             {
-                KMP_LOG_WARN("cannot load pipeline cache from '{}' - file is empty", _binaryPath);
+                KMP_LOG_WARN("pipeline cache file '{}' is empty", _binaryPath);
                 pipelineCacheCreateInfo.initialDataSize = 0;
                 pipelineCacheCreateInfo.pInitialData = nullptr;
             }
             else if (not _LoadedCacheIsValid(cacheBuffer))
             {
-                KMP_LOG_WARN("pipeline cache loaded from '{}' is not compatible", _binaryPath);
+                KMP_LOG_WARN("pipeline cache from file '{}' is not compatible", _binaryPath);
                 pipelineCacheCreateInfo.initialDataSize = 0;
                 pipelineCacheCreateInfo.pInitialData = nullptr;
             }
@@ -80,7 +80,7 @@ namespace Kmpleete
 
             if (not _cache)
             {
-                KMP_LOG_WARN("cache serialization failed - cache object is null");
+                KMP_LOG_WARN("serialization failed - cache object is null");
                 return;
             }
 

@@ -4,7 +4,6 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/string_id.h"
 #include "Kmpleete/Graphics/graphics_base.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -28,7 +27,6 @@ namespace Kmpleete
         class KMP_API VulkanDescriptorSetManager
         {
             KMP_DISABLE_COPY_MOVE(VulkanDescriptorSetManager)
-            KMP_LOG_CLASSNAME(VulkanDescriptorSetManager)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

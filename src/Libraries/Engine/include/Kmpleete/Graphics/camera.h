@@ -3,7 +3,6 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Math/geometry.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 
@@ -15,7 +14,6 @@ namespace Kmpleete
         //! Projection matrices should be calculated in implementation subclasses
         class KMP_API Camera
         {
-            KMP_LOG_CLASSNAME(Camera)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

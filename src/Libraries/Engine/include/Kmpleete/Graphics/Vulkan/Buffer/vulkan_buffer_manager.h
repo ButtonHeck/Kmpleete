@@ -9,7 +9,6 @@
 #include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_buffer.h"
 #include "Kmpleete/Graphics/Vulkan/Buffer/vulkan_vertex_buffer.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 #include <vulkan/vulkan.h>
 
@@ -31,7 +30,6 @@ namespace Kmpleete
         class KMP_API VulkanBufferManager
         {
             KMP_DISABLE_COPY_MOVE(VulkanBufferManager)
-            KMP_LOG_CLASSNAME(VulkanBufferManager)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

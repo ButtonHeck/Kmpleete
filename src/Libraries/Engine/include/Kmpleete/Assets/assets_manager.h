@@ -8,7 +8,6 @@
 #include "Kmpleete/Assets/font_asset_manager.h"
 #include "Kmpleete/Assets/assets_interface.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -21,7 +20,6 @@ namespace Kmpleete
         //! @see assets_interface.h
         class KMP_API AssetsManager
         {
-            KMP_LOG_CLASSNAME(AssetsManager)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
             KMP_DISABLE_COPY_MOVE(AssetsManager)
 

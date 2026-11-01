@@ -2,7 +2,6 @@
 #include "Kmpleete/Graphics/Vulkan/Utils/initializers.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/result_description.h"
 #include "Kmpleete/Core/assertion.h"
-#include "Kmpleete/Log/log.h"
 
 
 namespace Kmpleete

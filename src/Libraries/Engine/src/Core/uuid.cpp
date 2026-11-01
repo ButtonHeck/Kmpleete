@@ -6,7 +6,7 @@ namespace Kmpleete
 {
     static Math::RNGUInt64 rng;
 
-    UUID UUID::InvalidUuid(0);
+    /*static*/ UUID UUID::InvalidUuid(0);
 
     UUID::UUID()
         : _uuid(rng.Generate())

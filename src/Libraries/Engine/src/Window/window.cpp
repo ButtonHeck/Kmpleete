@@ -28,7 +28,7 @@ namespace Kmpleete
     {
         if (settings.name.empty())
         {
-            KMP_LOG_ERROR("cannot create window with empty name");
+            KMP_LOG_ERROR("empty name");
             throw RuntimeError("Window: cannot create window with empty name");
         }
 
@@ -93,7 +93,7 @@ namespace Kmpleete
 
         default:
         {
-            KMP_LOG_WARN("ScreenModeToString unknown mode '{}'", int(screenMode));
+            KMP_LOG_WARN("unknown mode '{}'", int(screenMode));
             return String("Unknown");
         }
         }
@@ -116,7 +116,7 @@ namespace Kmpleete
         }
         else
         {
-            KMP_LOG_WARN("StringToScreenMode unknown mode '{}', return Windowed as default", screenModeStr);
+            KMP_LOG_WARN("unknown mode '{}', return Windowed as default", screenModeStr);
             return Window::ScreenMode::Windowed;
         }
     }}

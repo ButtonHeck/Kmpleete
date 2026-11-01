@@ -7,7 +7,6 @@
 #include "Kmpleete/Base/optional.h"
 #include "Kmpleete/Core/settings_document.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -17,7 +16,6 @@ namespace Kmpleete
     //! @see SettingsDocument
     class KMP_API SettingsManager
     {
-        KMP_LOG_CLASSNAME(SettingsManager)
         KMP_PROFILE_CONSTRUCTOR_DECLARE()
         KMP_DISABLE_COPY_MOVE(SettingsManager)
 

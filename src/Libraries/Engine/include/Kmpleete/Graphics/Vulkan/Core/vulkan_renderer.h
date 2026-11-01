@@ -17,7 +17,6 @@
 #include "Kmpleete/Graphics/Vulkan/Texture/vulkan_texture_attachment.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/function_utils.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -33,7 +32,6 @@ namespace Kmpleete
         class KMP_API VulkanRenderer : public Renderer
         {
             KMP_DISABLE_COPY_MOVE(VulkanRenderer)
-            KMP_LOG_CLASSNAME(VulkanRenderer)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

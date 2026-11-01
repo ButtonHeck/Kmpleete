@@ -5,7 +5,6 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/string_id.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -20,7 +19,6 @@ namespace Kmpleete
         //! @see LocalizationLibrary
         class KMP_API LocalizationDictionary
         {
-            KMP_LOG_CLASSNAME(LocalizationDictionary)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
             KMP_DISABLE_COPY_MOVE(LocalizationDictionary)
 

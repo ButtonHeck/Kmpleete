@@ -90,7 +90,7 @@ namespace Kmpleete
 
         userData->dpi = UInt32(monitorDiagonalPixels / monitorDiagonalInch);
 
-        KMP_LOG_INFO("window DPI changed to {}", userData->dpi);
+        KMP_LOG_INFO("DPI changed to {}", userData->dpi);
     }}
     //--------------------------------------------------------------------------
 

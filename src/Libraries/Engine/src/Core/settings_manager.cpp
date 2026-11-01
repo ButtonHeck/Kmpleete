@@ -43,7 +43,7 @@ namespace Kmpleete
         JsonDocument document(_filepath);
         if (document.HasError())
         {
-            KMP_LOG_WARN("failed to load settings from '{}' - {}", _filepath, document.ErrorDescription());
+            KMP_LOG_WARN("failed to load from '{}' - {}", _filepath, document.ErrorDescription());
             return false;
         }
 
@@ -58,7 +58,7 @@ namespace Kmpleete
             _namedSettingsDocuments.emplace(name, CreateUPtr<SettingsDocument>(name, childDocument));
         }
 
-        KMP_LOG_INFO("settings successfully loaded from '{}'", _filepath);
+        KMP_LOG_INFO("successfully loaded from '{}'", _filepath);
 
         return true;
     }}
@@ -72,7 +72,7 @@ namespace Kmpleete
         {
             if (not settingsEntry)
             {
-                KMP_LOG_ERROR("settings entry named '{}' is nullptr - save settings will be incompleted", settingsEntryName);
+                KMP_LOG_ERROR("entry named '{}' is nullptr - saving will be incompleted", settingsEntryName);
             }
             else
             {
@@ -83,11 +83,11 @@ namespace Kmpleete
         const auto ok = summaryDocument.Save(_filepath);
         if (ok)
         {
-            KMP_LOG_INFO("settings successfully saved to '{}'", _filepath);
+            KMP_LOG_INFO("successfully saved to '{}'", _filepath);
         }
         else
         {
-            KMP_LOG_ERROR("failed to save settings to '{}'", _filepath);
+            KMP_LOG_ERROR("failed to save to '{}'", _filepath);
         }
 
         return ok;

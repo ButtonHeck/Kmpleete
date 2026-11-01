@@ -3,7 +3,6 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Localization/localization_base.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -13,7 +12,6 @@ namespace Kmpleete
         //TODO: comments
         class KMP_API UnicodeMap
         {
-            KMP_LOG_CLASSNAME(UnicodeMap)
             KMP_DISABLE_COPY_MOVE(UnicodeMap)
 
         public:

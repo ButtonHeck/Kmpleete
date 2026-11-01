@@ -2,7 +2,6 @@
 
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 #include <vulkan/vulkan.h>
 
@@ -15,8 +14,6 @@ namespace Kmpleete
         //! referenced and used by other Vulkan related classes.
         struct KMP_API VulkanContext
         {
-            KMP_LOG_CLASSNAME(VulkanContext)
-
         public:
             VkInstance instance;
             VkPhysicalDevice physicalDevice;

@@ -4,7 +4,6 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/string_id.h"
 #include "Kmpleete/Graphics/Vulkan/Pipeline/vulkan_graphics_pipeline_parameters.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 #include <vulkan/vulkan.h>
@@ -22,7 +21,6 @@ namespace Kmpleete
         class KMP_API VulkanGraphicsPipeline
         {
             KMP_DISABLE_COPY_MOVE(VulkanGraphicsPipeline)
-            KMP_LOG_CLASSNAME(VulkanGraphicsPipeline)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

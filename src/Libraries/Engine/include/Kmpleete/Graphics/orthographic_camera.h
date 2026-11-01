@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Kmpleete/Graphics/camera.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Profile/profiler.h"
 
 
@@ -12,7 +11,6 @@ namespace Kmpleete
         //! Implementation of an orthographic projection camera
         class KMP_API OrthographicCamera : public Camera
         {
-            KMP_LOG_CLASSNAME(OrthographicCamera)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 
         public:

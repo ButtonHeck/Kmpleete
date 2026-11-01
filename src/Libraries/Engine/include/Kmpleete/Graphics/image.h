@@ -5,7 +5,6 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Base/type_traits.h"
 #include "Kmpleete/Graphics/graphics_base.h"
-#include "Kmpleete/Log/log_class_macro.h"
 #include "Kmpleete/Math/geometry.h"
 #include "Kmpleete/Profile/profiler.h"
 
@@ -18,7 +17,6 @@ namespace Kmpleete
         //! height, channels count. Backed by stb_image
         class KMP_API Image
         {
-            KMP_LOG_CLASSNAME(Image)
             KMP_DISABLE_COPY(Image)
             KMP_PROFILE_CONSTRUCTOR_DECLARE()
 

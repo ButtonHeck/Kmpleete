@@ -6,7 +6,6 @@
 #include "Kmpleete/Graphics/Vulkan/Utils/presets.h"
 #include "Kmpleete/Graphics/Vulkan/Utils/bits_aliases.h"
 #include "Kmpleete/Core/assertion.h"
-#include "Kmpleete/Log/log.h"
 
 
 namespace Kmpleete

@@ -67,7 +67,7 @@ namespace Kmpleete
             const auto fullPath = _dataPath / filepath;
             if (not Filesystem::FilepathExists(fullPath))
             {
-                KMP_LOG_ERROR("cannot load asset file from '{}' - file not found", filepath);
+                KMP_LOG_ERROR("file '{}' not found", filepath);
                 return false;
             }
 
@@ -98,7 +98,7 @@ namespace Kmpleete
             const auto lookupVector = _GetSortedByFileAssetsInfos(assetsSids);
             if (lookupVector.empty())
             {
-                KMP_LOG_ERROR("failed to load assets - nothing to load");
+                KMP_LOG_ERROR("nothing to load");
                 return false;
             }
 
@@ -117,7 +117,7 @@ namespace Kmpleete
             {
                 if (not _lookupMap.contains(sid))
                 {
-                    KMP_LOG_WARN("cannot unload asset with sid '{}' - not found", sid);
+                    KMP_LOG_WARN("asset with sid '{}' not found", sid);
                     continue;
                 }
 
@@ -222,7 +222,7 @@ namespace Kmpleete
                 const auto assetLookupInfoIter = _lookupMap.find(sid);
                 if (assetLookupInfoIter == _lookupMap.cend())
                 {
-                    KMP_LOG_WARN("cannot load asset with sid '{}' - not found", sid);
+                    KMP_LOG_WARN("asset with sid '{}' not found", sid);
                     continue;
                 }
 
@@ -250,7 +250,7 @@ namespace Kmpleete
                     fileBuffer = Filesystem::ReadFileAsBinary(currentFilepath);
                     if (fileBuffer.empty())
                     {
-                        KMP_LOG_ERROR("failed to load assets from '{}' - buffer is empty or file not found", info.filepath);
+                        KMP_LOG_ERROR("assets from '{}' buffer is empty or file not found", info.filepath);
                         return false;
                     }
                 }

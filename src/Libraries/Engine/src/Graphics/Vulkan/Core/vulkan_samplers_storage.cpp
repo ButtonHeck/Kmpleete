@@ -37,7 +37,7 @@ namespace Kmpleete
             const auto samplerIter = _samplers.find(sid);
             if (samplerIter != _samplers.cend())
             {
-                KMP_LOG_WARN("sampler with sid '{}' already registered", sid);
+                KMP_LOG_WARN("'{}' already registered", sid);
                 return samplerIter->second;
             }
 
@@ -64,7 +64,7 @@ namespace Kmpleete
             const auto samplerIter = _samplers.find(sid);
             if (samplerIter == _samplers.cend())
             {
-                KMP_LOG_ERROR("sampler with sid '{}' not found", sid);
+                KMP_LOG_ERROR("'{}' not found", sid);
                 return VK_NULL_HANDLE;
             }
 
