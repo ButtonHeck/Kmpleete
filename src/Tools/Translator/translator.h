@@ -3,7 +3,6 @@
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/Translator/translator_interface.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -65,8 +64,6 @@ namespace Kmpleete
         //! either done manually or automated by other means)
         class TranslatorProcessor
         {
-            KMP_LOG_CLASSNAME(TranslatorProcessor)
-
         public:
             explicit TranslatorProcessor(TranslatorParameters&& parameters) noexcept;
             ~TranslatorProcessor() = default;

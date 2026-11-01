@@ -55,7 +55,7 @@ namespace Kmpleete
             const auto filesToProcess = _GatherFilesToUpdate(_parameters);
             if (filesToProcess.empty())
             {
-                KMP_LOG_ERROR("Update: Appropriate files not found");
+                KMP_LOG_ERROR("appropriate files not found");
                 return ReturnCode::ProcessorFilesNotFound;
             }
 
@@ -71,7 +71,7 @@ namespace Kmpleete
                 const auto poTemplateFile = _CreatePoTemplateFile(_parameters, locale);
                 if (poTemplateFile.empty())
                 {
-                    KMP_LOG_ERROR("Update: cannot create .pot file '{}'", poTemplateFile);
+                    KMP_LOG_ERROR("cannot create .pot file '{}'", poTemplateFile);
                     return ReturnCode::ProcessorCreatePotFailed;
                 }
 
@@ -91,7 +91,7 @@ namespace Kmpleete
                 const auto xgettextExitCode = xgettextProcess.exit_code();
                 if (xgettextExitCode != 0)
                 {
-                    KMP_LOG_ERROR("Update: xgettext error occured");
+                    KMP_LOG_ERROR("xgettext error '{}'", xgettextExitCode);
                     return ReturnCode::ProcessorXgettextError;
                 }
 
@@ -99,7 +99,7 @@ namespace Kmpleete
                 String potFileContent = Filesystem::ReadFileAsText(poTemplateFile);
                 if (potFileContent.empty())
                 {
-                    KMP_LOG_ERROR("Update: cannot open newly created .pot file '{}'", poTemplateFile);
+                    KMP_LOG_ERROR("cannot open newly created .pot file '{}'", poTemplateFile);
                     return ReturnCode::ProcessorOpenPotFailed;
                 }
 
@@ -107,7 +107,7 @@ namespace Kmpleete
 
                 if (not Filesystem::WriteFile(poTemplateFile, potFileContent, "append"_false))
                 {
-                    KMP_LOG_ERROR("Update: failed to write .pot file '{}'", poTemplateFile);
+                    KMP_LOG_ERROR("failed to write .pot file '{}'", poTemplateFile);
                     return ReturnCode::ProcessorCreatePotFailed;
                 }
 
@@ -131,7 +131,7 @@ namespace Kmpleete
                     const auto msginitExitCode = msginitProcess.exit_code();
                     if (msginitExitCode != 0)
                     {
-                        KMP_LOG_ERROR("Update: msginit error occured during .po creation");
+                        KMP_LOG_ERROR("msginit error '{}' during .po creation", msginitExitCode);
                         return ReturnCode::ProcessorMsginitError;
                     }
                 }
@@ -151,7 +151,7 @@ namespace Kmpleete
                 const auto msgattribStep1ExitCode = msgattribProcessStep1.exit_code();
                 if (msgattribStep1ExitCode != 0)
                 {
-                    KMP_LOG_ERROR("Update: msgattrib error occured during --set-obsolete step");
+                    KMP_LOG_ERROR("msgattrib error '{}' during --set-obsolete step", msgattribStep1ExitCode);
                     return ReturnCode::ProcessorMsgattribError;
                 }
 
@@ -168,7 +168,7 @@ namespace Kmpleete
                 const auto msgattribStep2ExitCode = msgattribProcessStep2.exit_code();
                 if (msgattribStep2ExitCode != 0)
                 {
-                    KMP_LOG_ERROR("Update: msgattrib error occured during --no-obsolete step");
+                    KMP_LOG_ERROR("msgattrib error '{}' during --no-obsolete step", msgattribStep2ExitCode);
                     return ReturnCode::ProcessorMsgattribError;
                 }
 
@@ -187,14 +187,14 @@ namespace Kmpleete
                 const auto msgmergeExitCode = msgmergeProcess.exit_code();
                 if (msgmergeExitCode != 0)
                 {
-                    KMP_LOG_ERROR("Update: msgmerge error occured");
+                    KMP_LOG_ERROR("msgmerge error '{}'", msgmergeExitCode);
                     return ReturnCode::ProcessorMsgmergeError;
                 }
 
                 // 8. remove .pot file
                 if (not Filesystem::RemoveFile(poTemplateFile))
                 {
-                    KMP_LOG_WARN("Update: failed to remove '{}'", poTemplateFile);
+                    KMP_LOG_WARN("failed to remove '{}'", poTemplateFile);
                 }
             }
 
@@ -212,7 +212,7 @@ namespace Kmpleete
 
                 if (not Filesystem::FilepathExists(outputDirectory))
                 {
-                    KMP_LOG_ERROR("Compile: output directory for locale '{}' not found", locale);
+                    KMP_LOG_ERROR("output directory for locale '{}' not found", locale);
                     continue;
                 }
 
@@ -221,7 +221,7 @@ namespace Kmpleete
 
                 if (not Filesystem::FilepathExists(poTemplateFile))
                 {
-                    KMP_LOG_ERROR("Compile: source .pot file not found '{}'", poTemplateFile);
+                    KMP_LOG_ERROR("source .pot file not found '{}'", poTemplateFile);
                     continue;
                 }
 
@@ -240,7 +240,7 @@ namespace Kmpleete
                 const auto msgfmtExitCode = msgfmtProcess.exit_code();
                 if (msgfmtExitCode != 0)
                 {
-                    KMP_LOG_ERROR("Compile: msgfmt error occured");
+                    KMP_LOG_ERROR("msgfmt error '{}'", msgfmtExitCode);
                     return ReturnCode::ProcessorMsgfmtError;
                 }
             }
@@ -301,7 +301,7 @@ namespace Kmpleete
 
             if (not Filesystem::CreateDirectories(poTemplateFilePath))
             {
-                KMP_LOG_ERROR("Update: cannot create .pot file directory hierarchy '{}'", poTemplateFilePath);
+                KMP_LOG_ERROR("cannot create .pot file directory hierarchy '{}'", poTemplateFilePath);
                 return String();
             }
 
@@ -310,7 +310,7 @@ namespace Kmpleete
 
             if (not Filesystem::CreateFile(poTemplateFileName))
             {
-                KMP_LOG_ERROR("Update: failed to create .pot file '{}'", poTemplateFileName);
+                KMP_LOG_ERROR("failed to create .pot file '{}'", poTemplateFileName);
                 return String();
             }
 

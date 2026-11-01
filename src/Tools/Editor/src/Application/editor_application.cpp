@@ -59,7 +59,7 @@ namespace Kmpleete
         auto settings = _settingsManager->PutSettingsDocument(SettingsEntryName);
         if (not settings)
         {
-            KMP_LOG_WARN("failed to create settings entry for saving");
+            KMP_LOG_WARN("failed to create settings entry");
             return;
         }
 
@@ -72,7 +72,7 @@ namespace Kmpleete
         const auto settings = _settingsManager->GetSettingsDocument(SettingsEntryName);
         if (not settings)
         {
-            KMP_LOG_WARN("failed to get setting entry for loading");
+            KMP_LOG_WARN("failed to get setting entry");
             return;
         }
 

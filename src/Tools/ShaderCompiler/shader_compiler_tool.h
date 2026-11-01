@@ -4,7 +4,6 @@
 #include "Kmpleete/Base/types_aliases.h"
 #include "Kmpleete/ShaderCompiler/shader_compiler_tool_interface.h"
 #include "Kmpleete/ShaderCompiler/compile.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -60,8 +59,6 @@ namespace Kmpleete
             //! --mode Json --source_files "path_to_shaders1.json" "path_to_shaders2.json"
             class ShaderCompilerProcessor
             {
-                KMP_LOG_CLASSNAME(ShaderCompilerProcessor)
-
             public:
                 explicit ShaderCompilerProcessor(CompilerParameters&& parameters) noexcept;
                 ~ShaderCompilerProcessor() = default;

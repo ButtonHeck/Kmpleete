@@ -12,7 +12,6 @@
 #include "Kmpleete/Event/event_handler_guard.h"
 #include "Kmpleete/ImGui/implementation.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -42,7 +41,6 @@ namespace Kmpleete
 
     class EditorFrameListener : public FrameListener
     {
-        KMP_LOG_CLASSNAME(EditorFrameListener)
         KMP_PROFILE_CONSTRUCTOR_DECLARE()
         KMP_DISABLE_COPY_MOVE(EditorFrameListener)
 

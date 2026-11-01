@@ -5,14 +5,12 @@
 #include "Kmpleete/Base/pointers.h"
 #include "Kmpleete/Application/window_application.h"
 #include "Kmpleete/Profile/profiler.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
 {
     class EditorApplication : public WindowApplication
     {
-        KMP_LOG_CLASSNAME(EditorApplication)
         KMP_PROFILE_CONSTRUCTOR_DECLARE()
         KMP_DISABLE_COPY_MOVE(EditorApplication)
 

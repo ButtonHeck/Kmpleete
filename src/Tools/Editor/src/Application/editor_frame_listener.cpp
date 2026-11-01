@@ -21,7 +21,6 @@
 #include "Kmpleete/ImGui/scope_guards.h"
 #include "Kmpleete/ImGui/context_vulkan.h"
 #include "Kmpleete/ImGui/implementation_glfw_vulkan.h"
-#include "Kmpleete/Log/log.h"
 
 
 namespace Kmpleete

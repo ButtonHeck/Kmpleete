@@ -5,7 +5,6 @@
 #include "Kmpleete/Base/string_id.h"
 #include "Kmpleete/Assets/assets_interface.h"
 #include "Kmpleete/Assets/assets_compiler_interface.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 
 namespace Kmpleete
@@ -55,8 +54,6 @@ namespace Kmpleete
             //! }
             class AssetsCompiler
             {
-                KMP_LOG_CLASSNAME(AssetsCompiler)
-
             public:
                 explicit AssetsCompiler(CompilerParameters&& parameters) noexcept;
                 ~AssetsCompiler() = default;
