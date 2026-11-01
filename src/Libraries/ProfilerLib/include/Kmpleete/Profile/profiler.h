@@ -32,7 +32,6 @@ namespace Kmpleete
 #include "Kmpleete/Base/kmpleete_api.h"
 #include "Kmpleete/Base/macro.h"
 #include "Kmpleete/Base/source_location_utils.h"
-#include "Kmpleete/Log/log_class_macro.h"
 
 #include <fstream>
 #include <chrono>
@@ -82,7 +81,6 @@ namespace Kmpleete
     //! @see ProfilerTimer
     class KMP_API Profiler
     {
-        KMP_LOG_CLASSNAME(Profiler)
         KMP_DISABLE_COPY_MOVE(Profiler)
 
     public:

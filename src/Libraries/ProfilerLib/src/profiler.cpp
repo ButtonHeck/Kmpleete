@@ -46,7 +46,7 @@ namespace Kmpleete
     void Profiler::SetActive(bool active)
     {
         _active = active;
-        KMP_LOG_INFO("activated: {}", _active);
+        KMP_LOG_INFO("{}", _active);
     }
     //--------------------------------------------------------------------------
 
