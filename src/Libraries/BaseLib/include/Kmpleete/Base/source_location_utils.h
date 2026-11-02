@@ -5,7 +5,7 @@ namespace Kmpleete
 {
     namespace SourceLocation
     {
-        //! Compile-time friendly struct for storing postprocessed name of a metrics unit
+        //! Compile-time friendly struct for storing postprocessed function signature
         template<size_t length>
         struct ReplaceResult
         {
@@ -14,7 +14,7 @@ namespace Kmpleete
         //--------------------------------------------------------------------------
 
 
-        //! Helper function to prettify name of a metrics unit (like remove __cdecl, replace std:: with custom aliases etc.)
+        //! Helper function to prettify function signature (like remove __cdecl, replace std:: with custom aliases etc.)
         template<size_t lengthSrc, size_t lengthRemove, size_t lengthReplace>
         consteval auto ReplaceString(const char(&src)[lengthSrc], const char(&remove)[lengthRemove], const char(&replace)[lengthReplace])
         {
@@ -51,7 +51,8 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        //! Helper function to strip function's full signature to a "ClassName::FunctionName" form
+        //! Helper function to strip function's full signature to a "ClassName::FunctionName" form,
+        //! currently works only for non-templated classes/functions
         template<size_t lengthSrc>
         consteval auto ShortenFunctionName(const char(&src)[lengthSrc])
         {
