@@ -1,6 +1,7 @@
 #include "texture_application.h"
 
 #include "Kmpleete/Application/application_context.h"
+#include "Kmpleete/Log/log.h"
 
 
 namespace Kmpleete
@@ -27,7 +28,7 @@ namespace Kmpleete
 
         if (not _assetsManager->LoadAssetFile("TextureSandbox_assets.kmpdata"))
         {
-            KMP_LOG_ERROR("failed to load TextureSandbox assets");
+            KMP_LOG_ERROR("failed to load assets");
         }
 
         _mainFrameListener.reset(new TextureFrameListener(*_frameListenerManager.get(), _mainWindow, *_graphicsBackend.get(), *_assetsManager.get(), _inputManager.get()));
