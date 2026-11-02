@@ -134,7 +134,7 @@ namespace Kmpleete
 
                     for (const auto& extension : requiredExtensions)
                     {
-                        KMP_LOG_WARN_FN("VulkanPhysicalDevice::QueryDeviceExtensionSupport: for device '{}' required extension {} not found", properties2.properties.deviceName, extension);
+                        KMP_LOG_WARN_RAW("VulkanPhysicalDevice::QueryDeviceExtensionSupport: for device '{}' required extension {} not found", properties2.properties.deviceName, extension);
                     }
                 }
 #endif
@@ -151,21 +151,21 @@ namespace Kmpleete
                 const auto queueFamiliesIndices = QueryQueueFamiliesIndices(device, surface);
                 if (not queueFamiliesIndices.IsValid())
                 {
-                    KMP_LOG_WARN_FN("VulkanPhysicalDevice::IsDeviceSuitable: '{}' is not suitable - queue families indices are invalid", properties2.properties.deviceName);
+                    KMP_LOG_WARN_RAW("VulkanPhysicalDevice::IsDeviceSuitable: '{}' is not suitable - queue families indices are invalid", properties2.properties.deviceName);
                     return { "device suitable"_false, {} };
                 }
 
                 const auto extensionsSupported = QueryDeviceExtensionSupport(device, enabledExtensions);
                 if (not extensionsSupported)
                 {
-                    KMP_LOG_WARN_FN("VulkanPhysicalDevice::IsDeviceSuitable: '{}' is not suitable - required extensions are not supported", properties2.properties.deviceName);
+                    KMP_LOG_WARN_RAW("VulkanPhysicalDevice::IsDeviceSuitable: '{}' is not suitable - required extensions are not supported", properties2.properties.deviceName);
                     return { "device suitable"_false, {} };
                 }
 
                 const auto surfaceAndPresentModeProperties = QuerySurfaceAndPresentModeProperties(device, surface);
                 if (not surfaceAndPresentModeProperties.IsValid())
                 {
-                    KMP_LOG_WARN_FN("VulkanPhysicalDevice::IsDeviceSuitable: '{}' is not suitable - surface and present modes properties are invalid", properties2.properties.deviceName);
+                    KMP_LOG_WARN_RAW("VulkanPhysicalDevice::IsDeviceSuitable: '{}' is not suitable - surface and present modes properties are invalid", properties2.properties.deviceName);
                     return { "device suitable"_false, {} };
                 }
 
@@ -175,7 +175,7 @@ namespace Kmpleete
                     not supportedFeatures.independentBlend ||
                     not supportedFeatures.depthBounds)
                 {
-                    KMP_LOG_WARN_FN("VulkanPhysicalDevice::IsDeviceSuitable: '{}' is not suitable - some device features are not supported", properties2.properties.deviceName);
+                    KMP_LOG_WARN_RAW("VulkanPhysicalDevice::IsDeviceSuitable: '{}' is not suitable - some device features are not supported", properties2.properties.deviceName);
                     return { "device suitable"_false, {} };
                 }
 

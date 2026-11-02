@@ -13,7 +13,7 @@ namespace Kmpleete
             functionPointer = (FunctionType)vkGetInstanceProcAddr(instance, functionName);
             if (functionPointer == nullptr)
             {
-                KMP_LOG_CRITICAL_FN("VKCommands: failed to load {} function", functionName);
+                KMP_LOG_CRITICAL_RAW("VKCommands: failed to load {} function", functionName);
                 return false;
             }
             return true;

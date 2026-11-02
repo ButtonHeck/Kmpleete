@@ -51,7 +51,7 @@ namespace Kmpleete
     void WindowApplication::Run()
     {
         KMP_ASSERT(not _running && _windowBackend);
-        KMP_LOG_INFO_FN("'{}' main loop started...", ApplicationContext::GetApplicationName());
+        KMP_LOG_INFO_RAW("'{}' main loop started...", ApplicationContext::GetApplicationName());
 
         _running = true;
 
@@ -65,7 +65,7 @@ namespace Kmpleete
             }
         }
 
-        KMP_LOG_INFO_FN("'{}' main loop finished", ApplicationContext::GetApplicationName());
+        KMP_LOG_INFO_RAW("'{}' main loop finished", ApplicationContext::GetApplicationName());
     }
     //--------------------------------------------------------------------------
 

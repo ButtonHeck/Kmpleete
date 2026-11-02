@@ -75,7 +75,7 @@ namespace Kmpleete
         }
         catch (const Exception&)
         {
-            KMP_LOG_CRITICAL_FN("CreateApplication: failed to create sandbox instance");
+            KMP_LOG_CRITICAL_RAW("CreateApplication: failed to create sandbox instance");
             return nullptr;
         }
     }}

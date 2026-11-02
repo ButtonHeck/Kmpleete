@@ -51,7 +51,7 @@ namespace Kmpleete
         }
         catch (const Exception&)
         {
-            KMP_LOG_CRITICAL_FN("CreateApplication: failed to create Editor instance");
+            KMP_LOG_CRITICAL_RAW("CreateApplication: failed to create Editor instance");
             return nullptr;
         }
     }}

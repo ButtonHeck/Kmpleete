@@ -14,7 +14,7 @@ namespace Kmpleete
                 if (result != VK_SUCCESS)
                 {
                     const auto resultDescription = VkResultToString(result);
-                    KMP_LOG_ERROR_FN("{}: {}", message, resultDescription);
+                    KMP_LOG_ERROR_RAW("{}: {}", message, resultDescription);
                     if (throwException)
                     {
                         throw RuntimeError(String(message).append(": ").append(resultDescription));

@@ -151,13 +151,13 @@ namespace Kmpleete
             const auto workMode = vm.count(ProcessorArgumentWorkMode) ? vm[ProcessorArgumentWorkMode].as<String>() : String();
             if (workMode.empty())
             {
-                KMP_LOG_ERROR_FN("Translator: work mode is not set");
+                KMP_LOG_ERROR_RAW("Translator: work mode is not set");
                 PrintUsage(optionsDescription);
                 return ReturnCode::WorkModeIsNotSet;
             }
             if (not WorkModeIsValid(workMode))
             {
-                KMP_LOG_ERROR_FN("Translator: work mode '{}' is not valid", workMode);
+                KMP_LOG_ERROR_RAW("Translator: work mode '{}' is not valid", workMode);
                 PrintUsage(optionsDescription);
                 return ReturnCode::WorkModeIsNotValid;
             }
@@ -170,7 +170,7 @@ namespace Kmpleete
                 const auto sourceDirectoryStrings = vm.count(ProcessorArgumentInputDirectories) ? vm[ProcessorArgumentInputDirectories].as<StringVector>() : StringVector();
                 if (sourceDirectoryStrings.empty())
                 {
-                    KMP_LOG_ERROR_FN("Translator: source directories are not set");
+                    KMP_LOG_ERROR_RAW("Translator: source directories are not set");
                     PrintUsage(optionsDescription);
                     return ReturnCode::SourceDirectoriesAreNotSet;
                 }
@@ -181,7 +181,7 @@ namespace Kmpleete
                     const auto sourceDirectory = Filepath(sourceDirectoryStr);
                     if (not Filesystem::FilepathExists(sourceDirectory) || not Filesystem::IsDirectory(sourceDirectory))
                     {
-                        KMP_LOG_ERROR_FN("Translator: one of source directories '{}' does not exist or is not of a directory type", sourceDirectory);
+                        KMP_LOG_ERROR_RAW("Translator: one of source directories '{}' does not exist or is not of a directory type", sourceDirectory);
                         PrintUsage(optionsDescription);
                         return ReturnCode::SourceDirectoriesAreNotValid;
                     }
@@ -195,7 +195,7 @@ namespace Kmpleete
                 const auto filesExtensions = vm.count(ProcessorArgumentExtensions) ? vm[ProcessorArgumentExtensions].as<StringVector>() : StringVector();
                 if (filesExtensions.empty())
                 {
-                    KMP_LOG_ERROR_FN("Translator: files extensions are not set");
+                    KMP_LOG_ERROR_RAW("Translator: files extensions are not set");
                     PrintUsage(optionsDescription);
                     return ReturnCode::FilesExtensionsAreNotSet;
                 }
@@ -211,7 +211,7 @@ namespace Kmpleete
             const auto outputDirectoryStr = vm.count(ProcessorArgumentOutputDirectory) ? vm[ProcessorArgumentOutputDirectory].as<String>() : String();
             if (outputDirectoryStr.empty())
             {
-                KMP_LOG_ERROR_FN("Translator: output directory is not set");
+                KMP_LOG_ERROR_RAW("Translator: output directory is not set");
                 PrintUsage(optionsDescription);
                 return ReturnCode::OutputDirectoryIsNotSet;
             }
@@ -219,7 +219,7 @@ namespace Kmpleete
 
             if (not Filesystem::CreateDirectories(outputDirectory))
             {
-                KMP_LOG_ERROR_FN("Translator: cannot create output directory '{}'", outputDirectory);
+                KMP_LOG_ERROR_RAW("Translator: cannot create output directory '{}'", outputDirectory);
                 PrintUsage(optionsDescription);
                 return ReturnCode::OutputDirectoryIsNotValid;
             }
@@ -228,7 +228,7 @@ namespace Kmpleete
             const auto outputFileNameStr = vm.count(ProcessorArgumentOutputFileName) ? vm[ProcessorArgumentOutputFileName].as<String>() : String();
             if (outputFileNameStr.empty())
             {
-                KMP_LOG_ERROR_FN("Translator: output file name is not set");
+                KMP_LOG_ERROR_RAW("Translator: output file name is not set");
                 PrintUsage(optionsDescription);
                 return ReturnCode::OutputFileNameIsNotSet;
             }
@@ -243,7 +243,7 @@ namespace Kmpleete
             auto gettextBinariesJsonDocument = JsonDocument(gettextBinariesPathsStr);
             if (gettextBinariesJsonDocument.HasError())
             {
-                KMP_LOG_ERROR_FN("Translator: 'translator_gettext_paths.json' file not found or has invalid format");
+                KMP_LOG_ERROR_RAW("Translator: 'translator_gettext_paths.json' file not found or has invalid format");
                 PrintUsage(optionsDescription);
                 return ReturnCode::GettextBinariesFileNotFound;
             }

@@ -38,15 +38,15 @@ namespace Kmpleete
         {
             if (messageSeverity & VK_DebugUtilsMessageSeverity_Verbose)
             {
-                KMP_LOG_DEBUG_FN("VulkanGraphicsBackend DebugCallback: {}", callbackData->pMessage);
+                KMP_LOG_DEBUG_RAW("VulkanGraphicsBackend DebugCallback: {}", callbackData->pMessage);
             }
             else if (messageSeverity & VK_DebugUtilsMessageSeverity_Warning)
             {
-                KMP_LOG_WARN_FN("VulkanGraphicsBackend DebugCallback: {}", callbackData->pMessage);
+                KMP_LOG_WARN_RAW("VulkanGraphicsBackend DebugCallback: {}", callbackData->pMessage);
             }
             else if (messageSeverity & VK_DebugUtilsMessageSeverity_Error)
             {
-                KMP_LOG_ERROR_FN("VulkanGraphicsBackend DebugCallback: {}", callbackData->pMessage);
+                KMP_LOG_ERROR_RAW("VulkanGraphicsBackend DebugCallback: {}", callbackData->pMessage);
             }
 
             return VK_FALSE;

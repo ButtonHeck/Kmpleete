@@ -9,12 +9,12 @@
 #define KMP_LOG_ERROR(...)
 #define KMP_LOG_CRITICAL(...)
 
-#define KMP_LOG_TRACE_FN(...)
-#define KMP_LOG_DEBUG_FN(...)
-#define KMP_LOG_INFO_FN(...)
-#define KMP_LOG_WARN_FN(...)
-#define KMP_LOG_ERROR_FN(...)
-#define KMP_LOG_CRITICAL_FN(...)
+#define KMP_LOG_TRACE_RAW(...)
+#define KMP_LOG_DEBUG_RAW(...)
+#define KMP_LOG_INFO_RAW(...)
+#define KMP_LOG_WARN_RAW(...)
+#define KMP_LOG_ERROR_RAW(...)
+#define KMP_LOG_CRITICAL_RAW(...)
 
 #else
 #include "Kmpleete/Log/log_api.h"
@@ -124,11 +124,11 @@ struct fmt::formatter<Kmpleete::Filepath> : fmt::formatter<Kmpleete::String>
 #define KMP_LOG_ERROR(...)          ::Kmpleete::Log::Error("{}:  {}", (::Kmpleete::SourceLocation::ShortenFunctionName(KMP_FUNC_SIG)).data, fmt::format(__VA_ARGS__))
 #define KMP_LOG_CRITICAL(...)       ::Kmpleete::Log::Critical("{}:  {}", (::Kmpleete::SourceLocation::ShortenFunctionName(KMP_FUNC_SIG)).data, fmt::format(__VA_ARGS__)); KMP_DEBUGBREAK
 
-#define KMP_LOG_TRACE_FN(...)       ::Kmpleete::Log::Trace(__VA_ARGS__)
-#define KMP_LOG_DEBUG_FN(...)       ::Kmpleete::Log::Debug(__VA_ARGS__)
-#define KMP_LOG_INFO_FN(...)        ::Kmpleete::Log::Info(__VA_ARGS__)
-#define KMP_LOG_WARN_FN(...)        ::Kmpleete::Log::Warn(__VA_ARGS__)
-#define KMP_LOG_ERROR_FN(...)       ::Kmpleete::Log::Error(__VA_ARGS__)
-#define KMP_LOG_CRITICAL_FN(...)    ::Kmpleete::Log::Critical(__VA_ARGS__); KMP_DEBUGBREAK
+#define KMP_LOG_TRACE_RAW(...)      ::Kmpleete::Log::Trace(__VA_ARGS__)
+#define KMP_LOG_DEBUG_RAW(...)      ::Kmpleete::Log::Debug(__VA_ARGS__)
+#define KMP_LOG_INFO_RAW(...)       ::Kmpleete::Log::Info(__VA_ARGS__)
+#define KMP_LOG_WARN_RAW(...)       ::Kmpleete::Log::Warn(__VA_ARGS__)
+#define KMP_LOG_ERROR_RAW(...)      ::Kmpleete::Log::Error(__VA_ARGS__)
+#define KMP_LOG_CRITICAL_RAW(...)   ::Kmpleete::Log::Critical(__VA_ARGS__); KMP_DEBUGBREAK
 
 #endif

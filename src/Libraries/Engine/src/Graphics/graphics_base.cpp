@@ -50,7 +50,7 @@ namespace Kmpleete
                 default: break;
             }
 
-            KMP_LOG_ERROR_FN("GraphicsBase: unknown ShaderDataType");
+            KMP_LOG_ERROR("unknown ShaderDataType");
             return 0;
         }
         //--------------------------------------------------------------------------
@@ -73,7 +73,7 @@ namespace Kmpleete
                 default: break;
             }
 
-            KMP_LOG_ERROR_FN("GraphicsBase: unknown ShaderDataType");
+            KMP_LOG_ERROR("unknown ShaderDataType");
             return 0;
         }
         //--------------------------------------------------------------------------

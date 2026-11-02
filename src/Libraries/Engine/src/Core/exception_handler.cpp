@@ -11,7 +11,7 @@
         Kmpleete::Profiler::Get().EndSession();
     #endif
 
-        KMP_LOG_ERROR_FN("UnhandledExceptionHandler: uncaught exception has occured");
+        KMP_LOG_ERROR_RAW("UnhandledExceptionHandler: uncaught exception has occured");
         Kmpleete::DumpStacktrace();
 
         return EXCEPTION_CONTINUE_SEARCH;
@@ -25,7 +25,7 @@
         Kmpleete::Profiler::Get().EndSession();
     #endif
 
-        KMP_LOG_ERROR_FN("SignalHandler: uncaught exception has occured '{}'", sigdescr_np(signum));
+        KMP_LOG_ERROR_RAW("SignalHandler: uncaught exception has occured '{}'", sigdescr_np(signum));
         Kmpleete::DumpStacktrace();
 
         exit(signum);

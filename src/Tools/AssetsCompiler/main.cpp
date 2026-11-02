@@ -147,7 +147,7 @@ namespace Kmpleete
             const auto inputFileNameStr = vm.count(CompilerArgumentInputFileName) ? vm[CompilerArgumentInputFileName].as<String>() : String();
             if (inputFileNameStr.empty())
             {
-                KMP_LOG_ERROR_FN("AssetsCompiler: input file name is not set");
+                KMP_LOG_ERROR_RAW("AssetsCompiler: input file name is not set");
                 PrintUsage(optionsDescription);
                 return ReturnCode::InputFileIsNotSet;
             }
@@ -155,7 +155,7 @@ namespace Kmpleete
             const auto inputFileNamePath = Filepath(inputFileNameStr);
             if (not Filesystem::FilepathExists(inputFileNamePath) || not Filesystem::IsFile(inputFileNamePath))
             {
-                KMP_LOG_ERROR_FN("AssetsCompiler: input file '{}' does not exist or is not of a file type", inputFileNamePath);
+                KMP_LOG_ERROR_RAW("AssetsCompiler: input file '{}' does not exist or is not of a file type", inputFileNamePath);
                 PrintUsage(optionsDescription);
                 return ReturnCode::InputFileIsNotValid;
             }
@@ -166,7 +166,7 @@ namespace Kmpleete
             const auto outputFileNameStr = vm.count(CompilerArgumentOutputFileName) ? vm[CompilerArgumentOutputFileName].as<String>() : String();
             if (outputFileNameStr.empty())
             {
-                KMP_LOG_ERROR_FN("AssetsCompiler: output file name is not set");
+                KMP_LOG_ERROR_RAW("AssetsCompiler: output file name is not set");
                 PrintUsage(optionsDescription);
                 return ReturnCode::OutputFileIsNotSet;
             }
@@ -174,7 +174,7 @@ namespace Kmpleete
             const auto outputFileNamePath = Filepath(outputFileNameStr);
             if (not Filesystem::CreateFile(outputFileNamePath))
             {
-                KMP_LOG_ERROR_FN("AssetsCompiler: cannot create output file '{}'", outputFileNamePath);
+                KMP_LOG_ERROR_RAW("AssetsCompiler: cannot create output file '{}'", outputFileNamePath);
                 PrintUsage(optionsDescription);
                 return ReturnCode::OutputFileCreationFailed;
             }

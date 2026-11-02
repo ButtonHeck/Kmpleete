@@ -17,7 +17,7 @@ namespace Kmpleete
             case ImageChannels::RGBAlpha:
                 return srgb ? VK_Format_RGBA8_SRGB : VK_Format_RGBA8_UNorm;
             case ImageChannels::RGB:
-                KMP_LOG_WARN_FN("VulkanGraphicsBase: RGB channels will be converted to default RGBA VkFormat");
+                KMP_LOG_WARN("RGB channels will be converted to default RGBA VkFormat");
                 return srgb ? VK_Format_RGBA8_SRGB : VK_Format_RGBA8_UNorm;
             case ImageChannels::GreyAlpha:
                 return srgb ? VK_Format_RG8_SRGB : VK_Format_RG8_UNorm;
@@ -47,7 +47,7 @@ namespace Kmpleete
                 break;
             }
 
-            KMP_LOG_WARN_FN("VulkanGraphicsBase: shader data type is unknown or complementary VkFormat is not added yet");
+            KMP_LOG_WARN("shader data type is unknown or complementary VkFormat is not added yet");
             return VK_Format_RGB32_SFloat;
         }
         //--------------------------------------------------------------------------

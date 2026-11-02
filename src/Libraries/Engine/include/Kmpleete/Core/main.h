@@ -33,11 +33,11 @@ void TerminationHandler()
     }
     catch (KMP_MB_UNUSED const Kmpleete::Exception& e)
     {
-        KMP_LOG_CRITICAL_FN("Uncaught exception: '{}'", e.what());
+        KMP_LOG_CRITICAL_RAW("Uncaught exception: '{}'", e.what());
     }
     catch (...)
     {
-        KMP_LOG_CRITICAL_FN("Uncaught exception");
+        KMP_LOG_CRITICAL_RAW("Uncaught exception");
     }
 
     std::exit(2);

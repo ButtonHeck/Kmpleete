@@ -40,12 +40,12 @@ namespace Kmpleete
                 {
                     if (handler->GetTypeName() == newHandlerWrapper->GetTypeName())
                     {
-                        KMP_LOG_ERROR_FN("EventDispatcher::AddHandler: already contains exactly same handler for '{}'", EventClass::TypeName);
+                        KMP_LOG_ERROR_RAW("EventDispatcher::AddHandler: already contains exactly same handler for '{}'", EventClass::TypeName);
                         return false;
                     }
                 }
 
-                KMP_LOG_DEBUG_FN("EventDispatcher::AddHandler: added handler for '{}' - {}", EventClass::TypeName, Utils::PrettifyFunctionName(newHandlerWrapper->GetTypeName()));
+                KMP_LOG_DEBUG_RAW("EventDispatcher::AddHandler: added handler for '{}' - {}", EventClass::TypeName, Utils::PrettifyFunctionName(newHandlerWrapper->GetTypeName()));
                 _handlersMap[EventClass::TypeID].emplace_back(std::move(newHandlerWrapper));
 
                 return true;
@@ -57,7 +57,7 @@ namespace Kmpleete
             {
                 if (not _handlersMap.contains(EventClass::TypeID))
                 {
-                    KMP_LOG_WARN_FN("EventDispatcher::RemoveHandler: cannot remove handler because its event TypeName '{}' has not been registered", EventClass::TypeName);
+                    KMP_LOG_WARN_RAW("EventDispatcher::RemoveHandler: cannot remove handler because its event TypeName '{}' has not been registered", EventClass::TypeName);
                     return false;
                 }
 
@@ -68,7 +68,7 @@ namespace Kmpleete
                     const EventHandlerWrapper* handlerPtr = handlerIter->get();
                     if (handlerPtr && handlerPtr->GetTypeName() == handlerTypeName)
                     {
-                        KMP_LOG_DEBUG_FN("EventDispatcher::RemoveHandler: removed handler for '{}' - {}", EventClass::TypeName, Utils::PrettifyFunctionName(handlerTypeName));
+                        KMP_LOG_DEBUG_RAW("EventDispatcher::RemoveHandler: removed handler for '{}' - {}", EventClass::TypeName, Utils::PrettifyFunctionName(handlerTypeName));
                         handlers.erase(handlerIter);
                         return true;
                     }
@@ -96,7 +96,7 @@ namespace Kmpleete
                     }
                     else
                     {
-                        KMP_LOG_ERROR_FN("EventDispatcher::Dispatch: handler under index '{}' is nullptr and cannot dispatch event '{}'", handlerIndex, event.GetName());
+                        KMP_LOG_ERROR_RAW("EventDispatcher::Dispatch: handler under index '{}' is nullptr and cannot dispatch event '{}'", handlerIndex, event.GetName());
                     }
 
                     if (event.handled)

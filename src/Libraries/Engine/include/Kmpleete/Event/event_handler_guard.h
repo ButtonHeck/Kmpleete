@@ -39,7 +39,7 @@ namespace Kmpleete
                 }
                 catch (...)
                 {
-                    KMP_LOG_ERROR_FN("EventHandlerGuard::~EventHandlerGuard: failed to detach event handler");
+                    KMP_LOG_ERROR_RAW("EventHandlerGuard::~EventHandlerGuard: failed to detach event handler");
                 }
             }
 

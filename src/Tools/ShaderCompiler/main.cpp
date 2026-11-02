@@ -149,13 +149,13 @@ namespace Kmpleete
             const auto workMode = vm.count(CompilerArgumentWorkMode) ? vm[CompilerArgumentWorkMode].as<String>() : String();
             if (workMode.empty())
             {
-                KMP_LOG_ERROR_FN("ShaderCompilerTool: work mode is not set");
+                KMP_LOG_ERROR_RAW("ShaderCompilerTool: work mode is not set");
                 PrintUsage(optionsDescription);
                 return ReturnCode::WorkModeIsNotSet;
             }
             if (not WorkModeIsValid(workMode))
             {
-                KMP_LOG_ERROR_FN("ShaderCompilerTool: work mode '{}' is not valid", workMode);
+                KMP_LOG_ERROR_RAW("ShaderCompilerTool: work mode '{}' is not valid", workMode);
                 PrintUsage(optionsDescription);
                 return ReturnCode::WorkModeIsNotValid;
             }
@@ -168,7 +168,7 @@ namespace Kmpleete
                 const auto sourceJsonFileStrings = vm.count(CompilerArgumentSourceFiles) ? vm[CompilerArgumentSourceFiles].as<StringVector>() : StringVector();
                 if (sourceJsonFileStrings.empty())
                 {
-                    KMP_LOG_ERROR_FN("ShaderCompilerTool: source json files are not set");
+                    KMP_LOG_ERROR_RAW("ShaderCompilerTool: source json files are not set");
                     PrintUsage(optionsDescription);
                     return ReturnCode::SourceJsonFilesAreNotSet;
                 }
@@ -179,7 +179,7 @@ namespace Kmpleete
                     const auto sourceJsonFilePath = Filepath(sourceJsonFileStr);
                     if (not Filesystem::FilepathExists(sourceJsonFilePath) || not Filesystem::IsFile(sourceJsonFilePath))
                     {
-                        KMP_LOG_ERROR_FN("ShaderCompilerTool: one of source files '{}' does not exist or is not of a file type", sourceJsonFilePath);
+                        KMP_LOG_ERROR_RAW("ShaderCompilerTool: one of source files '{}' does not exist or is not of a file type", sourceJsonFilePath);
                         PrintUsage(optionsDescription);
                         return ReturnCode::SourceJsonFilesAreNotValid;
                     }
@@ -195,7 +195,7 @@ namespace Kmpleete
                 const auto shaderSourceFilesStrings = vm.count(CompilerArgumentSourceFiles) ? vm[CompilerArgumentSourceFiles].as<StringVector>() : StringVector();
                 if (shaderSourceFilesStrings.empty())
                 {
-                    KMP_LOG_ERROR_FN("ShaderCompilerTool: shader source files are not set");
+                    KMP_LOG_ERROR_RAW("ShaderCompilerTool: shader source files are not set");
                     PrintUsage(optionsDescription);
                     return ReturnCode::ShaderSourceFilesAreNotSet;
                 }
@@ -206,7 +206,7 @@ namespace Kmpleete
                     const auto shaderSourceFilePath = Filepath(shaderSourceFileStr);
                     if (not Filesystem::FilepathExists(shaderSourceFilePath) || not Filesystem::IsFile(shaderSourceFilePath))
                     {
-                        KMP_LOG_ERROR_FN("ShaderCompilerTool: one of shader source files '{}', does not exist of is not of a file type", shaderSourceFilePath);
+                        KMP_LOG_ERROR_RAW("ShaderCompilerTool: one of shader source files '{}', does not exist of is not of a file type", shaderSourceFilePath);
                         PrintUsage(optionsDescription);
                         return ReturnCode::ShaderSourceFilesAreNotValid;
                     }
@@ -221,7 +221,7 @@ namespace Kmpleete
                 const auto shaderDestinationFilesStrings = vm.count(CompilerArgumentDestinationFiles) ? vm[CompilerArgumentDestinationFiles].as<StringVector>() : StringVector();
                 if (shaderDestinationFilesStrings.empty())
                 {
-                    KMP_LOG_ERROR_FN("ShaderCompilerTool: shader binary destination files are not set");
+                    KMP_LOG_ERROR_RAW("ShaderCompilerTool: shader binary destination files are not set");
                     PrintUsage(optionsDescription);
                     return ReturnCode::ShaderBinaryDestinationFilesAreNotSet;
                 }
@@ -239,7 +239,7 @@ namespace Kmpleete
                 const auto shaderTypeStrings = vm.count(CompilerArgumentShaderTypes) ? vm[CompilerArgumentShaderTypes].as<StringVector>() : StringVector();
                 if (shaderTypeStrings.empty())
                 {
-                    KMP_LOG_ERROR_FN("ShaderCompilerTool: shader types are not set");
+                    KMP_LOG_ERROR_RAW("ShaderCompilerTool: shader types are not set");
                     PrintUsage(optionsDescription);
                     return ReturnCode::ShaderTypesAreNotSet;
                 }
@@ -250,7 +250,7 @@ namespace Kmpleete
                     const auto shaderType = StringToShaderType(shaderTypeStr);
                     if (not shaderType.has_value())
                     {
-                        KMP_LOG_ERROR_FN("ShaderCompilerTool: shader type conversion failed");
+                        KMP_LOG_ERROR_RAW("ShaderCompilerTool: shader type conversion failed");
                         PrintUsage(optionsDescription);
                         return ReturnCode::ShaderTypesAreNotValid;
                     }
@@ -265,7 +265,7 @@ namespace Kmpleete
                 if (compilerParameters.shaderSourceFiles.size() != compilerParameters.shaderBinaryDestinationFiles.size() ||
                     compilerParameters.shaderSourceFiles.size() != compilerParameters.shaderTypes.size())
                 {
-                    KMP_LOG_ERROR_FN("ShaderCompilerTool: lengths of all three parameters lists should match");
+                    KMP_LOG_ERROR_RAW("ShaderCompilerTool: lengths of all three parameters lists should match");
                     PrintUsage(optionsDescription);
                     return ReturnCode::InvalidArgumentVariablesCount;
                 }

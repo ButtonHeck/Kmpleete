@@ -13,12 +13,12 @@ namespace Kmpleete
         {
             if (alignment == 0)
             {
-                KMP_LOG_ERROR_FN("Utils: AlignedAlloc - cannot allocate with alignment 0");
+                KMP_LOG_ERROR("cannot allocate with alignment 0");
                 return nullptr;
             }
             if (size == 0)
             {
-                KMP_LOG_ERROR_FN("Utils: AlignedAlloc - cannot allocate with size 0");
+                KMP_LOG_ERROR("cannot allocate with size 0");
                 return nullptr;
             }
 

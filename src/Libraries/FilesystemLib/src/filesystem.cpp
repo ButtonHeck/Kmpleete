@@ -33,7 +33,7 @@ namespace Kmpleete
             }
             catch (KMP_MB_UNUSED const FilesystemError& fe)
             {
-                KMP_LOG_ERROR_FN("Filesystem: failed to get current filepath: '{}'", fe.what());
+                KMP_LOG_ERROR("failed to get current filepath: '{}'", fe.what());
                 return Filepath{};
             }
         }}
@@ -47,7 +47,7 @@ namespace Kmpleete
             }
             catch (KMP_MB_UNUSED const FilesystemError& fe)
             {
-                KMP_LOG_ERROR_FN("Filesystem: exists failed: '{}'", fe.what());
+                KMP_LOG_ERROR("exists failed: '{}'", fe.what());
                 return false;
             }
         }}
@@ -65,14 +65,14 @@ namespace Kmpleete
             {
                 if (not overwrite && FilepathExists(newPath))
                 {
-                    KMP_LOG_WARN_FN("Filesystem: renaming '{}' to '{}' stopped - new path already exists and overwrite is prohibited", oldPath, newPath);
+                    KMP_LOG_WARN("renaming '{}' to '{}' stopped - new path already exists and overwrite is prohibited", oldPath, newPath);
                     return false;
                 }
                 if (overwrite && FilepathExists(newPath) && IsDirectory(oldPath) && IsDirectory(newPath))
                 {
                     if (not RemoveDirectories(newPath))
                     {
-                        KMP_LOG_ERROR_FN("Filesystem: renaming '{}' to '{}' failed - cannot remove destination directory for overwrite", oldPath, newPath);
+                        KMP_LOG_ERROR("renaming '{}' to '{}' failed - cannot remove destination directory for overwrite", oldPath, newPath);
                         return false;
                     }
                 }
@@ -82,7 +82,7 @@ namespace Kmpleete
             }
             catch (KMP_MB_UNUSED const FilesystemError& fe)
             {
-                KMP_LOG_ERROR_FN("Filesystem: renaming '{}' to '{}' failed: '{}'", oldPath, newPath, fe.what());
+                KMP_LOG_ERROR("renaming '{}' to '{}' failed: '{}'", oldPath, newPath, fe.what());
                 return false;
             }
         }}
@@ -97,7 +97,7 @@ namespace Kmpleete
             }
             catch (KMP_MB_UNUSED const FilesystemError& fe)
             {
-                KMP_LOG_ERROR_FN("Filesystem: create directories failed: '{}'", fe.what());
+                KMP_LOG_ERROR("create directories failed: '{}'", fe.what());
                 return false;
             }
         }}
@@ -111,7 +111,7 @@ namespace Kmpleete
             }
             catch (KMP_MB_UNUSED const FilesystemError& fe)
             {
-                KMP_LOG_ERROR_FN("Filesystem: remove directories failed: '{}'", fe.what());
+                KMP_LOG_ERROR("remove directories failed: '{}'", fe.what());
                 return false;
             }
         }}
@@ -121,7 +121,7 @@ namespace Kmpleete
         {
             if (not IsDirectory(from))
             {
-                KMP_LOG_ERROR_FN("Filesystem: CopyDirectories failed: '{}' is not a directory", from);
+                KMP_LOG_ERROR("copying failed: '{}' is not a directory", from);
                 return false;
             }
 
@@ -131,7 +131,7 @@ namespace Kmpleete
             }
             catch (KMP_MB_UNUSED const FilesystemError& fe)
             {
-                KMP_LOG_ERROR_FN("Filesystem: CopyDirectories failed: '{}'", fe.what());
+                KMP_LOG_ERROR("copying failed: '{}'", fe.what());
                 return false;
             }
 
@@ -147,7 +147,7 @@ namespace Kmpleete
             }
             catch (KMP_MB_UNUSED const FilesystemError& fe)
             {
-                KMP_LOG_ERROR_FN("Filesystem: 'isDirectory' failed: '{}'", fe.what());
+                KMP_LOG_ERROR("failed: '{}'", fe.what());
                 return false;
             }
         }}
@@ -159,13 +159,13 @@ namespace Kmpleete
             {
                 if (FilepathExists(filepath))
                 {
-                    KMP_LOG_INFO_FN("CreateFile - file '{}' already exists", filepath);
+                    KMP_LOG_INFO("file '{}' already exists", filepath);
                     return true;
                 }
 
                 if (not CreateDirectories(filepath, "path is file"_true))
                 {
-                    KMP_LOG_ERROR_FN("CreateFile - cannot create directories for file '{}'", filepath);
+                    KMP_LOG_ERROR("cannot create directories for file '{}'", filepath);
                     return false;
                 }
 
@@ -173,7 +173,7 @@ namespace Kmpleete
             }
             catch (KMP_MB_UNUSED const std::ios_base::failure& e)
             {
-                KMP_LOG_ERROR_FN("Filesystem: failed to create [{}]: '{}'", filepath, e.what());
+                KMP_LOG_ERROR("failed to create [{}]: '{}'", filepath, e.what());
             }
 
             return FilepathExists(filepath);
@@ -188,7 +188,7 @@ namespace Kmpleete
             }
             catch (KMP_MB_UNUSED const FilesystemError& fe)
             {
-                KMP_LOG_ERROR_FN("Filesystem: removing file '{}' failed: '{}'", filepath, fe.what());
+                KMP_LOG_ERROR("removing file '{}' failed: '{}'", filepath, fe.what());
                 return false;
             }
         }}
@@ -202,7 +202,7 @@ namespace Kmpleete
             }
             catch (KMP_MB_UNUSED const FilesystemError& fe)
             {
-                KMP_LOG_ERROR_FN("Filesystem: copy file failed: '{}'", fe.what());
+                KMP_LOG_ERROR("copy file failed: '{}'", fe.what());
                 return false;
             }
         }}
@@ -216,7 +216,7 @@ namespace Kmpleete
             }
             catch (KMP_MB_UNUSED const FilesystemError& fe)
             {
-                KMP_LOG_ERROR_FN("Filesystem: 'isFile' failed: '{}'", fe.what());
+                KMP_LOG_ERROR("failed: '{}'", fe.what());
                 return false;
             }
         }}
@@ -250,14 +250,14 @@ namespace Kmpleete
         {
             if (not FilepathExists(filepath))
             {
-                KMP_LOG_ERROR_FN("Filesystem: cannot read file '{}' - not found", filepath);
+                KMP_LOG_ERROR("cannot read file '{}' - not found", filepath);
                 return String();
             }
 
             std::ifstream fileStream(filepath);
             if (not fileStream.is_open() || not fileStream.good())
             {
-                KMP_LOG_ERROR_FN("Filesystem: cannot read file '{}' - failed to open", filepath);
+                KMP_LOG_ERROR("cannot read file '{}' - failed to open", filepath);
                 return String();
             }
 
@@ -269,14 +269,14 @@ namespace Kmpleete
         {
             if (not FilepathExists(filepath))
             {
-                KMP_LOG_ERROR_FN("Filesystem: cannot read file '{}' - not found", filepath);
+                KMP_LOG_ERROR("cannot read file '{}' - not found", filepath);
                 return BinaryBuffer();
             }
 
             std::ifstream fileStream(filepath, std::ios::binary);
             if (not fileStream.is_open() || not fileStream.good())
             {
-                KMP_LOG_ERROR_FN("Filesystem: cannot read file '{}' - failed to open", filepath);
+                KMP_LOG_ERROR("cannot read file '{}' - failed to open", filepath);
                 return BinaryBuffer();
             }
 
@@ -291,7 +291,7 @@ namespace Kmpleete
             {
                 if (not condition)
                 {
-                    KMP_LOG_ERROR_FN("Filesystem: cannot write empty {} to a file '{}'", contentType, filepath);
+                    KMP_LOG_ERROR("cannot write empty {} to a file '{}'", contentType, filepath);
                     return false;
                 }
 
@@ -299,7 +299,7 @@ namespace Kmpleete
                 {
                     if (not CreateFile(filepath))
                     {
-                        KMP_LOG_ERROR_FN("Filesystem: cannot write {} to a file '{}' - file creation failed", contentType, filepath);
+                        KMP_LOG_ERROR("cannot write {} to a file '{}' - file creation failed", contentType, filepath);
                         return false;
                     }
                 }
@@ -319,7 +319,7 @@ namespace Kmpleete
             std::ofstream fileStream(filepath, append ? std::ios::app : std::ios::trunc);
             if (not fileStream.is_open())
             {
-                KMP_LOG_ERROR_FN("Filesystem: cannot write string to a file '{}' - failed to open file", filepath);
+                KMP_LOG_ERROR("cannot write string to a file '{}' - failed to open file", filepath);
                 return false;
             }
 
@@ -340,7 +340,7 @@ namespace Kmpleete
             std::ofstream fileStream(filepath, std::ios::binary | (append ? std::ios::app : std::ios::trunc));
             if (not fileStream.is_open())
             {
-                KMP_LOG_ERROR_FN("Filesystem: cannot write binary buffer to a file '{}' - failed to open file", filepath);
+                KMP_LOG_ERROR("cannot write binary buffer to a file '{}' - failed to open file", filepath);
                 return false;
             }
 
@@ -361,7 +361,7 @@ namespace Kmpleete
             std::ofstream fileStream(filepath, std::ios::binary | (append ? std::ios::app : std::ios::trunc));
             if (not fileStream.is_open())
             {
-                KMP_LOG_ERROR_FN("Filesystem: cannot write binary buffer to a file '{}' - failed to open file", filepath);
+                KMP_LOG_ERROR("cannot write binary buffer to a file '{}' - failed to open file", filepath);
                 return false;
             }
 

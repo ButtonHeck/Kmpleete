@@ -22,7 +22,7 @@ namespace Kmpleete
 
         if (Filesystem::WriteFile(dumpFile, stacktrace.to_string(), "append"_false))
         {
-            KMP_LOG_ERROR_FN("stacktrace written to a file '{}'", dumpFile);
+            KMP_LOG_ERROR_RAW("stacktrace written to a file '{}'", dumpFile);
         }
     }
     //--------------------------------------------------------------------------

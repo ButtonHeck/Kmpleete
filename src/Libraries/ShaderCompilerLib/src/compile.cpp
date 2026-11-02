@@ -78,7 +78,7 @@ namespace Kmpleete
                 return ShaderType::RayTracing;
             else
             {
-                KMP_LOG_ERROR_FN("StringToShaderType: shader type for string '{}' not found", shaderTypeString);
+                KMP_LOG_ERROR_RAW("StringToShaderType: shader type for string '{}' not found", shaderTypeString);
                 return NullOptional;
             }
         }
@@ -88,7 +88,7 @@ namespace Kmpleete
         {
             if (shaderCode.empty())
             {
-                KMP_LOG_ERROR_FN("CompileGLSLToSpirvFromSource: cannot compile shader - code is empty (compiling '{}' shader named '{}')", ShaderTypeToString(shaderType), sourceName);
+                KMP_LOG_ERROR_RAW("CompileGLSLToSpirvFromSource: cannot compile shader - code is empty (compiling '{}' shader named '{}')", ShaderTypeToString(shaderType), sourceName);
                 return BinaryBuffer32();
             }
 
@@ -106,7 +106,7 @@ namespace Kmpleete
 
             if (not compiler.IsValid())
             {
-                KMP_LOG_ERROR_FN("CompileGLSLToSpirvFromSource: failed to create shaderc compiler instance (compiling '{}' shader named '{}')", ShaderTypeToString(shaderType), sourceName);
+                KMP_LOG_ERROR_RAW("CompileGLSLToSpirvFromSource: failed to create shaderc compiler instance (compiling '{}' shader named '{}')", ShaderTypeToString(shaderType), sourceName);
                 return BinaryBuffer32();
             }
 
@@ -119,11 +119,11 @@ namespace Kmpleete
             const auto result = compiler.CompileGlslToSpv(shaderCode, ShaderTypeToShadercNative(shaderType), sourceName.c_str(), options);
             if (result.GetCompilationStatus() != shaderc_compilation_status_success)
             {
-                KMP_LOG_ERROR_FN("CompileGLSLToSpirvFromSource: shader compilation failed (compiling '{}' shader named '{}')\n\t{}", ShaderTypeToString(shaderType), sourceName, result.GetErrorMessage());
+                KMP_LOG_ERROR_RAW("CompileGLSLToSpirvFromSource: shader compilation failed (compiling '{}' shader named '{}')\n\t{}", ShaderTypeToString(shaderType), sourceName, result.GetErrorMessage());
                 return BinaryBuffer32();
             }
 
-            KMP_LOG_INFO_FN("CompileGLSLToSpirvFromSource: successfully compiled '{}' shader named '{}'", ShaderTypeToString(shaderType), sourceName);
+            KMP_LOG_INFO_RAW("CompileGLSLToSpirvFromSource: successfully compiled '{}' shader named '{}'", ShaderTypeToString(shaderType), sourceName);
             return BinaryBuffer32({ result.cbegin(), result.cend() });
         }}
         //--------------------------------------------------------------------------
@@ -133,7 +133,7 @@ namespace Kmpleete
             const auto shaderCode = Filesystem::ReadFileAsText(shaderFile);
             if (shaderCode.empty())
             {
-                KMP_LOG_ERROR_FN("CompileGLSLToSpirvFromFile: failed to read shader code from '{}' (compiling '{}' shader named '{}')", shaderFile, ShaderTypeToString(shaderType), sourceName);
+                KMP_LOG_ERROR_RAW("CompileGLSLToSpirvFromFile: failed to read shader code from '{}' (compiling '{}' shader named '{}')", shaderFile, ShaderTypeToString(shaderType), sourceName);
                 return BinaryBuffer32();
             }
 
