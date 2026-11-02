@@ -9,13 +9,6 @@
 #define KMP_LOG_ERROR(...)
 #define KMP_LOG_CRITICAL(...)
 
-#define KMP_LOG_TRACE2(...)
-#define KMP_LOG_DEBUG2(...)
-#define KMP_LOG_INFO2(...)
-#define KMP_LOG_WARN2(...)
-#define KMP_LOG_ERROR2(...)
-#define KMP_LOG_CRITICAL2(...)
-
 #define KMP_LOG_TRACE_FN(...)
 #define KMP_LOG_DEBUG_FN(...)
 #define KMP_LOG_INFO_FN(...)
@@ -120,9 +113,9 @@ struct fmt::formatter<Kmpleete::Filepath> : fmt::formatter<Kmpleete::String>
 //--------------------------------------------------------------------------
 
 
-//! Three sets of logging macros for all levels: first two are used for a class functions (with "ClassName::FunctionName" or just "ClassName" printed first),
-//! while the third one is used for logging without any preprocessing
-//! @see log_class_macro.h
+//! Two sets of logging macros for all levels: first one is used for a class functions or free functions prepended with "ClassName/NamespaceName::FunctionName:",
+//! while the second one is used for logging without any preprocessing
+//! @see source_location_utils.h in BaseLib
 
 #define KMP_LOG_TRACE(...)          ::Kmpleete::Log::Trace("{}:  {}", (::Kmpleete::SourceLocation::ShortenFunctionName(KMP_FUNC_SIG)).data, fmt::format(__VA_ARGS__))
 #define KMP_LOG_DEBUG(...)          ::Kmpleete::Log::Debug("{}:  {}", (::Kmpleete::SourceLocation::ShortenFunctionName(KMP_FUNC_SIG)).data, fmt::format(__VA_ARGS__))
@@ -130,13 +123,6 @@ struct fmt::formatter<Kmpleete::Filepath> : fmt::formatter<Kmpleete::String>
 #define KMP_LOG_WARN(...)           ::Kmpleete::Log::Warn("{}:  {}", (::Kmpleete::SourceLocation::ShortenFunctionName(KMP_FUNC_SIG)).data, fmt::format(__VA_ARGS__))
 #define KMP_LOG_ERROR(...)          ::Kmpleete::Log::Error("{}:  {}", (::Kmpleete::SourceLocation::ShortenFunctionName(KMP_FUNC_SIG)).data, fmt::format(__VA_ARGS__))
 #define KMP_LOG_CRITICAL(...)       ::Kmpleete::Log::Critical("{}:  {}", (::Kmpleete::SourceLocation::ShortenFunctionName(KMP_FUNC_SIG)).data, fmt::format(__VA_ARGS__)); KMP_DEBUGBREAK
-
-#define KMP_LOG_TRACE2(...)         ::Kmpleete::Log::Trace("{}:  {}", GetLogClassName(), fmt::format(__VA_ARGS__))
-#define KMP_LOG_DEBUG2(...)         ::Kmpleete::Log::Debug("{}:  {}", GetLogClassName(), fmt::format(__VA_ARGS__))
-#define KMP_LOG_INFO2(...)          ::Kmpleete::Log::Info("{}:  {}", GetLogClassName(), fmt::format(__VA_ARGS__))
-#define KMP_LOG_WARN2(...)          ::Kmpleete::Log::Warn("{}:  {}", GetLogClassName(), fmt::format(__VA_ARGS__))
-#define KMP_LOG_ERROR2(...)         ::Kmpleete::Log::Error("{}:  {}", GetLogClassName(), fmt::format(__VA_ARGS__))
-#define KMP_LOG_CRITICAL2(...)      ::Kmpleete::Log::Critical("{}:  {}", GetLogClassName(), fmt::format(__VA_ARGS__)); KMP_DEBUGBREAK
 
 #define KMP_LOG_TRACE_FN(...)       ::Kmpleete::Log::Trace(__VA_ARGS__)
 #define KMP_LOG_DEBUG_FN(...)       ::Kmpleete::Log::Debug(__VA_ARGS__)

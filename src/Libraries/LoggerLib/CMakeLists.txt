@@ -12,7 +12,6 @@ add_library(LoggerLib)
 AddTargetSourcesGroup(LoggerLib "Log"
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Log/log.h
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Log/log_api.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Log/log_class_macro.h
     ${CMAKE_CURRENT_LIST_DIR}/src/log.cpp
 )
 
@@ -44,7 +43,6 @@ add_library(LoggerInterfaceLib INTERFACE)
 
 AddTargetSourcesGroup(LoggerInterfaceLib "Log"
     ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Log/log.h
-    ${CMAKE_CURRENT_LIST_DIR}/include/Kmpleete/Log/log_class_macro.h
 )
 
 target_compile_definitions(LoggerInterfaceLib
