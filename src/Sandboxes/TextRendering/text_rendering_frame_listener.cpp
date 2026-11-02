@@ -301,7 +301,8 @@ namespace Kmpleete
         auto& vulkanBufferManager = vulkanDevice.GetBufferManager();
         const auto& vulkanRenderer = vulkanDevice.GetRenderer();
 
-        const auto vertices = _GenerateTextVertices();
+        const auto verticesBuffer = _GenerateTextVertices();
+        const auto& vertices = verticesBuffer.vertices;
         const auto vertexBufferSize = UInt32(vertices.size() * sizeof(Graphics::FontCharacterVertex));
 
         if (create)
@@ -326,17 +327,17 @@ namespace Kmpleete
     }
     //--------------------------------------------------------------------------
 
-    Vector<Graphics::FontCharacterVertex> TextRenderingFrameListener::_GenerateTextVertices()
+    Graphics::FontVerticesBuffer TextRenderingFrameListener::_GenerateTextVertices()
     {
         const auto& alphabet = _localizationManager.Translation(TranslationDomain, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"_sid);
         const auto wideAlphabet = Utils::NarrowToWide(Utils::Utf8ToNarrow(alphabet));
 
         const auto windowFramebufferSize = _mainWindow.GetFramebufferSize();
         const auto& defaultFont = _assetsManager.GetFontAssetManager().GetAsset(Assets::FontAssetManager::DefaultFontSID).GetFont();
-        const auto vertices = defaultFont.GenerateTextVertices(_localizationManager.GetLocaleSID(), wideAlphabet, 0.0f, 100.0f, 48.0f, windowFramebufferSize);
-        _verticesCount = UInt32(vertices.size());
+        const auto verticesBuffer = defaultFont.GenerateTextVertices(_localizationManager.GetLocaleSID(), wideAlphabet, 0.0f, 100.0f, 48.0f, windowFramebufferSize);
+        _verticesCount = UInt32(verticesBuffer.vertices.size());
 
-        return vertices;
+        return verticesBuffer;
     }
     //--------------------------------------------------------------------------
 }

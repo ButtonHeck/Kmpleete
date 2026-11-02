@@ -27,5 +27,14 @@ namespace Kmpleete
             Math::Vec2F uv;
         };
         //--------------------------------------------------------------------------
+
+
+        //! Font vertices with its corresponding bonding box in window coordinates
+        struct FontVerticesBuffer
+        {
+            Vector<FontCharacterVertex> vertices;
+            Math::Rect2F boundingBox = { { 0, 0 }, { 0, 0 } };
+        };
+        //--------------------------------------------------------------------------
     }
 }

@@ -57,7 +57,7 @@ namespace Kmpleete
         void _FillDictionary();
 
         void _UpdateTextBuffer(bool create);
-        Vector<Graphics::FontCharacterVertex> _GenerateTextVertices();
+        Graphics::FontVerticesBuffer _GenerateTextVertices();
 
     private:
         Window& _mainWindow;

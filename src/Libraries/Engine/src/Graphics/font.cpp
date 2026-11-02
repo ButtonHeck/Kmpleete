@@ -113,13 +113,13 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        Vector<FontCharacterVertex> Font::GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
+        FontVerticesBuffer Font::GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
         {
             const auto& atlasOptional = GetAtlas(localeSid);
             if (not atlasOptional.has_value())
             {
                 KMP_LOG_ERROR("cannot find atlas for locale '{}' to generate text vertices", localeSid);
-                return Vector<FontCharacterVertex>();
+                return FontVerticesBuffer();
             }
 
             const auto& atlas = atlasOptional.value().get();
@@ -127,13 +127,13 @@ namespace Kmpleete
         }}
         //--------------------------------------------------------------------------
 
-        Vector<FontCharacterVertex> Font::GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
+        FontVerticesBuffer Font::GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
         {
             const auto& atlasOptional = GetAtlas(localeSid);
             if (not atlasOptional.has_value())
             {
                 KMP_LOG_ERROR("cannot find atlas for locale '{}' to generate text vertices", localeSid);
-                return Vector<FontCharacterVertex>();
+                return FontVerticesBuffer();
             }
 
             const auto& atlas = atlasOptional.value().get();

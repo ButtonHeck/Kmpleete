@@ -41,8 +41,8 @@ namespace Kmpleete
             KMP_NODISCARD const FontParameters& GetParameters() const noexcept;
             KMP_NODISCARD bool HasStyle(FontParameters::Style flag) const noexcept;
             KMP_NODISCARD OptionalRef<const FontAtlas> GetAtlas(const Localization::LocaleStrSID& localeSid) const noexcept;
-            KMP_NODISCARD Vector<FontCharacterVertex> GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const;
-            KMP_NODISCARD Vector<FontCharacterVertex> GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const;
+            KMP_NODISCARD FontVerticesBuffer GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const;
+            KMP_NODISCARD FontVerticesBuffer GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const;
 
         private:
             void _UpdateParameters() noexcept;

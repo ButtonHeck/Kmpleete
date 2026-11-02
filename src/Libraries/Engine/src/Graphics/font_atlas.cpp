@@ -1,6 +1,7 @@
 #include "Kmpleete/Graphics/font_atlas.h"
 #include "Kmpleete/Graphics/graphics_base.h"
 #include "Kmpleete/Core/assertion.h"
+#include "Kmpleete/Math/math.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -28,16 +29,17 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        Vector<FontCharacterVertex> FontAtlas::GenerateTextVertices(const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const
+        FontVerticesBuffer FontAtlas::GenerateTextVertices(const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const
         {
             return GenerateTextVertices(text, x, y, float(_parameters.sizeMetrics.xPixelsPerEM), framebufferSize);
         }
         //--------------------------------------------------------------------------
 
-        Vector<FontCharacterVertex> FontAtlas::GenerateTextVertices(const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
+        FontVerticesBuffer FontAtlas::GenerateTextVertices(const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
         {
             Vector<FontCharacterVertex> vertices;
             vertices.reserve(6 * text.size());
+            Math::Rect2F boundingBox = { { x, y }, { 0, 0 } };
 
             const auto scale = pixelSize / float(_parameters.sizeMetrics.xPixelsPerEM);
             for (const auto& c : text)
@@ -68,9 +70,12 @@ namespace Kmpleete
                 vertices.push_back({ p4, Math::Vec2F(fontChar.uvMax.x, fontChar.uvMin.y) });
 
                 x += (fontChar.advance >> 6) * scale;
+
+                boundingBox.size.x = Math::Max(boundingBox.size.x, x - boundingBox.position.x);
+                boundingBox.size.y = Math::Max(boundingBox.size.y, h);
             }
 
-            return vertices;
+            return { vertices, boundingBox };
         }}
         //--------------------------------------------------------------------------
 
