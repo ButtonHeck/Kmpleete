@@ -19,7 +19,6 @@ namespace Kmpleete
         class EventHandlerGuard
         {
             KMP_DISABLE_COPY_MOVE(EventHandlerGuard)
-            KMP_LOG_CLASSNAME(EventHandlerGuard)
 
         public:
             EventHandlerGuard(EventDispatcher& eventDispatcher, const EventHandler<EventClass>& handler, bool attachOnCreate = true) noexcept
@@ -40,7 +39,7 @@ namespace Kmpleete
                 }
                 catch (...)
                 {
-                    KMP_LOG_ERROR2("failed to detach event handler");
+                    KMP_LOG_ERROR_FN("EventHandlerGuard::~EventHandlerGuard: failed to detach event handler");
                 }
             }
 
