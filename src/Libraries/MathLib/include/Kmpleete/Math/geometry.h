@@ -64,6 +64,7 @@ namespace Kmpleete
                  >::value)
         struct Rect2
         {
+            Rect2() = default;
             Rect2(const PositionType& position, const SizeType& size) noexcept
                 : position(position)
                 , size(size)
@@ -102,6 +103,7 @@ namespace Kmpleete
                  >::value)
         struct Rect3
         {
+            Rect3() = default;
             Rect3(const PositionType& position, const SizeType& size) noexcept
                 : position(position)
                 , size(size)

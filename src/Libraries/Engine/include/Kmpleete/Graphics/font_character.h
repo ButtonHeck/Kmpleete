@@ -33,7 +33,7 @@ namespace Kmpleete
         struct FontVerticesBuffer
         {
             Vector<FontCharacterVertex> vertices;
-            Math::Rect2F boundingBox = { { 0, 0 }, { 0, 0 } };
+            Math::Rect2F boundingBox;
         };
         //--------------------------------------------------------------------------
     }
