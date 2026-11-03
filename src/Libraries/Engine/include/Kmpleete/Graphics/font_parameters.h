@@ -28,6 +28,8 @@ namespace Kmpleete
                 Int32 height = 0;
                 Int32 ascender = 0;
                 Int32 descender = 0;
+                Int32 boundingBoxMinY = 0;
+                Int32 boundingBoxMaxY = 0;
                 Int32 alignedHeight = 0;
             };
 
