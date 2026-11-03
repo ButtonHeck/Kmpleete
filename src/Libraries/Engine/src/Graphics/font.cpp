@@ -178,6 +178,12 @@ namespace Kmpleete
             _parameters.sizeMetrics.xScale = _freetypeFace->size->metrics.x_scale >> 16;
             _parameters.sizeMetrics.yScale = _freetypeFace->size->metrics.y_scale >> 16;
             _parameters.sizeMetrics.height = _freetypeFace->size->metrics.height >> 6;
+            _parameters.sizeMetrics.ascender = _freetypeFace->size->metrics.ascender >> 6;
+            _parameters.sizeMetrics.descender = _freetypeFace->size->metrics.descender >> 6;
+
+            const auto boundingBoxMaxY = FT_MulFix(_freetypeFace->bbox.yMax, _freetypeFace->size->metrics.y_scale) >> 6;
+            const auto boundingBoxMinY = FT_MulFix(_freetypeFace->bbox.yMin, _freetypeFace->size->metrics.y_scale) >> 6;
+            _parameters.sizeMetrics.alignedHeight = boundingBoxMaxY - boundingBoxMinY;
 
             _UpdateAtlases();
         }
