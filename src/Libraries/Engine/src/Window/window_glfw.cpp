@@ -114,6 +114,7 @@ namespace Kmpleete
         , dpi(settings.dpi)
         , contentScale(settings.contentScale)
         , iconified(false)
+        , framebufferSize(size)
     {}
     //--------------------------------------------------------------------------
 
@@ -186,6 +187,8 @@ namespace Kmpleete
         _UpdateDPI(_window);
 
         glfwShowWindow(_window);
+
+        _ActualizeGeometry();
     }
     //--------------------------------------------------------------------------
 
@@ -202,17 +205,17 @@ namespace Kmpleete
     {
         KMP_ASSERT(_window);
 
-        int width;
-        int height;
-        glfwGetWindowSize(_window, &width, &height);
-        return Math::Size2I(width, height);
+        const NonNull<_UserData*> userData = _GetUserPointer(_window);
+        return userData->size;
     }}
     //--------------------------------------------------------------------------
 
     Math::Size2I WindowGlfw::GetWindowedSize() const KMP_PROFILING(ProfileLevelMinor)
     {
+        KMP_ASSERT(_window);
+
         const NonNull<_UserData*> userData = _GetUserPointer(_window);
-        return Math::Size2I(userData->windowedSize.x, userData->windowedSize.y);
+        return userData->windowedSize;
     }}
     //--------------------------------------------------------------------------
 
@@ -220,10 +223,8 @@ namespace Kmpleete
     {
         KMP_ASSERT(_window);
 
-        int framebufferWidth;
-        int framebufferHeight;
-        glfwGetFramebufferSize(_window, &framebufferWidth, &framebufferHeight);
-        return Math::Size2I(framebufferWidth, framebufferHeight);
+        const NonNull<_UserData*> userData = _GetUserPointer(_window);
+        return userData->framebufferSize;
     }}
     //--------------------------------------------------------------------------
 
@@ -688,6 +689,8 @@ namespace Kmpleete
             const NonNull<_UserData*> userData = _GetUserPointer(window);
             userData->size.x = width;
             userData->size.y = height;
+            userData->framebufferSize.x = width;
+            userData->framebufferSize.y = height;
 
             if (userData->screenMode == ScreenMode::Windowed)
             {
@@ -859,6 +862,17 @@ namespace Kmpleete
                 PositionAtCurrentScreenCenter();
             }
         }
+    }}
+    //--------------------------------------------------------------------------
+
+    void WindowGlfw::_ActualizeGeometry() KMP_PROFILING(ProfileLevelAlways)
+    {
+        KMP_ASSERT(_window);
+
+        const NonNull<_UserData*> userData = _GetUserPointer(_window);
+        glfwGetFramebufferSize(_window, &userData->framebufferSize.x, &userData->framebufferSize.y);
+        glfwGetWindowSize(_window, &userData->size.x, &userData->size.y);
+        glfwGetWindowSize(_window, &userData->windowedSize.x, &userData->windowedSize.y);
     }}
     //--------------------------------------------------------------------------
 }

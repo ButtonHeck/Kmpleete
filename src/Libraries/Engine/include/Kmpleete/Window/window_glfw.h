@@ -86,8 +86,10 @@ namespace Kmpleete
             Math::Point2I& cursorPosition;
             UInt32& dpi;
             float& contentScale;
+
             EventCallbackFn eventCallback;
             bool iconified;
+            Math::Size2I framebufferSize;
         };
 
         KMP_NODISCARD static NonNull<_UserData*> _GetUserPointer(const NonNull<GLFWwindow*> window);
@@ -108,6 +110,7 @@ namespace Kmpleete
         void _InitializeKeyboardCallbacks() const;
         void _InitializeMouseCallbacks() const;
         void _InitializeGeometry();
+        void _ActualizeGeometry();
 
         void _Finalize();
 
