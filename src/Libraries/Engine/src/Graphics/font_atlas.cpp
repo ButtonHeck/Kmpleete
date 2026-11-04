@@ -2,6 +2,7 @@
 #include "Kmpleete/Graphics/graphics_base.h"
 #include "Kmpleete/Core/assertion.h"
 #include "Kmpleete/Math/math.h"
+#include "Kmpleete/Window/window.h"
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -29,24 +30,26 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        FontVerticesBuffer FontAtlas::GenerateTextVertices(const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const
+        FontVerticesBuffer FontAtlas::GenerateTextVertices(const WString& text, float x, float y, const Window& window) const
         {
-            return GenerateTextVertices(text, x, y, float(_parameters.sizeMetrics.xPixelsPerEM), framebufferSize);
+            return GenerateTextVertices(text, x, y, window, float(_parameters.sizeMetrics.xPixelsPerEM));
         }
         //--------------------------------------------------------------------------
 
-        FontVerticesBuffer FontAtlas::GenerateTextVertices(const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
+        FontVerticesBuffer FontAtlas::GenerateTextVertices(const WString& text, float x, float y, const Window& window, float pixelSize) const KMP_PROFILING(ProfileLevelImportant)
         {
             KMP_ASSERT(_parameters.sizeMetrics.xPixelsPerEM > 0);
 
             Vector<FontCharacterVertex> vertices;
             vertices.reserve(6 * text.size());
 
-            const auto scale = pixelSize / float(_parameters.sizeMetrics.xPixelsPerEM);
+            const auto framebufferSize = window.GetFramebufferSize();
+            const auto scale = pixelSize / float(_parameters.sizeMetrics.xPixelsPerEM) * window.GetContentScale();
             const auto offsetToTop = scale * float(_parameters.sizeMetrics.boundingBoxMaxY);
+            const auto alignedScaledHeight = float(_parameters.sizeMetrics.alignedHeight) * scale;
             Math::Rect2F boundingBox = { 
                 { x, y - offsetToTop },
-                { 0, float(_parameters.sizeMetrics.alignedHeight) }
+                { 0, alignedScaledHeight }
             };
 
             for (const auto& c : text)

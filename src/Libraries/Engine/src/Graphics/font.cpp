@@ -113,7 +113,7 @@ namespace Kmpleete
         }
         //--------------------------------------------------------------------------
 
-        FontVerticesBuffer Font::GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
+        FontVerticesBuffer Font::GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, const Window& window) const KMP_PROFILING(ProfileLevelImportant)
         {
             const auto& atlasOptional = GetAtlas(localeSid);
             if (not atlasOptional.has_value())
@@ -123,11 +123,11 @@ namespace Kmpleete
             }
 
             const auto& atlas = atlasOptional.value().get();
-            return atlas.GenerateTextVertices(text, x, y, framebufferSize);
+            return atlas.GenerateTextVertices(text, x, y, window);
         }}
         //--------------------------------------------------------------------------
 
-        FontVerticesBuffer Font::GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
+        FontVerticesBuffer Font::GenerateTextVertices(const Localization::LocaleStrSID& localeSid, const WString& text, float x, float y, const Window& window, float pixelSize) const KMP_PROFILING(ProfileLevelImportant)
         {
             const auto& atlasOptional = GetAtlas(localeSid);
             if (not atlasOptional.has_value())
@@ -137,7 +137,7 @@ namespace Kmpleete
             }
 
             const auto& atlas = atlasOptional.value().get();
-            return atlas.GenerateTextVertices(text, x, y, pixelSize, framebufferSize);
+            return atlas.GenerateTextVertices(text, x, y, window, pixelSize);
         }}
         //--------------------------------------------------------------------------
 

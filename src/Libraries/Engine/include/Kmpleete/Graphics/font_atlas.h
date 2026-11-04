@@ -16,6 +16,9 @@ struct FT_FaceRec_;
 
 namespace Kmpleete
 {
+    class Window;
+
+
     namespace Graphics
     {
         //! Font atlas containing an atlas image and a map of FontCharacters for a single locale. 
@@ -28,8 +31,8 @@ namespace Kmpleete
             FontAtlas(FT_FaceRec_* freetypeFace, const FontParameters& parameters, const Localization::CodepointVector& codepoints);
             ~FontAtlas() = default;
 
-            KMP_NODISCARD FontVerticesBuffer GenerateTextVertices(const WString& text, float x, float y, const Math::Vec2F& framebufferSize) const;
-            KMP_NODISCARD FontVerticesBuffer GenerateTextVertices(const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const;
+            KMP_NODISCARD FontVerticesBuffer GenerateTextVertices(const WString& text, float x, float y, const Window& window) const;
+            KMP_NODISCARD FontVerticesBuffer GenerateTextVertices(const WString& text, float x, float y, const Window& window, float pixelSize) const;
             KMP_NODISCARD const Image& GetImage() const noexcept;
 
         private:
