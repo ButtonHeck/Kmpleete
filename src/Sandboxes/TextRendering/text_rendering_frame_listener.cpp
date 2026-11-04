@@ -386,34 +386,33 @@ namespace Kmpleete
     void TextRenderingFrameListener::_GenerateTextVertices()
     {
         _verticesCount = 0;
-        const auto windowFramebufferSize = _mainWindow.GetFramebufferSize();
         const auto& defaultFont = _assetsManager.GetFontAssetManager().GetAsset(Assets::FontAssetManager::DefaultFontSID).GetFont();
         const auto currentLocaleSid = _localizationManager.GetLocaleSID();
 
         const auto& alphabet = _localizationManager.Translation(TranslationDomain, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"_sid);
         const auto wideAlphabet = Utils::NarrowToWide(Utils::Utf8ToNarrow(alphabet));
-        const auto alphabetBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, wideAlphabet, 0.0f, 100.0f, 48.0f, windowFramebufferSize);
+        const auto alphabetBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, wideAlphabet, 0.0f, 100.0f, _mainWindow, 32.0f);
         _verticesCount += UInt32(alphabetBuffer.vertices.size());
         _textBuffers["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"_sid] = alphabetBuffer;
 
         const auto untranslated = Utils::NarrowToWide(Utils::Utf8ToNarrow("untranslated"));
-        const auto untranslatedBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, untranslated, 20.0f, 200.0f, 48.0f, windowFramebufferSize);
+        const auto untranslatedBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, untranslated, 20.0f, 200.0f, _mainWindow);
         _verticesCount += UInt32(untranslatedBuffer.vertices.size());
         _textBuffers["untranslated"_sid] = untranslatedBuffer;
 
         const auto govern = Utils::NarrowToWide(Utils::Utf8ToNarrow("govern"));
-        const auto governBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, govern, 500.0f, 200.0f, 48.0f, windowFramebufferSize);
+        const auto governBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, govern, 500.0f, 200.0f, _mainWindow);
         _verticesCount += UInt32(governBuffer.vertices.size());
         _textBuffers["govern"_sid] = governBuffer;
 
         const auto& asciiChars = _localizationManager.Translation(TranslationDomain, "0123456789!@#$%^&*()'~`,./<>+-_=;:?"_sid);
         const auto wideAsciiChars = Utils::NarrowToWide(Utils::Utf8ToNarrow(asciiChars));
-        const auto asciiCharsBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, wideAsciiChars, 0.0f, 280.0f, 48.0f, windowFramebufferSize);
+        const auto asciiCharsBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, wideAsciiChars, 0.0f, 280.0f, _mainWindow);
         _verticesCount += UInt32(asciiCharsBuffer.vertices.size());
         _textBuffers["0123456789!@#$%^&*()'~`,./<>+-_=;:?"_sid] = asciiCharsBuffer;
 
         const auto textInParentheses = Utils::NarrowToWide(Utils::Utf8ToNarrow("(0 text in parentheses 1)"));
-        const auto textInParenthesesBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, textInParentheses, 0.0f, 350.0f, 48.0f, windowFramebufferSize);
+        const auto textInParenthesesBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, textInParentheses, 0.0f, 350.0f, _mainWindow);
         _verticesCount += UInt32(textInParenthesesBuffer.vertices.size());
         _textBuffers["(0 text in parentheses 1)"_sid] = textInParenthesesBuffer;
     }
