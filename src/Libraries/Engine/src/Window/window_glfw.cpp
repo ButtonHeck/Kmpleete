@@ -201,7 +201,7 @@ namespace Kmpleete
     }
     //--------------------------------------------------------------------------
 
-    Math::Size2I WindowGlfw::GetSize() const KMP_PROFILING(ProfileLevelMinor)
+    Math::Size2I WindowGlfw::GetSize() const KMP_PROFILING(ProfileLevelMinorVerbose)
     {
         KMP_ASSERT(_window);
 
@@ -210,7 +210,7 @@ namespace Kmpleete
     }}
     //--------------------------------------------------------------------------
 
-    Math::Size2I WindowGlfw::GetWindowedSize() const KMP_PROFILING(ProfileLevelMinor)
+    Math::Size2I WindowGlfw::GetWindowedSize() const KMP_PROFILING(ProfileLevelMinorVerbose)
     {
         KMP_ASSERT(_window);
 
@@ -219,7 +219,7 @@ namespace Kmpleete
     }}
     //--------------------------------------------------------------------------
 
-    Math::Size2I WindowGlfw::GetFramebufferSize() const KMP_PROFILING(ProfileLevelMinor)
+    Math::Size2I WindowGlfw::GetFramebufferSize() const KMP_PROFILING(ProfileLevelMinorVerbose)
     {
         KMP_ASSERT(_window);
 
@@ -228,7 +228,7 @@ namespace Kmpleete
     }}
     //--------------------------------------------------------------------------
 
-    float WindowGlfw::GetWindowAspectRatio() const KMP_PROFILING(ProfileLevelMinor)
+    float WindowGlfw::GetWindowAspectRatio() const KMP_PROFILING(ProfileLevelMinorVerbose)
     {
         const auto windowSize = GetSize();
         if (windowSize.y > 0)
@@ -240,7 +240,7 @@ namespace Kmpleete
     }}
     //--------------------------------------------------------------------------
 
-    float WindowGlfw::GetWindowFramebufferAspectRatio() const KMP_PROFILING(ProfileLevelMinor)
+    float WindowGlfw::GetWindowFramebufferAspectRatio() const KMP_PROFILING(ProfileLevelMinorVerbose)
     {
         const auto windowFramebufferSize = GetFramebufferSize();
         if (windowFramebufferSize.y > 0)
@@ -252,7 +252,7 @@ namespace Kmpleete
     }}
     //--------------------------------------------------------------------------
 
-    Math::Size2F WindowGlfw::GetFramebufferSizeToWindowSizeRatio() const KMP_PROFILING(ProfileLevelMinor)
+    Math::Size2F WindowGlfw::GetFramebufferSizeToWindowSizeRatio() const KMP_PROFILING(ProfileLevelMinorVerbose)
     {
         const auto windowFramebufferSize = GetFramebufferSize();
         const auto windowSize = GetSize();
