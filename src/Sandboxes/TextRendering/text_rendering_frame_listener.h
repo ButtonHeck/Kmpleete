@@ -57,7 +57,7 @@ namespace Kmpleete
         void _FillDictionary();
 
         void _UpdateTextBuffer(bool create);
-        Graphics::FontVerticesBuffer _GenerateTextVertices();
+        void _GenerateTextVertices();
 
     private:
         Window& _mainWindow;
@@ -66,6 +66,7 @@ namespace Kmpleete
         Localization::LocalizationManager& _localizationManager;
         UPtr<ImGuiUtils::ImGuiImplementation> _imguiImpl;
         UInt32 _verticesCount;
+        HashMap<StringID, Graphics::FontVerticesBuffer> _textBuffers;
 
         Events::EventHandlerGuard<Events::WindowContentScaleEvent> _windowContentScaleHandler;
         Events::EventHandlerGuard<Events::WindowFramebufferResizeEvent> _windowFramebufferResizeHandler;

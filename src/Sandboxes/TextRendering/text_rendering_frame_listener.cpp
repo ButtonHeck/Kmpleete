@@ -6,6 +6,7 @@
 #include "Kmpleete/Localization/localization_unicode_map.h"
 #include "Kmpleete/Utils/function_utils.h"
 #include "Kmpleete/Utils/string_utils.h"
+#include "Kmpleete/Utils/vector_utils.h"
 #include "Kmpleete/Core/assertion.h"
 #include "Kmpleete/Graphics/font.h"
 #include "Kmpleete/Graphics/image.h"
@@ -77,6 +78,7 @@ namespace Kmpleete
         , _localizationManager(localizationManager)
         , _imguiImpl(nullptr)
         , _verticesCount(0)
+        , _textBuffers()
         , _windowContentScaleHandler(_eventDispatcher, KMP_BIND(TextRenderingFrameListener::_OnWindowContentScaleEvent))
         , _windowFramebufferResizeHandler(_eventDispatcher, KMP_BIND(TextRenderingFrameListener::_OnWindowFramebufferResizeEvent))
         , _localeChangeHandler(_eventDispatcher, KMP_BIND(TextRenderingFrameListener::_OnLocaleChangeEvent))
@@ -261,6 +263,50 @@ namespace Kmpleete
 
     void TextRenderingFrameListener::_RenderImGui()
     {
+        auto& vulkanDevice = dynamic_cast<Graphics::VulkanLogicalDevice&>(_graphicsBackend.GetLogicalDevice());
+        const auto& vulkanTextureAttachmentManager = vulkanDevice.GetTextureAttachmentManager();
+        auto commandBuffer = vulkanDevice.GetRenderer().GetCurrentCommandBuffer();
+        const auto& renderer = vulkanDevice.GetRenderer();
+        const auto drawArea = VkRect2D{ VkOffset2D{.x = 0, .y = 0 }, vulkanDevice.GetCurrentExtent() };
+
+        _imguiImpl->NewFrame();
+
+        const auto imguiViewportPos = ImGui::GetMainViewport()->WorkPos;
+        static constexpr auto applicationWindowFlags =
+            ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus |
+            ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize;
+
+        for (const auto& [sid, textBuffer] : _textBuffers)
+        {
+            const auto& boundingBox = textBuffer.boundingBox;
+            const auto imguiWindowPos = ImVec2{ imguiViewportPos.x + boundingBox.position.x, imguiViewportPos.y + boundingBox.position.y };
+            ImGuiUtils::StyleColorGuard styleColorGuard({ { ImGuiCol_WindowBg, ImVec4(1.0f, 1.0f, 1.0f, 0.1f) } });
+            ImGui::SetNextWindowPos(imguiWindowPos, ImGuiCond_Always);
+            const auto uniqueId = Utils::Concatenate("BoundingBox##", sid);
+            ImGui::Begin(uniqueId.c_str(), nullptr, applicationWindowFlags);
+            ImGui::SetWindowSize(ImVec2(boundingBox.size.x, boundingBox.size.y));
+            ImGui::End();
+        }
+
+        auto imageBarrierParameters = Graphics::VKPresets::MemoryBarrierParameters_DepthStencil_PrepareWriting;
+        renderer.InsertImageMemoryBarrier(vulkanTextureAttachmentManager.GetTextureAttachment(MS_DepthStencilAttachment), imageBarrierParameters);
+
+        const auto colorAttachmentInfo = vulkanTextureAttachmentManager.GetRenderingAttachmentInfo(
+            Graphics::VKPresets::RenderingAttachmentInfo_Color_LoadStore,
+            MS_ColorAttachment, 0ULL, VK_Resolve_Average, VK_ImageLayout_AttachmentOptimal, "swapchain image for non-MSAA"_true, "use swapchain SRGB"_false
+        );
+        const auto depthStencilAttachmentInfo = vulkanTextureAttachmentManager.GetRenderingAttachmentInfo(
+            Graphics::VKPresets::RenderingAttachmentInfo_DepthStencil_LoadStore,
+            MS_DepthStencilAttachment, 0ULL, VK_Resolve_None, VK_ImageLayout_DontCare
+        );
+
+        renderer.BeginRendering(drawArea, { colorAttachmentInfo }, depthStencilAttachmentInfo);
+        auto* vulkanImGuiUtils = dynamic_cast<ImGuiUtils::ImGuiImplementationGlfwVulkan*>(_imguiImpl.get());
+        vulkanImGuiUtils->SetCommandBuffer(commandBuffer);
+        vulkanImGuiUtils->Render();
+        renderer.EndRendering();
+
+        ImGui::EndFrame();
     }
     //--------------------------------------------------------------------------
 
@@ -268,6 +314,7 @@ namespace Kmpleete
     {
         _imguiImpl.reset();
         _InitializeImGui();
+        _UpdateTextBuffer(false);
 
         return true;
     }
@@ -301,8 +348,12 @@ namespace Kmpleete
         auto& vulkanBufferManager = vulkanDevice.GetBufferManager();
         const auto& vulkanRenderer = vulkanDevice.GetRenderer();
 
-        const auto verticesBuffer = _GenerateTextVertices();
-        const auto& vertices = verticesBuffer.vertices;
+        _GenerateTextVertices();
+        Vector<Graphics::FontCharacterVertex> vertices;
+        for (const auto& [bufferSid, textBuffer] : _textBuffers)
+        {
+            Utils::AppendVectors(textBuffer.vertices, vertices);
+        }
         const auto vertexBufferSize = UInt32(vertices.size() * sizeof(Graphics::FontCharacterVertex));
 
         if (create)
@@ -327,17 +378,39 @@ namespace Kmpleete
     }
     //--------------------------------------------------------------------------
 
-    Graphics::FontVerticesBuffer TextRenderingFrameListener::_GenerateTextVertices()
+    void TextRenderingFrameListener::_GenerateTextVertices()
     {
-        const auto& alphabet = _localizationManager.Translation(TranslationDomain, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"_sid);
-        const auto wideAlphabet = Utils::NarrowToWide(Utils::Utf8ToNarrow(alphabet));
-
+        _verticesCount = 0;
         const auto windowFramebufferSize = _mainWindow.GetFramebufferSize();
         const auto& defaultFont = _assetsManager.GetFontAssetManager().GetAsset(Assets::FontAssetManager::DefaultFontSID).GetFont();
-        const auto verticesBuffer = defaultFont.GenerateTextVertices(_localizationManager.GetLocaleSID(), wideAlphabet, 0.0f, 100.0f, 48.0f, windowFramebufferSize);
-        _verticesCount = UInt32(verticesBuffer.vertices.size());
+        const auto currentLocaleSid = _localizationManager.GetLocaleSID();
 
-        return verticesBuffer;
+        const auto& alphabet = _localizationManager.Translation(TranslationDomain, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"_sid);
+        const auto wideAlphabet = Utils::NarrowToWide(Utils::Utf8ToNarrow(alphabet));
+        const auto alphabetBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, wideAlphabet, 0.0f, 100.0f, 48.0f, windowFramebufferSize);
+        _verticesCount += UInt32(alphabetBuffer.vertices.size());
+        _textBuffers["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"_sid] = alphabetBuffer;
+
+        const auto untranslated = Utils::NarrowToWide(Utils::Utf8ToNarrow("untranslated"));
+        const auto untranslatedBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, untranslated, 20.0f, 200.0f, 48.0f, windowFramebufferSize);
+        _verticesCount += UInt32(untranslatedBuffer.vertices.size());
+        _textBuffers["untranslated"_sid] = untranslatedBuffer;
+
+        const auto govern = Utils::NarrowToWide(Utils::Utf8ToNarrow("govern"));
+        const auto governBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, govern, 500.0f, 200.0f, 48.0f, windowFramebufferSize);
+        _verticesCount += UInt32(governBuffer.vertices.size());
+        _textBuffers["govern"_sid] = governBuffer;
+
+        const auto& asciiChars = _localizationManager.Translation(TranslationDomain, "0123456789!@#$%^&*()'~`,./<>+-_=;:?"_sid);
+        const auto wideAsciiChars = Utils::NarrowToWide(Utils::Utf8ToNarrow(asciiChars));
+        const auto asciiCharsBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, wideAsciiChars, 0.0f, 280.0f, 48.0f, windowFramebufferSize);
+        _verticesCount += UInt32(asciiCharsBuffer.vertices.size());
+        _textBuffers["0123456789!@#$%^&*()'~`,./<>+-_=;:?"_sid] = asciiCharsBuffer;
+
+        const auto textInParentheses = Utils::NarrowToWide(Utils::Utf8ToNarrow("(0 text in parentheses 1)"));
+        const auto textInParenthesesBuffer = defaultFont.GenerateTextVertices(currentLocaleSid, textInParentheses, 0.0f, 350.0f, 48.0f, windowFramebufferSize);
+        _verticesCount += UInt32(textInParenthesesBuffer.vertices.size());
+        _textBuffers["(0 text in parentheses 1)"_sid] = textInParenthesesBuffer;
     }
     //--------------------------------------------------------------------------
 }
