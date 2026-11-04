@@ -82,6 +82,10 @@ namespace Kmpleete
             KMP_PROFILE_SCOPE("Application logger initialization", ProfileLevelAlways);
             Log::Initialize(ApplicationContext::GetApplicationName(), ApplicationContext::GetApplicationLogPath());
         }
+#if defined(KMP_PROFILE)
+        const auto& profiler = Kmpleete::Profiler::Get();
+        KMP_LOG_INFO("Profiling is {}, level '{}'", profiler.IsActive() ? "enabled" : "disabled", profiler.GetLevel());
+#endif
 #endif
     }
     //--------------------------------------------------------------------------
