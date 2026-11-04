@@ -271,22 +271,27 @@ namespace Kmpleete
 
         _imguiImpl->NewFrame();
 
-        const auto imguiViewportPos = ImGui::GetMainViewport()->WorkPos;
         static constexpr auto applicationWindowFlags =
             ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus |
-            ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize;
+            ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoBackground;
+
+        ImGui::SetNextWindowPos(ImGui::GetMainViewport()->WorkPos, ImGuiCond_Always);
+        ImGui::Begin("TextRendering window", nullptr, applicationWindowFlags);
+        ImGui::SetWindowSize(ImVec2(float(drawArea.extent.width), float(drawArea.extent.height)));
+        const auto imguiWindowPos = ImGui::GetWindowPos();
+        const auto bboxFillColor = IM_COL32(255, 255, 255, 25);
+        const auto bboxBorderColor = IM_COL32(255, 255, 255, 50);
 
         for (const auto& [sid, textBuffer] : _textBuffers)
         {
             const auto& boundingBox = textBuffer.boundingBox;
-            const auto imguiWindowPos = ImVec2{ imguiViewportPos.x + boundingBox.position.x, imguiViewportPos.y + boundingBox.position.y };
-            ImGuiUtils::StyleColorGuard styleColorGuard({ { ImGuiCol_WindowBg, ImVec4(1.0f, 1.0f, 1.0f, 0.1f) } });
-            ImGui::SetNextWindowPos(imguiWindowPos, ImGuiCond_Always);
-            const auto uniqueId = Utils::Concatenate("BoundingBox##", sid);
-            ImGui::Begin(uniqueId.c_str(), nullptr, applicationWindowFlags);
-            ImGui::SetWindowSize(ImVec2(boundingBox.size.x, boundingBox.size.y));
-            ImGui::End();
+            const auto rectTopLeft = ImVec2{ imguiWindowPos.x + boundingBox.position.x, imguiWindowPos.y + boundingBox.position.y };
+            const auto rectBottomRight = ImVec2{ imguiWindowPos.x + boundingBox.position.x + boundingBox.size.x, imguiWindowPos.y + boundingBox.position.y + boundingBox.size.y };
+            ImGui::GetForegroundDrawList()->AddRectFilled(rectTopLeft, rectBottomRight, bboxFillColor);
+            ImGui::GetForegroundDrawList()->AddRect(rectTopLeft, rectBottomRight, bboxBorderColor);
         }
+        ImGui::End();
+
 
         auto imageBarrierParameters = Graphics::VKPresets::MemoryBarrierParameters_DepthStencil_PrepareWriting;
         renderer.InsertImageMemoryBarrier(vulkanTextureAttachmentManager.GetTextureAttachment(MS_DepthStencilAttachment), imageBarrierParameters);
