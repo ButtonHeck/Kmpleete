@@ -530,7 +530,7 @@ namespace Kmpleete
                 dynamic_cast<Graphics::VulkanTexture&>(textureAssetManager.GetAsset(TextureExample_SID).GetTexture()).GetVkImageView(), TextureBindingIndex
             );
         }
-        ImGui::SliderFloat("LOD bias", &_matrixShaderData.lodBias, -8.0f, 8.0f);
+        ImGui::SliderFloat("LOD bias", &_matrixShaderData.lodBias, -8.0f, 8.0f, "%.1f");
         ImGui::SliderInt("Tiling", &_matrixShaderData.tiling, 1, 4);
 
         if (ImGui::Button("Nearest filter"))
