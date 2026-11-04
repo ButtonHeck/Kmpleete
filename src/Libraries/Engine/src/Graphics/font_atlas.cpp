@@ -37,11 +37,18 @@ namespace Kmpleete
 
         FontVerticesBuffer FontAtlas::GenerateTextVertices(const WString& text, float x, float y, float pixelSize, const Math::Vec2F& framebufferSize) const KMP_PROFILING(ProfileLevelImportant)
         {
+            KMP_ASSERT(_parameters.sizeMetrics.xPixelsPerEM > 0);
+
             Vector<FontCharacterVertex> vertices;
             vertices.reserve(6 * text.size());
-            Math::Rect2F boundingBox = { { x, y }, { 0, 0 } };
 
             const auto scale = pixelSize / float(_parameters.sizeMetrics.xPixelsPerEM);
+            const auto offsetToTop = scale * float(_parameters.sizeMetrics.boundingBoxMaxY);
+            Math::Rect2F boundingBox = { 
+                { x, y - offsetToTop },
+                { 0, float(_parameters.sizeMetrics.alignedHeight) }
+            };
+
             for (const auto& c : text)
             {
                 const auto fontCharIter = _fontCharacters.find(c);
@@ -72,7 +79,6 @@ namespace Kmpleete
                 x += (fontChar.advance >> 6) * scale;
 
                 boundingBox.size.x = Math::Max(boundingBox.size.x, x - boundingBox.position.x);
-                boundingBox.size.y = Math::Max(boundingBox.size.y, h);
             }
 
             return { vertices, boundingBox };
@@ -87,6 +93,8 @@ namespace Kmpleete
 
         void FontAtlas::_CalculateAtlasSize(const Localization::CodepointVector& codepoints) KMP_PROFILING(ProfileLevelImportant)
         {
+            KMP_ASSERT(_freetypeFace);
+
             for (const auto& codepoint : codepoints)
             {
                 if (not _RenderGlyph(codepoint))
@@ -95,13 +103,15 @@ namespace Kmpleete
                 }
 
                 _width += _freetypeFace->glyph->bitmap.width + 1;
-                _height = std::max(_height, _freetypeFace->glyph->bitmap.rows);
+                _height = Math::Max(_height, _freetypeFace->glyph->bitmap.rows);
             }
         }}
         //--------------------------------------------------------------------------
 
         void FontAtlas::_CreateImage(const Localization::CodepointVector& codepoints) KMP_PROFILING(ProfileLevelImportant)
         {
+            KMP_ASSERT(_freetypeFace);
+
             BinaryBuffer atlasBuffer(_width * _height, 0);
             unsigned int offsetX = 0;
             _fontCharacters.reserve(codepoints.size());
@@ -142,6 +152,8 @@ namespace Kmpleete
 
         bool FontAtlas::_RenderGlyph(const Localization::Codepoint& codepoint)
         {
+            KMP_ASSERT(_freetypeFace);
+
             return (FT_Load_Char(_freetypeFace, codepoint, FT_LOAD_RENDER) == FT_Err_Ok) && (FT_Render_Glyph(_freetypeFace->glyph, FT_RENDER_MODE_SDF) == FT_Err_Ok);
         }
         //--------------------------------------------------------------------------
